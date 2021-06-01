@@ -3,8 +3,26 @@
     namespace App\Services;
 
     use DateTime;
+    use JsonException;
 
     class Text {
+
+        public static function encode($data): string
+        {
+
+            if(version_compare (PHP_VERSION , "7.2" , ">=") )
+            $encodedData = json_encode($data, JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
+            else {
+                // another $data parser or no
+                $encodedData = json_encode($data, JSON_UNESCAPED_UNICODE);
+            }
+
+            if (JSON_ERROR_NONE !== json_last_error() || false === $encodedData) {
+                throw new JsonException(sprintf('Could not encode value into JSON format. Error was: "%s".', json_last_error_msg()));
+            }
+
+            return $encodedData;
+        }
 
         public static function convertDate($date) {
             return DateTime::createFromFormat('Y-m-d H:i:s', $date->joindate)->getTimestamp();

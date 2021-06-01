@@ -144,7 +144,6 @@
                 @include('layouts.providers.pages')
             </nav>
             <div class="NavbarFooter-copyright">© {{ config('app.name') }}, Inc., 2021</div>
-            <div class="NavbarFooter-trademark">@lang('footer.footer_5')</div>
          </div>
       </div>
    </div>

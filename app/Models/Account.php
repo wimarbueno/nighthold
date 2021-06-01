@@ -91,7 +91,7 @@ class Account extends Model
     }
 
     public static function balance() {
-        return static::where('email', auth()->user()->email)->select('balans')->first();
+        return static::where('email', auth()->user()->email)->select('id')->first();
     }
 
     public static function createBattleNet($email, $password) {

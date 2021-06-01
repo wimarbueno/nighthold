@@ -12,11 +12,11 @@
         <label class="step__field--label step__form__block">
             <input class="step__checkbox" value="true" data-capture-id="tou-agreements-implicit" name="tou-agreements" type="checkbox" />
             <span class="step__field__indicator--checkbox"> <i class="far fa-check"></i></span>
-            <span class="step__field--label__text">@lang('account.create_step_4_4') <a href="/" rel="external noopener" target="_blank">@lang('account.create_step_4_5', ['name' => setting('site.title')]) <i class="far fa-external-link"></i></a> .</span>
+            <span class="step__field--label__text">@lang('account.create_step_4_4') <a href="{{ route('pages.view', [4, 'licenzionnogo-soglasheniya']) }}" rel="external noopener" target="_blank">@lang('account.create_step_4_5', ['name' => setting('site.title')]) <i class="far fa-external-link"></i></a> .</span>
         </label>
     </div>
     <div class="step__legal-summary step__block end">
-        <div class="step__legal-summary__links step__block" id="legal-summary-links"> @lang('account.create_step_4_6') <a href="/" rel="external noopener" target="_blank">@lang('account.create_step_4_7', ['name' => setting('site.title')]) <i class="far fa-external-link"></i></a> <span>,</span> <a href="/" rel="external noopener" target="_blank">@lang('account.create_step_4_8') <i class="far fa-external-link"></i></a> <span>,</span> <a href="/" rel="external noopener" target="_blank">@lang('account.create_step_4_9') <i class="far fa-external-link"></i></a>
+        <div class="step__legal-summary__links step__block" id="legal-summary-links"> @lang('account.create_step_4_6') <a href="{{ route('pages.view', [4, 'licenzionnogo-soglasheniya']) }}" rel="external noopener" target="_blank">@lang('account.create_step_4_7', ['name' => setting('site.title')]) <i class="far fa-external-link"></i></a>
         </div>
     </div>
     <button type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>

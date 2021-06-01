@@ -45,8 +45,11 @@ class AuthController extends Controller
 
     public function user() {
         $data = auth()->user();
-        $balance = Account::balance()->balans;
-        return response()->json(['data' => $data, 'balance' => $balance]);
+        $balance = auth()->user()->balance;
+        return json_encode([
+            'data' => $data,
+            'balance' => $balance
+        ], JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
     }
 
     public function select(Request $request) {
@@ -71,7 +74,7 @@ class AuthController extends Controller
                     "selected_characters" => session('characters'),
                 ];
         }
-        return json_encode($characters, JSON_UNESCAPED_UNICODE);
+        return json_encode($characters, JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
     }
 
     public function payment() {
@@ -81,10 +84,13 @@ class AuthController extends Controller
         return response()->json(['error' => false, 'data' => $data]);
     }
 
+    /**
+     * @throws \JsonException
+     */
     public function game()
     {
         $user = Auth::user()->account;
-        return response()->json(['error' => false, 'data' => $user]);
+        return response()->json(['error' => false, 'data' => Text::encode($user)]);
     }
 
     public function referrals()
