@@ -1,4 +1,7 @@
 <x-app-layout>
+    @push('css')
+        <link href="{{ asset('static/5.60a3b147f091048d9af5.css') }}" rel="stylesheet" type="text/css"/>
+    @endpush
     <div class="Pane Pane--underSiteNav Pane--repeat" data-url="{{ asset('/cms/template_resource/uj/RHMX56JT07891461948685993.jpg') }}" media-medium="hide">
         <div class="Pane-bg" style="background-color:#041828;background-image:url({{ asset('/cms/template_resource/uj/RHMX56JT07891461948685993.jpg') }});">
             <div class="Pane-overlay"></div>

@@ -1,4 +1,7 @@
 <x-app-layout>
+    @push('css')
+        <link href="{{ asset('static/5.60a3b147f091048d9af5.css') }}" rel="stylesheet" type="text/css"/>
+    @endpush
     <div class="Pane Pane--underSiteNav Pane--repeat hide" data-url="https://bnetcmsus-a.akamaihd.net/cms/template_resource/uj/UJX9EMWHIBFE1466177294042.jpg" media-medium="hide" queryselectoralways="0 31" media-original="Pane Pane--underSiteNav Pane--repeat">
         <div class="Pane-bg" style="background-color:#041828;background-image:url(https://bnetcmsus-a.akamaihd.net/cms/template_resource/uj/UJX9EMWHIBFE1466177294042.jpg);">
             <div class="Pane-overlay"></div>
