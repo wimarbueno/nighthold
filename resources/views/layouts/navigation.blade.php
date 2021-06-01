@@ -155,8 +155,8 @@
                            </svg>
                         </div>
                      </a>
-                     <a href="{{ config('app.url') }}" class="Navbar-logo" aria-label="Home" data-analytics="global-nav" data-analytics-placement="Nav - Icon"><img src="{{ asset(Utils::ImagesLogo('storage/'.setting('site.logo'))) }}" alt="" width="97" height="60" style=" margin-top: -11px" /></a>
-                     <a href="{{ config('app.url') }}" class="Navbar-customLogo"><img src="{{ asset(Utils::ImagesLogo('storage/'.setting('site.logo'))) }}" alt=""  width="97" height="60" style=" margin-top: -11px" /></a>
+                     <a href="{{ config('app.url') }}" class="Navbar-logo" aria-label="Home" data-analytics="global-nav" data-analytics-placement="Nav - Icon"></a>
+                     <a href="{{ config('app.url') }}" class="Navbar-customLogo"></a>
                      <div role="presentation" class="Navbar-profileItems">
                         <a role="button" aria-haspopup="true" aria-label="Open Secondary Menu" data-target="Navbar-accountModal" tabindex="0" class="Navbar-account Navbar-modalToggle is-noSelect">
                            <div class="Navbar-icon Navbar-mobileIcon Navbar-profileIcon">
@@ -169,7 +169,7 @@
                   </div>
                   <div class="Navbar-desktop">
                      <div role="presentation" class="Navbar-desktopOverlay Navbar-overlay"></div>
-                     <a href="{{ config('app.url') }}" class="Navbar-logo" aria-label="Home" data-analytics="global-nav" data-analytics-placement="Nav - Icon"><img src="{{ asset(Utils::ImagesLogo('storage/'.setting('site.logo'))) }}" alt="" width="97" height="60" style=" margin-top: -11px" /></a>
+                     <a href="{{ config('app.url') }}" class="Navbar-logo" aria-label="Home" data-analytics="global-nav" data-analytics-placement="Nav - Icon"></a>
                      <div class="Navbar-collapsedItems is-hidden">
                         <a data-target="Navbar-siteMenu" aria-label="Меню" role="button" tabindex="0" aria-haspopup="true" class="Navbar-menu Navbar-item Navbar-link Navbar-modalToggle is-noSelect">
                            <div class="Navbar-icon Navbar-collapsedIcon Navbar-siteMenuIcon">
@@ -238,9 +238,6 @@
                         <a href="{{ config('app.url') }}" data-target='{"class":"Navbar-home","data-index":"index","data-name":"home"}' class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Icon">
                            <div class="Navbar-modalLinkLabel">На главную</div>
                         </a>
-                        <a href="{{ route('user', ['shop']) }}" data-target='{"class":"Navbar-shop","data-index":"index","data-name":"shop"}' class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Shop">
-                           <div class="Navbar-modalLinkLabel">Магазин</div>
-                        </a>
                         <a href="{{ route('news.index') }}" data-target='{"class":"Navbar-news","data-index":"index","data-name":"news"}' class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - News">
                            <div class="Navbar-modalLinkLabel">Новости</div>
                         </a>
@@ -260,7 +257,7 @@
                         <div class="BnetNav-mobileSiteMenu">
                            <div class="BnetNav-mobileSiteMenuBody">
                               <div class="BnetNav-mobileSiteMenuLogo">
-                                 <div class="Logo Logo--wow Logo--wowSitenav"></div>
+                                 <div></div>
                               </div>
                               <div class="BnetNav-searchInline">
                                  <form action="{{ route('search') }}" method="GET">
