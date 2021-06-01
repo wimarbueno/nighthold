@@ -99,6 +99,9 @@ class RegisteredUserController extends Controller
         return view('auth.setPassword');
     }
 
+    /**
+     * @throws \Exception
+     */
     public function battletag(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -132,7 +135,11 @@ class RegisteredUserController extends Controller
         $email = Session::get('user_credentials.email');
 
         if(setting('soap.soap_enable') === "PUBLISHED") {
-            (new Soap)->cmd('.bnetaccount create ' . $email . ' ' . Session::get('user_password.password'));
+            if((new Soap)->cmd('.server info ') === NULL) {
+                (new Soap)->cmd('.bnetaccount create ' . $email . ' ' . Session::get('user_password.password');
+            } else {
+                Account::createSrp6BattleNet($email, Session::get('user_password.password'));
+            }
         }
         elseif(setting('registraciya.srp6_support') === "PUBLISHED") {
             Account::createBattleNet(Session::get('user_credentials.email'), Session::get('user_password.password'));
