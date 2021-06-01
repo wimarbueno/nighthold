@@ -181,9 +181,6 @@
                         </a>
                      </div>
                      <div class="Navbar-items">
-                        <a href="{{ route('user', ['shop']) }}" class="Navbar-item Navbar-link is-noSelect Navbar-shop" data-index='1' data-name="shop" tabindex="0" data-analytics="global-nav" data-analytics-placement="Nav - Shop">
-                           <div class="Navbar-label">@lang('navbar.nav-site-menu-shop')</div>
-                        </a>
                         <a href="{{ route('news.index') }}" class="Navbar-item Navbar-link is-noSelect Navbar-news" data-index='2' data-name="news" tabindex="0" data-analytics="global-nav" data-analytics-placement="Nav - News">
                            <div class="Navbar-label">@lang('navbar.nav-site-menu-news')</div>
                         </a>
