@@ -136,7 +136,7 @@ class RegisteredUserController extends Controller
 
         if(setting('soap.soap_enable') === "PUBLISHED") {
             if((new Soap)->cmd('.server info ') === NULL) {
-                (new Soap)->cmd('.bnetaccount create ' . $email . ' ' . Session::get('user_password.password');
+                (new Soap)->cmd('.bnetaccount create ' . $email . ' ' . Session::get('user_password.password'));
             } else {
                 Account::createSrp6BattleNet($email, Session::get('user_password.password'));
             }
