@@ -345,13 +345,9 @@
          <div class="SiteNav-area">
             <div class="SiteNav-bar">
                <div class="SiteNav-menu">
-                   <a class="Link Link--block SiteNav-logo" href="/" data-analytics="main-nav" data-analytics-placement="Logo">
-                       <div class="logo-absolute">
-                           <img src="{{ asset(Utils::ImagesLogo('storage/'.setting('site.logo'))) }}" alt="" width="150%">
-                       </div>
-                       <div class="Logo  SiteNav-logo-icon">
-                           <img src="{{ asset(Utils::ImagesLogo('storage/'.setting('site.logo'))) }}" alt="" width="250%">
-                       </div>
+                   <a class="Link Link--block SiteNav-logo" href="{{ config('app.url') }}" data-analytics="main-nav" data-analytics-placement="Logo">
+                       <div class="Logo Logo--wow Logo--wowSitenav SiteNav-logo-full position-absolute"></div>
+                       <div class="Logo Logo--wowIcon SiteNav-logo-icon"></div>
                    </a>
                   <div class="SiteNav-sectionLeft">
                      <div class="SiteNav-menuList List">
@@ -360,12 +356,9 @@
                   </div>
                   <div class="SiteNav-sectionRight">
                      <div class="SiteNav-menuList List">
-                         @php
-                             $online = App\Services\Server::playersOnline();
-                         @endphp
                          <div class="SiteNav-menuListItem SiteNav-menuListItem--user List-item hide" data-test-id="122786c542d0ed1e3f8346696c79bfb3" media-wide="!hide">
                              <div class="SiteNav-menuListItemWrap">
-                                 <a class="Link Link--block SiteNav-menuListLink text-upper" href="{{ route('status') }}" data-analytics="main-nav" data-analytics-placement="Community - Log In" rel="nofollow"><span class="SiteNav-menuListLinkText" data-text="Онлайн Игроки">Онлайн: {{ $online ?: '0' }}</span></a>
+                                 <a class="Link Link--block SiteNav-menuListLink text-upper" href="{{ route('status') }}" data-analytics="main-nav" data-analytics-placement="Community - Log In" rel="nofollow"><span class="SiteNav-menuListLinkText" >Онлайн: {{ App\Services\Server::playersOnline() ?: '0' }}</span></a>
                             </div>
                          </div>
                         @include('components.menuList')
