@@ -9,25 +9,21 @@ class Arena extends Model
 {
     protected $connection = 'characters';
 
-    protected $table = 'character_brackets_info';
+    protected $table = 'character_arena_data';
 
     protected $fillable = [
         "guid",
-        "bracket",
+        "slot",
         "rating",
-        "oldRating",
-        "best",
-        "oldBest",
-        "bestWeek",
-        "mmr",
-        "oldMmr",
-        "games",
-        "oldGames",
-        "wins",
-        "oldWins",
+        "bestRatingOfWeek",
+        "bestRatingOfSeason",
+        "matchMakerRating",
         "weekGames",
         "weekWins",
-        "bestWeekLast",
+        "prevWeekGames",
+        "prevWeekWins",
+        "seasonGames",
+        "seasonWins"
     ];
 
     public function characters() {

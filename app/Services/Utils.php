@@ -481,10 +481,10 @@
         }
 
         private static function pvpTalent($guid, $spec) {
-            $pvp = DB::connection('characters')->table('character_pvp_talent')->where('guid', $guid)->where('spec', $spec)->orderBy('talent', 'asc')->get();
+            $pvp = DB::connection('characters')->table('character_pvp_talent')->where('guid', $guid)->where('talentGroup', $spec)->orderBy('talent', 'asc')->get();
             $flattened = [];
             foreach ($pvp as $value) {
-                $info = Talent::where('talent', $value->talent)->first();
+                $info = Talent::where('talent', $value->talent0)->first();
 
                 if ($info) {
                     $flattened[] = [

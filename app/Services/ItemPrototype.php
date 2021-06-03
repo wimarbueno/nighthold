@@ -21,6 +21,8 @@
 
         public $ItemStat;
 
+        public $itemLevel;
+
         public $item;
 
         public function LoadFromDB($data, $guid) {
@@ -36,12 +38,9 @@
                 ii.charges,
                 ii.flags,
                 ii.enchantments,
-                ii.randomPropertyType,
-                ii.randomPropertyId,
                 ii.durability,
                 ii.playedTime,
                 ii.text,
-                ii.upgradeId,
                 ii.battlePetSpeciesId,
                 ii.battlePetBreedData,
                 ii.battlePetLevel,
@@ -70,15 +69,8 @@
                 ig.gemContext3,
                 ig.gemScalingLevel3,
                 im.fixedScalingLevel,
-                im.artifactKnowledgeLevel,
-                iia.xp,
-                iia.artifactAppearanceId,
-                iia.tier,
-                ii.dungeonEncounterID,
-                ii.contextID,
-                ii.itemLevel,
-                ii.createdTime
-                FROM item_instance ii LEFT JOIN item_instance_gems ig ON ii.guid = ig.itemGuid LEFT JOIN item_instance_transmog iit ON ii.guid = iit.itemGuid LEFT JOIN item_instance_artifact iia ON ii.itemEntry = iia.itemEntry and ii.owner_guid = iia.char_guid LEFT JOIN item_instance_modifiers im ON ii.guid = im.itemGuid WHERE ii.guid = ? AND ii.owner_guid = ? ', [$data->guid, $guid]);
+                im.artifactKnowledgeLevel
+                FROM item_instance ii LEFT JOIN item_instance_gems ig ON ii.guid = ig.itemGuid LEFT JOIN item_instance_transmog iit ON ii.guid = iit.itemGuid  LEFT JOIN item_instance_modifiers im ON ii.guid = im.itemGuid WHERE ii.guid = ? AND ii.owner_guid = ? ', [$data->guid, $guid]);
 
             $item_data = DB::connection('mysql')
                 ->table('item_prototypes')

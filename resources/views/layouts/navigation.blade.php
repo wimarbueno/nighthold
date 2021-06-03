@@ -292,9 +292,6 @@
                         <a href="{{ config('app.url') }}" data-target='{"class":"Navbar-home","data-index":"index","data-name":"home"}' class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Icon">
                            <div class="Navbar-modalLinkLabel">На главную</div>
                         </a>
-                        <a href="{{ route('user', ['shop']) }}" data-target='{"class":"Navbar-shop","data-index":"index","data-name":"shop"}' class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Shop">
-                           <div class="Navbar-modalLinkLabel">Магазин</div>
-                        </a>
                         <a href="{{ route('news.index') }}" data-target='{"class":"Navbar-news","data-index":"index","data-name":"news"}' class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - News">
                            <div class="Navbar-modalLinkLabel">Новости</div>
                         </a>

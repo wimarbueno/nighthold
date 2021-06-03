@@ -8,6 +8,7 @@
         private static $level          = 0;
         private static $item_level     = array();
         private static $m_items        = array();
+        private static $itemLevel        = 0;
 
         public static function GetAverageItemLevel() {
             return array('avg' => self::GetAVGItemLevel(), 'avgEquipped' => self::GetAVGEquippedItemLevel());
@@ -43,13 +44,13 @@
             self::$item_level = array('avgEquipped' => 0, 'avg' => 0);
             foreach(self::$m_items as $item) {
                 if(!in_array($item->slot, array(3, 18))) {
-                    if($item->item->itemLevel > 0) {
-                        $total_iLvl += $item->item->itemLevel;
-                        if($item->item->itemLevel < $minLvl) {
-                            $minLvl = $item->item->itemLevel;
+                    if($item->ItemLevel > 0) {
+                        $total_iLvl += $item->itemLevel;
+                        if($item->itemLevel < $minLvl) {
+                            $minLvl = $item->itemLevel;
                         }
-                        if($item->item->itemLevel > $maxLvl) {
-                            $maxLvl = $item->item->itemLevel;
+                        if($item->itemLevel > $maxLvl) {
+                            $maxLvl = $item->itemLevel;
                         }
                         $i++;
                     }
@@ -85,7 +86,6 @@
                     ii.battlePetLevel,
                     ii.battlePetDisplayId,
                     ii.bonusListIDs,
-                    ii.itemLevel,
                     iit.itemModifiedAppearanceAllSpecs,
                     iit.itemModifiedAppearanceSpec1,
                     iit.itemModifiedAppearanceSpec2,
@@ -181,8 +181,8 @@
                         "item_class" => (new Item)->ItemClass($item['item']->OverallQualityID, $item['item']->InventoryType),
                         "item_subclass" => (new Item)->ItemSubClass($item['item']->Material),
                         "level" => [
-                            "display_string" => __('characters.item_level', ['level' => $item['item']->item->itemLevel]),
-                            "value" => $item['item']->item->itemLevel
+                            "display_string" => __('characters.item_level', ['level' => $item['item']->itemLevel]),
+                            "value" => $item['item']->itemLevel
                         ],
                         "limit_category" => (new Item)->itemLimitCategory($item['item']->item->bonusListIDs),
                         "media" => [

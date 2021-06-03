@@ -24,7 +24,9 @@
         private static $totalKills     = 0;
         private static $chosenTitle    = 0;
         private static $health         = 0;
-        private static $activespec     = 0;
+        private static $honorLevel     = 0;
+        private static $honor          = 0;
+        private static $activeTalentGroup     = 0;
         private static $equipmentCache = 0;
 
         /* Extra Variables */
@@ -66,6 +68,7 @@
         private static $m_mounts_count = []; // Character companions & mounts counters (collected / not collected)
         private static $m_spells       = []; // Character spells
         private static $logout_time       = null;
+        private static $totaltime      = null;
 
         public static function LoadCharacter($name, $realm_id, $full = true, $initialBuild = true): int
         {
@@ -121,15 +124,9 @@
                 $isOutdated = false;
             }
 
-            $pvp = DB::connection('characters')
-                ->table('character_honor')
-                ->select('Guid', 'CurrentHonorAtLevel', 'HonorLevel', 'PrestigeLevel')
-                ->where('Guid', self::$guid)
-                ->first();
-
-            $arena2 = Arena::where('guid', self::$guid)->where('bracket', 0)->first();
-            $arena3 = Arena::where('guid', self::$guid)->where('bracket', 1)->first();
-            $battlegrounds = Arena::where('guid', self::$guid)->where('bracket', 3)->first();
+            $arena2 = Arena::where('guid', self::$guid)->where('slot', 0)->first();
+            $arena3 = Arena::where('guid', self::$guid)->where('slot', 1)->first();
+            $battlegrounds = Arena::where('guid', self::$guid)->where('slot', 3)->first();
 
             Achievements::Initialize(self::$guid);
 
@@ -202,8 +199,8 @@
                         ]
                     ],
                     "renderRaw" => ["url" => Utils::renderRaw(self::$race, self::$gender)],
-                    "spec" => Utils::characterSpec(self::$class, self::$activespec),
-                    "specs" => Utils::specCharacters(self::$class, self::$activespec, self::$guid),
+                    "spec" => Utils::characterSpec(self::$class, self::$activeTalentGroup),
+                    "specs" => Utils::specCharacters(self::$class, self::$activeTalentGroup, self::$guid),
                     "stats" => Utils::statsChar(self::$health, self::$class),
                     "title" => "[name], " . self::GetTitleInfo('title'),
                     "url" => route('characters.show', [self::$realmName, self::$name]),
@@ -318,8 +315,8 @@
                         ],
                         "pvp" => [
                             "honorableKills" => [
-                                "tier" => 1000,"value" => $pvp->CurrentHonorAtLevel ?? 0],
-                            "prestige" => ["honorLevel" => $pvp->HonorLevel ?? 0],
+                                "tier" => 1000,"value" => self::$honor],
+                            "prestige" => ["honorLevel" => self::$honorLevel],
                             "ratings" => Utils::pvp($arena2, $arena3, $battlegrounds),
                             "region" => "eu"
                         ],
@@ -354,8 +351,8 @@
                         ],
                         "renderRaw" => [
                             "url" => Utils::renderRaw(self::$race, self::$gender)],
-                        "spec" => Utils::characterSpec(self::$class, self::$activespec),
-                        "specs" => Utils::specCharacters(self::$class, self::$activespec, self::$guid),
+                        "spec" => Utils::characterSpec(self::$class, self::$activeTalentGroup),
+                        "specs" => Utils::specCharacters(self::$class, self::$activeTalentGroup, self::$guid),
                         "stats" => Utils::statsChar(self::$health, self::$class),
                         "title" => "[name], " . self::GetTitleInfo('title'),
                         "url" => route('characters.show', [self::$realmName, self::$name]),
@@ -363,13 +360,13 @@
                         "isOutdated" => $isOutdated,
                         "suffix" => self::GetTitleInfo('title')
                     ],
-                    "specs" => Utils::specCharacters(self::$class, self::$activespec, self::$guid),
+                    "specs" => Utils::specCharacters(self::$class, self::$activeTalentGroup, self::$guid),
                     "pets" => [],
                     "raids" => self::raids(self::$name, self::$guid),
                     "pvp" => [
                         "honorableKills" => [
-                            "tier" => 1000,"value" => $pvp->CurrentHonorAtLevel ?? 0],
-                        "prestige" => ["honorLevel" => $pvp->HonorLevel ?? 0],
+                            "tier" => 1000,"value" => self::$honor],
+                        "prestige" => ["honorLevel" => self::$honorLevel],
                         "ratings" => Utils::pvp($arena2, $arena3, $battlegrounds),
                         "region" => "eu"
                     ],
@@ -421,11 +418,11 @@
             $bosses = [];
             foreach ($boss as $item) {
                 $info = DB::connection('characters')
-                    ->table('character_stat_kill_creature')
+                    ->table('character_skills')
                     ->where('guid', $guid)
-                    ->where('entry', $item->id_boss)
+                    ->where('skill', $item->id_boss)
                     ->first();
-                $bosses[] = ["killCount" => $info->count ?? 0,"name" => $item->name];
+                $bosses[] = ["killCount" => $info->value ?? 0,"name" => $item->name];
             }
             return $bosses;
         }
@@ -435,10 +432,10 @@
             $i = 0;
             foreach ($boss as $item) {
                 $count = DB::connection('characters')
-                    ->table('character_stat_kill_creature')
+                    ->table('character_skills')
                     ->where('guid', $guid)
-                    ->where('entry', $item->id_boss)
-                    ->where('count', '>', 0)
+                    ->where('skill', $item->id_boss)
+                    ->where('value', '>', 0)
                     ->first();
                 if ($count) {
                     $i++;
@@ -518,7 +515,9 @@
             characters.totalKills,
             characters.chosenTitle,
             characters.health,
-            characters.activespec,
+            characters.honorLevel,
+            characters.honor,
+            characters.activeTalentGroup,
             characters.equipmentCache,
             characters.totaltime,
             characters.logout_time,

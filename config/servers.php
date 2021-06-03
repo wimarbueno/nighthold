@@ -4,7 +4,7 @@ return [
     'realm' => [
         '1' => [
             'id'   => 1,
-            'name' => 'wowlegions',
+            'name' => 'Nighthold х5',
             'type' => 2
         ]
     ]
