@@ -106,10 +106,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" focusable="false"><use xlink:href="#Navbar-icon-menu"></use></svg>
                 </div>
             </a>
-            <a href="{{ url('/') }}" class="Navbar-logo" data-analytics="global-nav" data-analytics-placement="Nav - Icon">
-                <img src="{{ asset(Utils::ImagesLogo('storage/'.setting('site.logo'))) }}" alt="" width="97" height="60" style=" margin-top: -11px" /></a>
-            <a href="{{ url('/') }}" class="Navbar-customLogo">
-                <img src="{{ asset(Utils::ImagesLogo('storage/'.setting('site.logo'))) }}"/></a>
+            <a href="{{ url('/') }}" class="Navbar-logo" data-analytics="global-nav" data-analytics-placement="Nav - Icon"></a>
+            <a href="{{ url('/') }}" class="Navbar-customLogo"></a>
             <div class="Navbar-profileItems">
                 <a data-target="Navbar-accountModal" class="Navbar-account Navbar-modalToggle is-noSelect">
                     <div class="Navbar-icon Navbar-mobileIcon Navbar-profileIcon">
@@ -120,13 +118,14 @@
         </nav>
         <nav class="Navbar-desktop">
             <div class="Navbar-desktopOverlay Navbar-overlay"></div>
-            <a href="{{ url('/') }}" class="Navbar-logo" data-analytics="global-nav" data-analytics-placement="Nav - Icon"><img src="{{ asset(Utils::ImagesLogo('storage/'.setting('site.logo'))) }}" alt="" width="97" height="60" style=" margin-top: -11px" /></a>
+            <a href="{{ url('/') }}" class="Navbar-logo" data-analytics="global-nav" data-analytics-placement="Nav - Icon"></a>
 
             <div class="Navbar-collapsedItems is-hidden"><a data-target="Navbar-siteMenu" class="Navbar-menu Navbar-item Navbar-link Navbar-modalToggle is-noSelect"><div class="Navbar-icon Navbar-collapsedIcon Navbar-siteMenuIcon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" focusable="false"><use xlink:href="#Navbar-icon-menu"></use></svg></div><div class="Navbar-label">{{ __('navbar.navbar_35') }}</div></a></div>
 
             <div class="Navbar-items">
-                <a href="/" class="Navbar-item Navbar-link is-noSelect Navbar-shop" data-index='1' data-name="shop" data-analytics="global-nav" data-analytics-placement="Nav - Shop"><div class="Navbar-label">{{ __('navbar.navbar_1') }}</div></a>
-                <a href="{{ route('news.index') }}" class="Navbar-item Navbar-link is-noSelect Navbar-news" data-index='2' data-name="news" data-analytics="global-nav" data-analytics-placement="Nav - News"><div class="Navbar-label">{{ __('navbar.navbar_2') }}</div></a>
+                <a href="{{ route('news.index') }}" class="Navbar-item Navbar-link is-noSelect Navbar-news" data-index='2' data-name="news" data-analytics="global-nav" data-analytics-placement="Nav - News">
+                    <div class="Navbar-label">{{ __('navbar.navbar_2') }}</div>
+                </a>
             </div>
 
             <div class="Navbar-profileItems">
@@ -217,7 +216,7 @@ document.getElementById('logout-form').submit();" class="Navbar-accountDropdownL
         <div class="Navbar-modal Navbar-accountModal is-animated is-scroll-blocking">
             <div class="Navbar-modalContent">
                 <div class="Navbar-mobileModalHeader"></div>
-                <a href="{{ url('/') }}" class="Navbar-logo Navbar-mobileModalLogo" data-analytics="global-nav" data-analytics-placement="Nav - Icon"><img src="{{ asset(config('global.logo')) }}" alt="" width="82" height="30" style=" margin-top: 6px; " /></a>
+                <a href="{{ url('/') }}" class="Navbar-logo Navbar-mobileModalLogo" data-analytics="global-nav" data-analytics-placement="Nav - Icon"></a>
                 <div class="Navbar-accountDropdownLoggedOut">
                     <div class="Navbar-modalSection">
                         <a href="{{ route('login') }}" class="Navbar-accountDropdownButtonLink" data-analytics="global-nav" data-analytics-placement="Nav - Account - Log In"><button class="Navbar-button is-full">{{ __('navbar.navbar_5') }}</button></a>
@@ -250,7 +249,6 @@ document.getElementById('logout').submit();" class="Navbar-accountDropdownLink" 
                     </form>
                 </div>
                 <a href="{{ url('/') }}" class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Icon"><div class="Navbar-modalLinkLabel">{{ __('navbar.navbar_8') }}</div></a>
-                <a href="/" class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Shop"><div class="Navbar-modalLinkLabel">{{ __('navbar.navbar_1') }}</div></a>
                 <a href="{{ route('news.index') }}" class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - News"><div class="Navbar-modalLinkLabel">{{ __('navbar.navbar_2') }}</div></a>
                 <div class="Navbar-icon Navbar-modalClose">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false">
