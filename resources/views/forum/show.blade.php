@@ -66,7 +66,7 @@
 @foreach($categories as $cat)
 @foreach($cat->forums as $cats)
 <a href="{{ route('forum.show', [$cats->id])}}" class="ForumCard ForumCard--content">
-<i class="ForumCard-icon" style="background-image: url('{{ $cats->getMedia('icons')->first()->getUrl() }}')"></i>
+<i class="ForumCard-icon" style="background-image: url('{{ asset('/storage/' . Utils::Images($cats->icons)) }}')"></i>
 <div class="ForumCard-details">
 <h1 class="ForumCard-heading">{!! $cats->name !!}</h1>
 <span class="ForumCard-description">{{$cats->category_description}}</span>
