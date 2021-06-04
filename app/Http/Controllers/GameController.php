@@ -16,7 +16,7 @@ class GameController extends Controller
         Meta::prependTitle('Арена 2х2 - Рейтинговая таблица PvP')
             ->setDescription('Сильнейшие среди героев Альянса и Орды сражаются за славу на аренах и полях боя. В этой таблице указана 1000 лучших игроков вашего региона.');
         return view('game.pvp.arena_two', [
-            'data' => Arena::with('characters')->with('account')->where('bracket', 0)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
+            'data' => Arena::with('characters')->with('account')->where('slot', 0)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
         ]);
     }
 
@@ -24,7 +24,7 @@ class GameController extends Controller
         Meta::prependTitle('Арена 3х3 - Рейтинговая таблица PvP')
             ->setDescription('Сильнейшие среди героев Альянса и Орды сражаются за славу на аренах и полях боя. В этой таблице указана 1000 лучших игроков вашего региона.');
         return view('game.pvp.arena_tree', [
-            'data' => Arena::with('characters')->where('bracket', 1)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
+            'data' => Arena::with('characters')->where('slot', 1)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
         ]);
     }
 
@@ -32,7 +32,7 @@ class GameController extends Controller
         Meta::prependTitle('Поля боя 10x10 - Рейтинговая таблица PvP')
             ->setDescription('Сильнейшие среди героев Альянса и Орды сражаются за славу на аренах и полях боя. В этой таблице указана 1000 лучших игроков вашего региона.');
         return view('game.pvp.battlegrounds', [
-            'data' => Arena::with('characters')->where('bracket', 3)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
+            'data' => Arena::with('characters')->where('slot', 3)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
         ]);
     }
 
