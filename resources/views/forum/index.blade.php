@@ -22,6 +22,27 @@
                 </div>
             </div>
         </header>
+        <div class="list-controls">
+            <div class="container">
+                <section class="navigation-container ember-view">
+                    <ul class="nav nav-pills ember-view">
+                        <li title="Все темы по категориям" id="ember33" class="active ember-view">
+                            <a href="{{ route('forums.index') }}" class="active">Категории</a>
+                        </li>
+                        <li title="Новые темы за последние несколько дней" id="ember37" class="ember-view">
+                            <a href="{{ route('forums.index') }}/new" class="">
+                                <!---->  Новые
+                            </a>
+                        </li>
+                        <li title="Темы с недавними сообщениями" id="ember41" class="ember-view">
+                            <a href="{{ route('forums.index') }}/latest" class="">
+                                <!---->  Последние
+                            </a>
+                        </li>
+                        </ul>
+                </section>
+            </div>
+        </div>
         @foreach($thread as $category)
             @if($category->visible == "PUBLISHED")
                 <div class="ForumCategory ">

@@ -9,13 +9,15 @@
       <link rel="shortcut icon" type="image/x-icon" href="{{ asset('forum/static/images/icons/wow-favicon.ico') }}" />
       <link rel="stylesheet" href="{{ asset('forum/static/css/navbar.css') }}">
       <link rel="stylesheet" href="{{ asset('forum/static/css/main-9296f9fec4.css') }}">
+      <link rel="stylesheet" href="{{ asset('forum/static/css/desktop_2_d90f4dbd5a861bdeed61b3da02053b01ae34655f.css') }}">
+      <link rel="stylesheet" href="{{ asset('forum/static/css/desktop_theme_3_5adbba4c27c4c795e67b29e3622e828be72f9232.css') }}">
       <script>var whTooltips = {colorLinks: true, iconizeLinks: true, renameLinks: true};</script>
       <script src="//wow.zamimg.com/widgets/power.js"></script>
       <script type="text/javascript" src="{{ asset('forum/static/js/vendor/jquery/dist/jquery.min.js') }}"></script>
       <script type="text/javascript">
          $(document).ready( function() {
              $('body').removeClass('no-js');
-         
+
              // TODO: Remove the following code when fixing the white flash issue.
              // Its here to fix the deeplinking bug in Firefox
              if (location.href.indexOf('#') > -1) {
@@ -60,13 +62,13 @@
       <script type="text/javascript">
          //<![CDATA[
          var LOCALIZATION = LOCALIZATION || {};
-         
+
          LOCALIZATION.SPAMMING = "Спам";
          LOCALIZATION.REAL_LIFE_THREATS = "Угрозы в реальной жизни";
          LOCALIZATION.ADVERTISING_STRADING = "Реклама";
          LOCALIZATION.OTHER = "Иное";
          LOCALIZATION.TROLLING = "Троллинг";
-         
+
          LOCALIZATION.EDIT = "Редактировать"
          LOCALIZATION.SAVE = "Сохранить"
          LOCALIZATION.PREVIEW = "Предпросмотр";
@@ -88,7 +90,7 @@
          LOCALIZATION.QUOTE = "Цитирование";
          LOCALIZATION.CODE = "Код";
          LOCALIZATION.URL = "Ссылка";
-         
+
          LOCALIZATION.DELETE_CONFIRM = "Вы точно хотите удалить это сообщение?";
          LOCALIZATION.CLOSED_CONFIRM = "Вы точно хотите закрыть эту тему?";
          LOCALIZATION.UNCLOSED_CONFIRM = "Вы точно хотите открыть эту тему?";
@@ -106,7 +108,7 @@
          LOCALIZATION.REPORT_SUCCESS = "Готово!"
          LOCALIZATION.ERROR_REPORT = "Ошибка при отправлении жалобы";
          LOCALIZATION.ERROR_BLOCK = "Ошибка при отправлении блокировки";
-         
+
          LOCALIZATION.ERROR_EMPTY = "Warning! No topics were selected";
          LOCALIZATION.ERROR_UPDATE = "Ошибка при обновлении";
          LOCALIZATION.ERROR_UPDATE_MOD = "Error Updating";
