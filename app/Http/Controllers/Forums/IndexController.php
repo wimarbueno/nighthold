@@ -93,14 +93,11 @@ class IndexController extends Controller
         return view('forum.new', compact( 'topics'));
     }
 
-    public function latest($slug) {
-        $threads = Channel::where('parent_id', 0)->with('forums')->orderBy('sort')->get();
-        $category = Channel::where('id', $slug)->whereNotNull('parent_id')->firstOrFail();
-        $categories = Channel::where('id', $slug)->with('forums')->orderBy('sort')->get();
-        $topics = Thread::whereChannelId($category->id)->whereNull('parent_id')->orderBy('sticky', 'DESC')->orderBy('created_at', 'DESC')->with(['user' => function($query) {
+    public function latest() {
+        $topics = Thread::orderBy('sticky', 'DESC')->orderBy('created_at', 'DESC')->with(['user' => function($query) {
             $query->select('id', 'name');
-        }])->paginate(30);
-        return view('forum.show', compact('category', 'topics', 'threads', 'categories'));
+        }])->paginate(10);
+        return view('forum.new', compact( 'topics'));
     }
 
 }
