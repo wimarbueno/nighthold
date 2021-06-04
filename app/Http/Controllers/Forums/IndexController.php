@@ -85,4 +85,22 @@ class IndexController extends Controller
     public function patch_notes() {
         return view('forum.patch_notes');
     }
+
+    public function new() {
+        $topics = Thread::orderBy('sticky', 'DESC')->orderBy('created_at', 'DESC')->with(['user' => function($query) {
+            $query->select('id', 'name');
+        }])->paginate(10);
+        return view('forum.new', compact( 'topics'));
+    }
+
+    public function latest($slug) {
+        $threads = Channel::where('parent_id', 0)->with('forums')->orderBy('sort')->get();
+        $category = Channel::where('id', $slug)->whereNotNull('parent_id')->firstOrFail();
+        $categories = Channel::where('id', $slug)->with('forums')->orderBy('sort')->get();
+        $topics = Thread::whereChannelId($category->id)->whereNull('parent_id')->orderBy('sticky', 'DESC')->orderBy('created_at', 'DESC')->with(['user' => function($query) {
+            $query->select('id', 'name');
+        }])->paginate(30);
+        return view('forum.show', compact('category', 'topics', 'threads', 'categories'));
+    }
+
 }
