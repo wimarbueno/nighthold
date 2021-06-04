@@ -174,9 +174,6 @@
                         <div class="Navbar-tick">
                            <div class="Navbar-tickInner"></div>
                         </div>
-                        <div class="Navbar-modalContent">
-                           @include('components.auth-menu-desctop')
-                        </div>
                         <a data-target=".Navbar-account.is-active" class="Navbar-modalClose" tabindex="0" role="button" aria-label="@lang('navbar.closed-menu')" data-analytics="global-nav">
                            <div class="Navbar-icon Navbar-gameMenuItemIcon">
                               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false" aria-hidden="true">

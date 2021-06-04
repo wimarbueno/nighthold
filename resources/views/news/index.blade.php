@@ -1,6 +1,6 @@
 <x-app-layout>
     @push('css')
-        <link href="{{ asset('static/3.559b47542534e00a0a6b.css') }}?v=8.27.2" rel="stylesheet">
+        <link href="{{ asset('static/5.60a3b147f091048d9af5.css') }}" rel="stylesheet">
     @endpush
 
     <div class="Pane Pane--full Pane--dirtDark">

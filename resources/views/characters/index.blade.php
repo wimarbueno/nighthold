@@ -1,4 +1,9 @@
 <x-app-layout>
+
+    @push('css')
+        <link href="{{ asset('static/5.60a3b147f091048d9af5.css') }}" rel="stylesheet">
+    @endpush
+
     <div class="Pane Pane--underSiteNav Pane--cropMax" data-url="{{ asset('/cms/template_resource/hf/HFUOF413X1O21459870154507.jpg') }}">
         <div class="Pane-bg" style="background-color:#180906;background-image:url({{ asset('/cms/template_resource/hf/HFUOF413X1O21459870154507.jpg') }});">
             <div class="Pane-overlay"></div>

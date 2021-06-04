@@ -1,6 +1,6 @@
 <x-app-layout>
     @push('css')
-        <link href="{{ asset('static/3.e8d11e4f9a06fb8b663d.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('static/5.60a3b147f091048d9af5.css') }}" rel="stylesheet" type="text/css"/>
     @endpush
     <div class="Pane Pane--underSiteNav Pane--cropEdge" data-url="{{ asset('/storage/' . Utils::ImagesLogo($classes->images_fone)) }}">
         <div class="Pane-bg" style="background-color:#{{ $classes->art_color }};background-image:url({{ asset('/storage/' . Utils::ImagesLogo($classes->images_fone)) }});">
