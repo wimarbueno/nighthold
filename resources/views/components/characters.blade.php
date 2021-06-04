@@ -45,11 +45,19 @@
         </div>
         <div class="List List--vertical List--right">
             @auth
+            @can('browse_admin')
+            <div class="List-item">
+                <a class="SiteNav-pageLink" href="{{ route('voyager.dashboard') }}">Админка</a>
+            </div>
+            @endcan
+            <div class="List-item">
+                <a class="SiteNav-pageLink" href="{{ route('user', ['overview']) }}">Учетная запись</a>
+            </div>
             @empty(!Auth::user()->account)
                 @empty(!Auth::user()->account->characters)
-                    <div class="List-item">
-                        <a class="SiteNav-pageLink" href="{{ route('characters.index') }}">Все ваши персонажи</a>
-                    </div>
+            <div class="List-item">
+                <a class="SiteNav-pageLink" href="{{ route('characters.index') }}">Все ваши персонажи</a>
+            </div>
                 @endempty
             @endempty
             @endauth

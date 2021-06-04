@@ -167,45 +167,6 @@
                         </a>
                      </div>
                   </div>
-                  <div class="Navbar-desktop">
-                     <div role="presentation" class="Navbar-desktopOverlay Navbar-overlay"></div>
-                     <a href="{{ config('app.url') }}" class="Navbar-logo" aria-label="Home" data-analytics="global-nav" data-analytics-placement="Nav - Icon"></a>
-                     <div class="Navbar-collapsedItems is-hidden">
-                        <a data-target="Navbar-siteMenu" aria-label="Меню" role="button" tabindex="0" aria-haspopup="true" class="Navbar-menu Navbar-item Navbar-link Navbar-modalToggle is-noSelect">
-                           <div class="Navbar-icon Navbar-collapsedIcon Navbar-siteMenuIcon">
-                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" focusable="false" aria-hidden="true">
-                                 <use xlink:href="#Navbar-icon-menu"></use>
-                              </svg>
-                           </div>
-                           <div class="Navbar-label">@lang('navbar.navbar-site-menu')</div>
-                        </a>
-                     </div>
-                     <div class="Navbar-items">
-                        <a href="{{ route('news.index') }}" class="Navbar-item Navbar-link is-noSelect Navbar-news" data-index='2' data-name="news" tabindex="0" data-analytics="global-nav" data-analytics-placement="Nav - News">
-                           <div class="Navbar-label">@lang('navbar.nav-site-menu-news')</div>
-                        </a>
-                     </div>
-                     <div class="Navbar-profileItems">
-                        <a href="/" class="Navbar-support Navbar-item Navbar-link is-noSelect" data-index="0" data-name="support" data-analytics="global-nav" data-analytics-placement="Nav - Support">
-                           <div class="Navbar-label">@lang('navbar.nav-site-menu-support')</div>
-                           <div class="Navbar-supportCounter">0</div>
-                        </a>
-                        <a tabindex="0" data-target="Navbar-accountDropdown" data-name="account" role="button" aria-haspopup="true" aria-label="@lang('navbar.account-dropdown')" class="Navbar-account Navbar-item Navbar-modalToggle is-noSelect">
-                           <div class="Navbar-icon Navbar-employeeIcon">
-                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false" aria-hidden="true">
-                                 <use xlink:href="#Navbar-icon-blizz"></use>
-                              </svg>
-                           </div>
-                           <div class="Navbar-label Navbar-accountUnauthenticated">@lang('navbar.account-unauthenticated')</div>
-                           <div class="Navbar-label Navbar-accountAuthenticated">{{ Str::title(Auth::user()->name  ?? '%USER_BATTLETAG_FULL%')}}</div>
-                           <div class="Navbar-icon Navbar-dropdownIcon">
-                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false" aria-hidden="true">
-                                 <use xlink:href="#Navbar-icon-dropdown"></use>
-                              </svg>
-                           </div>
-                        </a>
-                     </div>
-                  </div>
                </div>
                <div class="Navbar-modals" role="presentation">
                   <div role="presentation" class="Navbar-constrained">
@@ -296,9 +257,7 @@
                            <div class="Navbar-modalLinkLabel">Новости</div>
                         </a>
                         <div class="Navbar-corpLinks">
-                           <a href="/" data-target='{"data-index":0}' class="Navbar-corpLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Support">Поддержка</a>
                            <a href="{{ route('user', ['overview']) }}" data-target='{"data-index":1}' class="Navbar-corpLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Account">Учетная запись</a>
-                           <a href="/" data-target='{"data-index":2}' class="Navbar-corpLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Gifts">Мои подарки</a>
                         </div>
                         <div class="Navbar-modalClose Navbar-icon" data-target=".Navbar-menu.is-active" tabindex="0" role="button" aria-label="Закрыть меню">
                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false" aria-hidden="true">
