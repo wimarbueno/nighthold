@@ -140,7 +140,7 @@
                                             <a href="" class="posts-map badge-posts heatmap-">
                                                 <svg class="fa d-icon d-icon-blizzard-chat svg-icon blizzard-reply-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#blizzard-chat"></use></svg>
 
-                                                <span class="number" aria-label="Ответов  в этой теме: {{ $item->replies_count }}">{{ $item->replies_count }}</span>
+                                                <span class="number" aria-label="Ответов  в этой теме: {{ $item->thread->replies_count }}">{{ $item->thread->replies_count }}</span>
                                             </a>
                                         </td>
 
