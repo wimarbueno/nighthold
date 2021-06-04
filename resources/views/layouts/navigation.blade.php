@@ -412,9 +412,6 @@
                               <div class="gutter-vertical gutter-tiny">
                                  <a class="Link Link--external Link--block SiteNav-pageLink" href="{{ route('forums.index') }}" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - Forums - Community">Сообщество</a>
                               </div>
-                              <div class="gutter-vertical gutter-tiny">
-                                 <a class="Link Link--external Link--block SiteNav-pageLink" href="/" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - Forums - Website &amp; Mobile Feedback">Отзыв о сайте</a>
-                              </div>
                            </div>
                         </div>
                      </div>
