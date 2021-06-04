@@ -1,6 +1,6 @@
 <x-app-layout>
     @push('css')
-        <link href="{{ asset('static/3.559b47542534e00a0a6b.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('static/5.60a3b147f091048d9af5.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('static/8.e30c2327d4d9ba9aab80.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('static/17.f40c232ffe8c6c1deb61.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('static/character-profile.1d8296fc2a8ba6d8b1c1.css') }}" rel="stylesheet" type="text/css"/>
