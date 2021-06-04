@@ -132,7 +132,7 @@
 
         public static function FindRealm($rName) {
             foreach(config('servers.realm') as $realm) {
-                if(strtolower($realm['name']) == strtolower($rName)) {
+                if(strtolower($realm['slug']) == strtolower($rName)) {
                     return $realm['id'];
                 }
             }

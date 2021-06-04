@@ -13,7 +13,7 @@
                 @empty(!Auth::user()->account->characters)
                     @foreach(Auth::user()->account->characters as $item)
                         <div class="Grid-1of2 SyncHeight-item" media-small="" media-wide="Grid-1of3" media-huge="Grid-1of4 !hide">
-                            <a class="Link Character Character--{{ __('forum.class_key_'.$item->class) }} Character--name Character--avatar Character--level Character--realm Character--onDark" href="{{ route('characters.show', [$item->realmName, mb_strtolower($item->name)]) }}">
+                            <a class="Link Character Character--{{ __('forum.class_key_'.$item->class) }} Character--name Character--avatar Character--level Character--realm Character--onDark" href="{{ route('characters.show', [$item->realmSlug, mb_strtolower($item->name)]) }}">
                                 <div class="Character-link">
                                     <div class="Character-table">
                                         <div class="Character-bust">

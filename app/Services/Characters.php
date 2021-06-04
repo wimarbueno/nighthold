@@ -31,6 +31,7 @@
 
         /* Extra Variables */
         private static $m_server       = -1;
+        private static $realmSlug      = null;
         private static $realmName      = null;
         private static $realmID        = 0;
 
@@ -92,6 +93,7 @@
             }
             self::$realmID = $realm_id;
             self::$realmName = config('servers.realm')[$realm_id]['name'];
+            self::$realmSlug = config('servers.realm')[$realm_id]['slug'];
             self::$m_server = config('servers.realm')[$realm_id]['type'];
 
             self::HandleEquipmentCacheInfo();
@@ -161,8 +163,8 @@
                         'slug' => Str::slug(__('characters.gender_'.self::$gender))
                     ],
                     "guild" => [
-                        "name"=> $guild->name ?? '',
-                        "url"=> route('guild.show', ['wowlegions', Str::slug($guild->name ?? '')])
+                        "name"=> $guildName ?? '',
+                        "url"=> route('guild.show', [self::$realmSlug, Str::slug($guild->name ?? '')])
                     ],
                     "lastUpdatedTimestamp" => ["epoch" => 1616645340000,"iso8601" => "2021-03-25T04:09Z"],
                     "level" => self::$level,
@@ -175,7 +177,7 @@
                         'name' => __('characters.race_'.self::$race),
                         'slug' => __('characters.key_race_'.self::$race)
                     ],
-                    "realm" => ["name" => self::$realmName,"slug" => self::$realmName],
+                    "realm" => ["name" => self::$realmName,"slug" => self::$realmSlug],
                     "region" => "eu",
                     "render" => [
                         "staticFallback" => [
@@ -203,8 +205,8 @@
                     "specs" => Utils::specCharacters(self::$class, self::$activeTalentGroup, self::$guid),
                     "stats" => Utils::statsChar(self::$health, self::$class),
                     "title" => "[name], " . self::GetTitleInfo('title'),
-                    "url" => route('characters.show', [self::$realmName, self::$name]),
-                    "achievementUrl" => route('achievements', [self::$realmName, self::$name]),
+                    "url" => route('characters.show', [self::$realmSlug, self::$name]),
+                    "achievementUrl" => route('achievements', [self::$realmSlug, self::$name]),
                     "isOutdated" => $isOutdated,
                     "suffix" => self::GetTitleInfo('title')
                 ],
@@ -228,8 +230,8 @@
                             'slug' => Str::slug(__('characters.gender_'.self::$gender))
                         ],
                         "guild" => [
-                            "name"=> $guild->name ?? '',
-                            "url"=> route('guild.show', ['wowlegions', Str::slug($guild->name ?? '')])
+                            "name"=> $guildName ?? '',
+                            "url"=> route('guild.show', [self::$realmSlug, Str::slug($guild->name ?? '')])
                         ],
                         "lastUpdatedTimestamp" => ["epoch" => 1616645340000,"iso8601" => "2021-03-25T04 => 09Z"],
                         "level" => self::$level,
@@ -326,7 +328,7 @@
                             'name' => __('characters.race_'.self::$race),
                             'slug' => __('characters.key_race_'.self::$race)
                         ],
-                        "realm" => ["name" => self::$realmName,"slug" => self::$realmName],
+                        "realm" => ["name" => self::$realmName,"slug" => self::$realmSlug],
                         "region" => "eu",
                         "render" => [
                             "staticFallback" => [
@@ -355,8 +357,8 @@
                         "specs" => Utils::specCharacters(self::$class, self::$activeTalentGroup, self::$guid),
                         "stats" => Utils::statsChar(self::$health, self::$class),
                         "title" => "[name], " . self::GetTitleInfo('title'),
-                        "url" => route('characters.show', [self::$realmName, self::$name]),
-                        "achievementUrl" => route('achievements', [self::$realmName, self::$name]),
+                        "url" => route('characters.show', [self::$realmSlug, self::$name]),
+                        "achievementUrl" => route('achievements', [self::$realmSlug, self::$name]),
                         "isOutdated" => $isOutdated,
                         "suffix" => self::GetTitleInfo('title')
                     ],
@@ -374,7 +376,7 @@
                     "mythicKeystoneDungeons" => []
                 ]
             ];
-            if(!isset($guild))
+            if(!isset($guildName))
             {
                 unset($data['character']['guild']);
                 unset($data['summary']['character']['guild']);
