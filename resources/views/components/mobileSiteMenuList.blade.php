@@ -34,7 +34,7 @@
                         <div class="BnetNav-mobileSiteMenuList List List--full List--vertical">
                             @foreach(Auth::user()->account->characters as $item)
                             <div class="BnetNav-mobileSiteMenuListItem List-item">
-                                <a class="Link Character Character--{{ __('forum.class_key_'.$item->class) }} Character--small Character--level Character--onDark BnetNav-mobileSiteMenuLink" href="{{ route('characters.show', [$item->realmName, mb_strtolower($item->name)]) }}">
+                                <a class="Link Character Character--{{ __('forum.class_key_'.$item->class) }} Character--small Character--level Character--onDark BnetNav-mobileSiteMenuLink" href="{{ route('characters.show', [$item->realmSlug, mb_strtolower($item->name)]) }}">
                                     <div class="Character-link"><div class="Character-table"><div class="Character-bust"><div class="Art Art--above"><div class="Art-size" style="padding-top:50.43478260869565%"></div><div class="Art-image" style="background-image:url({{ Utils::imageClass($item->race, $item->gender)}});"></div><div class="Art-overlay"></div></div></div><div class="Character-avatar"><div class="Avatar Avatar--medium"><div class="Avatar-image" style="background-image:url({{ Utils::imageClass($item->race, $item->gender)}});"></div></div></div><div class="Character-details"><div class="Character-role"></div><div class="Character-name">{{ $item->name }}</div><div class="Character-level"><b>{{ $item->level }}</b> {{ __('forum.class_'.$item->class) }} (Стихии)</div><div class="Character-realm">{{ $item->realmName }}</div></div></div></div></a>
                             </div>
                             @endforeach
