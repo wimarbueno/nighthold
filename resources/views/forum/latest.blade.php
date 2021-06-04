@@ -121,7 +121,7 @@
                                         <td class="main-link clearfix" colspan="1">
   <span class="link-top-line"><span class="topic-icon-container">
 </span>
-<a href="{{ route('forum.show', [$item->channel->id]) }}" class="title raw-link raw-topic-link" data-topic-id="194369">{{ $item->thread->title }}</a>  </span>
+<a href="{{ route('topic.show', [$item->thread->id]) }}#post-{{ $item->id }}" class="title raw-link raw-topic-link" data-topic-id="{{ $item->id }}">{{ $item->thread->title }}</a>  </span>
                                             <div class="link-bottom-line">
                                                 <a class="badge-wrapper none" href="{{ route('forum.show', [$item->channel->id]) }}"><span data-drop-close="true" class="badge-category clear-badge" title="{{ $item->channel->category_description }}"><span class="category-name">{{ $item->channel->name }}</span></span></a>
 
