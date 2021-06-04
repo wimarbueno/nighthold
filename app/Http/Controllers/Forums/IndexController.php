@@ -87,17 +87,17 @@ class IndexController extends Controller
     }
 
     public function new() {
-        $topics = Thread::orderBy('sticky', 'DESC')->orderBy('created_at', 'DESC')->with(['user' => function($query) {
+        $topics = Thread::whereNull('parent_id')->orderBy('created_at', 'DESC')->with(['user' => function($query) {
             $query->select('id', 'name');
         }])->paginate(10);
         return view('forum.new', compact( 'topics'));
     }
 
     public function latest() {
-        $topics = Thread::orderBy('sticky', 'DESC')->orderBy('created_at', 'DESC')->with(['user' => function($query) {
+        $topics = Thread::whereNotNull('parent_id')->orderBy('created_at', 'DESC')->with(['user' => function($query) {
             $query->select('id', 'name');
         }])->paginate(10);
-        return view('forum.new', compact( 'topics'));
+        return view('forum.latest', compact( 'topics'));
     }
 
 }

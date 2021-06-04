@@ -63,11 +63,11 @@
                         <li title="Все темы по категориям" id="ember33" class="ember-view">
                             <a href="{{ route('forums.index') }}" class="">Категории</a>
                         </li>
-                        <li title="Новые темы за последние несколько дней" id="ember37" class="active ember-view">
-                            <a href="{{ route('forums.new') }}" class="active">Новые</a>
+                        <li title="Новые темы за последние несколько дней" id="ember37" class="ember-view">
+                            <a href="{{ route('forums.new') }}" class="">Новые</a>
                         </li>
-                        <li title="Темы с недавними сообщениями" id="ember41" class="ember-view">
-                            <a href="{{ route('forums.latest') }}" class="">Последние</a>
+                        <li title="Темы с недавними сообщениями" id="ember41" class="active ember-view">
+                            <a href="{{ route('forums.latest') }}" class="active">Последние</a>
                         </li>
                     </ul>
 
@@ -117,41 +117,41 @@
 
                                 <tbody>
                                 @foreach ($topics as $item)
-                                <tr data-topic-id="194369" id="ember59" class="topic-list-item category-%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0-c%D0%BB%D1%83%D0%B6%D0%B1%D0%B0-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B8 unseen-topic ember-view">
-                                    <td class="main-link clearfix" colspan="1">
+                                    <tr data-topic-id="194369" id="ember59" class="topic-list-item category-%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0-c%D0%BB%D1%83%D0%B6%D0%B1%D0%B0-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B8 unseen-topic ember-view">
+                                        <td class="main-link clearfix" colspan="1">
   <span class="link-top-line"><span class="topic-icon-container">
 </span>
-<a href="{{ route('forum.show', [$item->channel->id]) }}" class="title raw-link raw-topic-link" data-topic-id="194369">{{ $item->title }}</a>  </span>
-                                        <div class="link-bottom-line">
-                                            <a class="badge-wrapper none" href="{{ route('forum.show', [$item->channel->id]) }}"><span data-drop-close="true" class="badge-category clear-badge" title="{!! $item->channel->category_description !!}"><span class="category-name">{{ $item->channel->name }}</span></span></a>
+<a href="{{ route('forum.show', [$item->channel->id]) }}" class="title raw-link raw-topic-link" data-topic-id="194369">{{ $item->thread->title }}</a>  </span>
+                                            <div class="link-bottom-line">
+                                                <a class="badge-wrapper none" href="{{ route('forum.show', [$item->channel->id]) }}"><span data-drop-close="true" class="badge-category clear-badge" title="{{ $item->channel->category_description }}"><span class="category-name">{{ $item->channel->name }}</span></span></a>
 
 
-                                        </div>
-                                    </td>
+                                            </div>
+                                        </td>
 
-                                    <td class="creator">
-                                        <a href="#" data-user-card="{{ $item->creator->name }}">
-                                            {{ $item->creator->name }}
-                                        </a>
-                                    </td>
-
-
-                                    <td class="num posts-map posts heatmap-" title="Ответов  в этой теме: 1">
-                                        <a href="" class="posts-map badge-posts heatmap-">
-                                            <svg class="fa d-icon d-icon-blizzard-chat svg-icon blizzard-reply-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#blizzard-chat"></use></svg>
-
-                                            <span class="number" aria-label="Ответов  в этой теме: {{ $item->replies_count }}">{{ $item->replies_count }}</span>
-                                        </a>
-                                    </td>
-
-                                    <td class="num views "><span class="number" title="просмотров темы: 0">0</span></td>
-
-                                    <td class="num age activity" title="Первое сообщение: {{ $item->created_at->diffForHumans() }}">
-                                        <a class="post-activity" href="{{ route('forum.show', [$item->channel->id]) }}"><span class="relative-date" data-time="1622815911072" data-format="tiny">{{ $item->created_at->diffForHumans() }}</span></a>
-                                    </td>
+                                        <td class="creator">
+                                            <a href="#" data-user-card="{{ $item->creator->name }}">
+                                                {{ $item->creator->name }}
+                                            </a>
+                                        </td>
 
 
-                                </tr>
+                                        <td class="num posts-map posts heatmap-" title="Ответов  в этой теме: 1">
+                                            <a href="" class="posts-map badge-posts heatmap-">
+                                                <svg class="fa d-icon d-icon-blizzard-chat svg-icon blizzard-reply-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#blizzard-chat"></use></svg>
+
+                                                <span class="number" aria-label="Ответов  в этой теме: {{ $item->replies_count }}">{{ $item->replies_count }}</span>
+                                            </a>
+                                        </td>
+
+                                        <td class="num views "><span class="number" title="просмотров темы: 0">0</span></td>
+
+                                        <td class="num age activity" title="Первое сообщение: {{ $item->created_at->diffForHumans() }}">
+                                            <a class="post-activity" href="{{ route('forum.show', [$item->channel->id]) }}"><span class="relative-date" data-time="1622815911072" data-format="tiny">{{ $item->created_at->diffForHumans() }}</span></a>
+                                        </td>
+
+
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>

@@ -17,7 +17,7 @@
 
         protected $guarded = [];
 
-        protected $with = ['creator', 'channel'];
+        protected $with = ['creator', 'channel', 'thread'];
 
         protected $appends = ['isSubscribedTo'];
         protected $dates = ['expired_at'];
@@ -59,6 +59,11 @@
         public function parentId(): \Illuminate\Database\Eloquent\Relations\BelongsTo
         {
             return $this->belongsTo(self::class);
+        }
+
+        public function thread(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+        {
+            return $this->belongsTo(self::class, 'parent_id', 'id');
         }
 
         public function channelId(): \Illuminate\Database\Eloquent\Relations\BelongsTo
