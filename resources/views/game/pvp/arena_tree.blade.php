@@ -117,6 +117,7 @@
                             </div>
                             <div class="SortTable-body">
                                 @foreach($data as $item)
+                                    @if($item->characters)
                                 <div class="SortTable-row">
                                     <div class="SortTable-col SortTable-data align-center text-nowrap" data-value="{{ $loop->iteration }}">{{ $loop->iteration }}</div>
                                     <div class="SortTable-col SortTable-data align-center text-nowrap">
@@ -131,7 +132,7 @@
                                         </div>
                                     </div>
                                     <div class="SortTable-col SortTable-data" data-value="{{ $item->characters->name }}">
-                                        <a class="Link Character Character--@lang('forum.class_key_'. $item->characters->class) Character--inline Character--small Character--name margin-top-xSmall" href="{{ route('characters.show', [strtolower($item->characters->name) ]) }}" media-wide="Character--avatar">
+                                        <a class="Link Character Character--@lang('forum.class_key_'. $item->characters->class) Character--inline Character--small Character--name margin-top-xSmall" href="{{ route('characters.show', [$item->characters->realmSlug, strtolower($item->characters->name) ]) }}" media-wide="Character--avatar">
                                             <div class="Character-link">
                                                 <div class="Character-table">
                                                     <div class="Character-bust">
@@ -150,7 +151,7 @@
                                                         <div class="Character-role"></div>
                                                         <div class="Character-name">{{ $item->characters->name }}</div>
                                                         <div class="Character-level"><b>{{ $item->characters->level }}</b> @lang('forum.class_'. $item->characters->class) (Огонь)</div>
-                                                        <div class="Character-realm">{{ Server::getServerName() }}</div>
+                                                        <div class="Character-realm">{{ $item->characters->realmName }}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -198,13 +199,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center" data-value="Ravencrest" media-wide="!hide">Ravencrest</div>
-                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center color-status-success" data-value="{{ $item->wins }}" media-wide="!hide">{{ $item->wins }}</div>
-                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center color-status-error" data-value="{{ $item->wins - $item->games }}" media-wide="!hide">{{ $item->wins - $item->games }}</div>
+                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center" data-value="{{ $item->characters->realmName }}" media-wide="!hide">{{ $item->characters->realmName }}</div>
+                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center color-status-success" data-value="{{ $item->seasonWins }}" media-wide="!hide">{{ $item->seasonWins }}</div>
+                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center color-status-error" data-value="{{ $item->seasonWins - $item->seasonGames }}" media-wide="!hide">{{ $item->seasonWins - $item->seasonGames }}</div>
                                 </div>
+                                    @endif
                                 @endforeach
                             </div>
                             @foreach($data as $item)
+                                @if($item->characters)
                             <div class="Modal" data-modal="entry-details-modal-{{ $loop->iteration }}" data-izimodal-group="entry-details-modals" style="display: none;">
                                 <div class="Modal-back" title="Назад">
                                     <div class="List">
@@ -237,7 +240,7 @@
                                     <tr>
                                         <td class="gutter-normal-bottom font-semp-medium-white">Игрок</td>
                                         <td class="gutter-normal-bottom gutter-normal-left">
-                                            <a class="Link font-size-small color-class-MAGE-onDark" href="{{ route('characters.show', [strtolower($item->characters->name) ]) }}">
+                                            <a class="Link font-size-small color-class-MAGE-onDark" href="{{ route('characters.show', [$item->characters->realmSlug, strtolower($item->characters->name) ]) }}">
                                                 {{ $item->characters->name }}
                                             </a>
                                         </td>
@@ -252,22 +255,23 @@
                                     </tr>
                                     <tr>
                                         <td class="gutter-normal-bottom font-semp-medium-white">Игровой мир</td>
-                                        <td class="gutter-normal-bottom gutter-normal-left font-size-small">{{ Server::getServerName() }}</td>
+                                        <td class="gutter-normal-bottom gutter-normal-left font-size-small">{{ $item->characters->realmName }}</td>
                                     </tr>
                                     <tr>
                                         <td class="gutter-normal-bottom font-semp-medium-white">Победы</td>
                                         <td class="gutter-normal-bottom gutter-normal-left font-size-small color-win">
-                                            {{ $item->wins }}
+                                            {{ $item->seasonWins }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="gutter-normal-bottom font-semp-medium-white">Поражения</td>
                                         <td class="gutter-normal-bottom gutter-normal-left font-size-small color-loss">
-                                            {{ $item->wins - $item->games }}
+                                            {{ $item->seasonWins - $item->seasonGames }}
                                         </td>
                                     </tr>
                                 </table>
                             </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>
