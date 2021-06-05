@@ -45,7 +45,7 @@
         'key_race_24' => 'pandaren',
         'key_race_25' => 'pandaren',
         'key_race_26' => 'pandaren',
-        'key_race_27' => 'nigh-tborne',
+        'key_race_27' => 'nightborne',
         'key_race_28' => 'high-mountain-tauren',
         'key_race_29' => 'void-elf',
         'key_race_30' => 'light-forged-draenei',
