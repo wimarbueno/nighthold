@@ -49,7 +49,7 @@
         'key_race_28' => 'highmountaintauren',
         'key_race_29' => 'void-elf',
         'key_race_30' => 'lightforgeddraenei',
-        'key_race_31' => 'zandalaritroll',
+        'key_race_31' => 'zandalari-troll',
         'key_race_34' => 'darkirondwarf',
         'key_race_35' => 'vulpera',
         'key_race_36' => 'magharorc',

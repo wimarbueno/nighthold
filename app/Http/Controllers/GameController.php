@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
+    public function leaderboards () {
+        Meta::prependTitle(' - Рейтинги подземелий с эпохальным ключом')
+            ->setDescription('Просмотрите список игроков с наиболее высоким рейтингом на этой неделе. Кто занимает первое место в подземелье &quot;Кровавые катакомбы&quot;?');
+        return view('game.pve.leaderboards', [
+            'data' => Arena::with('characters')->where('slot', 0)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
+        ]);
+    }
 
     public function arena_two () {
         Meta::prependTitle('Арена 2х2 - Рейтинговая таблица PvP')

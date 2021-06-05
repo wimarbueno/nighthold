@@ -107,7 +107,7 @@
             $iconName = DB::connection('mysql')->table('icons')->where('id', $entry)->get(['iconname']);
             if(!Images::Exists(public_path('uploads/item/'.$iconName[0]->iconname.'.jpg') ) ) {
                 Images::Download(
-                        'https://render-eu.worldofwarcraft.com/icons/56/'.$iconName[0]->iconname.'.jpg',
+                        'https://render.worldofwarcraft.com/eu/icons/56/'.$iconName[0]->iconname.'.jpg',
                         public_path('uploads/item/'.$iconName[0]->iconname.'.jpg')
                 );
             }

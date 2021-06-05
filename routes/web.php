@@ -70,6 +70,8 @@ Route::group(['prefix' => LocaleMiddleware::getLocales()], function(){
         Route::get('game/pvp/leaderboards/3v3', [GameController::class, 'arena_tree'])->name('arena_tree');
         Route::get('game/pvp/leaderboards/battlegrounds', [GameController::class, 'battlegrounds'])->name('battlegrounds');
 
+        Route::get('game/pve/leaderboards/{server}/{instance}', [GameController::class, 'leaderboards'])->name('leaderboards');
+
         Route::get('pages/{id}/{slug}', [PagesController::class, 'view'])->name('pages.view');
 
         Route::get('character', [CharactersController::class, 'index'])->name('characters.index');

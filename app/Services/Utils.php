@@ -187,7 +187,7 @@
         public static function renderRaw($race, $gender) {
             if(!Images::Exists(public_path('uploads/shadow/profile-raw/'. strtolower(__('characters.key_race_'.$race)) . "-" . strtolower(__('characters.gender_'.$gender)) . ".png") ) ) {
                 Images::Download(
-                    'https://render-eu.worldofwarcraft.com/shadow/profile-raw/' .
+                    'https://render.worldofwarcraft.com/eu/shadow/profile-raw/' .
                     strtolower(__('characters.key_race_'.$race)) . '-' .
                     strtolower(__('characters.gender_'.$gender)) . '.png',
                     public_path('uploads/shadow/profile-raw/'. strtolower(__('characters.key_race_'.$race)) . "-" . strtolower(__('characters.gender_'.$gender)) . ".png")
@@ -201,7 +201,7 @@
         public static function renderBackground($class, $race, $gender) {
             if(!Images::Exists(public_path('uploads/shadow/profile-background/'. strtolower(__('characters.class_key_'.$class)) . "-" . strtolower(__('characters.key_race_'.$race)) . "-" . strtolower(__('characters.gender_'.$gender)) . ".jpg") ) ) {
                 Images::Download(
-                    'https://render-eu.worldofwarcraft.com/shadow/profile-background/' .
+                    'https://render.worldofwarcraft.com/eu/shadow/profile-background/' .
                     strtolower(__('characters.class_key_'.$class)) . '-' .
                     strtolower(__('characters.key_race_'.$race)) . '-' .
                     strtolower(__('characters.gender_'.$gender)) . '.jpg',
@@ -225,7 +225,7 @@
             $data = [];
             if ($arena2) {
                 $data = [
-                    "lossCount" => $arena2->games - $arena2->wins,
+                    "lossCount" => $arena2->seasonGames - $arena2->seasonWins,
                     "rating" => $arena2->rating,
                     "tier" => [
                         "id" => 1,
@@ -234,9 +234,9 @@
                             "url" => self::imageRating($arena2->rating)['images']
                         ]
                     ],
-                    "winCount" => $arena2->wins,
-                    "total" => $arena2->games,
-                    "winLoss" => self::percentageOf($arena2->games, $arena2->wins)
+                    "winCount" => $arena2->seasonWins,
+                    "total" => $arena2->seasonGames,
+                    "winLoss" => self::percentageOf($arena2->seasonGames, $arena2->seasonWins)
                 ];
             } else {
                 $data = [
@@ -261,7 +261,7 @@
             $data = [];
             if ($arena3) {
                 $data = [
-                    "lossCount" => $arena3->games - $arena3->wins,
+                    "lossCount" => $arena3->seasonGames - $arena3->seasonWins,
                     "rating" => $arena3->rating,
                     "tier" => [
                         "id" => 1,
@@ -270,9 +270,9 @@
                             "url" => self::imageRating($arena3->rating)['images']
                         ]
                     ],
-                    "winCount" => $arena3->wins,
-                    "total" => $arena3->games,
-                    "winLoss" => self::percentageOf($arena3->games, $arena3->wins)
+                    "winCount" => $arena3->seasonWins,
+                    "total" => $arena3->seasonGames,
+                    "winLoss" => self::percentageOf($arena3->seasonGames, $arena3->seasonWins)
                 ];
             } else {
                 $data = [
@@ -297,7 +297,7 @@
             $data = [];
             if ($battlegrounds) {
                 $data = [
-                    "lossCount" => $battlegrounds->games - $battlegrounds->wins,
+                    "lossCount" => $battlegrounds->seasonGames - $battlegrounds->seasonWins,
                     "rating" => $battlegrounds->rating,
                     "tier" => [
                         "id" => 1,
@@ -306,9 +306,9 @@
                             "url" => self::imageRating($battlegrounds->rating)['images']
                         ]
                     ],
-                    "winCount" => $battlegrounds->wins,
-                    "total" => $battlegrounds->games,
-                    "winLoss" => self::percentageOf($battlegrounds->games, $battlegrounds->wins)
+                    "winCount" => $battlegrounds->seasonWins,
+                    "total" => $battlegrounds->seasonGames,
+                    "winLoss" => self::percentageOf($battlegrounds->seasonGames, $battlegrounds->seasonWins)
                 ];
             } else {
                 $data = [
@@ -327,21 +327,6 @@
                 ];
             }
             return $data;
-        }
-
-        public static function covenant() {
-            return [
-                "covenant" => [
-                    "description" => "Некролорды вознаграждают сильных и избавляются от слабых. Амбициозные и свирепые души становятся частью бессмертной армии, стоящей на страже Темных Земель.",
-                    "enum" => "NECROLORD",
-                    "id" => 4,
-                    "name" => "Некролорды",
-                    "renown" => [
-                        "rank" => 38
-                    ],
-                    "slug" => "necrolord"
-                ]
-            ];
         }
 
         public static function percentageOf( $max, $min){

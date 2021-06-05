@@ -45,12 +45,12 @@
             foreach(self::$m_items as $item) {
                 if(!in_array($item->slot, array(3, 18))) {
                     if($item->ItemLevel > 0) {
-                        $total_iLvl += $item->itemLevel;
-                        if($item->itemLevel < $minLvl) {
-                            $minLvl = $item->itemLevel;
+                        $total_iLvl += $item->ItemLevel;
+                        if($item->ItemLevel < $minLvl) {
+                            $minLvl = $item->ItemLevel;
                         }
-                        if($item->itemLevel > $maxLvl) {
-                            $maxLvl = $item->itemLevel;
+                        if($item->ItemLevel > $maxLvl) {
+                            $maxLvl = $item->ItemLevel;
                         }
                         $i++;
                     }
@@ -181,8 +181,8 @@
                         "item_class" => (new Item)->ItemClass($item['item']->OverallQualityID, $item['item']->InventoryType),
                         "item_subclass" => (new Item)->ItemSubClass($item['item']->Material),
                         "level" => [
-                            "display_string" => __('characters.item_level', ['level' => $item['item']->itemLevel]),
-                            "value" => $item['item']->itemLevel
+                            "display_string" => __('characters.item_level', ['level' => $item['item']->ItemLevel]),
+                            "value" => $item['item']->ItemLevel
                         ],
                         "limit_category" => (new Item)->itemLimitCategory($item['item']->item->bonusListIDs),
                         "media" => [
