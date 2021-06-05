@@ -350,7 +350,7 @@
         }
 
         public static function raids($name, $guid) {
-            $raid = Raid::where('key', 'legion')->get();
+            $raid = Raid::where('key', 'темные-земли')->get();
             $raids = [];
             foreach ($raid as $item) {
                 $raids[] = [
