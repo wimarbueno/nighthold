@@ -4,6 +4,7 @@
       @meta_tags
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="referrer" content="no-referrer-when-downgrade">
+      <link rel="shortcut icon" type="image/x-icon" href="{{ asset('forum/static/images/icons/wow-favicon.ico') }}" />
       <script>var dataLayer = dataLayer || [];
          dataLayer.push({"locale":"ru-RU", "serverRegion":"eu", "region":"eu", "localeRegion":"eu", "project":"wow", @guest "authenticated":"0", "hasGameTime":"0" @else "authenticated":"1", "userId":{{ Auth::id() }}, "hasGameTime":"0" @endguest });
       </script>
