@@ -88,11 +88,10 @@
                                 ],
                                 "type" => "ENHANCED"
                             ],
-                            "enum" => "INTELLECT",
-                            "slug" => "intellect",
+                            "enum" => "AGILITY",
+                            "slug" => "agility",
                             "value" => [
-                                "type" => "WHOLE",
-                                "value" => 1310
+                                "type" => "WHOLE","value" => 1305
                             ]
                         ],
                         [

@@ -360,7 +360,7 @@
                     "location" => $item->location,
                     "name" => $item->name,
                     "players" => $item->players,
-                    "url" => route('raid.details', ['wowlegions', $name, $item->key, $item->ids]),
+                    "url" => route('raid.details', [self::$realmSlug, $name, $item->key, $item->ids]),
                     "bg" => ""
                 ];
             }

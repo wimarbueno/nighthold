@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class RaidController extends Controller
 {
-    public function index($characters, $key, $ids) {
+    public function index($server, $characters, $key, $ids) {
         return view('game.raid.details', ['data' => Raid::where('ids', urldecode($ids))->first()]);
     }
 }
