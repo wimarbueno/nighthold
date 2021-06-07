@@ -113,7 +113,7 @@
         }
 
         public static function data() {
-            if (self::$level < 10) {
+            if (self::$level < 10 && self::$activeTalentGroup) {
                 return abort(512);
             }
             $date = strtotime(date('d.m.Y'));

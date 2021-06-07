@@ -59,9 +59,90 @@
                            "details" => ["bonus" => ["type" => "PERCENTAGE","value" => 1.275],"effective" => ["type" => "PERCENTAGE","value" => 2.55],"rating" => ["type" => "WHOLE","value" => 102],"type" => "VERSATILITY"],"enum" => "VERSATILITY","slug" => "versatility","value" => ["type" => "PERCENTAGE","value" => 2.55]]
                    ];
                 break;
+                case "1":
+                    return [
+                        [
+                            "enum" => "HEALTH","slug" => "health","value" => ["type" => "WHOLE","value" => $health]
+                        ],
+                        [
+                            "enum" => "RAGE","slug" => "rage","value" => ["type" => "WHOLE","value" => 100]
+                        ],
+                        [
+                            "details" => [
+                                "base" => [
+                                    "type" => "WHOLE","value" => 452
+                                ],
+                                "bonus" => [
+                                    "type" => "WHOLE","value" => 858
+                                ],
+                                "effective" => [
+                                    "type" => "WHOLE","value" => 1310
+                                ],
+                                "rating" => [
+                                    "type" => "WHOLE","value" => 1310
+                                ],
+                                "type" => "ENHANCED"
+                            ],
+                            "enum" => "STRENGTH",
+                            "slug" => "strength",
+                            "value" => [
+                                "type" => "WHOLE","value" => 1305
+                            ]
+                        ],
+                        [
+                            "details" => ["base" => ["type" => "WHOLE","value" => 414],"bonus" => ["type" => "WHOLE","value" => 1192],"effective" => ["type" => "WHOLE","value" => 1606],"rating" => ["type" => "WHOLE","value" => 1606],"type" => "ENHANCED"],"enum" => "STAMINA","slug" => "stamina","value" => ["type" => "WHOLE","value" => 1606]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 9.457143],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 331],"type" => "RATED"],"enum" => "CRITICALSTRIKE","slug" => "critical-strike","value" => ["type" => "PERCENTAGE","value" => 15.457143]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 21.60606],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 713],"type" => "RATED"],"enum" => "HASTE","slug" => "haste","value" => ["type" => "PERCENTAGE","value" => 21.606064]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 4.042857],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 283],"type" => "RATED"],"enum" => "MASTERY","slug" => "mastery","value" => ["type" => "PERCENTAGE","value" => 8.042857]],
+                        [
+                            "details" => ["bonus" => ["type" => "PERCENTAGE","value" => 1.275],"effective" => ["type" => "PERCENTAGE","value" => 2.55],"rating" => ["type" => "WHOLE","value" => 102],"type" => "VERSATILITY"],"enum" => "VERSATILITY","slug" => "versatility","value" => ["type" => "PERCENTAGE","value" => 2.55]]
+                    ];
+                    break;
 
                 case "3":
-
+                    return [
+                        [
+                            "enum" => "HEALTH","slug" => "health","value" => ["type" => "WHOLE","value" => $health]
+                        ],
+                        [
+                            "enum" => "ENERGY","slug" => "energy","value" => ["type" => "WHOLE","value" => 100]
+                        ],
+                        [
+                            "details" => [
+                                "base" => [
+                                    "type" => "WHOLE","value" => 452
+                                ],
+                                "bonus" => [
+                                    "type" => "WHOLE","value" => 858
+                                ],
+                                "effective" => [
+                                    "type" => "WHOLE","value" => 1310
+                                ],
+                                "rating" => [
+                                    "type" => "WHOLE","value" => 1310
+                                ],
+                                "type" => "ENHANCED"
+                            ],
+                            "enum" => "AGILITY",
+                            "slug" => "agility",
+                            "value" => [
+                                "type" => "WHOLE","value" => 1305
+                            ]
+                        ],
+                        [
+                            "details" => ["base" => ["type" => "WHOLE","value" => 414],"bonus" => ["type" => "WHOLE","value" => 1192],"effective" => ["type" => "WHOLE","value" => 1606],"rating" => ["type" => "WHOLE","value" => 1606],"type" => "ENHANCED"],"enum" => "STAMINA","slug" => "stamina","value" => ["type" => "WHOLE","value" => 1606]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 9.457143],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 331],"type" => "RATED"],"enum" => "CRITICALSTRIKE","slug" => "critical-strike","value" => ["type" => "PERCENTAGE","value" => 15.457143]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 21.60606],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 713],"type" => "RATED"],"enum" => "HASTE","slug" => "haste","value" => ["type" => "PERCENTAGE","value" => 21.606064]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 4.042857],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 283],"type" => "RATED"],"enum" => "MASTERY","slug" => "mastery","value" => ["type" => "PERCENTAGE","value" => 8.042857]],
+                        [
+                            "details" => ["bonus" => ["type" => "PERCENTAGE","value" => 1.275],"effective" => ["type" => "PERCENTAGE","value" => 2.55],"rating" => ["type" => "WHOLE","value" => 102],"type" => "VERSATILITY"],"enum" => "VERSATILITY","slug" => "versatility","value" => ["type" => "PERCENTAGE","value" => 2.55]]
+                    ];
                 break;
 
                 case "4":
@@ -108,11 +189,89 @@
                 break;
 
                 case "6":
-
+                    return [
+                        [
+                            "enum" => "HEALTH","slug" => "health","value" => ["type" => "WHOLE","value" => $health]
+                        ],
+                        [
+                            "enum" => "ENERGY","slug" => "energy","value" => ["type" => "WHOLE","value" => 100]
+                        ],
+                        [
+                            "details" => [
+                                "base" => [
+                                    "type" => "WHOLE","value" => 452
+                                ],
+                                "bonus" => [
+                                    "type" => "WHOLE","value" => 858
+                                ],
+                                "effective" => [
+                                    "type" => "WHOLE","value" => 1310
+                                ],
+                                "rating" => [
+                                    "type" => "WHOLE","value" => 1310
+                                ],
+                                "type" => "ENHANCED"
+                            ],
+                            "enum" => "AGILITY",
+                            "slug" => "agility",
+                            "value" => [
+                                "type" => "WHOLE","value" => 1305
+                            ]
+                        ],
+                        [
+                            "details" => ["base" => ["type" => "WHOLE","value" => 414],"bonus" => ["type" => "WHOLE","value" => 1192],"effective" => ["type" => "WHOLE","value" => 1606],"rating" => ["type" => "WHOLE","value" => 1606],"type" => "ENHANCED"],"enum" => "STAMINA","slug" => "stamina","value" => ["type" => "WHOLE","value" => 1606]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 9.457143],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 331],"type" => "RATED"],"enum" => "CRITICALSTRIKE","slug" => "critical-strike","value" => ["type" => "PERCENTAGE","value" => 15.457143]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 21.60606],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 713],"type" => "RATED"],"enum" => "HASTE","slug" => "haste","value" => ["type" => "PERCENTAGE","value" => 21.606064]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 4.042857],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 283],"type" => "RATED"],"enum" => "MASTERY","slug" => "mastery","value" => ["type" => "PERCENTAGE","value" => 8.042857]],
+                        [
+                            "details" => ["bonus" => ["type" => "PERCENTAGE","value" => 1.275],"effective" => ["type" => "PERCENTAGE","value" => 2.55],"rating" => ["type" => "WHOLE","value" => 102],"type" => "VERSATILITY"],"enum" => "VERSATILITY","slug" => "versatility","value" => ["type" => "PERCENTAGE","value" => 2.55]]
+                    ];
                 break;
 
                 case "12":
-
+                    return [
+                        [
+                            "enum" => "HEALTH","slug" => "health","value" => ["type" => "WHOLE","value" => $health]
+                        ],
+                        [
+                            "enum" => "ENERGY","slug" => "energy","value" => ["type" => "WHOLE","value" => 100]
+                        ],
+                        [
+                            "details" => [
+                                "base" => [
+                                    "type" => "WHOLE","value" => 452
+                                ],
+                                "bonus" => [
+                                    "type" => "WHOLE","value" => 858
+                                ],
+                                "effective" => [
+                                    "type" => "WHOLE","value" => 1310
+                                ],
+                                "rating" => [
+                                    "type" => "WHOLE","value" => 1310
+                                ],
+                                "type" => "ENHANCED"
+                            ],
+                            "enum" => "AGILITY",
+                            "slug" => "agility",
+                            "value" => [
+                                "type" => "WHOLE","value" => 1305
+                            ]
+                        ],
+                        [
+                            "details" => ["base" => ["type" => "WHOLE","value" => 414],"bonus" => ["type" => "WHOLE","value" => 1192],"effective" => ["type" => "WHOLE","value" => 1606],"rating" => ["type" => "WHOLE","value" => 1606],"type" => "ENHANCED"],"enum" => "STAMINA","slug" => "stamina","value" => ["type" => "WHOLE","value" => 1606]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 9.457143],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 331],"type" => "RATED"],"enum" => "CRITICALSTRIKE","slug" => "critical-strike","value" => ["type" => "PERCENTAGE","value" => 15.457143]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 21.60606],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 713],"type" => "RATED"],"enum" => "HASTE","slug" => "haste","value" => ["type" => "PERCENTAGE","value" => 21.606064]],
+                        [
+                            "details" => ["base" => ["type" => "PERCENTAGE","value" => 0],"bonus" => ["type" => "PERCENTAGE","value" => 4.042857],"effective" => ["type" => "PERCENTAGE","value" => 0],"rating" => ["type" => "DECIMAL","value" => 283],"type" => "RATED"],"enum" => "MASTERY","slug" => "mastery","value" => ["type" => "PERCENTAGE","value" => 8.042857]],
+                        [
+                            "details" => ["bonus" => ["type" => "PERCENTAGE","value" => 1.275],"effective" => ["type" => "PERCENTAGE","value" => 2.55],"rating" => ["type" => "WHOLE","value" => 102],"type" => "VERSATILITY"],"enum" => "VERSATILITY","slug" => "versatility","value" => ["type" => "PERCENTAGE","value" => 2.55]]
+                    ];
                 break;
 
                 case "11":
