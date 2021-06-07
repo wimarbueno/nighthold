@@ -50,6 +50,7 @@
         'key_race_29' => 'void-elf',
         'key_race_30' => 'light-forged-draenei',
         'key_race_31' => 'zandalari-troll',
+        'key_race_32' => 'kul-tiran',
         'key_race_34' => 'darkiron-dwarf',
         'key_race_35' => 'vulpera',
         'key_race_36' => 'maghar-orc',
