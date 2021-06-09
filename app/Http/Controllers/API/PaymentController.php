@@ -49,7 +49,7 @@ class PaymentController extends Controller
             ]);
 
             $payment->setInvoiceId($order->id)
-                ->setSum($request->get('sum'))
+                ->setSum($request->get('sum')*10)
                 ->setDescription('Пополнение баланса');
 
             return response()->json(['error' => false, 'url' => $payment->getPaymentUrl()]);
@@ -66,7 +66,7 @@ class PaymentController extends Controller
                 'order_id' => $order_id,
             ]);
 
-            $url = FreeKassa::getPayUrl($request->get('sum'), $order_id);
+            $url = FreeKassa::getPayUrl($request->get('sum')*10, $order_id);
             return response()->json(['error' => false, 'url' => $url]);
         }
         return response()->json(['error' => 'Errors']);

@@ -37,7 +37,7 @@
       <script>
          window.__WOW_UI_PUBLIC_PATH__ = "{{ config('app.asset_url') }}/static/"
       </script>
-      <script src="{{ asset('static/core.4b919ff22c39b1029f28.js') }}"></script>
+      <script src="{{ asset('static/core.04c3634bf4bf834dbb46.js') }}"></script>
       @stack('characters')
       <script id="init">window.trigger("init");</script>
       <link href="{{ asset('static/core.b15be49248362418ef78.css') }}" rel="stylesheet" type="text/css"/>

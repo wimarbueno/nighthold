@@ -1,7 +1,7 @@
 <?php
-    
+
     return [
-            
+
             'title' => 'Форум World of Warcraft',
             'description' => 'Добро пожаловать на официальные форумы World of Warcraft',
             'User-menu-label' => 'Разместить как:',
@@ -12,17 +12,17 @@
             'data-filter' => 'Фильтр',
             'Author-posts' => 'Сообщений',
             'data-Ignoriert' => 'проигнорировано',
-            
+
             'Forums-footer' => 'Спасибо, что заглянули на',
             'Forums-footer-2' => 'Описание обновлений!',
-            
+
             'Careers' => 'Вакансии',
             'Impressum' => 'О компании',
             'Kundendienst' => 'Поддержка',
             'Kontakt' => 'Открыть запрос',
-            
+
             'copyright' => 'Все права защищены.',
-            
+
             'character_class_key_1' => 'warrior',
             'character_class_key_2' => 'paladin',
             'character_class_key_3' => 'hunter',
@@ -33,7 +33,7 @@
             'character_class_key_8' => 'mage',
             'character_class_key_9' => 'warlock',
             'character_class_key_11' => 'druid',
-            
+
             'urlprompt' => 'Ссылка на страницу:',
             'shop' => 'Магазин',
             'username_navbar' => 'Учетная запись',
@@ -42,13 +42,13 @@
             'account' => 'Параметры',
             'support' => 'Поддержка',
             'logout' => 'Выход',
-        
+
             'About' => 'О компании',
             'Privacy' => 'Политика конфиденциальности',
             'Terms' => 'Соглашения',
-            
+
             'change_lang' => 'Изменить',
-            
+
             'forum' => 'Форумы',
             'search_forum' => 'Поиск по',
             'create_topic' => 'Новая тема',
@@ -56,7 +56,7 @@
             'messages_gm' => 'Сообщение Game Master',
             'messages_cuf' => 'Сообщение ЦУФ',
             'topic_closed' => 'Закрыто',
-            
+
             'ignored' => 'проигнорировано',
             'logIn_message' => 'Вам есть что сказать? Авторизуйтесь, чтобы присоединиться к обсуждению.',
             'logIn_content' => 'Авторизация',
@@ -64,7 +64,7 @@
             'TopicFormHeadingClosed' => 'Доступ ограничен',
             'thread_is_locked' => 'Тема закрыта.',
             'view_message_history' => 'Просмотреть историю сообщений',
-            
+
             'bold' => 'Полужирный шрифт',
             'italics' => 'Курсив',
             'underline' => 'Подчеркивание',
@@ -73,33 +73,33 @@
             'quote' => 'Цитата',
             'code' => 'Код',
             'item' => 'Итем',
-            
+
             'TopicFormReply' => 'Ответить',
             'TopicFormReplyTopic' => 'Ответить',
             'TopicFormEdit' => 'Редактировать',
             'Code_of_Conduct' => 'Правила поведения',
-            
+
             'count_messages' => 'Сообщений: :count',
-            
+
             'dropdown' => 'Дополнительные настройки',
             'copy_link' => 'Копировать ссылку',
-            
+
             'edit_topicpost' => 'Редактировать',
             'delete_topicpost' => 'Удалить',
             'report_topicpost' => 'Сообщить модераторам',
             'ignore_user_topicpost' => 'Игнорировать',
             'unignore_user_topicpost' => 'Перестать игнорировать',
             'view_post_topicpost' => 'Открыть сообщение',
-            
+
             'parentForum' => 'К форуму',
-            
+
             'TopicFormSubject' => 'Заголовок темы',
             'New_Topic' => 'Новая тема',
             'CoolDownTimerMessage' => 'Разместить новое сообщение вы сможете через <span class="time-left-display">1</span> сек.',
             'TopicFormButtonCreate' => 'Создать тему',
             'TopicFormButtonPreview' => 'Предпросмотр',
             'TopicFormButtonEdit' => 'Редактировать',
-            
+
             'race_1' => 'Человек',
             'race_2' => 'Орк',
             'race_3' => 'Дворф',
@@ -119,7 +119,7 @@
             'race_28' => 'Таурен Крутогорья',
             'race_29' => 'Эльф Бездны',
             'race_30' => 'Озаренный дреней',
-            
+
             'class_1' => 'Воин',
             'class_11' => 'Друид',
             'class_5' => 'Жрец',
@@ -132,7 +132,7 @@
             'class_6' => 'Рыцарь смерти',
             'class_9' => 'Чернокнижник',
             'class_7' => 'Шаман',
-            
+
             'class_key_1' => 'WARRIOR',
             'class_key_11' => 'DRUID',
             'class_key_5' => 'PRIEST',
@@ -145,7 +145,7 @@
             'class_key_6' => 'DEATHKNIGHT',
             'class_key_9' => 'WARLOCK',
             'class_key_7' => 'SHAMAN',
-        
+
             'icon_race_1' => 'human',
             'icon_race_2' => 'orc',
             'icon_race_3' => 'dwarf',
@@ -166,11 +166,12 @@
             'icon_race_29' => 'voidelf',
             'icon_race_30' => 'lightforgeddraenei',
             'icon_race_31' => 'zandalaritroll',
+            'icon_race_32' => 'kultiran',
             'icon_race_34' => 'darkirondwarf',
             'icon_race_35' => 'vulpera',
             'icon_race_36' => 'magharorc',
             'icon_race_37' => 'mechagnome',
-        
+
             'icon_gender_0' => 'male',
             'icon_gender_1' => 'female',
     ];

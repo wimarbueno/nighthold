@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
+    public function recruit () {
+        Meta::prependTitle('Пригласи друга')
+            ->setDescription('Позовите в игру друзей, чтобы вместе странствовать по Азероту и получить потрясающие награды.');
+        return view('game.recruit_friend');
+    }
+
     public function leaderboards () {
         Meta::prependTitle(' - Рейтинги подземелий с эпохальным ключом')
             ->setDescription('Просмотрите список игроков с наиболее высоким рейтингом на этой неделе. Кто занимает первое место в подземелье &quot;Кровавые катакомбы&quot;?');
