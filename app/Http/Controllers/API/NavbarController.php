@@ -19,4 +19,10 @@ class NavbarController extends Controller
             );
         }
     }
+
+    public function online() {
+        return json_encode(
+            ["online" => Server::playersOnline()]
+        );
+    }
 }
