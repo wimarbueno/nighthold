@@ -19,6 +19,31 @@ class AuthController extends Controller
         return response()->json([]);
     }
 
+    public function changePassword(Request $request) {
+        $password = $request->only([
+            'oldPassword', 'newPassword', 'confirmPassword'
+        ]);
+
+        if ($password['newPassword'] != $password['confirmPassword']) {
+            return response()->json(['success'=> false, 'message' => 'Поле «подтвердить пароль» не совпадает.']);
+        }
+
+        if(Hash::check($password['oldPassword'], auth()->user()->password)) {
+            $user = User::where('email', auth()->user()->email)->first();
+            $soap = new Soap();
+            if($soap->cmd('bnetaccount password '.$password['oldPassword'].' '.$password['newPassword'].' '.$password['confirmPassword']) === NULL) {
+                $user->update([
+                    'password' => Hash::make($password['newPassword'])
+                ]);
+                return response()->json(['success'=> true, 'message' => 'Пароль успешно изменен.']);
+            } else {
+                return response()->json(['success'=> true, 'message' => 'Не известная ошибка, обратитесь к администратору сайта.']);
+            }
+        } else {
+            return response()->json(['success'=> false, 'message' => 'Старый пароль неверный!']);
+        }
+    }
+
     public function changeName(Request $request) {
         $user = User::where('email', auth()->user()->email)->first();
         $user->update([
