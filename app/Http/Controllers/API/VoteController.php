@@ -39,7 +39,7 @@ class VoteController extends Controller
             }
         }
 
-        $data = Vote::where('name', Auth::user()->name)->orderBy('created_at', 'desc')->paginate(3);
+        $data = Vote::where('name', Auth::user()->name)->orderBy('created_at', 'desc')->paginate(10);
         $data_done = Vote::where('name', Auth::user()->name)->where('complete', 1)->count();
         $count_vote = $data->count();
         return response()->json(['error' => false, 'data' => $data, 'vote_count' => $count_vote, 'vote_done' => $data_done]);
