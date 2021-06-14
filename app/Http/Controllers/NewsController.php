@@ -11,16 +11,16 @@ class NewsController extends Controller
     public function index() {
         Meta::prependTitle('Новости')
             ->setDescription('Все последние новости о World of Warcraft, включая сообщения разработчиков и уведомления о выходе обновлений.');
-        $firstnews = Post::all()->where('status','PUBLISHED')->reverse()->take(1);
-        $lastnews = Post::all()->where('status','PUBLISHED')->reverse()->skip(1)->take(5);
-        $dataToEliminate = Post::orderBy('created_at','desc')->take(6)->select('id')->pluck('id');
-        $news = Post::whereNotIn('id', $dataToEliminate)->orderBy('created_at','desc')->skip(6)->simplePaginate(10);
+        $firstnews = Post::all()->where('status','PUBLISHED')->where('language', app()->getLocale())->reverse()->take(1);
+        $lastnews = Post::all()->where('status','PUBLISHED')->where('language', app()->getLocale())->reverse()->skip(1)->take(5);
+        $dataToEliminate = Post::orderBy('created_at','desc')->where('language', app()->getLocale())->take(6)->select('id')->pluck('id');
+        $news = Post::whereNotIn('id', $dataToEliminate)->where('language', app()->getLocale())->orderBy('created_at','desc')->skip(6)->simplePaginate(10);
         $num = 0;
         return view('news.index', compact('firstnews','lastnews','news','num'));
     }
 
     public function frag() {
-        $dataToEliminate = Post::orderBy('created_at','desc')->take(6)->select('id')->pluck('id');
+        $dataToEliminate = Post::orderBy('created_at','desc')->where('language', app()->getLocale())->take(6)->select('id')->pluck('id');
         $news = Post::whereNotIn('id', $dataToEliminate)->orderBy('created_at','desc')->skip(6)->simplePaginate(10);
         return view('news.frag', [
             'news' => $news
