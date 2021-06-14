@@ -80,7 +80,7 @@ return [
 
     'database' => [
         'tables' => [
-            'hidden' => ['migrations', 'data_rows', 'data_types', 'menu_items', 'password_resets', 'permission_role', 'settings'],
+            'hidden' => ['migrations', 'data_rows', 'data_types', 'password_resets', 'permission_role', 'settings'],
         ],
         'autoload_migrations' => true,
     ],
@@ -99,7 +99,7 @@ return [
         /*
          * Set whether or not the multilingual is supported by the BREAD input.
          */
-        'enabled' => false,
+        'enabled' => true,
 
         /*
          * Select default language
@@ -110,8 +110,19 @@ return [
          * Select languages that are supported.
          */
         'locales' => [
-            'en-us',
-            'ru-ru',
+            "ru-ru",
+            "de-de",
+            "en-us",
+            "en-gb",
+            "es-es",
+            "es-mx",
+            "fr-fr",
+            "it-it",
+            "pt-br",
+            "pt-pt",
+            "ko-kr",
+            "zh-tw",
+            "zh-cn"
         ],
     ],
 

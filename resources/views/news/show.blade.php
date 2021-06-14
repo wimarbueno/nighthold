@@ -17,7 +17,7 @@
                <div media-huge="space-huge" queryselectoralways="0" media-original="" class=""></div>
                <div media-huge="space-huge" queryselectoralways="0" media-original="" class=""></div>
                <div class="contain-max">
-                  <h1 class="margin-none font-title-large-onDark">{{ $post->title }}</h1>
+                  <h1 class="margin-none font-title-large-onDark">{{ $post->getTranslatedAttribute('title', App()->getLocale(), 'en-gb') }}</h1>
                   <div class="space-small"></div>
                   <div class="List">
                      <div class="font-bliz-light-small-beige List-item gutter-tiny" media-medium="List-item gutter-tiny" queryselectoralways="0" media-original="font-bliz-light-small-beige">
@@ -102,7 +102,7 @@
                <div id="blog">
                   <div class="Blog margin-bottom-medium" queryselectoralways="5">
                      <div class="detail">
-                        {!! $post->body !!}
+                        {!! $post->getTranslatedAttribute('body', App()->getLocale(), 'en-gb') !!}
                      </div>
                   </div>
                </div>

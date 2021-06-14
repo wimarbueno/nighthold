@@ -7,13 +7,13 @@
                             <div class="Grid-1of5">
                                 <div class="List List--full List--vertical List--separator List--separatorBrownMedium">
                                     <div class="List-item gutter-tiny gutter-vertical">
-                                        <div class="SiteNav-sectionTitle font-title-tiny-onDark">{{ $menu->title }}</div>
+                                        <div class="SiteNav-sectionTitle font-title-tiny-onDark">{{ $menu->getTranslatedAttribute('title', App()->getLocale(), 'en-gb') }}</div>
                                     </div>
                                     <div class="List-item gutter-tiny gutter-vertical">
                                         @if(!$menu->children->isEmpty())
                                             @foreach($menu->children as $item)
                                             <div class="gutter-vertical gutter-tiny">
-                                            <a class="Link Link--block SiteNav-pageLink" href="{{ $item->link() }}" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Game - Gameplay - Races">{{ $item->title }} @if($item->new_item)<sup class="font-sup color-gold-medium">Новый</sup>@endif</a></div>
+                                            <a class="Link Link--block SiteNav-pageLink" href="{{ $item->link() }}" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Game - Gameplay - Races">{{ $item->getTranslatedAttribute('title', App()->getLocale(), 'en-gb') }} @if($item->new_item)<sup class="font-sup color-gold-medium">Новый</sup>@endif</a></div>
                                             @endforeach
                                         @endif
                                     </div>
