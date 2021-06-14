@@ -11,7 +11,7 @@ class MainController extends Controller
 {
     public function index () {
         $data = (new Posts)->getHome();
-        $content = Homepage::where('language', app()->getLocale())->orderBy('sort', 'ASC')->get();
+        $content = Homepage::orderBy('sort', 'ASC')->get();
         Meta::prependTitle('Главная')
             ->setDescription('Примкните к тысячам могучих героев Азерота в мире магии и бесконечных приключений!');
         return view('dashboard', ['data' => $data, 'content' => $content]);

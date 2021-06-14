@@ -37,8 +37,8 @@
                                              </div>
                                              <div class="Grid-full gutter-small Grid-3of4" media-large="Grid-3of4" media-wide="Grid-4of5" queryselectoralways="0" media-original="Grid-full gutter-small">
                                                 <div class="contain-large contain-left gutter-normal" media-large="gutter-normal" queryselectoralways="0" media-original="contain-large contain-left">
-                                                   <div class="NewsBlog-title">{{ $item->title }}</div>
-                                                   <p class="NewsBlog-desc color-beige-medium font-size-xSmall">{{ $item->excerpt }}</p>
+                                                   <div class="NewsBlog-title">{{ $item->getTranslatedAttribute('title', App()->getLocale(), 'en-gb') }}</div>
+                                                   <p class="NewsBlog-desc color-beige-medium font-size-xSmall">{{ $item->getTranslatedAttribute('excerpt', App()->getLocale(), 'en-gb') }}</p>
                                                 </div>
                                                 <div media-large="gutter-normal" queryselectoralways="0" media-original="" class="gutter-normal">
                                                    <div class="Pair">

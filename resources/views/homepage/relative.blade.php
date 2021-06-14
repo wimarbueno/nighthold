@@ -5,15 +5,15 @@
         <div class="Panel-area SyncHeight-item">
             <div class="Panel-box">
                 <div class="Panel-content">
-                    @if($item->sub_title)<h3 class="Panel-subtitle">{{ $item->sub_title }}</h3>@endif
-                    <h2 class="Panel-title">{{ $item->title }}</h2>
-                    <div class="Content Content--onDark Panel-desc">{{ $item->description }}</div>
+                    @if($item->sub_title)<h3 class="Panel-subtitle">{{ $item->getTranslatedAttribute('sub_title', App()->getLocale(), 'en-gb') }}</h3>@endif
+                    <h2 class="Panel-title">{{ $item->getTranslatedAttribute('title', App()->getLocale(), 'en-gb') }}</h2>
+                    <div class="Content Content--onDark Panel-desc">{{ $item->getTranslatedAttribute('description', App()->getLocale(), 'en-gb') }}</div>
                     <div class="Panel-buttons">
                         @if($item->slug)
                             <a class="Link Button Button--ghost Panel-button" href="{{ $item->slug }}" data-analytics="homepage-panel" data-analytics-placement="Recruit A Friend Page">
                                 <div class="Button-outer">
                                     <div class="Button-inner">
-                                        <div class="Button-label" data-text="{{ $item->slug_text }}">{{ $item->slug_text }}</div>
+                                        <div class="Button-label" data-text="{{ $item->getTranslatedAttribute('slug_text', App()->getLocale(), 'en-gb') }}">{{ $item->getTranslatedAttribute('slug_text', App()->getLocale(), 'en-gb') }}</div>
                                     </div>
                                 </div>
                             </a>
@@ -22,7 +22,7 @@
                             <a class="Link Button Button--ghost Panel-button" href="{{ $item->slug_two }}" data-analytics="homepage-panel" data-analytics-placement="Page: Burning Crusade Classic">
                                 <div class="Button-outer">
                                     <div class="Button-inner">
-                                        <div class="Button-label" data-text="{{ $item->slug_text_two }}">{{ $item->slug_text_two }}</div>
+                                        <div class="Button-label" data-text="{{ $item->getTranslatedAttribute('slug_text_two', App()->getLocale(), 'en-gb') }}">{{ $item->getTranslatedAttribute('slug_text_two', App()->getLocale(), 'en-gb') }}</div>
                                     </div>
                                 </div>
                             </a>
@@ -43,15 +43,15 @@
         <div class="Panel-area SyncHeight-item">
             <div class="Panel-box">
                 <div class="Panel-content">
-                    @if($item->sub_title)<h3 class="Panel-subtitle">{{ $item->sub_title }}</h3>@endif
-                    <h2 class="Panel-title">{{ $item->title }}</h2>
-                    <div class="Content Content--onDark Panel-desc">{{ $item->description }}</div>
+                    @if($item->sub_title)<h3 class="Panel-subtitle">{{ $item->getTranslatedAttribute('sub_title', App()->getLocale(), 'en-gb') }}</h3>@endif
+                    <h2 class="Panel-title">{{ $item->getTranslatedAttribute('title', App()->getLocale(), 'en-gb') }}</h2>
+                    <div class="Content Content--onDark Panel-desc">{{ $item->getTranslatedAttribute('description', App()->getLocale(), 'en-gb') }}</div>
                     <div class="Panel-buttons">
                         @if($item->slug)
                         <a class="Link Button Button--ghost Panel-button" href="{{ $item->slug }}" data-analytics="homepage-panel" data-analytics-placement="Recruit A Friend Page">
                             <div class="Button-outer">
                                 <div class="Button-inner">
-                                    <div class="Button-label" data-text="{{ $item->slug_text }}">{{ $item->slug_text }}</div>
+                                    <div class="Button-label" data-text="{{ $item->getTranslatedAttribute('slug_text', App()->getLocale(), 'en-gb') }}">{{ $item->getTranslatedAttribute('slug_text', App()->getLocale(), 'en-gb') }}</div>
                                 </div>
                             </div>
                         </a>
@@ -60,7 +60,7 @@
                         <a class="Link Button Button--ghost Panel-button" href="{{ $item->slug_two }}" data-analytics="homepage-panel" data-analytics-placement="Page: Burning Crusade Classic">
                             <div class="Button-outer">
                                 <div class="Button-inner">
-                                    <div class="Button-label" data-text="{{ $item->slug_text_two }}">{{ $item->slug_text_two }}</div>
+                                    <div class="Button-label" data-text="{{ $item->getTranslatedAttribute('slug_text_two', App()->getLocale(), 'en-gb') }}">{{ $item->getTranslatedAttribute('slug_text_two', App()->getLocale(), 'en-gb') }}</div>
                                 </div>
                             </div>
                         </a>
