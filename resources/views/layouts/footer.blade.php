@@ -144,7 +144,6 @@
                 @include('layouts.providers.pages')
             </nav>
             <div class="NavbarFooter-copyright">© {{ config('app.name') }}, Inc., 2021</div>
-             <a href="//freekassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/14.png" title="Приём оплаты на сайте картами"></a>
          </div>
       </div>
    </div>
