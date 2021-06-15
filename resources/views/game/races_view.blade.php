@@ -11,9 +11,9 @@
                 <div class="gutter-normal gutter-negative">
                     <div class="space-large"></div>
                     <div class="contain-masthead align-center">
-                        <h1 class="margin-none font-semp-xxxLarge-white">{{ $race->name }}</h1>
+                        <h1 class="margin-none font-semp-xxxLarge-white">{{ $race->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</h1>
                         <div class="space-rhythm-medium"></div>
-                        <div class="font-bliz-light-medium-beige">{{ $race->factions->name }}</div>
+                        <div class="font-bliz-light-medium-beige">{{ $race->factions->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</div>
                     </div>
                     <div class="space-large"></div>
                     <div class="Grid">
@@ -27,7 +27,7 @@
                                             <div class="Art-overlay"></div>
                                         </div>
                                     </div>
-                                    {!! $race->description !!}
+                                    {!! $race->getTranslatedAttribute('description', App()->getLocale(), 'en-gb') !!}
                                 </div>
                             </div>
                         </div>
@@ -40,16 +40,16 @@
                                     </div>
                                     <div class="Grid Grid--gutters">
                                         <div class="Grid-col" media-medium="Grid-1of2" media-large="!Grid-1of2">
-                                            <h3 class="margin-none font-semp-medium-blue align-center">Расовые особенности</h3>
+                                            <h3 class="margin-none font-semp-medium-blue align-center">@lang('races.races_9')</h3>
                                             <div class="space-normal"></div>
                                             @foreach($race->ability as $ability)
                                             <div class="gutter-small gutter-vertical">
                                                 <div class="Media Media--alignTop">
-                                                    <div class="Media-image"><div class="GameIcon Media-icon"><div class="GameIcon-icon" style="background-image:url({{ asset('/storage/' . Utils::ImagesLogo($ability->icon)) }});"></div><div class="GameIcon-transmog"></div><div class="GameIcon-borderImage"></div></div></div><div class="Media-text"><div class="font-semp-xSmall-blue">{{ $ability->name }}</div>{{ $ability->description }}</div></div></div>
+                                                    <div class="Media-image"><div class="GameIcon Media-icon"><div class="GameIcon-icon" style="background-image:url({{ asset('/storage/' . Utils::ImagesLogo($ability->icon)) }});"></div><div class="GameIcon-transmog"></div><div class="GameIcon-borderImage"></div></div></div><div class="Media-text"><div class="font-semp-xSmall-blue">{{ $ability->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</div>{{ $ability->getTranslatedAttribute('description', App()->getLocale(), 'en-gb') }}</div></div></div>
                                             @endforeach
                                         </div>
                                         <div class="Grid-col" media-medium="Grid-1of2" media-large="!Grid-1of2">
-                                            <h3 class="margin-none font-semp-medium-blue align-center">Классы</h3>
+                                            <h3 class="margin-none font-semp-medium-blue align-center">@lang('races.races_10')</h3>
                                             <div class="space-normal"></div>
                                             <div class="Grid Grid--gutters">
                                                 @foreach($race->classes as $class)
@@ -64,17 +64,17 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="Media-text">
-                                                                    <div class="font-semp-xSmall-red">{{ $class->name }}</div>
+                                                                    <div class="font-semp-xSmall-red">{{ $class->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</div>
                                                                 </div>
                                                             </div>
                                                         </a>
                                                         <div class="Tooltip" name="race-details-tooltip-{{ $class->slug }}">
                                                             <div class="GameTooltip">
                                                                 <div class="ui-tooltip">
-                                                                    <div class="font-bliz-light-small-lightGold">{{ $class->name }}</div>
+                                                                    <div class="font-bliz-light-small-lightGold">{{ $class->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</div>
                                                                     <div class="space-small"></div>
                                                                     <div class="font-bliz-light-xSmall-white">
-                                                                        {!! $class->card_description !!}
+                                                                        {!! $class->getTranslatedAttribute('card_description', App()->getLocale(), 'en-gb') !!}
                                                                     </div>
                                                                 </div>
                                                             </div>

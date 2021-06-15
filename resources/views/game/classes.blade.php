@@ -3,7 +3,7 @@
         <link href="{{ asset('static/5.60a3b147f091048d9af5.css') }}" rel="stylesheet" type="text/css"/>
     @endpush
    <div class="Pane Pane--underSiteNav Pane--cropWide" data-url="https://images.blz-contentstack.com/v3/assets/blt3452e3b114fab0cd/bltfdb10c76cd837218/5ef22bb0b7f22712a4d508b9/PJBK2UYV0YYL1466177409759.jpg">
-      <div class="Pane-bg" style="background-color:#151b0f;background-image:url(&quot;https://images.blz-contentstack.com/v3/assets/blt3452e3b114fab0cd/bltfdb10c76cd837218/5ef22bb0b7f22712a4d508b9/PJBK2UYV0YYL1466177409759.jpg&quot;);">
+      <div class="Pane-bg" style="background-color:#151b0f;background-image:url(https://images.blz-contentstack.com/v3/assets/blt3452e3b114fab0cd/bltfdb10c76cd837218/5ef22bb0b7f22712a4d508b9/PJBK2UYV0YYL1466177409759.jpg);">
          <div class="Pane-overlay"></div>
       </div>
       <div class="Pane-content">
@@ -11,9 +11,9 @@
          <div class="space-large hide" media-medium="!hide"></div>
          <div class="space-large hide" media-wide="!hide"></div>
          <div class="contain-masthead align-center">
-            <h1 class="margin-none font-semp-xxxLarge-white">Классы</h1>
+            <h1 class="margin-none font-semp-xxxLarge-white">@lang('classes.classes_5')</h1>
             <div class="space-rhythm-medium"></div>
-            <p class="margin-none font-bliz-light-small-beige">Рыцари в сверкающих доспехах, неуловимые преследователи, коварные заклинатели... каждый класс в World of Warcraft — особенный, для каждого существуют свои препятствия, достижения и вершины. Каким путем последуете вы?</p>
+            <p class="margin-none font-bliz-light-small-beige">@lang('classes.classes_6')</p>
          </div>
          <div class="space-medium"></div>
          <div class="space-large hide" media-medium="!hide"></div>
@@ -42,9 +42,9 @@
                         </div>
                         <div class="Card-content">
                            <div class="gutter-normal gutter-all">
-                              <div class="Card-title">{{ $class->name }}</div>
-                              <div class="Card-subtitle">{{ $class->card_subtitle }}</div>
-                              {!! $class->card_description !!}
+                              <div class="Card-title">{{ $class->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</div>
+                              <div class="Card-subtitle">{{ $class->getTranslatedAttribute('card_subtitle', App()->getLocale(), 'en-gb') }}</div>
+                              {!! $class->getTranslatedAttribute('card_description', App()->getLocale(), 'en-gb') !!}
                            </div>
                         </div>
                      </a>
@@ -75,9 +75,9 @@
                         </div>
                         <div class="Card-content">
                            <div class="gutter-normal gutter-all">
-                              <div class="Card-title">{{ $class->name }}</div>
-                              <div class="Card-subtitle">{{ $class->card_subtitle }}</div>
-                              {!! $class->card_description !!}
+                               <div class="Card-title">{{ $class->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</div>
+                               <div class="Card-subtitle">{{ $class->getTranslatedAttribute('card_subtitle', App()->getLocale(), 'en-gb') }}</div>
+                               {!! $class->getTranslatedAttribute('card_description', App()->getLocale(), 'en-gb') !!}
                            </div>
                         </div>
                      </a>

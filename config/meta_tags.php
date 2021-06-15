@@ -7,7 +7,7 @@ return [
      * Meta title section
      */
     'title' => [
-        'default' => env('APP_NAME'),
+        'default' => null,
         'separator' => '-',
         'max_length' => 255,
     ],

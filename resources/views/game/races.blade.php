@@ -13,9 +13,9 @@
          <div class="space-large"></div>
          <div media-wide="space-medium"></div>
          <div class="contain-masthead align-center gutter-normal">
-            <h1 class="margin-none font-semp-xxxLarge-white">Жители Азерота</h1>
+            <h1 class="margin-none font-semp-xxxLarge-white">@lang('races.races_1')</h1>
             <div class="space-rhythm-medium"></div>
-            <p class="margin-none font-bliz-light-small-darkBeige">Азерот населяет множество рас — одни изначально жили в этом мире, другие пришли из иных миров. От выбора расы зависит, чью сторону вы примите в бесконечной войне. Станете ли вы отважным защитником Альянса или неутомимым воином Орды? Кому вы присягнете на верность?</p>
+            <p class="margin-none font-bliz-light-small-darkBeige">@lang('races.races_2')</p>
          </div>
          <div class="space-large"></div>
          <div class="space-large"></div>
@@ -31,9 +31,9 @@
          <div class="space-large"></div>
          <div media-wide="space-medium"></div>
          <div class="contain-masthead align-center gutter-normal">
-            <h1 class="margin-none font-semp-xxxLarge-white">Жители Азерота</h1>
+            <h1 class="margin-none font-semp-xxxLarge-white">@lang('races.races_1')</h1>
             <div class="space-rhythm-medium"></div>
-            <p class="margin-none font-bliz-light-small-darkBeige">Азерот населяет множество рас — одни изначально жили в этом мире, другие пришли из иных миров. От выбора расы зависит, чью сторону вы примите в бесконечной войне. Станете ли вы отважным защитником Альянса или неутомимым воином Орды? Кому вы присягнете на верность?</p>
+            <p class="margin-none font-bliz-light-small-darkBeige">@lang('races.races_2')</p>
          </div>
          <div class="space-large"></div>
          <div class="space-large"></div>
@@ -60,9 +60,9 @@
             </div>
             <div class="space-small"></div>
             <div class="align-center contain-wide gutter-normal" medi-nav="!gutter-normal gutter-medium" media-wide="!gutter-normal !gutter-medium gutter-large">
-               <h2 class="margin-none font-semp-large-white text-upper">За Альянс!</h2>
+               <h2 class="margin-none font-semp-large-white text-upper">@lang('races.races_3')</h2>
                <div class="space-rhythm-small"></div>
-               <p class="margin-none font-bliz-light-small-darkBeige">Непоколебимый Альянс живет традициями. Эти убежденные сторонники справедливости, верные своему долгу, готовы защищать Азерот от любой угрозы, в том числе от свирепой Орды.</p>
+               <p class="margin-none font-bliz-light-small-darkBeige">@lang('races.races_4')</p>
             </div>
             <div class="space-large"></div>
             <div class="hide flex flex-column flex-items-center" media-huge="!hide">
@@ -84,7 +84,7 @@
                               </div>
                               <div class="space-normal"></div>
                               <div class="space-small"></div>
-                              <div class="RaceTile-name SyncHeightItem">{{ $races->name }}</div>
+                              <div class="RaceTile-name SyncHeightItem">{{ $races->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</div>
                            </a>
                         </div>
                      </div>
@@ -111,7 +111,7 @@
                            </div>
                            <div class="space-normal"></div>
                            <div class="space-small"></div>
-                           <div class="RaceTile-name SyncHeightItem">{{ $races->name }}</div>
+                           <div class="RaceTile-name SyncHeightItem">{{ $races->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</div>
                         </a>
                      </div>
                   </div>
@@ -143,9 +143,9 @@
             </div>
             <div class="space-small"></div>
             <div class="align-center contain-wide gutter-normal" medi-nav="!gutter-normal gutter-medium" media-wide="!gutter-normal !gutter-medium gutter-large">
-               <h2 class="margin-none font-semp-large-white text-upper">За Орду!</h2>
+               <h2 class="margin-none font-semp-large-white text-upper">@lang('races.races_5')</h2>
                <div class="space-rhythm-small"></div>
-               <p class="margin-none font-bliz-light-small-darkBeige">Неудержимой Ордой движет идея единства. Ревностные поборники свободы, они готовы противостоять любому, кто угрожает их идеалам, в том числе и не допускающему возражений Альянсу.</p>
+               <p class="margin-none font-bliz-light-small-darkBeige">@lang('races.races_6')</p>
             </div>
             <div class="space-large"></div>
             <div class="hide flex flex-column flex-items-center" media-huge="!hide">
@@ -167,7 +167,7 @@
                               </div>
                               <div class="space-normal"></div>
                               <div class="space-small"></div>
-                              <div class="RaceTile-name SyncHeightItem">{{ $races->name }}</div>
+                              <div class="RaceTile-name SyncHeightItem">{{ $races->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</div>
                            </a>
                         </div>
                      </div>
@@ -194,7 +194,7 @@
                            </div>
                            <div class="space-normal"></div>
                            <div class="space-small"></div>
-                           <div class="RaceTile-name SyncHeightItem">{{ $races->name }}</div>
+                           <div class="RaceTile-name SyncHeightItem">{{ $races->getTranslatedAttribute('name', App()->getLocale(), 'en-gb') }}</div>
                         </a>
                      </div>
                   </div>
@@ -216,9 +216,9 @@
             <div class="space-large"></div>
             <div class="space-small"></div>
             <div class="align-center contain-wide gutter-normal" medi-nav="!gutter-normal gutter-medium" media-wide="!gutter-normal !gutter-medium gutter-large">
-               <h2 class="margin-none font-semp-large-white text-upper">Союзные расы</h2>
+               <h2 class="margin-none font-semp-large-white text-upper">@lang('races.races_7')</h2>
                <div class="space-rhythm-small"></div>
-               <p class="margin-none font-bliz-light-small-darkBeige">Героям Альянса и Орды предстоит отправиться в далекие земли и найти новых союзников. Чтобы создать персонажа одной из союзных рас, вам предстоит заручиться поддержкой этой расы для своей фракции.</p>
+               <p class="margin-none font-bliz-light-small-darkBeige">@lang('races.races_8')</p>
             </div>
             <div class="padding-top-normal padding-bottom-normal"></div>
             <div class="hide flex flex-column flex-items-center" media-huge="!hide">

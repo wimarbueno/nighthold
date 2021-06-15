@@ -60,8 +60,8 @@ class GameController extends Controller
     }
 
     public function races () {
-        Meta::prependTitle('Игровые расы')
-            ->setDescription('Азерот населяет множество рас — одни изначально жили в этом мире, другие пришли из иных миров. Подробнее о жителях Азерота рассказывается в этой статье.');
+        Meta::prependTitle(__('races.races_11'))
+            ->setDescription(__('races.races_12'));
         return view('game.races', [
             'race' => Races::select(['name', 'images_main', 'images_main_two', 'slug', 'faction'])->get()
         ]);
@@ -69,8 +69,8 @@ class GameController extends Controller
 
     public function races_view($race) {
         $races = Races::where('slug', $race)->firstOrFail();
-        Meta::prependTitle($races->name)
-            ->setDescription($races->description, 200);
+        Meta::prependTitle($races->getTranslatedAttribute('name', App()->getLocale(), 'en-gb'))
+            ->setDescription($races->getTranslatedAttribute('description', App()->getLocale(), 'en-gb'), 200);
         return view('game.races_view', [
             'race' => $races,
             'other' => Races::where('slug', '!=', $race)->limit(2)->get()
@@ -79,8 +79,8 @@ class GameController extends Controller
 
     public function classes_view($classes) {
         $class = Classes::where('slug', $classes)->firstOrFail();
-        Meta::prependTitle($class->name)
-            ->setDescription($class->description, 200);
+        Meta::prependTitle($class->getTranslatedAttribute('name', App()->getLocale(), 'en-gb'))
+            ->setDescription($class->getTranslatedAttribute('description', App()->getLocale(), 'en-gb'), 200);
         return view('game.classes_view', [
             'classes' => $class,
             'other' => Classes::where('slug', '!=', $classes)->limit(2)->get()
@@ -88,8 +88,8 @@ class GameController extends Controller
     }
 
     public function classes () {
-        Meta::prependTitle('Классы игровых персонажей')
-            ->setDescription('От рыцарей в сияющих доспехах до коварных шпионов и хитроумных заклинателей: каждый класс в World of Warcraft — это уникальные возможности и задачи для игрока.');
+        Meta::prependTitle(__('classes.classes_7'))
+            ->setDescription(__('classes.classes_8'));
         $first = Classes::all()->reverse()->take(6);
         $last = Classes::all()->reverse()->skip(6)->take(6);
         $num = 0;
