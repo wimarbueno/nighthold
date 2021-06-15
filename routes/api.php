@@ -29,7 +29,7 @@ Route::get('v5/nav/rating', [NavbarController::class, 'nav'])->name('navRating')
 
 Route::get('online', [NavbarController::class, 'online'])->name('onlineApi');
 
-Route::get('articles/{lang}', [ArticleController::class, 'show']);
+Route::get('articles', [ArticleController::class, 'show']);
 
 Route::get('/update/check', [UpdateController::class, 'getVersion']);
 Route::get('/update/get/{version}', [UpdateController::class, 'update']);

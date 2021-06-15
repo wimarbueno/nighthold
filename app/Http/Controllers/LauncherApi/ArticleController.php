@@ -8,8 +8,8 @@ use Launcher;
 
 class ArticleController extends Controller
 {
-	public function show($lang)
+	public function show()
 	{
-		return Launcher::getAllNews($lang);
+		return Launcher::getAllNews();
 	}
 }

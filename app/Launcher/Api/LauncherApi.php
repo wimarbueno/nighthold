@@ -12,9 +12,9 @@ use File;
 class LauncherApi
 {
 
-	public function getAllNews($langCode = 'ru-ru')
+	public function getAllNews()
     {
-		$raw = Post::select('id', 'title', 'excerpt', 'image', 'slug', 'language')->where('language', $langCode)->orderBy('created_at', 'desc')->get();
+		$raw = Post::select('id', 'title', 'excerpt', 'image', 'slug')->orderBy('created_at', 'desc')->get();
 
         $collection = [];
         foreach($raw as $key) {
