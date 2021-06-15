@@ -17,7 +17,7 @@
                     <div media-huge="space-huge" queryselectoralways="0" media-original="" class=""></div>
                     <div media-huge="space-huge" queryselectoralways="0" media-original="" class=""></div>
                     <div class="contain-max">
-                        <h1 class="margin-none font-title-large-onDark">{{ $page->title }}</h1>
+                        <h1 class="margin-none font-title-large-onDark">{{ $page->getTranslatedAttribute('title', App()->getLocale(), 'en-gb') }}</h1>
                         <div class="space-small"></div>
                         <div class="space-medium space-large" media-large="space-large" queryselectoralways="0" media-original="space-medium"></div>
                     </div>
@@ -34,7 +34,7 @@
                     <div id="blog">
                         <div class="Blog margin-bottom-medium" queryselectoralways="5">
                             <div class="detail">
-                               {!! $page->body !!}
+                               {!! $page->getTranslatedAttribute('body', App()->getLocale(), 'en-gb') !!}
                             </div>
                         </div>
                     </div>
