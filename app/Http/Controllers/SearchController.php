@@ -37,7 +37,7 @@ class SearchController extends Controller
     public function blog(Request $request) {
         Meta::prependTitle('Поиск')
             ->setDescription('Примкните к тысячам могучих героев Азерота в мире магии и бесконечных приключений!');
-        if ($request->get('g')) {
+        if ($request->get('q')) {
             return view('search.blog', [
                 'post' => Post::like('body', Str::ucfirst($request->get('q')))->paginate(25)
             ]);

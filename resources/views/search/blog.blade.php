@@ -7,25 +7,25 @@
             <div class="Pane-overlay"></div>
         </div>
         <div class="Pane-content">
-            <div class="Pane Pane--underSiteNav Pane--cropMax Pane--transparent" data-url="https://bnetcmsus-a.akamaihd.net/cms/template_resource/p8/P8LCY89PNXOK1466794718015.jpg">
-                <div class="Pane-bg" style="background-image:url(https://bnetcmsus-a.akamaihd.net/cms/template_resource/p8/P8LCY89PNXOK1466794718015.jpg);">
+            <div class="Pane Pane--underSiteNav Pane--cropMax Pane--transparent" data-url="{{ asset('cms/template_resource/p8/P8LCY89PNXOK1466794718015.jpg') }}">
+                <div class="Pane-bg" style="background-image:url({{ asset('cms/template_resource/p8/P8LCY89PNXOK1466794718015.jpg') }});">
                     <div class="Pane-overlay"></div>
                 </div>
                 <div class="Pane-content">
                     <div class="contain-max">
                         <div class="space-large" media-large="space-huge"></div>
                         <div class="Grid">
-                            <div class="Grid-full font-semp-xLarge-white" media-large="font-semp-xxxLarge-white" media-wide="Grid-1of2" media-huge="Grid-2of3">Поиск</div>
+                            <div class="Grid-full font-semp-xLarge-white" media-large="font-semp-xxxLarge-white" media-wide="Grid-1of2" media-huge="Grid-2of3">@lang('search.search_8')</div>
                             <div class="Grid-full padding-top-small" media-wide="Grid-1of2" media-huge="Grid-1of3">
                                 <form class="SiteNav-searchBox" action="{{ route('search') }}" method="GET">
                                     <span class="Icon Icon--searchGold SiteNav-searchIcon"></span>
-                                    <input class="SiteNav-searchInput" id="searchInput" name="q" type="search" placeholder="Что вы ищете?" value="{{ request()->q ?? request()->a }}" autocomplete="off">
+                                    <input class="SiteNav-searchInput" id="searchInput" name="q" type="search" placeholder="@lang('navbar.navbar_9')" value="{{ request()->q ?? request()->a }}" autocomplete="off">
                                 </form>
                             </div>
                         </div>
                         <div class="Pair">
                             <div class="Pair-left">
-                                <div class="fontFamily-blizzard font-size-medium color-monochrome-white textShadow-small-black">По запросу <b>«{{ request()->q ?? request()->a }}»</b> в категории «blog»</div>
+                                <div class="fontFamily-blizzard font-size-medium color-monochrome-white textShadow-small-black">@lang('search.search_9') <b>«{{ request()->q ?? request()->a }}»</b> @lang('search.search_18')</div>
                             </div>
                             <div class="Pair-right">
                                 {{ $post->appends(['q' => request()->q ?? request()->a])->links('search.paginates') }}
@@ -81,7 +81,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a class="Link NewsBlog-link" href="{{ route('news.show', [$first->id, $first->slug]) }}" data-analytics-v2="{&quot;name&quot;:&quot;ctaOther&quot;,&quot;category&quot;:&quot;cta&quot;,&quot;action&quot;:&quot;other&quot;,&quot;label&quot;:&quot;blog&quot;,&quot;dimensions&quot;:{&quot;ctaPlacement&quot;:&quot;search&quot;,&quot;destinationUrl&quot;:&quot;{{ route('news.show', [$first->id, $first->slug]) }}&quot;}}">
+                                            <a class="Link NewsBlog-link" href="{{ route('news.show', [$first->id, $first->slug]) }}">
 
                                             </a>
                                         </article>
