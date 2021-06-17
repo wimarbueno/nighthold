@@ -32,12 +32,12 @@
 </div>
 @else
 <div class="SiteNav-menuListItem List-item" data-test-id="bfd7f05102e49f81dc3e45badd316e7e">
-<a class="Link Link--block SiteNav-menuListLink text-upper" href="{{ route('login') }}" data-analytics="main-nav" data-analytics-placement="Community - Log In" rel="nofollow"><span class="SiteNav-menuListLinkText" data-text="Авторизация">Авторизация</span></a>
+<a class="Link Link--block SiteNav-menuListLink text-upper" href="{{ route('login') }}" data-analytics="main-nav" data-analytics-placement="Community - Log In" rel="nofollow"><span class="SiteNav-menuListLinkText" data-text="@lang('navbar.navbar_30')">@lang('navbar.navbar_30')</span></a>
 </div>
 <div class="SiteNav-menuListItem SiteNav-menuListItem--user List-item hide" data-test-id="122786c542d0ed1e3f8346696c79bfb3" media-wide="!hide">
     <div class="SiteNav-menuListItemWrap">
         <a class="Link Link--block SiteNav-menuListLink text-upper" href="{{ route('register') }}">
-            <span class="SiteNav-menuListLinkText" data-text="Регистрация">Регистрация</span>
+            <span class="SiteNav-menuListLinkText" data-text="@lang('navbar.navbar_34')">@lang('navbar.navbar_34')</span>
         </a>
     </div>
 </div>

@@ -112,13 +112,10 @@ return [
         'locales' => [
             "ru-ru",
             "de-de",
-            "en-us",
             "en-gb",
             "es-es",
-            "es-mx",
             "fr-fr",
             "it-it",
-            "pt-br",
             "pt-pt",
             "ko-kr",
             "zh-tw",

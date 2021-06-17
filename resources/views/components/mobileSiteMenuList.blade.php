@@ -29,7 +29,7 @@
                         @empty(!Auth::user()->account->characters)
                 <div class="BnetNav-mobileSiteMenuListItem List-item">
                     <a class="Link" data-dropdown="BnetNav-mobileSiteMenuCharacters">
-                        <div class="DropdownLink DropdownLink--gold BnetNav-mobileSiteMenuLink"><div class="Pair"><div class="Pair-left">Список персонажей</div><div class="Pair-right"><div class="BnetNav-mobileDropdownIndicator DropdownLink-indicator"></div></div></div></div></a>
+                        <div class="DropdownLink DropdownLink--gold BnetNav-mobileSiteMenuLink"><div class="Pair"><div class="Pair-left">@lang('navbar.navbar_40')</div><div class="Pair-right"><div class="BnetNav-mobileDropdownIndicator DropdownLink-indicator"></div></div></div></div></a>
                     <div class="Dropdown" name="BnetNav-mobileSiteMenuCharacters" data-dropdown-group="BnetNav-mobileSiteMenuSubsections">
                         <div class="BnetNav-mobileSiteMenuList List List--full List--vertical">
                             @foreach(Auth::user()->account->characters as $item)
@@ -50,7 +50,7 @@
                             @empty(!Auth::user()->account)
                                 @empty(!Auth::user()->account->characters)
                         <div class="BnetNav-mobileSiteMenuListItem List-item">
-                            <a class="Link Link--block BnetNav-mobileSiteMenuLink" href="{{ route('characters.index') }}">Все ваши персонажи</a>
+                            <a class="Link Link--block BnetNav-mobileSiteMenuLink" href="{{ route('characters.index') }}">@lang('navbar.navbar_41')</a>
                         </div>
                                 @endempty
                             @endempty
@@ -58,7 +58,7 @@
                         <div class="BnetNav-mobileSiteMenuListItem List-item">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                            <a class="Link Link--block BnetNav-mobileSiteMenuLink" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" data-analytics="main-nav" data-analytics-placement="Community - Log Out">Выход</a>
+                            <a class="Link Link--block BnetNav-mobileSiteMenuLink" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" data-analytics="main-nav" data-analytics-placement="Community - Log Out">@lang('navbar.navbar_7')</a>
                             </form>
                         </div>
                     </div>
@@ -69,14 +69,14 @@
     @else
     <div class="BnetNav-mobileSiteMenuListItem List-item" data-test-id="3f056bb1133c182b8785d65f77042b58">
         <a class="Link Link--block BnetNav-mobileSiteMenuLink" href="{{ route('login') }}" data-analytics="main-nav" data-analytics-placement="Community - Log In" rel="nofollow">
-            <span class="BnetNav-mobileSiteMenuLinkText text-upper" data-text="Авторизация">Авторизация</span>
+            <span class="BnetNav-mobileSiteMenuLinkText text-upper" data-text="Авторизация">@lang('navbar.navbar_30')</span>
         </a>
     </div>
     <div class="space-normal"></div>
     <div class="BnetNav-mobileSiteMenuListItem BnetNav-mobileSiteMenuListItem--user List-item align-center" data-test-id="dee9617eb2e140df59d4dcb648c1b1b5">
         <div class="BnetNav-mobileSiteMenuListItemWrap">
             <a class="Link Link--external Link--block BnetNav-mobileSiteMenuLink BnetNav-mobileSiteMenuLink--signup" href="{{ route('register') }}">
-                <span class="BnetNav-mobileSiteMenuLinkText text-upper" data-text="Создать учетную запись">Создать учетную запись</span>
+                <span class="BnetNav-mobileSiteMenuLinkText text-upper" data-text="Создать учетную запись">@lang('navbar.navbar_34')</span>
             </a>
         </div>
     </div>

@@ -187,25 +187,25 @@
                   <div class="Navbar-modal Navbar-accountModal is-animated is-scroll-blocking" aria-label="Secondary Menu" role="dialog">
                      <div class="Navbar-modalContent">
                         <div class="Navbar-mobileModalHeader"></div>
-                        <a href="{{ config('app.url') }}" class="Navbar-logo Navbar-mobileModalLogo" aria-label="Blizzard Home" data-analytics="global-nav" data-analytics-placement="Nav - Icon">
+                        <a href="{{ config('app.url') }}" class="Navbar-logo Navbar-mobileModalLogo" aria-label="Home" data-analytics="global-nav" data-analytics-placement="Nav - Icon">
                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 151.15 68.46" focusable="false" aria-hidden="true">
                               <use xlink:href="#Navbar-logo-blizzard"></use>
                            </svg>
                         </a>
                         @include('components.auth-menu')
                         <a href="{{ config('app.url') }}" data-target='{"class":"Navbar-home","data-index":"index","data-name":"home"}' class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Icon">
-                           <div class="Navbar-modalLinkLabel">На главную</div>
+                           <div class="Navbar-modalLinkLabel">@lang('navbar.navbar_8')</div>
                         </a>
                         <a href="{{ route('news.index') }}" data-target='{"class":"Navbar-news","data-index":"index","data-name":"news"}' class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - News">
-                           <div class="Navbar-modalLinkLabel">Новости</div>
+                           <div class="Navbar-modalLinkLabel">@lang('navbar.navbar_2')</div>
                         </a>
-                        <a data-target=".Navbar-mobileIcon.Navbar-profileIcon" class="Navbar-modalClose" tabindex="0" role="button" aria-label="Закрыть меню" data-analytics="global-nav">
+                        <a data-target=".Navbar-mobileIcon.Navbar-profileIcon" class="Navbar-modalClose" tabindex="0" role="button" aria-label="@lang('navbar.closed-menu')" data-analytics="global-nav">
                            <div class="Navbar-icon Navbar-gameMenuItemIcon">
                               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false" aria-hidden="true">
                                  <use xlink:href="#Navbar-icon-close"></use>
                               </svg>
                            </div>
-                           <div class="Navbar-gameMenuItemLabel">Закрыть</div>
+                           <div class="Navbar-gameMenuItemLabel">@lang('navbar.closed')</div>
                         </a>
                      </div>
                      <div class="Navbar-modalCloseGutter"></div>
@@ -220,7 +220,7 @@
                               <div class="BnetNav-searchInline">
                                  <form action="{{ route('search') }}" method="GET">
                                     <span class="Icon Icon--searchGold BnetNav-searchIcon"></span>
-                                    <input class="BnetNav-searchInlineInput" id="searchInlineInput" name="q" type="search" placeholder="Что вы ищете?" autocomplete="off"/>
+                                    <input class="BnetNav-searchInlineInput" id="searchInlineInput" name="q" type="search" placeholder="@lang('navbar.navbar_9')" autocomplete="off"/>
                                  </form>
                               </div>
                               <div class="space-normal"></div>
@@ -232,7 +232,7 @@
                               <use xlink:href="#Navbar-logo-blizzard"></use>
                            </svg>
                         </div>
-                        <div class="Navbar-modalClose Navbar-icon" data-target=".Navbar-menu.is-active" tabindex="0" role="button" aria-label="Закрыть меню">
+                        <div class="Navbar-modalClose Navbar-icon" data-target=".Navbar-menu.is-active" tabindex="0" role="button" aria-label="@lang('navbar.closed-menu')">
                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false" aria-hidden="true">
                               <use xlink:href="#Navbar-icon-close"></use>
                            </svg>
@@ -248,13 +248,13 @@
                            </svg>
                         </a>
                         <a href="{{ config('app.url') }}" data-target='{"class":"Navbar-home","data-index":"index","data-name":"home"}' class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Icon">
-                           <div class="Navbar-modalLinkLabel">На главную</div>
+                           <div class="Navbar-modalLinkLabel">@lang('navbar.navbar_8')</div>
                         </a>
                         <a href="{{ route('news.index') }}" data-target='{"class":"Navbar-news","data-index":"index","data-name":"news"}' class="Navbar-modalLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - News">
-                           <div class="Navbar-modalLinkLabel">Новости</div>
+                           <div class="Navbar-modalLinkLabel">@lang('navbar.navbar_2')</div>
                         </a>
                         <div class="Navbar-corpLinks">
-                           <a href="{{ route('user', ['overview']) }}" data-target='{"data-index":1}' class="Navbar-corpLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Account">Учетная запись</a>
+                           <a href="{{ route('user', ['overview']) }}" data-target='{"data-index":1}' class="Navbar-corpLink is-noSelect" data-analytics="global-nav" data-analytics-placement="Nav - Account">@lang('navbar.navbar_33')</a>
                         </div>
                         <div class="Navbar-modalClose Navbar-icon" data-target=".Navbar-menu.is-active" tabindex="0" role="button" aria-label="Закрыть меню">
                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false" aria-hidden="true">
@@ -305,7 +305,7 @@
                      <div class="SiteNav-menuList List">
                          <div class="SiteNav-menuListItem SiteNav-menuListItem--user List-item hide" data-test-id="122786c542d0ed1e3f8346696c79bfb3" media-wide="!hide">
                              <div class="SiteNav-menuListItemWrap">
-                                 <a class="Link Link--block SiteNav-menuListLink text-upper" href="{{ route('status') }}" data-analytics="main-nav" data-analytics-placement="Community - Log In" rel="nofollow"><span class="SiteNav-menuListLinkText" >Онлайн: {{ App\Services\Server::playersOnline() ?: '0' }}</span></a>
+                                 <a class="Link Link--block SiteNav-menuListLink text-upper" href="{{ route('status') }}" data-analytics="main-nav" data-analytics-placement="Community - Log In" rel="nofollow"><span class="SiteNav-menuListLinkText" >@lang('navbar.navbar_42') {{ App\Services\Server::playersOnline() ?: '0' }}</span></a>
                             </div>
                          </div>
                         @include('components.menuList')
@@ -318,60 +318,9 @@
                <div class="SiteNav-doormatContent">
                   <form class="SiteNav-searchBox" action="{{ route('search') }}" method="GET">
                      <span class="Icon Icon--searchGold SiteNav-searchIcon"></span>
-                     <input class="SiteNav-searchInput" id="searchInput" name="q" type="search" placeholder="Что вы ищете?" autocomplete="off"/>
+                     <input class="SiteNav-searchInput" id="searchInput" name="q" type="search" placeholder="@lang('navbar.navbar_9')" autocomplete="off"/>
                   </form>
                   <div class="space-medium"></div>
-                  <div class="Grid Grid--gutters">
-                     <div class="Grid-1of4">
-                        <div class="List List--full List--vertical List--separator List--separatorBrownMedium">
-                           <div class="List-item gutter-tiny gutter-vertical">
-                              <div class="SiteNav-sectionTitle font-title-tiny-onDark">Материалы</div>
-                           </div>
-                           <div class="List-item gutter-tiny gutter-vertical">
-                              <div class="gutter-vertical gutter-tiny"><a class="Link Link--block SiteNav-pageLink" href="/" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - Resources - New Players">Начинающие игроки в WoW</a></div>
-                              <div class="gutter-vertical gutter-tiny"><a class="Link Link--block SiteNav-pageLink" href="/" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - Resources - Returning Players">Продолжающие игру</a></div>
-                              <div class="gutter-vertical gutter-tiny"><a class="Link Link--block SiteNav-pageLink" href="{{ route('talent.calculator') }}" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - Resources - Talent Calculator">Калькулятор талантов</a></div>
-                              <div class="gutter-vertical gutter-tiny"><a class="Link Link--block SiteNav-pageLink" href="{{ route('status') }}" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - Resources - Realm Status">Состояние игровых миров</a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="Grid-1of4">
-                        <div class="List List--full List--vertical List--separator List--separatorBrownMedium">
-                           <div class="List-item gutter-tiny gutter-vertical">
-                              <div class="SiteNav-sectionTitle font-title-tiny-onDark">Новости</div>
-                           </div>
-                           <div class="List-item gutter-tiny gutter-vertical">
-                              <div class="gutter-vertical gutter-tiny"><a class="Link Link--block SiteNav-pageLink" href="{{ route('news.index') }}" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - News - Most Recent">По дате размещения</a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="Grid-1of4">
-                        <div class="List List--full List--vertical List--separator List--separatorBrownMedium">
-                           <div class="List-item gutter-tiny gutter-vertical">
-                              <div class="SiteNav-sectionTitle font-title-tiny-onDark">Игровой процесс</div>
-                           </div>
-                           <div class="List-item gutter-tiny gutter-vertical">
-                              <div class="gutter-vertical gutter-tiny"><a class="Link Link--block SiteNav-pageLink" href="{{ route('races') }}" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - Gameplay - Races">Расы</a></div>
-                              <div class="gutter-vertical gutter-tiny"><a class="Link Link--block SiteNav-pageLink" href="{{ route('classes') }}" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - Gameplay - Classes">Классы</a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="Grid-1of4">
-                        <div class="List List--full List--vertical List--separator List--separatorBrownMedium">
-                           <div class="List-item gutter-tiny gutter-vertical">
-                              <div class="SiteNav-sectionTitle font-title-tiny-onDark">Форумы</div>
-                           </div>
-                           <div class="List-item gutter-tiny gutter-vertical">
-                              <div class="gutter-vertical gutter-tiny">
-                                 <a class="Link Link--external Link--block SiteNav-pageLink" href="/" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - Forums - Support">Поддержка</a>
-                              </div>
-                              <div class="gutter-vertical gutter-tiny">
-                                 <a class="Link Link--external Link--block SiteNav-pageLink" href="{{ route('forums.index') }}" type="CATEGORY_ITEM" data-analytics="main-nav" data-analytics-placement="Search - Forums - Community">Сообщество</a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
                </div>
             </div>
              @include('components.characters')

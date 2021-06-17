@@ -47,14 +47,6 @@
                                       </svg>
                                   </div>
                               </a>
-                              <a class="NavbarFooter-selectorLocale @if(App::isLocale('en-us')) is-active is-selected @endif NavbarFooter-selectorOption" href="{{ route('lang', ['lang' => 'en-us', 'current' => app()->getLocale()]) }}" data-id="en-us">
-                                  <div class="NavbarFooter-selectorOptionLabel">English (US)</div>
-                                  <div class="NavbarFooter-selectorOptionCheck NavbarFooter-icon">
-                                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false">
-                                          <use xlink:href="#Navbar-icon-check"></use>
-                                      </svg>
-                                  </div>
-                              </a>
                               <a class="NavbarFooter-selectorLocale @if(App::isLocale('en-gb')) is-active is-selected @endif NavbarFooter-selectorOption" href="{{ route('lang', ['lang' => 'en-gb', 'current' => app()->getLocale()]) }}" data-id="en-gb">
                                   <div class="NavbarFooter-selectorOptionLabel">English (EU)</div>
                                   <div class="NavbarFooter-selectorOptionCheck NavbarFooter-icon">
@@ -64,12 +56,6 @@
                                   </div>
                               </a>
                               <a class="NavbarFooter-selectorLocale @if(App::isLocale('es-es')) is-active is-selected @endif NavbarFooter-selectorOption" href="{{ route('lang', ['lang' => 'es-es', 'current' => app()->getLocale()]) }}" data-id="es-es"><div class="NavbarFooter-selectorOptionLabel">Español (EU)</div>
-                                  <div class="NavbarFooter-selectorOptionCheck NavbarFooter-icon">
-                                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-check"></use></svg>
-                                  </div>
-                              </a>
-                              <a class="NavbarFooter-selectorLocale @if(App::isLocale('es-mx')) is-active is-selected @endif NavbarFooter-selectorOption" href="{{ route('lang', ['lang' => 'es-mx', 'current' => app()->getLocale()]) }}" data-id="es-mx">
-                                  <div class="NavbarFooter-selectorOptionLabel">Español (AL)</div>
                                   <div class="NavbarFooter-selectorOptionCheck NavbarFooter-icon">
                                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-check"></use></svg>
                                   </div>
@@ -88,12 +74,6 @@
                               </a>
                           </div>
                           <div class="NavbarFooter-selectorSectionBlock">
-                              <a class="NavbarFooter-selectorLocale @if(App::isLocale('pt-br')) is-active is-selected @endif NavbarFooter-selectorOption" href="{{ route('lang', ['lang' => 'pt-br', 'current' => app()->getLocale()]) }}" data-id="pt-br">
-                                  <div class="NavbarFooter-selectorOptionLabel">Português (AL)</div>
-                                  <div class="NavbarFooter-selectorOptionCheck NavbarFooter-icon">
-                                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-check"></use></svg>
-                                  </div>
-                              </a>
                               <a class="NavbarFooter-selectorLocale @if(App::isLocale('pt-pt')) is-active is-selected @endif NavbarFooter-selectorOption" href="{{ route('lang', ['lang' => 'pt-pt', 'current' => app()->getLocale()]) }}" data-id="pt-pt">
                                   <div class="NavbarFooter-selectorOptionLabel">Português (EU)</div>
                                   <div class="NavbarFooter-selectorOptionCheck NavbarFooter-icon">

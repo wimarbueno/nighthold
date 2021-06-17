@@ -87,14 +87,11 @@ return [
     'locale' => 'ru-ru',
 
     'locales' => [
-        'en-us' => 'English (US)',
         'en-gb' => 'English (EU)',
         'de-de' => 'Deutsch',
         'es-es' => 'Español (EU)',
-        'es-mx' => 'Español (AL)',
         'fr-fr' => 'Français',
         'it-it' => 'Italiano',
-        'pt-br' => 'Português (AL)',
         'pt-pt' => 'Português (EU)',
         'ko-kr' => '한국어',
         'zh-tw' => '繁體中文',

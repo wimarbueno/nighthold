@@ -3,7 +3,7 @@
         <div class="Grid Grid--gutters">
             <div class="Grid--full">
                 <div class="gutter-tiny gutter-vertical">
-                    <div class="SiteNav-sectionTitle font-title-tiny-onDark">Список персонажей</div>
+                    <div class="SiteNav-sectionTitle font-title-tiny-onDark">@lang('navbar.navbar_40')</div>
                 </div>
             </div>
         </div>
@@ -47,16 +47,16 @@
             @auth
             @can('browse_admin')
             <div class="List-item">
-                <a class="SiteNav-pageLink" href="{{ route('voyager.dashboard') }}">Админка</a>
+                <a class="SiteNav-pageLink" href="{{ route('voyager.dashboard') }}">@lang('navbar.navbar_43')</a>
             </div>
             @endcan
             <div class="List-item">
-                <a class="SiteNav-pageLink" href="{{ route('user', ['overview']) }}">Учетная запись</a>
+                <a class="SiteNav-pageLink" href="{{ route('user', ['overview']) }}">@lang('navbar.navbar_33')</a>
             </div>
             @empty(!Auth::user()->account)
                 @empty(!Auth::user()->account->characters)
             <div class="List-item">
-                <a class="SiteNav-pageLink" href="{{ route('characters.index') }}">Все ваши персонажи</a>
+                <a class="SiteNav-pageLink" href="{{ route('characters.index') }}">@lang('navbar.navbar_41')</a>
             </div>
                 @endempty
             @endempty
@@ -64,7 +64,7 @@
             <div class="List-item">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <a class="SiteNav-pageLink" data-analytics="main-nav" data-analytics-placement="Community - Log Out" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Выход</a>
+                    <a class="SiteNav-pageLink" data-analytics="main-nav" data-analytics-placement="Community - Log Out" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">@lang('navbar.navbar_7')</a>
                 </form>
             </div>
         </div>
