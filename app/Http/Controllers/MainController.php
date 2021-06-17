@@ -28,4 +28,10 @@ class MainController extends Controller
     {
         return config('app.url') . "?ref=" . \Hashids::encode(auth()->user()->id);
     }
+
+    public function promoPage () {
+        Meta::prependTitle('Shadowlands — Главная страница')
+            ->setDescription('Примкните к тысячам могучих героев Азерота в мире магии и бесконечных приключений!');
+        return view('promoPage');
+    }
 }

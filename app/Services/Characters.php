@@ -126,9 +126,12 @@
                 $isOutdated = false;
             }
 
-            $arena2 = Arena::where('guid', self::$guid)->where('slot', 0)->first();
-            $arena3 = Arena::where('guid', self::$guid)->where('slot', 1)->first();
-            $battlegrounds = Arena::where('guid', self::$guid)->where('slot', 3)->first();
+            $arena2 = '';
+            ///$arena2 = Arena::where('guid', self::$guid)->where('slot', 0)->first();
+            $arena3 = '';
+            ///$arena3 = Arena::where('guid', self::$guid)->where('slot', 1)->first();
+            $battlegrounds = '';
+            ///$battlegrounds = Arena::where('guid', self::$guid)->where('slot', 3)->first();
 
             Achievements::Initialize(self::$guid);
 

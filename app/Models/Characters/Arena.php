@@ -9,7 +9,7 @@ class Arena extends Model
 {
     protected $connection = 'characters';
 
-    protected $table = 'character_arena_data';
+    protected $table = 'arena_team_member';
 
     protected $fillable = [
         "guid",

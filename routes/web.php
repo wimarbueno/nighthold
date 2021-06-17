@@ -42,6 +42,7 @@ Route::get('lang/{lang}/', function ($lang) {
 Route::group(['prefix' => LocaleMiddleware::getLocales()], function(){
 
         Route::get('/', [MainController::class, 'index'])->name('index');
+        Route::get('shadowlands', [MainController::class, 'promoPage'])->name('promoPage');
         Route::get('content-update-notes', [MainController::class, 'update'])->name('content.update');
         Route::get('/news', [NewsController::class, 'index'])->name('news.index');
         Route::get('/news/{id}/{slug}', [NewsController::class, 'show'])->name('news.show');
