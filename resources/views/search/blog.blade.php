@@ -50,8 +50,8 @@
                                                     </div>
                                                     <div class="Grid-full" media-large="Grid-3of4 gutter-small" media-wide="Grid-4of5">
                                                         <div class="contain-large contain-left" media-large="gutter-normal">
-                                                            <div class="NewsBlog-title">{{ $first->title }}</div>
-                                                            <p class="NewsBlog-desc color-beige-medium font-size-xSmall">{{ $first->excerpt }}</p>
+                                                            <div class="NewsBlog-title">{{ $first->getTranslatedAttribute('title', App()->getLocale(), 'en-gb') }}</div>
+                                                            <p class="NewsBlog-desc color-beige-medium font-size-xSmall">{{ $first->getTranslatedAttribute('excerpt', App()->getLocale(), 'en-gb') }}</p>
                                                         </div>
                                                         <div media-large="gutter-normal">
                                                             <div class="Pair">

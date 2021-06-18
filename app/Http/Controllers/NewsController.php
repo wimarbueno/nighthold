@@ -29,7 +29,7 @@ class NewsController extends Controller
 
     public function show($id) {
         $post = Post::where('id', $id)->firstOrFail();
-        Meta::prependTitle($post->title)
+        Meta::prependTitle($post->getTranslatedAttribute('title', App()->getLocale(), 'en-gb'))
             ->setDescription('Примкните к тысячам могучих героев Азерота в мире магии и бесконечных приключений!');
         return view('news.show', ['post' => $post]);
     }

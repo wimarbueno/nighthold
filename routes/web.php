@@ -50,7 +50,6 @@ Route::group(['prefix' => LocaleMiddleware::getLocales()], function(){
 
         Route::prefix('forums')->group(function () {
             Route::get('/', [IndexController::class, 'index'])->name('forums.index');
-            Route::get('/patch-notes/', [IndexController::class, 'patch_notes'])->name('forums.patch.notes');
             Route::get('/new', [IndexController::class, 'new'])->name('forums.new');
             Route::get('/latest', [IndexController::class, 'latest'])->name('forums.latest');
             Route::get('/{category}', [IndexController::class, 'show'])->name('forum.show')->where('category', '[0-9]+');

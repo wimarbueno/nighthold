@@ -99,9 +99,9 @@
                      </div>
                   </a>
                </div>
-               <div id="blog">
-                  <div class="Blog margin-bottom-medium" queryselectoralways="5">
-                     <div class="detail">
+                <div id="blog">
+                    <div class="Blog margin-bottom-medium">
+                        <div class="detail">
                         {!! $post->getTranslatedAttribute('body', App()->getLocale(), 'en-gb') !!}
                      </div>
                   </div>
