@@ -120,9 +120,15 @@
             <div class="Navbar-desktopOverlay Navbar-overlay"></div>
             <a href="{{ url('/') }}" class="Navbar-logo" data-analytics="global-nav" data-analytics-placement="Nav - Icon"></a>
 
-            <div class="Navbar-collapsedItems is-hidden"><a data-target="Navbar-siteMenu" class="Navbar-menu Navbar-item Navbar-link Navbar-modalToggle is-noSelect"><div class="Navbar-icon Navbar-collapsedIcon Navbar-siteMenuIcon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" focusable="false"><use xlink:href="#Navbar-icon-menu"></use></svg></div><div class="Navbar-label">{{ __('navbar.navbar_35') }}</div></a></div>
+            <div class="Navbar-collapsedItems is-hidden">
+                <a data-target="Navbar-siteMenu" class="Navbar-menu Navbar-item Navbar-link Navbar-modalToggle is-noSelect">
+                    <div class="Navbar-icon Navbar-collapsedIcon Navbar-siteMenuIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" focusable="false"><use xlink:href="#Navbar-icon-menu"></use></svg></div><div class="Navbar-label">{{ __('navbar.navbar_35') }}</div></a></div>
 
             <div class="Navbar-items">
+                <a href="{{ url('/') }}" class="Navbar-item Navbar-link is-noSelect Navbar-home" data-index='1' data-name="home" data-analytics="global-nav" data-analytics-placement="Nav - Home">
+                    <div class="Navbar-label">{{ __('navbar.navbar_10') }}</div>
+                </a>
                 <a href="{{ route('news.index') }}" class="Navbar-item Navbar-link is-noSelect Navbar-news" data-index='2' data-name="news" data-analytics="global-nav" data-analytics-placement="Nav - News">
                     <div class="Navbar-label">{{ __('navbar.navbar_2') }}</div>
                 </a>

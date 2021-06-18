@@ -133,7 +133,6 @@
       <div role="main">
          {{ $slot }}
       </div>
-      <footer class="Forums-footer"> @lang('forum.Forums-footer') <a href="{{ route('forums.index') }}">{{ config('app.name_forum', __('forum.title')) }}</a> ({{ config('app.forum_version') }}) · <a href="{{ route('forums.patch.notes') }}">@lang('forum.Forums-footer-2')</a> </footer>
       @include('layouts.footer')
       <script src="{{ asset('forum/static/js/vendor/tether/dist/js/tether.js') }}"></script>
       <script src="{{ asset('forum/static/js/vendor/waypoints/lib/jquery.waypoints.js') }}"></script>
