@@ -26,12 +26,15 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         'email',
         'password',
         'vote_balance',
-        'referred_by'
+        'referred_by',
+        'question',
+        'answer'
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'answer',
     ];
 
     protected $casts = [

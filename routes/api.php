@@ -37,8 +37,9 @@ Route::get('/client/mini/list/{id}', [ClientController::class, 'miniList']);
 Route::get('/client/full/list/{id}', [ClientController::class, 'fullList']);
 
 Route::get('user', [AuthController::class, 'user']);
-Route::post('edit/password', [AuthController::class, 'changePassword']);
 
+Route::post('edit/password', [AuthController::class, 'changePassword']);
+Route::post('edit/question', [AuthController::class, 'changeQuestion']);
 Route::post('edit/email', [AuthController::class, 'changeEmail']);
 Route::post('edit/name', [AuthController::class, 'changeName']);
 

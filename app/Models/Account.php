@@ -23,7 +23,16 @@ class Account extends Model
      * @var array
      */
     protected $hidden = [
-        'sha_pass_hash', 'sessionkey', 'v', 's', 'token_key'
+        'sha_pass_hash',
+        's',
+        'v',
+        'token_key',
+        'salt',
+        'verifier',
+        'session_key_auth',
+        'session_key_bnet',
+        'battlenet_account',
+        'battlenet_index'
     ];
 
     public static function setBalance($newBalance)
