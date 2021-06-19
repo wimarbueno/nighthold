@@ -80,6 +80,7 @@ class AuthController extends Controller
     public function user() {
         $data = auth()->user();
         $data['questions'] = __('account.question_'.$data['question']);
+        $data['countrys'] = __('country.'.$data['country']);
         $balance = auth()->user()->balance;
         return json_encode([
             'data' => $data,
