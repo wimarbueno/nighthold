@@ -169,7 +169,7 @@
                     ],
                     "guild" => [
                         "name"=> self::$guildName ?? '',
-                        "url"=> route('guild.show', [self::$realmSlug, Str::slug(self::$guildName ?? '')])
+                        "url"=> route('guild.show', [self::$realmSlug, Str::slug(self::$guildName ?? 'non')])
                     ],
                     "lastUpdatedTimestamp" => [
                         "epoch" => 1622835492000,"iso8601" => "2021-06-04T19:38:12Z"],
