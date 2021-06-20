@@ -179,7 +179,7 @@
                     "pve" => [
                         "id" => "темные-земли",
                         "name" => "Темные Земли",
-                        "raids" =>  self::raids(self::$name, self::$guid)
+                        "raids" =>  self::raids(self::$guid)
                     ],
                     "pvp" => [
                         "honorableKills" => [
@@ -265,7 +265,7 @@
                         "name" => self::$name,
                         "pve" => [
                             "id" => "темные-земли","name" => "Темные Земли",
-                            "raids" =>  self::raids(self::$name, self::$guid)
+                            "raids" =>  self::raids(self::$guid)
                         ],
                         "pvp" => [
                             "honorableKills" => [
@@ -317,7 +317,7 @@
                     ],
                     "specs" => Utils::specCharacters(self::$class, self::$activeTalentGroup, self::$guid),
                     "pets" => [],
-                    "raids" => self::raids(self::$name, self::$guid),
+                    "raids" => self::raids(self::$guid),
                     "pvp" => [
                         "honorableKills" => [
                             "tier" => 1000,"value" => self::$honor],
@@ -350,7 +350,7 @@
             return self::$title_info[$info] ?? false;
         }
 
-        public static function raids($name, $guid) {
+        public static function raids($guid) {
             $raid = Raid::where('key', 'темные-земли')->get();
             $raids = [];
             foreach ($raid as $item) {
@@ -363,7 +363,7 @@
                     "location" => $item->location,
                     "name" => $item->name,
                     "players" => $item->players,
-                    "url" => route('raid.details', [self::$realmSlug, $name, $item->key, $item->ids]),
+                    "url" => route('raid.details', [self::$realmSlug, self::$name, $item->key, $item->ids]),
                     "bg" => ""
                 ];
             }
