@@ -169,7 +169,7 @@
                     ],
                     "guild" => [
                         "name"=> self::$guildName ?? '',
-                        "url"=> route('guild.show', [self::$realmSlug, Str::slug(self::$guildName ?? 'non')])
+                        "url"=> ''
                     ],
                     "lastUpdatedTimestamp" => [
                         "epoch" => 1622835492000,"iso8601" => "2021-06-04T19:38:12Z"],
@@ -255,8 +255,8 @@
                             'slug' => Str::slug(__('characters.gender_'.self::$gender))
                         ],
                         "guild" => [
-                            "name"=> $guildName ?? '',
-                            "url"=> route('guild.show', [self::$realmSlug, Str::slug(self::$guildName ?? 'non')])
+                            "name"=> self::$guildName ?? '',
+                            "url"=> ''
                         ],
                         "lastUpdatedTimestamp" => [
                             "epoch" => 1622835492000,"iso8601" => "2021-06-04T19:38:12Z"],
