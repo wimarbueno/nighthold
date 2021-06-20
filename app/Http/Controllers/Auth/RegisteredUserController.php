@@ -105,7 +105,7 @@ class RegisteredUserController extends Controller
     public function battletag(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'battletag' => 'required'
+            'battletag' => 'required|string'
         ]);
 
         if ($validator->fails()) {

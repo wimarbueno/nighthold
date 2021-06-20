@@ -10,7 +10,7 @@ use Request;
 class LocaleMiddleware
 {
 
-    public static $languages = ['de-de', 'en-us', 'en-gb', 'es-es', 'fr-fr', 'it-it', 'ru-ru', 'ja-jp', 'zh-cn', 'pt-br', 'pt-pt'];
+    public static $languages = ['de-de', 'en-gb', 'es-es', 'fr-fr', 'it-it', 'ru-ru', 'ja-jp', 'zh-cn', 'pt-pt'];
 
     public function handle($request, Closure $next) {
         $locale = self::getLocales();

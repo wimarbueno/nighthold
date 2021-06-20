@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ preg_replace_callback('/\-\s*\w\s*\w/', function($m) { return strtoupper($m[0]); }, app()->getLocale()) }}">
    <head>
       @meta_tags
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="referrer" content="no-referrer-when-downgrade">
       <link rel="shortcut icon" type="image/x-icon" href="{{ asset('forum/static/images/icons/wow-favicon.ico') }}" />
       <script>var dataLayer = dataLayer || [];
-         dataLayer.push({"locale":"{{ str_replace('_', '-', app()->getLocale()) }}", "serverRegion":"eu", "region":"eu", "localeRegion":"eu", "project":"wow", @guest "authenticated":"0", "hasGameTime":"0" @else "authenticated":"1", "userId":{{ Auth::id() }}, "hasGameTime":"0" @endguest });
+         dataLayer.push({"locale":"{{ preg_replace_callback('/\-\s*\w\s*\w/', function($m) { return strtoupper($m[0]); }, app()->getLocale()) }}", "serverRegion":"eu", "region":"eu", "localeRegion":"eu", "project":"wow", @guest "authenticated":"0", "hasGameTime":"0" @else "authenticated":"1", "userId":{{ Auth::id() }}, "hasGameTime":"0" @endguest });
       </script>
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ setting('site.googletagmanager') }}"></script>

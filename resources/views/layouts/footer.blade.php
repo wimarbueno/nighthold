@@ -55,7 +55,8 @@
                                       </svg>
                                   </div>
                               </a>
-                              <a class="NavbarFooter-selectorLocale @if(App::isLocale('es-es')) is-active is-selected @endif NavbarFooter-selectorOption" href="{{ route('lang', ['lang' => 'es-es', 'current' => app()->getLocale()]) }}" data-id="es-es"><div class="NavbarFooter-selectorOptionLabel">Español (EU)</div>
+                              <a class="NavbarFooter-selectorLocale @if(App::isLocale('es-es')) is-active is-selected @endif NavbarFooter-selectorOption" href="{{ route('lang', ['lang' => 'es-es', 'current' => app()->getLocale()]) }}" data-id="es-es">
+                                  <div class="NavbarFooter-selectorOptionLabel">Español (EU)</div>
                                   <div class="NavbarFooter-selectorOptionCheck NavbarFooter-icon">
                                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-check"></use></svg>
                                   </div>
