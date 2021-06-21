@@ -342,7 +342,6 @@
                 unset($data['summary']['character']['suffix']); /////  Тактик
                 unset($data['summary']['character']['title']); //// Тактик {name}
             }
-            ///dd($data);
             return json_encode($data, JSON_UNESCAPED_UNICODE);
         }
 

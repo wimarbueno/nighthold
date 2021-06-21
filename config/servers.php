@@ -4,8 +4,8 @@ return [
     'realm' => [
         '1' => [
             'id'   => 1,
-            'name' => 'Nighthold х5',
-            'slug' => 'nighthold-x5',
+            'name' => 'Shadowlands',
+            'slug' => 'shadowlands',
             'type' => 2
         ]
     ]
