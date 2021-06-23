@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class SearchController extends Controller
 {
     public function index(Request $request) {
-        Meta::prependTitle('Поиск')
+        Meta::prependTitle(__('search.search_8'))
             ->setDescription('Примкните к тысячам могучих героев Азерота в мире магии и бесконечных приключений!');
         $post = Post::like('body', Str::ucfirst($request->get('q')))->get();
         $characters = Characters::like('name', Str::ucfirst($request->get('q')))->limit(10)->get();
@@ -27,7 +27,7 @@ class SearchController extends Controller
     }
 
     public function character(Request $request) {
-        Meta::prependTitle('Поиск')
+        Meta::prependTitle(__('search.search_8'))
             ->setDescription('Примкните к тысячам могучих героев Азерота в мире магии и бесконечных приключений!');
         return view('search.characters', [
             'characters' => Characters::like('name', Str::ucfirst($request->get('q')))->paginate(10)
@@ -35,7 +35,7 @@ class SearchController extends Controller
     }
 
     public function blog(Request $request) {
-        Meta::prependTitle('Поиск')
+        Meta::prependTitle(__('search.search_8'))
             ->setDescription('Примкните к тысячам могучих героев Азерота в мире магии и бесконечных приключений!');
         if ($request->get('q')) {
             return view('search.blog', [

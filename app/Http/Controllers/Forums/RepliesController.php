@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Forums;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reply;
 use App\Models\Thread;
 use App\Services\Utils;
 use Illuminate\Http\Request;

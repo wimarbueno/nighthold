@@ -3,16 +3,15 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\Globals\User;
+use App\Models\User;
 
 class NewMessage extends Notification
 {
     use Queueable;
     public $fromUser;
-    
+
     /**
      * Create a new notification instance.
      *
@@ -44,7 +43,7 @@ class NewMessage extends Notification
     {
         $subject = sprintf('%s: You\'ve got a new message from %s!', config('app.name'), $this->fromUser->name);
         $greeting = sprintf('Hello %s!', $notifiable->name);
-        
+
         return (new MailMessage)
                     ->subject($subject)
                     ->greeting($greeting)

@@ -1,17 +1,17 @@
 <?php
-    
+
     namespace App\Notifications;
-    
+
     use Illuminate\Notifications\Messages\MailMessage;
     use Illuminate\Auth\Notifications\ResetPassword as Notification;
-    
+
     class ResetPassword extends Notification
     {
         /**
          * Build the mail representation of the notification.
          *
          * @param  mixed  $notifiable
-         * @return string
+         * @return MailMessage
          */
         public function toMail($notifiable)
         {
