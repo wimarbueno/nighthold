@@ -113,6 +113,8 @@ class GameController extends Controller
     }
 
     public function stream() {
+        Meta::prependTitle('Стримы')
+            ->setDescription(__('classes.classes_8'));
         $twitch = new Twitch;
         $twitch->setClientId('dg7ctrw8kegwua5bbmp80nwn8u4807');
         $result = $twitch->getUsers(['login' => 'cemka']);
@@ -139,6 +141,8 @@ class GameController extends Controller
 
     public function streamView() {
         $stream = Stream::where('name', 'cemka')->first();
+        Meta::prependTitle($stream->user_name )
+            ->setDescription(__('classes.classes_8'));
         $twitch = new Twitch;
         $twitch->setClientId('dg7ctrw8kegwua5bbmp80nwn8u4807');
         $result = $twitch->getStreams(['user_id' => $stream->user_id]);
