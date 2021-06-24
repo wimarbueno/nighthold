@@ -20,8 +20,9 @@
                     <div class="space-huge"></div>
                     <div class="contain-huge">
                         <div class="Grid">
-                            <div class="Grid-full gutter-large" media-wide="!Grid-full Grid-2of5">
-                                <div class="Image">
+                            <div class="Grid-full" media-wide="!Grid-full Grid-3of5">
+                                <div class="space-tiny"></div>
+                                <div class="font-size-small color-beige-dark">
                                     <!-- Add a placeholder for the Twitch embed -->
                                     <div id="twitch-embed"></div>
 
@@ -37,20 +38,18 @@
                                         });
                                     </script>
                                 </div>
-                                <div class="space-large" media-wide="!space-large"></div>
+                                <div class="space-large"></div>
                             </div>
-                            <div class="Grid-full" media-wide="!Grid-full Grid-3of5">
-                                <div class="space-tiny"></div>
-                                <div class="font-size-small color-beige-dark">
+                            <div class="Grid-full gutter-large" media-wide="!Grid-full Grid-2of5">
+                                <div class="Image">
                                     <iframe
                                         id="chat_embed"
                                         src="https://www.twitch.tv/embed/{{ $user->user_login }}/chat?parent=nighthold.ru"
                                         height="500"
                                         width="380">
                                     </iframe>
-
                                 </div>
-                                <div class="space-large"></div>
+                                <div class="space-large" media-wide="!space-large"></div>
                             </div>
                         </div>
                         <div class="space-medium"></div>
