@@ -21,21 +21,17 @@
                     <div class="contain-huge">
                         <div class="Grid">
                             <div class="Grid-full" media-wide="!Grid-full Grid-3of5">
-                                <div class="space-tiny"></div>
-                                <div class="font-size-small color-beige-dark">
-                                    <div class="Image">
+                                <div class="Image">
                                     <div id="twitch-embed"></div>
                                     <script src="https://player.twitch.tv/js/embed/v1.js"></script>
                                     <script type="text/javascript">
                                         new Twitch.Player("twitch-embed", {
                                             channel: "{{ $user->user_login }}",
                                             width: 780,
-                                            height: 550,
+                                            height: 500,
                                         });
                                     </script>
-                                    </div>
                                 </div>
-                                <div class="space-large"></div>
                             </div>
                             <div class="Grid-full gutter-large" media-wide="!Grid-full Grid-2of5">
 
