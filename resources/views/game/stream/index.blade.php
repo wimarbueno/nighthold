@@ -29,7 +29,7 @@
                     <div class="Tab Tab--save Tab--default" name="all" data-group="story">
                         <div class="space-normal" media-wide="space-medium"></div>
                         <div class="Grid SyncHeight SyncHeight--disabled gutter-small gutter-all gutter-negative" media-large="!SyncHeight--disabled">
-                            @foreach($stream as $item)
+                            @forelse($stream as $item)
                             <div class="Grid-full" media-large="Grid-1of2" media-wide="Grid-1of3" media-huge="Grid-1of4">
                                 <div class="ArticleTile ArticleTile--stacked ArticleTile--gutter">
                                     <div class="ArticleTile-content">
@@ -56,7 +56,9 @@
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
+                            @empty
+                                <p>No Result</p>
+                            @endforelse
                         </div>
                     </div>
                     <div class="space-huge"></div></div>
