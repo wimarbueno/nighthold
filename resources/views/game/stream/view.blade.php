@@ -10,8 +10,6 @@
                 </div>
                 <div class="Pane-content">
                     <div class="space-huge"></div>
-                    <div media-wide="space-large"></div>
-                    <div media-huge="space-large"></div>
                     <div class="align-center">
                         <!-- Add a placeholder for the Twitch embed -->
                         <div id="twitch-embed"></div>
@@ -22,14 +20,15 @@
                         <!-- Create a Twitch.Player object. This will render within the placeholder div -->
                         <script type="text/javascript">
                             new Twitch.Player("twitch-embed", {
-                                channel: "cemka"
+                                channel: "cemka",
+                                width: 854,
+                                height: 480,
                             });
                         </script>
+
                     </div>
                     <div media-large="space-large"></div>
                     <div class="space-huge"></div>
-                    <div media-wide="space-large"></div>
-                    <div media-huge="space-large"></div>
                 </div>
             </div>
             <div class="Divider Divider--lightBrown Divider--borders"></div>
