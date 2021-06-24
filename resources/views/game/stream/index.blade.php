@@ -47,7 +47,7 @@
                                             <div class="ArticleTile-bottomInner">
                                                 <div class="ArticleTile-left">
                                                     <div class="ArticleTile-subtitle">{{ $item->display_name }}</div>
-                                                    <div class="ArticleTile-title">Pолик Shadowlands — «За завесой»</div>
+                                                    <div class="ArticleTile-title">{{ $item->view_count }} Просмотров</div>
                                                 </div>
                                                 <div class="ArticleTile-right"></div>
                                             </div>
