@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Characters\Arena;
 use App\Models\Classes;
 use App\Models\Races;
+use App\Models\Stream;
 use App\Services\Server;
 use Butschster\Head\Facades\Meta;
 use Illuminate\Http\Request;
+use romanzipp\Twitch\Twitch;
 
 class GameController extends Controller
 {
@@ -108,5 +110,56 @@ class GameController extends Controller
                 ["errors"=>[["message"=>"PersistedQueryNotSupported"]]]
             );
         }
+    }
+
+    public function stream() {
+        $twitch = new Twitch;
+        $twitch->setClientId('dg7ctrw8kegwua5bbmp80nwn8u4807');
+        $result = $twitch->getUsers(['login' => 'cemka']);
+        if ( ! $result->success()) {
+            return null;
+        }
+        $user = $result->shift();
+
+        $stream = Stream::where('name', 'cemka')->first();
+
+        if(!$stream) {
+            (new \App\Models\Stream)->create([
+                'name' => $user->login,
+                'display_name' => $user->display_name,
+                'description' => $user->description,
+                'user_id' => $user->id,
+                'profile_image_url' => $user->profile_image_url,
+                'view_count' => $user->view_count
+            ]);
+        }
+        $streams = Stream::all();
+        return view('game.stream.index', ['stream' => $streams]);
+    }
+
+    public function streamView() {
+
+        $twitch = new Twitch;
+        $twitch->setClientId('dg7ctrw8kegwua5bbmp80nwn8u4807');
+        $result = $twitch->getUsers(['login' => 'cemka']);
+        if ( ! $result->success()) {
+            return null;
+        }
+        $user = $result->shift();
+
+        $stream = Stream::where('name', 'cemka')->first();
+
+        if(!$stream) {
+            (new \App\Models\Stream)->create([
+                'name' => $user->login,
+                'display_name' => $user->display_name,
+                'description' => $user->description,
+                'user_id' => $user->id,
+                'profile_image_url' => $user->profile_image_url,
+                'view_count' => $user->view_count
+            ]);
+        }
+        $streams = Stream::all();
+        return view('game.stream.view', ['stream' => $streams]);
     }
 }

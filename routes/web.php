@@ -59,6 +59,8 @@ Route::group(['prefix' => LocaleMiddleware::getLocales()], function(){
             Route::get('/search', [SearchController::class, 'forum'])->name('forum.search');
         });
 
+        Route::get('game/stream', [GameController::class, 'stream'])->name('stream');
+        Route::get('game/stream/{name}', [GameController::class, 'streamView'])->name('stream.view');
         Route::get('game/talent-calculator', [GameController::class, 'calculator'])->name('talent.calculator');
         Route::get('game/status/eu', [GameController::class, 'status'])->name('status');
         Route::get('game/races', [GameController::class, 'races'])->name('races');
