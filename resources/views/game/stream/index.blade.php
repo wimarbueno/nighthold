@@ -30,7 +30,8 @@
                         <div class="space-normal" media-wide="space-medium"></div>
                         <div class="Grid SyncHeight SyncHeight--disabled gutter-small gutter-all gutter-negative" media-large="!SyncHeight--disabled">
                             @forelse($stream as $item)
-                            <div class="Grid-full" media-large="Grid-1of2" media-wide="Grid-1of3" media-huge="Grid-1of4">
+                                @if($item->type === 'live')
+                                    <div class="Grid-full" media-large="Grid-1of2" media-wide="Grid-1of3" media-huge="Grid-1of4">
                                 <div class="ArticleTile ArticleTile--stacked ArticleTile--gutter">
                                     <div class="ArticleTile-content">
                                         <div class="Tile ArticleTile-tile">
@@ -47,7 +48,7 @@
                                             <div class="ArticleTile-bottomInner">
                                                 <div class="ArticleTile-left">
                                                     <div class="ArticleTile-subtitle">{{ $item->display_name }}</div>
-                                                    <div class="ArticleTile-title">{{ $item->view_count }} Просмотров</div>
+                                                    <div class="ArticleTile-title">{{ $item->title }}</div>
                                                 </div>
                                                 <div class="ArticleTile-right"></div>
                                             </div>
@@ -56,6 +57,7 @@
                                     </div>
                                 </div>
                             </div>
+                                @endif
                             @empty
                                 <p>No Result</p>
                             @endforelse

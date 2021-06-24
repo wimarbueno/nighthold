@@ -125,12 +125,21 @@ class GameController extends Controller
             }
             $user = $result->shift();
 
+            $results = $twitch->getStreams(['user_id' => $user->id]);
+            if ( ! $results->success()) {
+                return null;
+            }
+
+            $users = $results->shift();
+
             Stream::where('name', $item->name)->update([
                 'display_name' => $user->display_name,
                 'description' => $user->description,
                 'user_id' => $user->id,
                 'profile_image_url' => $user->profile_image_url,
-                'view_count' => $user->view_count
+                'view_count' => $user->view_count,
+                'title' => $users->title,
+                'type' => $users->type,
             ]);
         }
         $streams = Stream::all();
