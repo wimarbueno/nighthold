@@ -45,6 +45,8 @@ Route::post('edit/name', [AuthController::class, 'changeName']);
 
 Route::get('referrals', [AuthController::class, 'referrals']);
 
+Route::get('user/stream', [AuthController::class, 'stream']);
+Route::post('edit/stream', [AuthController::class, 'streamSend']);
 Route::get('user/characters', [AuthController::class, 'characters']);
 Route::post('user/select', [AuthController::class, 'select']);
 

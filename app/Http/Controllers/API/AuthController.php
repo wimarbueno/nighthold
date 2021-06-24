@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\HistoryPayment;
+use App\Models\Streams;
 use App\Models\User;
 use App\Services\Soap\Soap;
 use App\Services\Text;
@@ -15,6 +16,30 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function streamSend(Request $request) {
+        Streams::create([
+            'name_user' => $request->get('name_user'),
+            'id_user' => auth()->id()
+        ]);
+        return response()->json(['success'=> true, 'message' => 'Данные успешно отправлены.']);
+    }
+
+    public function stream() {
+        $data = auth()->user()->stream;
+
+        if($data) {
+            $data['status'] = __('account.stream_'.$data['status']);
+            return json_encode([
+                'success'=> true,
+                'data' => $data
+            ], JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
+        } else {
+            return json_encode([
+                'success'=> false
+            ], JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
+        }
+    }
+
     public function notifications() {
         return response()->json([]);
     }

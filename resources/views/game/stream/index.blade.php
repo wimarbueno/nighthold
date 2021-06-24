@@ -1,6 +1,8 @@
 <x-app-layout>
     @push('css')
         <link href="{{ asset('static/5.60a3b147f091048d9af5.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('static/7.a443545c59725220e960.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('static/15.be68fe1e28dbf276ed18.css') }}" rel="stylesheet" type="text/css">
     @endpush
 
         <div class="page-Story">
@@ -21,8 +23,23 @@
                 </div>
             </div>
             <div class="Divider Divider--lightBrown Divider--borders" media-wide="hide"></div>
-            <div class="Pane" data-url="//bnetcmsus-a.akamaihd.net/cms/template_resource/JPKVVF0I2ZBB1461617074269.jpg">
-                <div class="Pane-bg" style="background-image:url(//bnetcmsus-a.akamaihd.net/cms/template_resource/JPKVVF0I2ZBB1461617074269.jpg);">
+            <div class="Pane bordered align-center clearfix" data-url="{{ asset('cms/template_resource/JPKVVF0I2ZBB1461617074269.jpg') }}">
+                <div class="Pane-bg" style="background-image:url({{ asset('cms/template_resource/JPKVVF0I2ZBB1461617074269.jpg') }});">
+                    <div class="Pane-overlay"></div>
+                </div>
+                <div class="Pane-content">
+                    <div class="padding-top-medium padding-bottom-medium">
+                        <h2 class="margin-bottom-none margin-top-medium font-semp-xxxLarge-white">Новые приключения ждут</h2>
+                        <a class="IronButton IronButton--primary margin-top-small margin-bottom-medium" href="{{ route('user', ['stream']) }}">
+                            <div class="IronButton-inner margin-top-small-inner">
+                                <div class="IronButton-label margin-top-small-label">Добавить свой канал</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="Pane" data-url="{{ asset('cms/template_resource/JPKVVF0I2ZBB1461617074269.jpg') }}">
+                <div class="Pane-bg" style="background-image:url({{ asset('cms/template_resource/JPKVVF0I2ZBB1461617074269.jpg') }});">
                     <div class="Pane-overlay"></div>
                 </div>
                 <div class="Pane-content">

@@ -45,6 +45,10 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         return $this->hasOne(Account::class, 'email', 'email');
     }
 
+    public function stream() {
+        return $this->belongsTo(Streams::class, 'id', 'id_user');
+    }
+
     public function topics() {
         return $this->hasMany(Thread::class);
     }
