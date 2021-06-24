@@ -23,13 +23,9 @@
                             <div class="Grid-full" media-wide="!Grid-full Grid-3of5">
                                 <div class="space-tiny"></div>
                                 <div class="font-size-small color-beige-dark">
-                                    <!-- Add a placeholder for the Twitch embed -->
+                                    <div class="Image">
                                     <div id="twitch-embed"></div>
-
-                                    <!-- Load the Twitch embed script -->
                                     <script src="https://player.twitch.tv/js/embed/v1.js"></script>
-
-                                    <!-- Create a Twitch.Player object. This will render within the placeholder div -->
                                     <script type="text/javascript">
                                         new Twitch.Player("twitch-embed", {
                                             channel: "{{ $user->user_login }}",
@@ -37,18 +33,19 @@
                                             height: 500,
                                         });
                                     </script>
+                                    </div>
                                 </div>
                                 <div class="space-large"></div>
                             </div>
                             <div class="Grid-full gutter-large" media-wide="!Grid-full Grid-2of5">
-                                <div class="Image">
+
                                     <iframe
                                         id="chat_embed"
                                         src="https://www.twitch.tv/embed/{{ $user->user_login }}/chat?parent=nighthold.ru"
                                         height="500"
                                         width="380">
                                     </iframe>
-                                </div>
+
                                 <div class="space-large" media-wide="!space-large"></div>
                             </div>
                         </div>
