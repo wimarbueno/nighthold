@@ -138,28 +138,14 @@ class GameController extends Controller
     }
 
     public function streamView() {
-
+        $stream = Stream::where('name', 'cemka')->first();
         $twitch = new Twitch;
         $twitch->setClientId('dg7ctrw8kegwua5bbmp80nwn8u4807');
-        $result = $twitch->getUsers(['login' => 'cemka']);
+        $result = $twitch->getStreams(['user_id' => $stream->user_id]);
         if ( ! $result->success()) {
             return null;
         }
         $user = $result->shift();
-
-        $stream = Stream::where('name', 'cemka')->first();
-
-        if(!$stream) {
-            (new \App\Models\Stream)->create([
-                'name' => $user->login,
-                'display_name' => $user->display_name,
-                'description' => $user->description,
-                'user_id' => $user->id,
-                'profile_image_url' => $user->profile_image_url,
-                'view_count' => $user->view_count
-            ]);
-        }
-        $streams = Stream::all();
-        return view('game.stream.view', ['stream' => $streams]);
+        return view('game.stream.view', ['user' => $user]);
     }
 }
