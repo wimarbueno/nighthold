@@ -30,7 +30,7 @@
                                         new Twitch.Player("twitch-embed", {
                                             channel: "{{ $user->user_login }}",
                                             width: 845,
-                                            height: 500,
+                                            height: 550,
                                         });
                                     </script>
                                     </div>
