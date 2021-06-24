@@ -24,7 +24,7 @@
                                 <div class="Image">
                                     <iframe
                                         id="chat_embed"
-                                        src="https://www.twitch.tv/embed/{{ $user->user_login }}/chat?parent={{ config('app.url') }}"
+                                        src="https://www.twitch.tv/embed/{{ $user->user_login }}/chat?parent=nighthold.ru"
                                         height="500"
                                         width="380">
                                     </iframe>
