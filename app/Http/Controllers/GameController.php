@@ -117,17 +117,15 @@ class GameController extends Controller
             ->setDescription(__('classes.classes_8'));
         $twitch = new Twitch;
         $twitch->setClientId('dg7ctrw8kegwua5bbmp80nwn8u4807');
-        $result = $twitch->getUsers(['login' => 'cemka']);
-        if ( ! $result->success()) {
-            return null;
-        }
-        $user = $result->shift();
+        $stream = Stream::all();
+        foreach ($stream as $item)  {
+            $result = $twitch->getUsers(['login' => $item->name]);
+            if ( ! $result->success()) {
+                return null;
+            }
+            $user = $result->shift();
 
-        $stream = Stream::where('name', 'cemka')->first();
-
-        if(!$stream) {
-            (new \App\Models\Stream)->create([
-                'name' => $user->login,
+            Stream::where('name', $item->name)->update([
                 'display_name' => $user->display_name,
                 'description' => $user->description,
                 'user_id' => $user->id,
@@ -139,10 +137,8 @@ class GameController extends Controller
         return view('game.stream.index', ['stream' => $streams]);
     }
 
-    public function streamView() {
-        $stream = Stream::where('name', 'cemka')->first();
-        Meta::prependTitle($stream->user_name )
-            ->setDescription(__('classes.classes_8'));
+    public function streamView($name) {
+        $stream = Stream::where('name', $name)->first();
         $twitch = new Twitch;
         $twitch->setClientId('dg7ctrw8kegwua5bbmp80nwn8u4807');
         $result = $twitch->getStreams(['user_id' => $stream->user_id]);
@@ -150,6 +146,8 @@ class GameController extends Controller
             return null;
         }
         $user = $result->shift();
+        Meta::prependTitle($user->user_name )
+            ->setDescription(__('classes.classes_8'));
         return view('game.stream.view', ['user' => $user]);
     }
 }
