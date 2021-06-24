@@ -138,8 +138,8 @@ class GameController extends Controller
                 'user_id' => $user->id,
                 'profile_image_url' => $user->profile_image_url,
                 'view_count' => $user->view_count,
-                'title' => $users->title,
-                'type' => $users->type,
+                'title' => $users->title ?? '',
+                'type' => $users->type ?? 'offline',
             ]);
         }
         $streams = Stream::all();
