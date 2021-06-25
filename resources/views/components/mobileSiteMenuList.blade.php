@@ -73,6 +73,7 @@
         </a>
     </div>
     <div class="space-normal"></div>
+    @if(setting('registraciya.register_enable') === 'PUBLISHED')
     <div class="BnetNav-mobileSiteMenuListItem BnetNav-mobileSiteMenuListItem--user List-item align-center" data-test-id="dee9617eb2e140df59d4dcb648c1b1b5">
         <div class="BnetNav-mobileSiteMenuListItemWrap">
             <a class="Link Link--external Link--block BnetNav-mobileSiteMenuLink BnetNav-mobileSiteMenuLink--signup" href="{{ route('register') }}">
@@ -81,5 +82,6 @@
         </div>
     </div>
     <div class="space-normal"></div>
+    @endif
     @endauth
 </div>
