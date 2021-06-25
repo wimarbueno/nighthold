@@ -176,7 +176,7 @@
                             </div>
                             <div class="Navbar-accountDropdownLinkLabel">{{ __('navbar.navbar_6') }}</div>
                         </a>
-                        @if (Route::has('register'))
+                        @if(setting('registraciya.register_enable') === 'PUBLISHED')
                             <a href="{{ route('register') }}" class="Navbar-accountDropdownLink" data-analytics="global-nav" data-analytics-placement="Nav - Account - Create a Free Account">
                                 <div class="Navbar-icon Navbar-accountDropdownLinkIcon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false">
@@ -229,7 +229,7 @@ document.getElementById('logout-form').submit();" class="Navbar-accountDropdownL
                     </div>
                     <a href="{{ url('/') }}" class="Navbar-accountDropdownLink Navbar-accountDropdownSupport" data-analytics="global-nav" data-analytics-placement="Nav - Support"><div class="Navbar-icon Navbar-accountDropdownLinkIcon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-question"></use></svg></div><div class="Navbar-accountDropdownLinkLabel">{{ __('navbar.navbar_3') }}</div><div class="Navbar-accountDropdownCounter">0</div></a>
                     <a href="{{ route('user', ['overview']) }}" class="Navbar-accountDropdownLink Navbar-accountDropdownSettings" data-analytics="global-nav" data-analytics-placement="Nav - Account - Settings"><div class="Navbar-icon Navbar-accountDropdownLinkIcon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-settings"></use></svg></div><div class="Navbar-accountDropdownLinkLabel">{{ __('navbar.navbar_6') }}</div></a>
-                    @if (Route::has('register'))
+                    @if(setting('registraciya.register_enable') === 'PUBLISHED')
                         <a href="{{ route('register') }}" class="Navbar-accountDropdownLink" data-analytics="global-nav" data-analytics-placement="Nav - Account - Create a Free Account"><div class="Navbar-icon Navbar-accountDropdownLinkIcon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-account-add"></use></svg></div><div class="Navbar-accountDropdownLinkLabel">{{ __('navbar.navbar_34') }}</div></a>
                     @endif
                 </div>
