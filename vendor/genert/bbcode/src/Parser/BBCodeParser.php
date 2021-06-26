@@ -86,12 +86,12 @@ final class BBCodeParser extends Parser
             'content' => '$1'
         ],
         'unorderedlist' => [
-            'pattern' => '/\[list\](.*?)\[\/list\]/s',
+            'pattern' => '/\[ul\](.*?)\[\/ul\]/s',
             'replace' => '<ul>$1</ul>',
             'content' => '$1'
         ],
         'listitem' => [
-            'pattern' => '/\[\*\](.*)/',
+            'pattern' => '/\[li\](.*?)\[\/li\]/s',
             'replace' => '<li>$1</li>',
             'content' => '$1'
         ],

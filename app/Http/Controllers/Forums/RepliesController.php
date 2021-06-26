@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Forums;
 use App\Http\Controllers\Controller;
 use App\Models\Reply;
 use App\Models\Thread;
-use App\Services\Utils;
-use Illuminate\Http\Request;
 use Genert\BBCode\BBCode;
 
 class RepliesController extends Controller
@@ -54,8 +52,10 @@ class RepliesController extends Controller
             '<div id="player_'.$index.'"></div><script>var player = new Playerjs({id:"player_'.$index.'", $1});</script>',
             '$1'
         );
-        $text = $this->getInLines($bbCode->convertToHtml(request('detail')));
 
+        $texts = $bbCode->convertToHtml(request('detail'), BBCode::CASE_SENSITIVE);
+
+        $text = $this->getInLines($texts);
 
         $thread->addReply([
             'parent_id' => $thread->id,

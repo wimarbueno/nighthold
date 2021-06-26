@@ -61,14 +61,14 @@
                     <aside class="TopicPost-author">
                         <div class="Author-block">
                             <div class="Author @if($thread->creator->role->id === 1) Author--blizzard @endif @if($thread->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true">
-                                <a href="/" class="Author-avatar hasNoProfile">
+                                <a href="#" class="Author-avatar hasNoProfile">
                                     <img src="{{ asset('/storage/'.$thread->creator->avatar) }}" alt="" />
                                 </a>
                                 <div class="Author-details">
-                                    <a class="Author-name--profileLink" href="/">{{ Str::Title($thread->creator->name) }}</a>
+                                    <a class="Author-name--profileLink" href="#">{{ Str::Title($thread->creator->name) }}</a>
                                     <span class="Author-job">{{ $thread->creator->role->display_name }}</span>
                                     <span class="Author-posts">
-                                    <a class="Author-posts" href="/forum/search?a={{ $thread->creator->name }}" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
+                                    <a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
                                      @lang('forum.count_messages', ['count' => $thread->creator->posts_count])</a>
                                     </span>
                                 </div>
@@ -79,58 +79,65 @@
                         <div class="TopicPost-details">
                             <div class="Timestamp-details">
                                 <a class="TopicPost-timestamp" href="#post-{{ $thread->id }}" data-toggle="tooltip" data-tooltip-content="{{ $thread->created_at->format('m/d/Y H:i') }}" data-original-title="" title="">{{ $thread->created_at->diffForHumans() }}</a>
-                            <!--a class="TopicPost-timestamp" href="#post-{{ $thread->id }}" data-toggle="tooltip" data-tooltip-content="Гринфайр {{ $thread->updated_at->format('m/d/Y H:i') }}"> &#160;(Отредактировано) </a-->
+                                @if($thread->created_at != $thread->updated_at)
+                                    <a class="TopicPost-timestamp" href="#post-{{ $thread->id }}" data-toggle="tooltip" data-tooltip-content="{{ $thread->name }} {{ $thread->created_at->diffForHumans() }}">
+                                    &#160;(Отредактировано)
+                                </a>
+                                @endif
                                 @if($thread->up)<span class="TopicPost-rank TopicPost-rank--up" data-topic-post-rank="true" data-toggle="tooltip" data-tooltip-content="Нравится: {{ $thread->up }}.">{{ $thread->up }}</span>@endif
                                 <span class="TopicPost-rank TopicPost-rank--none" data-topic-post-rank="true"></span>
                             </div>
-                            @guest
-                            @else
+                            @auth
                                 <aside class="TopicPost-control">
-                                    <div class="TopicPost-menu Dropdown"><button class="Button-dropdown Button--secondary Button--icon" data-trigger="toggle.dropdown.menu" data-toggle="tooltip" data-tooltip-content="@lang('forum.dropdown')" type="button" data-original-title="" title=""><span class="Button-content"><i class="Icon Icon--16 Icon--blue Icon--button Icon--caretdown"></i></span></button><div class="Dropdown-menu"><span class="Dropdown-arrow Dropdown-arrow--up" data-attachment="top right" data-target-attachment="bottom center"></span><div class="Dropdown-items">
-                                                @can('delete-theme')
-                                                    <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">Удалить</span>
-                                                @endcan
-                                                    @can('banned-user-forum')
+                                    <div class="TopicPost-menu Dropdown">
+                                        <button class="Button-dropdown Button--secondary Button--icon" data-trigger="toggle.dropdown.menu" data-toggle="tooltip" data-tooltip-content="@lang('forum.dropdown')" type="button" data-original-title="" title="">
+                                            <span class="Button-content">
+                                                <i class="Icon Icon--16 Icon--blue Icon--button Icon--caretdown"></i>
+                                            </span>
+                                        </button>
+                                        <div class="Dropdown-menu">
+                                            <span class="Dropdown-arrow Dropdown-arrow--up" data-attachment="top right" data-target-attachment="bottom center"></span>
+                                            <div class="Dropdown-items">
+                                                @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3)
+                                                    @if($thread->creator->role->id === 4)
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="unblock.topicpost">Разблокировать</span>
-                                                    @endcan
-                                                    @can('unbanned-user-forum')
+                                                    @else
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="block.preview.topicpost">Заблокировать</span>
                                                         <div class="Dropdown-divider"></div>
-                                                    @endcan
+                                                    @endif
                                                 @if(!$thread->locked)
-                                                    @can('closed-thead')
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="closed.topicpost">Закрыть тему</span>
                                                         <div class="Dropdown-divider"></div>
-                                                    @endcan
                                                 @else
-                                                    @can('open-thead')
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="unclosed.topicpost">Открыть тему</span>
                                                         <div class="Dropdown-divider"></div>
-                                                    @endcan
                                                 @endif
                                                 @if(!$thread->sticky)
-                                                    @can('sticky-thead')
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="sticky.topicpost">Закрепить тему</span>
                                                         <div class="Dropdown-divider"></div>
-                                                    @endcan
                                                 @else
-                                                    @can('unsticky-thead')
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="unsticky.topicpost">Открепить тему</span>
                                                         <div class="Dropdown-divider"></div>
-                                                    @endcan
                                                 @endif
-
+                                                @endif
                                                 @if(Auth::user()->name == $thread->creator->name)
                                                     <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
-                                                    <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
+                                                    @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3)
+                                                        <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">Удалить</span>
+                                                    @else
+                                                        <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
+                                                    @endif
                                                 @else
                                                     <span class="Dropdown-item" data-topic-post-button="true" data-trigger="report.preview.topicpost">@lang('forum.report_topicpost')</span>
                                                     <span class="Dropdown-item" data-topic-post-button="true" data-topic-post-ignore-button="true" data-trigger="ignore.user.topicpost">@lang('forum.ignore_user_topicpost')</span>
                                                     <span class="Dropdown-item is-hidden" data-topic-post-button="true" data-topic-post-unignore-button="true" data-trigger="unignore.user.topicpost">@lang('forum.unignore_user_topicpost')</span>
                                                 @endif
 
-                                            </div></div></div>
-                                </aside>   @endguest
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
+                            @endauth
                         </div>
 
                         <button class="TopicPost-button TopicPost-button--viewPost is-hidden" data-topic-post-button="true" data-topic-viewpost-button="true" data-trigger="view.post.topicpost">
@@ -154,14 +161,14 @@
                         </div>
                         <aside class="TopicPost-author">
                             <div class="Author-block">
-                                <div class="Author @if($reply->creator->role->id === 1) Author--blizzard @endif @if($reply->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true"><a href="/" class="Author-avatar hasNoProfile"><img src="{{ asset('/storage/'.$reply->creator->avatar) }}" alt="" /></a>
+                                <div class="Author @if($reply->creator->role->id === 1) Author--blizzard @endif @if($reply->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true"><a href="#" class="Author-avatar hasNoProfile"><img src="{{ asset('/storage/'.$reply->creator->avatar) }}" alt="" /></a>
                                     <div class="Author-details">
-                                        <a class="Author-name--profileLink" href="">
+                                        <a class="Author-name--profileLink" href="#">
                                             {{ Str::Title($reply->creator->name) }}
                                         </a>
                                         <span class="Author-job">{{ $reply->creator->role->display_name }}</span>
                                         <span class="Author-posts">
-<a class="Author-posts" href="/forum/search?a={{ $reply->creator->name }}" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
+<a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
 @lang('forum.count_messages', ['count' => $reply->creator->posts_count])</a>
 </span></div></div>
                             </div>
@@ -173,7 +180,8 @@
                                     <a class="TopicPost-timestamp" data-toggle="tooltip" data-tooltip-content="{{ $reply->created_at->diffForHumans() }}" data-original-title="" title="" href="#post-{{ $reply->id }}">{{ $reply->created_at->diffForHumans() }}</a>
                                     @if($reply->created_at != $reply->updated_at)<a class="TopicPost-timestamp" href="#post-{{ $reply->id }}" data-toggle="tooltip" data-tooltip-content="{{ $reply->creator->name }} {{ $reply->created_at->diffForHumans() }}">
                                         &#160;(Отредактировано)
-                                    </a>@endif
+                                    </a>
+                                    @endif
                                     @if($reply->up)<span class="TopicPost-rank TopicPost-rank--up" data-topic-post-rank="true"
                                                          data-toggle="tooltip" data-tooltip-content="Нравится: {{ $reply->up }}.">{{ $reply->up }}</span>@endif
                                     <span class="TopicPost-rank TopicPost-rank--none" data-topic-post-rank="true"></span>
@@ -184,21 +192,21 @@
                                             <div class="Dropdown-menu">
                                                 <span class="Dropdown-arrow Dropdown-arrow--up" data-attachment="top right" data-target-attachment="bottom center"></span>
                                                 <div class="Dropdown-items">
-                                                    @can('delete-theme')
-                                                        <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">Удалить</span>
-                                                    @endcan
-                                                        @can('banned-user-forum')
+                                                    @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3)
+                                                        @if($reply->creator->role->id === 4)
                                                             <span class="Dropdown-item" data-topic-post-button="true" data-trigger="unblock.topicpost">Разблокировать</span>
-                                                            <div class="Dropdown-divider"></div>
-                                                        @endcan
-                                                        @can('unbanned-user-forum')
+                                                        @else
                                                             <span class="Dropdown-item" data-topic-post-button="true" data-trigger="block.preview.topicpost">Заблокировать</span>
                                                             <div class="Dropdown-divider"></div>
-                                                        @endcan
+                                                        @endif
+                                                    @endif
                                                     @if(Auth::user()->name == $reply->creator->name)
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
-                                                        <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
-
+                                                            @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3)
+                                                                <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">Удалить</span>
+                                                            @else
+                                                            <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
+                                                            @endif
                                                         @else
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="report.preview.topicpost">@lang('forum.report_topicpost')</span>
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-topic-post-ignore-button="true" data-trigger="ignore.user.topicpost">@lang('forum.ignore_user_topicpost')</span>

@@ -8,6 +8,7 @@ use App\Models\Thread;
 use Illuminate\Http\Request;
 use Genert\BBCode\BBCode;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class IndexController extends Controller
 {
@@ -37,13 +38,18 @@ class IndexController extends Controller
             'messages' => 'required'
         ]);
         $bbCode = new BBCode();
+
         $bbCode->addParser(
             'custom-link',
             '/\[link=(.*?)\](.*?)\[\/link\]/s',
             '<a href="$1">$2</a>',
             '$1'
         );
-        $text = $this->getInLines($bbCode->convertToHtml(request('messages')));
+
+        $texts = $bbCode->convertToHtml(request('detail'), BBCode::CASE_SENSITIVE);
+
+        $text = $this->getInLines($texts);
+
 
         $thread = Thread::create([
             'user_id' => auth()->id(),
@@ -74,11 +80,13 @@ class IndexController extends Controller
 
     public function topic($slug)
     {
+        $thread = Thread::where('id', $slug)->whereNull('parent_id')->firstOrFail();
         if (auth()->check()) {
             auth()->user()->read($slug);
         }
-        $thread = Thread::where('id', $slug)->whereNull('parent_id')->firstOrFail();
+
         $topics = Thread::whereParentId($thread->id)->paginate(10);
+
         return view('forum.topic', compact('thread', 'topics'));
     }
 

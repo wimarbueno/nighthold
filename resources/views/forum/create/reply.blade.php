@@ -11,7 +11,7 @@
                             <a class="Author-name--profileLink" href="characters">{{ Str::Title(Auth::user()->name) }}</a>
                         </span>
                         <span class="Author-posts">
-<a class="Author-posts" href="/search?a={{ Auth::user()->name }}" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
+<a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
 @lang('forum.count_messages', ['count' => Auth::user()->posts_count])
 </a>
 </span></div></div>
