@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
+use App\Models\Shadowlands\Account\Account;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
+use App\Models\Wotlk\Account\AccountWotlk;
 use App\Services\Soap\Soap;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -137,14 +137,46 @@ class RegisteredUserController extends Controller
         if(setting('soap.soap_enable') === "PUBLISHED") {
             if((new Soap)->cmd('.server info ') === NULL) {
                 (new Soap)->cmd('.bnetaccount create ' . $email . ' ' . Session::get('user_password.password'));
+                $hashed_pass = strtoupper(sha1(strtoupper($request->input('battletag') . ':' . Session::get('user_password.password'))));
+                AccountWotlk::create([
+                 'username' => $request->input('battletag'),
+                 'sha_pass_hash' => $hashed_pass,
+                 'email' => $email,
+                 'reg_mail' => $email,
+                 'expansion' => '2'
+                ]);
             } else {
                 Account::createSrp6BattleNet($email, Session::get('user_password.password'));
+                $hashed_pass = strtoupper(sha1(strtoupper($request->input('battletag') . ':' . Session::get('user_password.password'))));
+                AccountWotlk::create([
+                    'username' => $request->input('battletag'),
+                    'sha_pass_hash' => $hashed_pass,
+                    'email' => $email,
+                    'reg_mail' => $email,
+                    'expansion' => '2'
+                ]);
             }
         }
         elseif(setting('registraciya.srp6_support') === "PUBLISHED") {
             Account::createBattleNet(Session::get('user_credentials.email'), Session::get('user_password.password'));
+            $hashed_pass = strtoupper(sha1(strtoupper($request->input('battletag') . ':' . Session::get('user_password.password'))));
+            AccountWotlk::create([
+                'username' => $request->input('battletag'),
+                'sha_pass_hash' => $hashed_pass,
+                'email' => $email,
+                'reg_mail' => $email,
+                'expansion' => '2'
+            ]);
         }else {
             Account::createSrp6BattleNet($email, Session::get('user_password.password'));
+            $hashed_pass = strtoupper(sha1(strtoupper($request->input('battletag') . ':' . Session::get('user_password.password'))));
+            AccountWotlk::create([
+                'username' => $request->input('battletag'),
+                'sha_pass_hash' => $hashed_pass,
+                'email' => $email,
+                'reg_mail' => $email,
+                'expansion' => '2'
+            ]);
         }
 
         Session::forget('user_name');

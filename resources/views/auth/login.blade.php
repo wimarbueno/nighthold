@@ -110,7 +110,7 @@
                             <span>@lang('account.login_12')</span>
                         </div>
                         <ul id="help-links" role="navigation">
-                            @if (Route::has('register'))
+                            @if(setting('registraciya.register_enable') === 'PUBLISHED')
                             <li role="link">
                                 <a rel="internal"
                                    href="{{ route('register') }}"

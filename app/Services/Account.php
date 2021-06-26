@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Account
@@ -17,6 +16,87 @@ class Account
 
     public static function init() {
         self::LoadCharacters();
+        self::LoadCharactersWotlk();
+    }
+
+    private static function LoadCharactersWotlk()
+    {
+        self::$characters_loaded = false;
+        self::$myGamesList = auth()->user()->accountWotlk->id;
+        $account_ids = array();
+        $accounts_count = self::$myGamesList;
+        for($i = 0; $i < $accounts_count; ++$i) {
+            $account_ids[] = self::$myGamesList;
+        }
+        if(is_array($account_ids) && $accounts_count > 0) {
+            $total_chars_count = DB::connection('WotlkAuth')->table('realmcharacters')->where('acctid', [auth()->user()->accountWotlk->id])->sum('numchars');
+            self::$characters_data = DB::table("user_characters")->where('account', [auth()->user()->accountWotlk->id])->orderBy('index')->get();
+        }
+        else {
+            $total_chars_count = 0;
+        }
+        if(!self::$characters_data || count(self::$characters_data) != $total_chars_count) {
+            self::LoadCharactersFromWorld();
+        }
+        else {
+            self::$characters_loaded = true;
+            for($i = 0; $i < $total_chars_count; ++$i) {
+                self::$characters_data[$i]->class_text = __('characters.class_' . self::$characters_data[$i]->class);
+                self::$characters_data[$i]->race_text = __('characters.race_' . self::$characters_data[$i]->race);
+                self::$characters_data[$i]->faction_text = Utils::faction(self::$characters_data[$i]->race)['slug'];
+                self::$characters_data[$i]->url = '';
+
+                // Realm status
+                $status = Server::getServerStatus(self::$characters_data[$i]->realmId);
+                self::$characters_data[$i]->realmStatus = isset($status[0], $status[0]->status) ? $status[0]->status : 'down';
+
+                if(self::$characters_data[$i]->isActive) {
+                    self::$active_character = self::$characters_data[$i];
+                }
+            }
+            return;
+        }
+        if(!self::$characters_data) {
+            return;
+        }
+        $active_set = false;
+        $index = 0;
+        DB::table('user_characters')->where('account', '=', $account_ids)->delete();
+        foreach(self::$characters_data as $char) {
+            DB::table('user_characters')->insert([
+                'bn_id' => auth()->user()->id,
+                'account' => $char['account'],
+                'index' => $index,
+                'guid' => $char['guid'],
+                'name' => $char['name'],
+                'class' => $char['class'],
+                'class_text' => $char['class_text'],
+                'class_key' => $char['class_key'],
+                'race' => $char['race'],
+                'race_text' => $char['race_text'],
+                'race_key' => $char['race_key'],
+                'gender' => $char['gender'],
+                'level' => $char['level'],
+                'realmId' => $char['realmId'],
+                'logout_time' => $char['logout_time'],
+                'totaltime' => $char['totaltime'],
+                'realmName' => $char['realmName'],
+                'realmSlug' => $char['realmSlug'],
+                'isActive' => $active_set ? 0 : 1,
+                'faction' => $char['faction'],
+                'faction_text' => $char['faction_text'],
+                'guildId' => $char['guildId'],
+                'guildName' => $char['guildName'],
+                'guildUrl' => $char['guildUrl'],
+                'url' => $char['url']
+            ]);
+            if(!$active_set) {
+                self::$active_character = $char;
+                $active_set = true;
+            }
+            ++$index;
+        }
+        self::$characters_loaded = true;
     }
 
     private static function LoadCharacters()
@@ -29,7 +109,7 @@ class Account
             $account_ids[] = self::$myGamesList;
         }
         if(is_array($account_ids) && $accounts_count > 0) {
-            $total_chars_count = DB::connection('auth')->table('realmcharacters')->where('acctid', [auth()->user()->account->id])->sum('numchars');
+            $total_chars_count = DB::connection('ShadowlandsAuth')->table('realmcharacters')->where('acctid', [auth()->user()->account->id])->sum('numchars');
             self::$characters_data = DB::table("user_characters")->where('account', [auth()->user()->account->id])->orderBy('index')->get();
         }
         else {
@@ -110,7 +190,7 @@ class Account
             return false;
         }
         foreach(config('servers.realm') as $realm_info) {
-            $chars_data = DB::connection('characters')->select("
+            $chars_data = DB::connection($realm_info['connectionChatacters'])->select("
                 SELECT
                 characters.guid,
                 characters.account,

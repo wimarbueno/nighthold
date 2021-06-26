@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Shadowlands\Account;
 
 use App\Models\Characters\Characters;
 use App\Services\Srp6;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class Account extends Model
 {
-    protected $connection = 'auth';
+    protected $connection = 'ShadowlandsAuth';
 
     protected $table = 'account';
 

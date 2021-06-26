@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Characters\Characters;
+use App\Models\Shadowlands\Account\Account;
+use App\Models\Wotlk\Account\AccountWotlk;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,6 +46,14 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function account() {
         return $this->hasOne(Account::class, 'email', 'email');
+    }
+
+    public function accountWotlk() {
+        return $this->hasOne(AccountWotlk::class, 'email', 'email');
+    }
+
+    public function characters() {
+        return $this->hasMany(Characters::class, 'bn_id', 'id');
     }
 
     public function stream() {

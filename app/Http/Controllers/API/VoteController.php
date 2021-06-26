@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
 use App\Models\HistoryPayment;
+use App\Models\Shadowlands\Account\Account;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Http\Request;

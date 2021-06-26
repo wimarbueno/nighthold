@@ -27,7 +27,8 @@
         "romanzipp/laravel-twitch": "^4.1",
         "spatie/laravel-medialibrary": "^8.10.1",
         "tcg/voyager": "^1.4",
-        "torann/hashids": "3.0.2"
+        "torann/hashids": "3.0.2",
+      "ext-pdo": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

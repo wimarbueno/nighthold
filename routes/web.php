@@ -62,7 +62,7 @@ Route::group(['prefix' => LocaleMiddleware::getLocales()], function(){
         Route::get('game/stream', [GameController::class, 'stream'])->name('stream');
         Route::get('game/stream/{name}', [GameController::class, 'streamView'])->name('stream.view');
         Route::get('game/talent-calculator', [GameController::class, 'calculator'])->name('talent.calculator');
-        Route::get('game/status/eu', [GameController::class, 'status'])->name('status');
+        Route::get('game/status/{name}', [GameController::class, 'status'])->name('status');
         Route::get('game/races', [GameController::class, 'races'])->name('races');
         Route::get('game/races/{race}', [GameController::class, 'races_view'])->name('races.view');
         Route::get('game/classes', [GameController::class, 'classes'])->name('classes');

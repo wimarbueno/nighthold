@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Homepage;
+use App\Services\Account;
 use App\Services\Posts\Posts;
 use Butschster\Head\Facades\Meta;
 use TCG\Voyager\Models\Post;
 
 class MainController extends Controller
 {
+
+    function __construct() {
+        if (Auth()->check()){
+            Account::init();
+        }
+    }
+
     public function index () {
         $data = (new Posts)->getHome();
         $content = Homepage::orderBy('sort', 'ASC')->get();

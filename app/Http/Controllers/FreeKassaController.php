@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
 use App\Models\HistoryPayment;
+use App\Models\Shadowlands\Account\Account;
 use Illuminate\Http\Request;
 
 class FreeKassaController extends Controller

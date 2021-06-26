@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Raid;
-use Illuminate\Http\Request;
 
 class RaidController extends Controller
 {

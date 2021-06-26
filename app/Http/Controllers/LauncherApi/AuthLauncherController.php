@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\{
-    Account, User
+    Shadowlands\Account\Account, User
 };
 
 class AuthLauncherController extends Controller {

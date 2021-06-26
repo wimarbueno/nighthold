@@ -9,9 +9,9 @@
         </div>
         <div class="Grid Grid--gutters SyncHeight">
             @auth
-            @empty(!Auth::user()->account)
-                @empty(!Auth::user()->account->characters)
-                    @foreach(Auth::user()->account->characters as $item)
+            @empty(!auth()->user()->characters)
+                @empty(!auth()->user()->characters)
+                    @foreach(auth()->user()->characters as $item)
                         <div class="Grid-1of2 SyncHeight-item" media-small="" media-wide="Grid-1of3" media-huge="Grid-1of4 !hide">
                             <a class="Link Character Character--{{ __('forum.class_key_'.$item->class) }} Character--name Character--avatar Character--level Character--realm Character--onDark" href="{{ route('characters.show', [$item->realmSlug, mb_strtolower($item->name)]) }}">
                                 <div class="Character-link">
@@ -53,12 +53,10 @@
             <div class="List-item">
                 <a class="SiteNav-pageLink" href="{{ route('user', ['overview']) }}">@lang('navbar.navbar_33')</a>
             </div>
-            @empty(!Auth::user()->account)
-                @empty(!Auth::user()->account->characters)
+            @empty(!Auth::user()->characters)
             <div class="List-item">
                 <a class="SiteNav-pageLink" href="{{ route('characters.index') }}">@lang('navbar.navbar_41')</a>
             </div>
-                @endempty
             @endempty
             @endauth
             <div class="List-item">

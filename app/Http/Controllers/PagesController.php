@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Butschster\Head\Facades\Meta;
-use Illuminate\Http\Request;
 use TCG\Voyager\Models\Page;
 
 class PagesController extends Controller

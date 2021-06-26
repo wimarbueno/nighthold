@@ -21,103 +21,218 @@
             return static::getServerStatus();
         }
 
-        public static function getServerStatus($realmID = false) {
-            $server = "";
-            if($realmID === false) {
-                $realmList = DB::connection('auth')->table('realmlist')->get();
-            }
-            else {
-                if(isset(self::$realmsStatusCache[$realmID])) {
-                    return self::$realmsStatusCache[$realmID];
-                }
-                $realmList[] = DB::connection('auth')->table('realmlist')->where('id', $realmID)->first();
-            }
-            if(!$realmList) {
-                return false;
-            }
-            $size = count($realmList);
-            for($i = 0; $i < $size; $i++) {
-                $errNo = 0;
-                $errStr = 0;
-                $realmList[$i]->status = @fsockopen($realmList[$i]->address, $realmList[$i]->port, $errNo, $errStr,
-                        1) ? 'true' : 'false';
-                switch($realmList[$i]->icon ) {
-                    default:
-                    case 0:
-                        $realmList[$i]->type = 'Обычный';
-                        break;
-                    case 4:
-                        $realmList[$i]->type = 'PvE';
-                        break;
-                    case 1:
-                        $realmList[$i]->type = 'PvP';
-                        break;
-                    case 6:
-                        $realmList[$i]->type = 'Ролевой';
-                        break;
-                    case 8:
-                        $realmList[$i]->type = 'RP PvP';
-                        break;
-                }
-
-               $server = [
-                   "data" => [
-                       "GameVersions" => [
-                           [
-                               "name" => "World of Warcraft",
-                               "slug" => "world-of-warcraft",
-                               "key" => "mainline",
-                               "__typename" => "GameVersion"
-                           ],
-                       ],
-                       "Regions" => [
-                           [
-                               "name" => "С. и Ю. Америка, Австралия и Океания","slug" => "americas-oceania","key" => "us","__typename" => "Region"],
-                           [
-                               "name" => "Европа","slug" => "europe","key" => "eu","__typename" => "Region"],
-                           [
-                               "name" => "Корея","slug" => "korea","key" => "kr","__typename" => "Region"],
-                           [
-                               "name" => "Тайвань","slug" => "taiwan","key" => "tw","__typename" => "Region"]
-                       ],
-                       "Realms" => [
-                           [
-                               "name" => $realmList[$i]->name,
-                               "slug" => Str::slug($realmList[$i]->name),
-                               "locale" => "ru-RU",
-                               "timezone" => self::getOnline($realmList[$i]->id),
-                               "online" => $realmList[$i]->status,
-                               "category" => "Русский",
-                               "type" => [
-                                   "id" => "1",
-                                   "name" => $realmList[$i]->type,
-                                   "slug" => "обычный",
-                                   "enum" => "NORMAL",
-                                   "__typename" => "RealmTypeEnum"
-                               ],
-                               "population" => [
-                                   "id" => "2",
-                                   "name" => "Средняя",
-                                   "slug" => "средняя",
-                                   "enum" => "MEDIUM",
-                                   "__typename" => "RealmPopulationEnum"
-                               ],
-                               "__typename" => "Realm"
-                           ],
-                       ]
-                   ]
-               ];
-            }
-            return $server;
+        public static function statusSL()
+        {
+            return static::getServerStatusSL();
         }
 
-        private static function getOnline($id) {
-            $Statement = DB::connection('characters')
+        public static function statusWotlk()
+        {
+            return static::getServerStatusWotlk();
+        }
+        public static function getServerStatusSL() {
+            $server = [];
+            foreach (config('servers.realm') as $item) {
+
+                $errNo = 0;
+                $errStr = 0;
+
+                if($item['type'] === 'sl') {
+                    $server[] = [
+                        "name" => $item['name'],
+                        "slug" => $item['slug'],
+                        "locale" => "ru-RU",
+                        "timezone" => self::getOnline($item['connectionChatacters']),
+                        "online" => @fsockopen($item['ip'], $item['port'], $errNo, $errStr, 1) ? 'true' : 'false',
+                        "category" => "Русский",
+                        "type" => [
+                            "id" => "1",
+                            "name" => $item['type_server'],
+                            "slug" => "обычный",
+                            "enum" => "NORMAL",
+                            "__typename" => "RealmTypeEnum"
+                        ],
+                        "population" => [
+                            "id" => "2",
+                            "name" => "Средняя",
+                            "slug" => "средняя",
+                            "enum" => "MEDIUM",
+                            "__typename" => "RealmPopulationEnum"
+                        ],
+                        "__typename" => "Realm"
+                    ];
+                }
+            }
+            return [
+                "data" => [
+                    "GameVersions" => [
+                        [
+                            "name" => "Все миры",
+                            "slug" => "world-of-warcraft",
+                            "key" => "mainline",
+                            "__typename" => "GameVersion"
+                        ],
+                        [
+                            "name" => "Shadowlands",
+                            "slug" => "shadowlands",
+                            "key" => "sl",
+                            "__typename" => "GameVersion"
+                        ],
+                        [
+                            "name" => "Wrath of the Lich King",
+                            "slug" => "wrath-of-the-lich-king",
+                            "key" => "wotlk",
+                            "__typename" => "GameVersion"
+                        ]
+                    ],
+                    "Regions" => [
+                        ["name" => "Европа","slug" => "europe","key" => "eu","__typename" => "Region"]
+                    ],
+                    "Realms" => $server
+                ]
+            ];
+        }
+
+        public static function getServerStatusWotlk() {
+            $server = [];
+            foreach (config('servers.realm') as $item) {
+
+                $errNo = 0;
+                $errStr = 0;
+
+                if($item['type'] === 'wotlk') {
+                    $server[] = [
+                        "name" => $item['name'],
+                        "slug" => $item['slug'],
+                        "locale" => "ru-RU",
+                        "timezone" => self::getOnline($item['connectionChatacters']),
+                        "online" => @fsockopen($item['ip'], $item['port'], $errNo, $errStr, 1) ? 'true' : 'false',
+                        "category" => "Русский",
+                        "type" => [
+                            "id" => "1",
+                            "name" => $item['type_server'],
+                            "slug" => "обычный",
+                            "enum" => "NORMAL",
+                            "__typename" => "RealmTypeEnum"
+                        ],
+                        "population" => [
+                            "id" => "2",
+                            "name" => "Средняя",
+                            "slug" => "средняя",
+                            "enum" => "MEDIUM",
+                            "__typename" => "RealmPopulationEnum"
+                        ],
+                        "__typename" => "Realm"
+                    ];
+                }
+            }
+            return [
+                "data" => [
+                    "GameVersions" => [
+                        [
+                            "name" => "Все миры",
+                            "slug" => "world-of-warcraft",
+                            "key" => "mainline",
+                            "__typename" => "GameVersion"
+                        ],
+                        [
+                            "name" => "Shadowlands",
+                            "slug" => "shadowlands",
+                            "key" => "sl",
+                            "__typename" => "GameVersion"
+                        ],
+                        [
+                            "name" => "Wrath of the Lich King",
+                            "slug" => "wrath-of-the-lich-king",
+                            "key" => "wotlk",
+                            "__typename" => "GameVersion"
+                        ]
+                    ],
+                    "Regions" => [
+                        ["name" => "Европа","slug" => "europe","key" => "eu","__typename" => "Region"]
+                    ],
+                    "Realms" => $server
+                ]
+            ];
+        }
+
+        public static function getServerStatus() {
+            $server = [];
+            foreach (config('servers.realm') as $item) {
+
+                $errNo = 0;
+                $errStr = 0;
+
+               $server[] = [
+                   "name" => $item['name'],
+                   "slug" => $item['slug'],
+                   "locale" => "ru-RU",
+                   "timezone" => self::getOnline($item['connectionChatacters']),
+                   "online" => @fsockopen($item['ip'], $item['port'], $errNo, $errStr, 1) ? 'true' : 'false',
+                   "category" => "Русский",
+                   "type" => [
+                       "id" => "1",
+                       "name" => $item['type_server'],
+                       "slug" => "обычный",
+                       "enum" => "NORMAL",
+                       "__typename" => "RealmTypeEnum"
+                   ],
+                   "population" => [
+                       "id" => "2",
+                       "name" => "Средняя",
+                       "slug" => "средняя",
+                       "enum" => "MEDIUM",
+                       "__typename" => "RealmPopulationEnum"
+                   ],
+                   "__typename" => "Realm"
+               ];
+            }
+            return [
+                "data" => [
+                    "GameVersions" => [
+                        [
+                            "name" => "Все миры",
+                            "slug" => "world-of-warcraft",
+                            "key" => "mainline",
+                            "__typename" => "GameVersion"
+                        ],
+                        [
+                            "name" => "Shadowlands",
+                            "slug" => "shadowlands",
+                            "key" => "sl",
+                            "__typename" => "GameVersion"
+                        ],
+                        [
+                            "name" => "Wrath of the Lich King",
+                            "slug" => "wrath-of-the-lich-king",
+                            "key" => "wotlk",
+                            "__typename" => "GameVersion"
+                        ]
+                    ],
+                    "Regions" => [
+                        ["name" => "Европа","slug" => "europe","key" => "eu","__typename" => "Region"]
+                    ],
+                    "Realms" => $server
+                ]
+            ];
+        }
+
+        private static function getOnline($connection) {
+            if ($connection === "WotlkChatacters") {
+                $Statement = DB::connection($connection)
                     ->table('characters')
                     ->select(DB::raw('count(guid) as now_online'))
                     ->where('online', 1)
                     ->first();
-            return ceil($Statement->now_online * setting('onlain.online'));
+                return ceil($Statement->now_online * setting('onlain.online_wotlk'));
+            } else {
+                $Statement = DB::connection($connection)
+                    ->table('characters')
+                    ->select(DB::raw('count(guid) as now_online'))
+                    ->where('online', 1)
+                    ->first();
+                return ceil($Statement->now_online * setting('onlain.online'));
+            }
         }
 
         public static function getServerName() {
@@ -151,10 +266,10 @@
 
         private static function getOnlinePlayers()
         {
+            $SLOnline = DB::connection('ShadowlandsChatacters')->table('characters')->where('online', 1)->count();
+            $WotlkOnline = DB::connection('WotlkChatacters')->table('characters')->where('online', 1)->count();
 
-            $playersOnline = DB::connection('characters')->table('characters')->where('online', 1)->count();
-
-            return ceil($playersOnline * setting('onlain.online')) ;
+            return ceil($SLOnline + $WotlkOnline * setting('onlain.online') * setting('onlain.online_wotlk')) ;
         }
 
         private static function extractFaction($race): string

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
 use App\Models\HistoryPayment;
+use App\Models\Shadowlands\Account\Account;
 use App\Models\Streams;
 use App\Models\User;
 use App\Services\Soap\Soap;
@@ -121,7 +121,7 @@ class AuthController extends Controller
     }
 
     public function characters() {
-        $data = auth()->user()->account->charactersApi;
+        $data = auth()->user()->characters;
         $characters = [];
         foreach ($data as $item ) {
             $characters[] =
@@ -130,6 +130,7 @@ class AuthController extends Controller
                     "level" => $item->level,
                     "race" => asset(Utils::imageRace($item->race)),
                     "class" => asset(Utils::imageClass($item->race, $item->gender)),
+                    "server" => $item->realmName,
                     "totaltime" => Text::totalTime($item->totaltime),
                     "logout_time" => Text::lastLoginCharacters($item->logout_time),
                     "selected_characters" => session('characters'),
@@ -156,7 +157,11 @@ class AuthController extends Controller
 
     public function referrals()
     {
-        return response()->json(['error' => false, 'data' =>  auth()->user()->referrals]);
+        return response()->json([
+            'error' => false,
+            'data' =>  auth()->user()->referrals,
+            'url' => config('app.url') . "?ref=" . \Hashids::encode(auth()->user()->id)
+        ]);
     }
 
     public function banned()

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
 use App\Models\Characters\Characters;
 use App\Models\Mail;
+use App\Models\Shadowlands\Account\Account;
 use App\Models\Shop\CategotyShop;
 use App\Models\Shop\Shop;
 use App\Services\Soap\Soap;
