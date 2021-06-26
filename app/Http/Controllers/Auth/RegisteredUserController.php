@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
     public function credentials(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255|unique:users'
+            'email' => 'required|string|email|max:255|unique:users|ends_with:gmail.com,mail.ru,inbox.ru,list.ru,yandex.ru,bk.ru,yahoo.com,outlook.com,rambler.ru,icloud.com'
         ]);
 
         if ($validator->fails()) {
