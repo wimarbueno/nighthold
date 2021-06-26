@@ -65,6 +65,13 @@
                         <div class="SocialLinks SocialLinks--wow">
                            <div class="SocialLinks-title">@lang('footer.footer_1', ['name' => setting('site.title')])</div>
                            <div class="SocialLinks-links">
+                               @if(setting('socseti.discord'))
+                                   <a class="Link SocialLinks-link" href="{{ setting('socseti.discord') }}" data-analytics="sns-refer" data-analytics-placement="Footer - discord">
+                                 <span class="Icon Icon--social-facebook Icon--medium SocialLinks-icon">
+                                    <img class="Icon-svg" src="/static/components/Icon/svg/icons8-discord-48.png">
+                                 </span>
+                                   </a>
+                               @endif
                               @if(setting('socseti.facebook'))
                               <a class="Link SocialLinks-link" href="{{setting('socseti.facebook')}}" data-analytics="sns-refer" data-analytics-placement="Footer - facebook">
                                  <span class="Icon Icon--social-facebook Icon--medium SocialLinks-icon">
