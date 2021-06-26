@@ -67,8 +67,10 @@
                            <div class="SocialLinks-links">
                                @if(setting('socseti.discord'))
                                    <a class="Link SocialLinks-link" href="{{ setting('socseti.discord') }}" data-analytics="sns-refer" data-analytics-placement="Footer - discord">
-                                 <span class="Icon Icon--social-facebook Icon--medium SocialLinks-icon">
-                                    <img class="Icon-svg" src="/static/components/Icon/svg/icons8-discord-48.png">
+                                 <span class="Icon Icon--social-discord Icon--medium SocialLinks-icon">
+                                    <svg class="Icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 71 55" focusable="false">
+                                       <use xlink:href="/static/components/Icon/svg/Discord-Logo-Color.svg#clip0"></use>
+                                    </svg>
                                  </span>
                                    </a>
                                @endif
