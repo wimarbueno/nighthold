@@ -108,6 +108,11 @@ class RegisteredUserController extends Controller
             'battletag' => 'required|string'
         ]);
 
+        if ($request->input('battletag') === $request->input('wotlk')) {
+            return view('auth.register.step_6')
+                ->withErrors(['wotlk' => __('account.create_step_0_1')]);
+        }
+
         if ($validator->fails()) {
             return view('auth.register.step_6')
                 ->withErrors($validator);
@@ -191,8 +196,23 @@ class RegisteredUserController extends Controller
 
     public function suggestion()
     {
+        $post = [
+            'method' => 'getNickName',
+            'count_result' => 1
+
+        ];
+        $ch = curl_init('https://rustxt.ru/api/index.php');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "X-Requested-With: XMLHttpRequest",
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+        $resutl_syn = curl_exec($ch);
+        curl_close($ch);
+        $array = ["[","\\","?",".", "]", " ", "\""];
         return response()->json([
-            "battleTag" => substr(md5(uniqid(rand(), true)), 0, rand(7, 13))
+            "battleTag" => ucfirst(str_replace($array, "", $resutl_syn))
         ]);
     }
 }
