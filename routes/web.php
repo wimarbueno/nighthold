@@ -70,9 +70,7 @@ Route::group(['prefix' => LocaleMiddleware::getLocales()], function(){
 
         Route::get('game/recruit-a-friend', [GameController::class, 'recruit'])->name('recruit');
 
-        Route::get('game/pvp/leaderboards/2v2', [GameController::class, 'arena_two'])->name('arena_two');
-        Route::get('game/pvp/leaderboards/3v3', [GameController::class, 'arena_tree'])->name('arena_tree');
-        Route::get('game/pvp/leaderboards/battlegrounds', [GameController::class, 'battlegrounds'])->name('battlegrounds');
+        Route::get('game/pvp/leaderboards/{servers}/{type}', [GameController::class, 'arena'])->name('arena');
 
         Route::get('game/pve/leaderboards/{server}/{instance}', [GameController::class, 'leaderboards'])->name('leaderboards');
 

@@ -235,14 +235,27 @@
             }
         }
 
-        public static function getServerName() {
-            $realmList = DB::connection('auth')->table('realmlist')->select('name')->first();
-            return $realmList->name;
+        public static function getServer() {
+            return config('servers.realm');
         }
 
         public static function GetRealmIDByName($realmName)
         {
             return self::FindRealm(urldecode($realmName));
+        }
+
+        public static function GetRealmNameBySlug($realmName)
+        {
+            return self::FindRealmSlug(urldecode($realmName));
+        }
+
+        public static function FindRealmSlug($rName) {
+            foreach(config('servers.realm') as $realm) {
+                if(strtolower($realm['slug']) == strtolower($rName)) {
+                    return $realm['name'];
+                }
+            }
+            return 0;
         }
 
         public static function FindRealm($rName) {
@@ -254,11 +267,31 @@
             return 0;
         }
 
+        public static function IsRealmBySlug($realmName): bool
+        {
+            foreach(config('servers.realm') as $realm) {
+                if($realm['slug'] == $realmName) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public static function IsRealm($realmName): bool
         {
             foreach(config('servers.realm') as $realm) {
                 if($realm['name'] == $realmName) {
                     return true;
+                }
+            }
+            return false;
+        }
+
+        public static function IsRealmByType($realmName)
+        {
+            foreach(config('servers.realm') as $realm) {
+                if($realm['slug'] == $realmName) {
+                    return $realm['type'];
                 }
             }
             return false;

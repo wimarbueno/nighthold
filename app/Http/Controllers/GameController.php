@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Characters\Arena;
 use App\Models\Classes;
 use App\Models\Races;
+use App\Models\Shadowlands\Arena\ArenaSl;
 use App\Models\Stream;
+use App\Models\Wotlk\Arena\ArenaWotlk;
 use App\Services\Server;
 use Butschster\Head\Facades\Meta;
 use Illuminate\Http\Request;
@@ -23,31 +24,38 @@ class GameController extends Controller
         Meta::prependTitle(' - Рейтинги подземелий с эпохальным ключом')
             ->setDescription('Просмотрите список игроков с наиболее высоким рейтингом на этой неделе. Кто занимает первое место в подземелье &quot;Кровавые катакомбы&quot;?');
         return view('game.pve.leaderboards', [
-            'data' => Arena::with('characters')->where('slot', 0)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
+            'data' => ArenaSl::with('characters')->where('slot', 0)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
         ]);
     }
 
-    public function arena_two () {
-        Meta::prependTitle('Арена 2х2 - Рейтинговая таблица PvP')
+    public function arena ($server, $type) {
+        if(Server::IsRealmBySlug($server) === false) {
+            return abort(404);
+        }
+        if(Server::IsRealmByType($server) === 'sl') {
+            if($type === '2v2') {
+                $data = ArenaSl::with('team_member')->where('type', 2)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
+            } elseif ($type === '3v3') {
+                $data = ArenaSl::with('team_member')->where('type', 3)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
+            } else {
+                $data = ArenaSl::with('team_member')->where('type', 5)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
+            }
+        } else {
+            if($type === '2v2') {
+                $data = ArenaWotlk::with('team_member')->where('type', 2)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
+            } elseif ($type === '3v3') {
+                $data = ArenaWotlk::with('team_member')->where('type', 3)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
+            } else {
+                $data = ArenaWotlk::with('team_member')->where('type', 5)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
+            }
+        }
+        Meta::prependTitle(__('theme.arena_' . $type) . ' - Рейтинговая таблица PvP')
             ->setDescription('Сильнейшие среди героев Альянса и Орды сражаются за славу на аренах и полях боя. В этой таблице указана 1000 лучших игроков вашего региона.');
-        return view('game.pvp.arena_two', [
-            'data' => Arena::with('characters')->where('slot', 0)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
-        ]);
-    }
-
-    public function arena_tree () {
-        Meta::prependTitle('Арена 3х3 - Рейтинговая таблица PvP')
-            ->setDescription('Сильнейшие среди героев Альянса и Орды сражаются за славу на аренах и полях боя. В этой таблице указана 1000 лучших игроков вашего региона.');
-        return view('game.pvp.arena_tree', [
-            'data' => Arena::with('characters')->where('slot', 1)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
-        ]);
-    }
-
-    public function battlegrounds () {
-        Meta::prependTitle('Поля боя 10x10 - Рейтинговая таблица PvP')
-            ->setDescription('Сильнейшие среди героев Альянса и Орды сражаются за славу на аренах и полях боя. В этой таблице указана 1000 лучших игроков вашего региона.');
-        return view('game.pvp.battlegrounds', [
-            'data' => Arena::with('characters')->where('slot', 3)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30)
+        return view('game.pvp.arena', [
+            'data' => $data,
+            'servers' => $server,
+            'type' => $type,
+            'server_type' => Server::IsRealmByType($server)
         ]);
     }
 

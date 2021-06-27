@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'footer_copyright'  => 'Сделано с <i class="voyager-heart"></i> ',
-    'footer_copyright2' => 'Сделано под ромом :) ',
+    'arena_1v1' => 'Арена 1х1',
+    'arena_2v2' => 'Арена 2х2',
+    'arena_3v3' => 'Арена 3х3',
+    'arena_10v10' => 'Поля боя 10x10',
 ];

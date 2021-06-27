@@ -45,6 +45,9 @@
                                 <a class="Link SelectMenu-link" href="{{ route('arena_tree') }}">Арена 3х3</a>
                             </div>
                             <div class="SelectMenu-item">
+                                <a class="Link SelectMenu-link" href="{{ route('arena_five') }}">Арена 5х5</a>
+                            </div>
+                            <div class="SelectMenu-item">
                                 <a class="Link SelectMenu-link" href="{{ route('battlegrounds') }}">Поля боя 10x10</a>
                             </div>
                             <div class="SelectMenu-exception">Результатов не найдено.</div>
@@ -85,6 +88,9 @@
                         <a class="Link HorizontalNav-link List-item is-active" href="{{ route('arena_tree') }}">
                             <div class="HorizontalNav-item" data-text="Арена 3х3">Арена 3х3</div>
                         </a>
+                        <a class="Link HorizontalNav-link List-item" href="{{ route('arena_five') }}">
+                            <div class="HorizontalNav-item" data-text="Арена 5х5">Арена 5х5</div>
+                        </a>
                         <a class="Link HorizontalNav-link List-item" href="{{ route('battlegrounds') }}">
                             <div class="HorizontalNav-item" data-text="Поля боя 10x10">Поля боя 10x10</div>
                         </a>
@@ -117,41 +123,41 @@
                             </div>
                             <div class="SortTable-body">
                                 @foreach($data as $item)
-                                    @if($item->characters)
+                                    @if($item->team_member->characters)
                                 <div class="SortTable-row">
                                     <div class="SortTable-col SortTable-data align-center text-nowrap" data-value="{{ $loop->iteration }}">{{ $loop->iteration }}</div>
                                     <div class="SortTable-col SortTable-data align-center text-nowrap">
                                         <div class="flex flex-align-center flex-justify-center">
-                                            <a class="Link" data-tooltip="pvp-tier-tooltip-{{ Utils::imageRating($item->rating)['tier'] }}">
+                                            <a class="Link" data-tooltip="pvp-tier-tooltip-{{ Utils::imageRating($item->team_member->rating)['tier'] }}">
                                                 <div class="List">
                                                     <div class="List-item">
-                                                        <img src="{{ Utils::imageRating($item->rating)['images'] }}" style="max-width: 32px; margin-right: 5px;"></div>
-                                                    <div class="List-item">{{ $item->rating }}</div>
+                                                        <img src="{{ Utils::imageRating($item->team_member->rating)['images'] }}" style="max-width: 32px; margin-right: 5px;"></div>
+                                                    <div class="List-item">{{ $item->team_member->rating }}</div>
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="SortTable-col SortTable-data" data-value="{{ $item->characters->name }}">
-                                        <a class="Link Character Character--@lang('forum.class_key_'. $item->characters->class) Character--inline Character--small Character--name margin-top-xSmall" href="{{ route('characters.show', [$item->characters->realmSlug, strtolower($item->characters->name) ]) }}" media-wide="Character--avatar">
+                                    <div class="SortTable-col SortTable-data" data-value="{{ $item->team_member->characters->name }}">
+                                        <a class="Link Character Character--@lang('forum.class_key_'. $item->team_member->characters->class) Character--inline Character--small Character--name margin-top-xSmall" href="{{ route('characters.show', [$item->team_member->characters->realmSlug, strtolower($item->team_member->characters->name) ]) }}" media-wide="Character--avatar">
                                             <div class="Character-link">
                                                 <div class="Character-table">
                                                     <div class="Character-bust">
                                                         <div class="Art Art--above">
                                                             <div class="Art-size" style="padding-top:50.43478260869565%"></div>
-                                                            <div class="Art-image" style="background-image:url({{ Utils::imageClass($item->characters->race, $item->characters->gender) }});"></div>
+                                                            <div class="Art-image" style="background-image:url({{ Utils::imageClass($item->team_member->characters->race, $item->team_member->characters->gender) }});"></div>
                                                             <div class="Art-overlay"></div>
                                                         </div>
                                                     </div>
                                                     <div class="Character-avatar">
                                                         <div class="Avatar Avatar--medium">
-                                                            <div class="Avatar-image" style="background-image:url({{ Utils::imageClass($item->characters->race, $item->characters->gender) }});"></div>
+                                                            <div class="Avatar-image" style="background-image:url({{ Utils::imageClass($item->team_member->characters->race, $item->team_member->characters->gender) }});"></div>
                                                         </div>
                                                     </div>
                                                     <div class="Character-details">
                                                         <div class="Character-role"></div>
-                                                        <div class="Character-name">{{ $item->characters->name }}</div>
-                                                        <div class="Character-level"><b>{{ $item->characters->level }}</b> @lang('forum.class_'. $item->characters->class) (Огонь)</div>
-                                                        <div class="Character-realm">{{ $item->characters->realmName }}</div>
+                                                        <div class="Character-name">{{ $item->team_member->characters->name }}</div>
+                                                        <div class="Character-level"><b>{{ $item->team_member->characters->level }}</b> @lang('forum.class_'. $item->team_member->characters->class) (Огонь)</div>
+                                                        <div class="Character-realm">{{ $item->team_member->characters->realmName }}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -165,49 +171,49 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="SortTable-col SortTable-data hide align-center" data-value="Маг" media-wide="!hide">
-                                        <a class="Link" data-url="{{ route('classes.view', [Utils::classes($item->characters->class)['slug']]) }}" data-tooltip="{{ $loop->iteration }}-{{ $item->characters->name }}-character-class-tooltip">
-                                            <div class="GameIcon GameIcon--@lang('forum.class_key_'. $item->characters->class) GameIcon--medium GameIcon--bordered GameIcon--rounded margin-top-xSmall">
+                                        <a class="Link" data-url="{{ route('classes.view', [Utils::classes($item->team_member->characters->class)['slug']]) }}" data-tooltip="{{ $loop->iteration }}-{{ $item->team_member->characters->name }}-character-class-tooltip">
+                                            <div class="GameIcon GameIcon--@lang('forum.class_key_'. $item->team_member->characters->class) GameIcon--medium GameIcon--bordered GameIcon--rounded margin-top-xSmall">
                                                 <div class="GameIcon-icon"></div>
                                                 <div class="GameIcon-transmog"></div>
                                                 <div class="GameIcon-borderImage"></div>
                                             </div>
                                         </a>
-                                        <div class="Tooltip" name="{{ $loop->iteration }}-{{ $item->characters->name }}-character-class-tooltip">
+                                        <div class="Tooltip" name="{{ $loop->iteration }}-{{ $item->team_member->characters->name }}-character-class-tooltip">
                                             <div class="GameTooltip">
                                                 <div class="ui-tooltip">
                                                     <div class="font-bliz-light-small-white">
-                                                        {{ Utils::classes($item->characters->class)['name'] }}
+                                                        {{ Utils::classes($item->team_member->characters->class)['name'] }}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="SortTable-col SortTable-data hide font-none align-center" data-value="{{ Utils::faction($item->characters->race)['enum'] }}" media-wide="!hide">
-                                        <a class="Link" data-tooltip="{{ $loop->iteration }}-{{ $item->characters->name }}-character-faction-tooltip">
-                                            <span class="Icon Icon--{{ Utils::faction($item->characters->race)['slug'] }} Icon--medium">
-                                                <svg class="Icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="{{ Utils::faction($item->characters->race)['images'] }}"></use>
+                                    <div class="SortTable-col SortTable-data hide font-none align-center" data-value="{{ Utils::faction($item->team_member->characters->race)['enum'] }}" media-wide="!hide">
+                                        <a class="Link" data-tooltip="{{ $loop->iteration }}-{{ $item->team_member->characters->name }}-character-faction-tooltip">
+                                            <span class="Icon Icon--{{ Utils::faction($item->team_member->characters->race)['slug'] }} Icon--medium">
+                                                <svg class="Icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="{{ Utils::faction($item->team_member->characters->race)['images'] }}"></use>
                                                 </svg>
                                             </span>
                                         </a>
-                                        <div class="Tooltip" name="{{ $loop->iteration }}-{{ $item->characters->name }}-character-faction-tooltip">
+                                        <div class="Tooltip" name="{{ $loop->iteration }}-{{ $item->team_member->characters->name }}-character-faction-tooltip">
                                             <div class="GameTooltip">
                                                 <div class="ui-tooltip">
                                                     <div class="font-bliz-light-small-white">
-                                                        {{ Utils::faction($item->characters->race)['name'] }}
+                                                        {{ Utils::faction($item->team_member->characters->race)['name'] }}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center" data-value="{{ $item->characters->realmName }}" media-wide="!hide">{{ $item->characters->realmName }}</div>
-                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center color-status-success" data-value="{{ $item->seasonWins }}" media-wide="!hide">{{ $item->seasonWins }}</div>
-                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center color-status-error" data-value="{{ $item->seasonWins - $item->seasonGames }}" media-wide="!hide">{{ $item->seasonWins - $item->seasonGames }}</div>
+                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center" data-value="{{ $item->team_member->characters->realmName }}" media-wide="!hide">{{ $item->team_member->characters->realmName }}</div>
+                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center color-status-success" data-value="{{ $item->team_member->seasonWins }}" media-wide="!hide">{{ $item->team_member->seasonWins }}</div>
+                                    <div class="SortTable-col SortTable-data hide text-nowrap align-center color-status-error" data-value="{{ $item->team_member->seasonWins - $item->team_member->seasonGames }}" media-wide="!hide">{{ $item->team_member->seasonWins - $item->team_member->seasonGames }}</div>
                                 </div>
                                     @endif
                                 @endforeach
                             </div>
                             @foreach($data as $item)
-                                @if($item->characters)
+                                @if($item->team_member->characters)
                             <div class="Modal" data-modal="entry-details-modal-{{ $loop->iteration }}" data-izimodal-group="entry-details-modals" style="display: none;">
                                 <div class="Modal-back" title="Назад">
                                     <div class="List">
@@ -234,39 +240,39 @@
                                         <td class="gutter-normal-bottom font-semp-medium-white">Ступень/Рейтинг</td>
                                         <td class="gutter-normal-bottom gutter-normal-left">
                                             <div class="font-size-small">Ветеран</div>
-                                            <div class="font-size-xSmall">Рейтинг: {{ $item->rating }}</div>
+                                            <div class="font-size-xSmall">Рейтинг: {{ $item->team_member->rating }}</div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="gutter-normal-bottom font-semp-medium-white">Игрок</td>
                                         <td class="gutter-normal-bottom gutter-normal-left">
-                                            <a class="Link font-size-small color-class-MAGE-onDark" href="{{ route('characters.show', [$item->characters->realmSlug, strtolower($item->characters->name) ]) }}">
-                                                {{ $item->characters->name }}
+                                            <a class="Link font-size-small color-class-MAGE-onDark" href="{{ route('characters.show', [$item->team_member->characters->realmSlug, strtolower($item->team_member->characters->name) ]) }}">
+                                                {{ $item->team_member->characters->name }}
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="gutter-normal-bottom font-semp-medium-white">Класс</td>
-                                        <td class="gutter-normal-bottom gutter-normal-left font-size-small">{{ Utils::classes($item->characters->class)['name'] }}</td>
+                                        <td class="gutter-normal-bottom gutter-normal-left font-size-small">{{ Utils::classes($item->team_member->characters->class)['name'] }}</td>
                                     </tr>
                                     <tr>
                                         <td class="gutter-normal-bottom font-semp-medium-white">Фракция</td>
-                                        <td class="gutter-normal-bottom gutter-normal-left font-size-small">{{ Utils::faction($item->characters->race)['name'] }}</td>
+                                        <td class="gutter-normal-bottom gutter-normal-left font-size-small">{{ Utils::faction($item->team_member->characters->race)['name'] }}</td>
                                     </tr>
                                     <tr>
                                         <td class="gutter-normal-bottom font-semp-medium-white">Игровой мир</td>
-                                        <td class="gutter-normal-bottom gutter-normal-left font-size-small">{{ $item->characters->realmName }}</td>
+                                        <td class="gutter-normal-bottom gutter-normal-left font-size-small">{{ $item->team_member->characters->realmName }}</td>
                                     </tr>
                                     <tr>
                                         <td class="gutter-normal-bottom font-semp-medium-white">Победы</td>
                                         <td class="gutter-normal-bottom gutter-normal-left font-size-small color-win">
-                                            {{ $item->seasonWins }}
+                                            {{ $item->team_member->seasonWins }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="gutter-normal-bottom font-semp-medium-white">Поражения</td>
                                         <td class="gutter-normal-bottom gutter-normal-left font-size-small color-loss">
-                                            {{ $item->seasonWins - $item->seasonGames }}
+                                            {{ $item->team_member->seasonWins - $item->team_member->seasonGames }}
                                         </td>
                                     </tr>
                                 </table>
