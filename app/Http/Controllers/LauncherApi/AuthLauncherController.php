@@ -79,7 +79,6 @@ class AuthLauncherController extends Controller {
     }
 
     public function user(Request $request) {
-        $account = Account::userGameIDApi($request->user()->email);
         return response()->json([
             'id' => $request->user()->id,
             'UserCode' => $request->user()->id,
