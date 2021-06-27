@@ -8,7 +8,7 @@ use Launcher;
 
 class ArticleController extends Controller
 {
-	public function index()
+	public function show()
 	{
 		return Launcher::getAllNews();
 	}

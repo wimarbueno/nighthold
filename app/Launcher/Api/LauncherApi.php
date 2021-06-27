@@ -16,13 +16,11 @@ class LauncherApi
     {
 		$raw = Post::select('id', 'title', 'excerpt', 'image', 'slug')->orderBy('created_at', 'desc')->get();
 
-        $response = new Collection();
-        foreach($raw as &$key)
-        {
-            $response->push($this->buildArticle($key));
+        $collection = [];
+        foreach($raw as $key) {
+            $collection[] = $this->buildArticle($key);
         }
-
-        return response()->json($response);
+        return json_encode($collection, JSON_UNESCAPED_UNICODE);
     }
 
     private function buildArticle($raw)
