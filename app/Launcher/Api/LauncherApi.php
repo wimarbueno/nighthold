@@ -26,7 +26,7 @@ class LauncherApi
     private function buildArticle($raw)
     {
         return array(
-            'title' => $raw->title,
+            'title' => $raw->getTranslatedAttribute('title', App()->getLocale(), 'en-gb'),
             'description' => $raw->created_at,
             'image' => config('app.url') . '/storage/' . Utils::ImagesLogo($raw->image),
             'link' => route('news.show', [$raw->id, $raw->slug])
