@@ -13,38 +13,42 @@
             <div class="contain-max">
                 <div class="font-semp-xLarge-white" media-large="font-semp-xxxLarge-white">Персонажи</div>
                 <div media-large="hide">
+                    @foreach(config('servers.realm') as $server)
                     <div class="space-normal"></div>
-                    <div class="font-semp-small-white">{{ Server::getServerName() }}</div>
+                    <div class="font-semp-small-white">{{ $server['name'] }}</div>
                     <div class="space-small"></div>
                     <div class="List List--vertical">
                         @auth
-                            @empty(!Auth::user()->account)
-                                @empty(!Auth::user()->account->characters)
-                                    @foreach(Auth::user()->account->characters as $item)
+                            @empty(!Auth::user()->characters)
+                                @foreach(Auth::user()->characters as $item)
+                                    @if($server['id'] === $item->realmId)
                         <div class="List-item">
-                            <a class="Link Character Character--{{ __('forum.class_key_'.$item->class) }} Character--inline Character--name Character--avatar Character--level Character--square" href="{{ route('characters.show', [$item->realmSlug, strtolower($item->name)]) }}"><div class="Character-link"><div class="Character-table"><div class="Character-bust"><div class="Art Art--above"><div class="Art-size" style="padding-top:50.43478260869565%"></div><div class="Art-image" style="background-image:url({{ Utils::imageClass($item->race, $item->gender)}});"></div><div class="Art-overlay"></div></div></div><div class="Character-avatar"><div class="Avatar"><div class="Avatar-image" style="background-image:url({{ Utils::imageClass($item->race, $item->gender)}});"></div></div></div><div class="Character-details"><div class="Character-role"></div><div class="Character-name">{{ $item->name }}</div><div class="Character-level"><b>{{ $item->level }}</b> {{ __('forum.class_'.$item->class) }} (Стихии)</div><div class="Character-realm">{{ Server::getServerName() }}</div></div></div></div></a></div>
-                                    @endforeach
-                                @endempty
+                            <a class="Link Character Character--{{ __('forum.class_key_'.$item->class) }} Character--inline Character--name Character--avatar Character--level Character--square" href="{{ route('characters.show', [$item->realmSlug, strtolower($item->name)]) }}"><div class="Character-link"><div class="Character-table"><div class="Character-bust"><div class="Art Art--above"><div class="Art-size" style="padding-top:50.43478260869565%"></div><div class="Art-image" style="background-image:url({{ Utils::imageClass($item->race, $item->gender)}});"></div><div class="Art-overlay"></div></div></div><div class="Character-avatar"><div class="Avatar"><div class="Avatar-image" style="background-image:url({{ Utils::imageClass($item->race, $item->gender)}});"></div></div></div><div class="Character-details"><div class="Character-role"></div><div class="Character-name">{{ $item->name }}</div><div class="Character-level"><b>{{ $item->level }}</b> {{ __('forum.class_'.$item->class) }} (Стихии)</div><div class="Character-realm">{{ $item->serverName }}</div></div></div></div></a></div>
+                                    @endif
+                                @endforeach
                             @endempty
                         @endauth
                     </div>
+                    @endforeach
                 </div>
                 <div class="hide" media-large="!hide">
+                    @foreach(config('servers.realm') as $server)
                     <div class="space-large"></div>
-                    <div class="font-semp-small-white text-upper">{{ Server::getServerName() }}</div>
+                    <div class="font-semp-small-white text-upper">{{ $server['name'] }}</div>
                     <div class="space-normal"></div>
                     <div class="Grid Grid--gutters SyncHeight">
                         @auth
-                            @empty(!Auth::user()->account)
-                                @empty(!Auth::user()->account->characters)
-                                    @foreach(Auth::user()->account->characters as $item)
+                            @empty(!Auth::user()->characters)
+                                @foreach(Auth::user()->characters as $item)
+                                    @if($server['id'] === $item->realmId)
                         <div class="Grid-1of2 SyncHeight-item" media-wide="Grid-1of3" media-huge="Grid-1of4">
-                            <a class="Link Character Character--{{ __('forum.class_key_'.$item->class) }} Character--name Character--avatar Character--level Character--square" href="{{ route('characters.show', [$item->realmSlug, strtolower($item->name)]) }}"><div class="Character-link"><div class="Character-table"><div class="Character-bust"><div class="Art Art--above"><div class="Art-size" style="padding-top:50.43478260869565%"></div><div class="Art-image" style="background-image:url({{ Utils::imageClass($item->race, $item->gender)}});"></div><div class="Art-overlay"></div></div></div><div class="Character-avatar"><div class="Avatar"><div class="Avatar-image" style="background-image:url({{ Utils::imageClass($item->race, $item->gender)}});"></div></div></div><div class="Character-details"><div class="Character-role"></div><div class="Character-name">{{ $item->name }}</div><div class="Character-level"><b>{{ $item->level }}</b> {{ __('forum.class_'.$item->class) }} (Стихии)</div><div class="Character-realm">{{ Server::getServerName() }}</div></div></div></div></a></div>
-                                    @endforeach
-                                @endempty
+                        <a class="Link Character Character--{{ __('forum.class_key_'.$item->class) }} Character--name Character--avatar Character--level Character--square" href="{{ route('characters.show', [$item->realmSlug, strtolower($item->name)]) }}"><div class="Character-link"><div class="Character-table"><div class="Character-bust"><div class="Art Art--above"><div class="Art-size" style="padding-top:50.43478260869565%"></div><div class="Art-image" style="background-image:url({{ Utils::imageClass($item->race, $item->gender)}});"></div><div class="Art-overlay"></div></div></div><div class="Character-avatar"><div class="Avatar"><div class="Avatar-image" style="background-image:url({{ Utils::imageClass($item->race, $item->gender)}});"></div></div></div><div class="Character-details"><div class="Character-role"></div><div class="Character-name">{{ $item->name }}</div><div class="Character-level"><b>{{ $item->level }}</b> {{ __('forum.class_'.$item->class) }} (Стихии)</div><div class="Character-realm">{{ $item->serverName }}</div></div></div></div></a></div>
+                                    @endif
+                                @endforeach
                             @endempty
                         @endauth
                     </div>
+                    @endforeach
                 </div>
             </div>
             <div class="space-normal" media-large="space-large"></div>

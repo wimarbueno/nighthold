@@ -61,8 +61,6 @@ Route::post('send_email', [AuthController::class, 'send_email']);
 
 Route::get('web/payment', [AuthController::class, 'payment']);
 
-Route::get('web/payment/history', 'Home\PaymentController@paymentHistory');
-
 Route::get('web/payment/home', [PaymentController::class, 'homePage']);
 
 Route::get('payment', [PaymentController::class, 'paymentInfo']);
@@ -79,6 +77,3 @@ Route::get('user/banned', [AuthController::class, 'banned']);
 
 Route::post('payment/add', [PaymentController::class, 'paymentAdd']);
 Route::get('account/payment/success', [PaymentController::class, 'store']);
-
-Route::patch('settings/profile', 'Settings\ProfileController@update');
-Route::apiResource('settings/password', 'Settings\PasswordController');

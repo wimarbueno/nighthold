@@ -125,11 +125,6 @@ class Account
                 self::$characters_data[$i]->race_text = __('characters.race_' . self::$characters_data[$i]->race);
                 self::$characters_data[$i]->faction_text = Utils::faction(self::$characters_data[$i]->race)['slug'];
                 self::$characters_data[$i]->url = '';
-
-                // Realm status
-                $status = Server::getServerStatus(self::$characters_data[$i]->realmId);
-                self::$characters_data[$i]->realmStatus = isset($status[0], $status[0]->status) ? $status[0]->status : 'down';
-
                 if(self::$characters_data[$i]->isActive) {
                     self::$active_character = self::$characters_data[$i];
                 }
@@ -141,7 +136,9 @@ class Account
         }
         $active_set = false;
         $index = 0;
+
         DB::table('user_characters')->where('account', '=', $account_ids)->delete();
+
         foreach(self::$characters_data as $char) {
             DB::table('user_characters')->insert([
                 'bn_id' => auth()->user()->id,
@@ -211,7 +208,6 @@ class Account
                 continue;
             }
             foreach($chars_data as $char) {
-                $status = Server::getServerStatus($realm_info['id']);
                 $tmp_char_data = array(
                     'account' => $char->account,
                     'index' => $index,
@@ -236,8 +232,7 @@ class Account
                     'guildId' => $char->guildId,
                     'guildName' => $char->guildName,
                     'guildUrl' => '',
-                    'url' => '',
-                    'realmStatus' => isset($status[0], $status[0]['status']) ? $status[0]['status'] : 'down'
+                    'url' => ''
                 );
                 self::$characters_data[] = $tmp_char_data;
                 ++$index;
