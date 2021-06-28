@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
+use App\Models\Shadowlands\Account\Account;
 use App\Services\Soap\Soap;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
