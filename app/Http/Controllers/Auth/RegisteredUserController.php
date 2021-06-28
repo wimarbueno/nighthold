@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Shadowlands\Account\Account;
 use App\Models\User;
+use App\Models\Web\Referral;
 use App\Models\Wotlk\Account\AccountWotlk;
 use App\Services\Soap\Soap;
 use Illuminate\Auth\Events\Registered;
@@ -172,7 +173,8 @@ class RegisteredUserController extends Controller
                 'reg_mail' => $email,
                 'expansion' => '2'
             ]);
-        }else {
+        }
+        else {
             Account::createSrp6BattleNet($email, Session::get('user_password.password'));
             $hashed_pass = strtoupper(sha1(strtoupper($request->input('wotlk') . ':' . Session::get('user_password.password'))));
             AccountWotlk::create([
@@ -190,6 +192,27 @@ class RegisteredUserController extends Controller
         Session::forget('user_password');
         Session::forget('user_name_tag');
 
+        if ($referred_by) {
+
+            $referred = Referral::where('ref_id')->get();
+
+            if (count($referred)) {
+                $bonus = 10;
+            } else {
+                $bonus = 5;
+            }
+
+            if (count($referred) === 10) {
+                $reward = 'vip';
+            }
+
+            Referral::create([
+                'user_id' => $user->id,
+                'ref_id' => $referred_by,
+                'bonus' => $bonus,
+                'reward' => $reward
+            ]);
+        }
         event(new Registered($user));
         return view('auth.battletag', compact('email'));
     }

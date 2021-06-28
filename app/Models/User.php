@@ -95,6 +95,6 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function referrals()
     {
-        return $this->hasMany(self::class, 'referred_by')->select('name');
+        return $this->hasMany(self::class, 'referred_by')->select('name', 'email');
     }
 }
