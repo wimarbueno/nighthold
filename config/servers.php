@@ -16,8 +16,8 @@ return [
         ],
         '2' => [
             'id'    => 2,
-            'name'  => 'Wrath of the Lich King',
-            'slug'  => 'wrath-of-the-lich-king',
+            'name'  => 'Stormrage X7',
+            'slug'  => 'stormrage-x7',
             'type'  => 'wotlk',                                 //// Не изменять
             'type_server' => 'Обычный',                         //// Не изменять
             'ip'  => '91.201.41.102',                           //// Не изменять
