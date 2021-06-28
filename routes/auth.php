@@ -41,13 +41,12 @@ Route::get('/account/creation/api/battletag-suggestion', [RegisteredUserControll
     ->middleware('guest');
 
 
-Route::post('/login/csrf-token', [LoginController::class, 'token'])
+Route::post('login/csrf-token', [LoginController::class, 'token'])
     ->middleware('guest')
     ->name('login.report');
 
-Route::post('/login/error-report', [LoginController::class, 'report'])
-    ->middleware('guest')
-    ->name('login.report');
+Route::post('login/error-report', [LoginController::class, 'report'])
+    ->middleware('guest');
 
 Route::post('/login/srp', [LoginController::class, 'spr'])
     ->middleware('guest')

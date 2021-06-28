@@ -14,7 +14,7 @@ class LoginController extends Controller
         return csrf_token();
     }
 
-    public function report(Request $request)
+    public function report()
     {
         return response()->json([
             'authentication_state' => "LOGIN",
