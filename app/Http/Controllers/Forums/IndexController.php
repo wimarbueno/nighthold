@@ -46,7 +46,7 @@ class IndexController extends Controller
             '$1'
         );
 
-        $texts = $bbCode->convertToHtml(request('detail'), BBCode::CASE_SENSITIVE);
+        $texts = $bbCode->convertToHtml(request('messages'), BBCode::CASE_SENSITIVE);
 
         $text = $this->getInLines($texts);
 
