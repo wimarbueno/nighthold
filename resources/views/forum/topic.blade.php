@@ -50,7 +50,7 @@
 
         {{ $topics->links('forum.paginate.posthead') }}
         <div class="Topic-content">
-            <div class="TopicPost @if($thread->creator->role->id === 1 || $reply->creator->role->id === 3) TopicPost--blizzard @endif @if($thread->creator->role->id === 5) TopicPost--mvp @endif" id="post-{{ $thread->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $thread->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $thread->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $thread->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
+            <div class="TopicPost @if($thread->creator->role->id === 1 || $thread->creator->role->id === 3) TopicPost--blizzard @endif @if($thread->creator->role->id === 5) TopicPost--mvp @endif" id="post-{{ $thread->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $thread->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $thread->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $thread->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
                 <span id="{{ $thread->id }}"></span>
                 <div class="TopicPost-content">
                     <div class="TopicPost-authorIcon TopicPost-authorIcon--blizzard">
@@ -60,7 +60,7 @@
                     </div>
                     <aside class="TopicPost-author">
                         <div class="Author-block">
-                            <div class="Author @if($thread->creator->role->id === 1 || $reply->creator->role->id === 3) Author--blizzard @endif @if($thread->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true">
+                            <div class="Author @if($thread->creator->role->id === 1 || $thread->creator->role->id === 3) Author--blizzard @endif @if($thread->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true">
                                 <a href="#" class="Author-avatar hasNoProfile">
                                     <img src="{{ asset('/storage/'.$thread->creator->avatar) }}" alt="" />
                                 </a>
