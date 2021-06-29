@@ -24,6 +24,9 @@ class RegisteredUserController extends Controller
 
     public function create()
     {
+        if(setting('registraciya.register_enable') === 'DRAFT') {
+            return redirect()->route('index');
+        }
         return view('auth.register');
     }
 
