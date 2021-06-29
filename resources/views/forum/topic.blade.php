@@ -98,6 +98,9 @@
                                         <div class="Dropdown-menu">
                                             <span class="Dropdown-arrow Dropdown-arrow--up" data-attachment="top right" data-target-attachment="bottom center"></span>
                                             <div class="Dropdown-items">
+                                                @if(Auth::user()->role->id === 5)
+
+                                                @endif
                                                 @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3)
                                                     @if($thread->creator->role->id === 4)
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="unblock.topicpost">Разблокировать</span>
