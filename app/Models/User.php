@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Characters\Characters;
 use App\Models\Shadowlands\Account\Account;
+use App\Models\Web\Referral;
 use App\Models\Wotlk\Account\AccountWotlk;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -95,6 +96,6 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function referrals()
     {
-        return $this->hasMany(self::class, 'referred_by')->select('name', 'email');
+        return $this->hasMany(Referral::class, 'ref_id', 'id');
     }
 }

@@ -7,6 +7,7 @@ use App\Models\HistoryPayment;
 use App\Models\Shadowlands\Account\Account;
 use App\Models\Streams;
 use App\Models\User;
+use App\Models\Web\Referral;
 use App\Services\Soap\Soap;
 use App\Services\Text;
 use App\Services\Utils;
@@ -155,15 +156,6 @@ class AuthController extends Controller
         return response()->json(['error' => false, 'data' => Text::encode($user)]);
     }
 
-    public function referrals()
-    {
-        return response()->json([
-            'error' => false,
-            'data' =>  auth()->user()->referrals,
-            'url' => config('app.url') . "?ref=" . \Hashids::encode(auth()->user()->id)
-        ]);
-    }
-
     public function banned()
     {
         $notBanned = 0;
@@ -177,5 +169,37 @@ class AuthController extends Controller
             return response()->json(['error' => false, 'data' => $banned]);
         }
 
+    }
+
+    public function referrals()
+    {
+        $this->referralData();
+
+        $data = Referral::where('ref_id', Auth::user()->id)->with('referrer')->with('characters')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        $referrals = [];
+        foreach ($data as $item ) {
+            $referrals[] =
+                [
+                    "name" => $item->referrer->name,
+                    "bonus" => $item->bonus,
+                    "totaltime" => Text::totalTime($item->characters->totaltime ?? '0')
+                ];
+        }
+
+        return response()->json([
+            'error' => false,
+            'data' =>  $referrals,
+            'url' => config('app.url') . "?ref=" . \Hashids::encode(auth()->user()->id)
+        ]);
+    }
+
+    private function referralData()
+    {
+        $data = Referral::where('ref_id', Auth::user()->id)->with('referrer')->with('characters')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
     }
 }

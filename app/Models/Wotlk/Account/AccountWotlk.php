@@ -26,11 +26,6 @@ class AccountWotlk extends Model
         'sha_pass_hash'
     ];
 
-    public static function setBalance($newBalance)
-    {
-        return static::where('email', auth()->user()->email)->update(['balans' => $newBalance]);
-    }
-
     public static function newPasswordChangeEmail($user, $password)
     {
         $accountHash = strtoupper(bin2hex(strrev(hex2bin(strtoupper(hash("sha256",strtoupper(hash("sha256", strtoupper($user)).":".strtoupper($password))))))));
@@ -46,10 +41,6 @@ class AccountWotlk extends Model
             ->update(['sha_pass_hash' => $accountGameHash]);
     }
 
-    public static function userGameIDApi($email)
-    {
-        return DB::connection('auth')->table('account')->where('email', '=', $email)->first();
-    }
 
     public function path() {
         return route('games.view', [$this->id, $this->username]);
@@ -57,19 +48,6 @@ class AccountWotlk extends Model
 
     public function characters() {
         return $this->hasMany(Characters::class, 'account', 'id');
-    }
-
-    public function charactersApi() {
-        return $this->hasMany(Characters::class, 'account', 'id')
-            ->select('name', 'level', 'race', 'class', 'gender', 'totaltime', 'logout_time');
-    }
-
-    public function banned() {
-        return $this->hasOne(Banned::class, 'id', 'id');
-    }
-
-    public static function balance() {
-        return static::where('email', auth()->user()->email)->select('id')->first();
     }
 
     public static function createBattleNet($email, $password) {

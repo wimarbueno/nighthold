@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Shadowlands\Account\Account;
 use App\Models\User;
 use App\Models\Web\Referral;
+use App\Models\Wotlk\Account\AccountDonate;
+use App\Models\Wotlk\Account\AccountPremium;
 use App\Models\Wotlk\Account\AccountWotlk;
 use App\Services\Soap\Soap;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -194,9 +197,9 @@ class RegisteredUserController extends Controller
 
         if ($referred_by) {
 
-            $referred = Referral::where('ref_id')->get();
+            $referred = Referral::where('ref_id', $referred_by)->get();
 
-            if (count($referred)) {
+            if (count($referred) === 0) {
                 $bonus = 10;
             } else {
                 $bonus = 5;
@@ -204,6 +207,8 @@ class RegisteredUserController extends Controller
 
             if (count($referred) === 10) {
                 $reward = 'vip';
+            }  else {
+                $reward = '';
             }
 
             Referral::create([
@@ -212,6 +217,7 @@ class RegisteredUserController extends Controller
                 'bonus' => $bonus,
                 'reward' => $reward
             ]);
+
         }
         event(new Registered($user));
         return view('auth.battletag', compact('email'));

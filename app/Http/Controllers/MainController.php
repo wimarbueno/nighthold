@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Homepage;
+use App\Models\User;
+use App\Models\Web\Referral;
+use App\Models\Wotlk\Account\AccountDonate;
+use App\Models\Wotlk\Account\AccountPremium;
 use App\Services\Account;
 use App\Services\Posts\Posts;
 use Butschster\Head\Facades\Meta;
+use Carbon\Carbon;
 use TCG\Voyager\Models\Post;
 
 class MainController extends Controller
@@ -13,7 +18,7 @@ class MainController extends Controller
 
     function __construct() {
         if (Auth()->check()){
-            Account::init();
+            ///Account::init();
         }
     }
 
@@ -34,7 +39,46 @@ class MainController extends Controller
 
     public function referral()
     {
+        $referred = Referral::where('ref_id', 17)->get();
+
+        if(count($referred) === 0) {
+            $bonus = 10;
+            $refer = User::where('id', 17)->first();
+            AccountDonate::updateOrCreate([
+                'id' => $refer->accountWotlk->id,
+            ],[
+                'bonuses' => $bonus,
+                'votes' => 0,
+                'total_votes' => 1,
+                'total_bonuses' => 1
+            ]);
+        } else {
+            $bonus = 5;
+            $refer = User::where('id', 17)->first();
+            AccountDonate::updateOrCreate([
+                'id' => $refer->accountWotlk->id,
+                ],[
+                'bonuses' => $bonus,
+                'votes' => 0,
+                'total_votes' => 1,
+                'total_bonuses' => 1
+            ]);
+        }
+
+        $referrals =  Referral::where('ref_id', 17)->get();
+
+        if (count($referrals) === 10) {
+            $refer = User::where('id', 17)->first();
+            AccountPremium::updateOrCreate([
+                'id' => $refer->accountWotlk->id,
+            ], [
+                'setdate' => Carbon::now()->addDays(0)->timestamp,
+                'unsetdate' => Carbon::now()->addDays(30)->timestamp,
+                'active' => 1
+            ]);
+        }
         return config('app.url') . "?ref=" . \Hashids::encode(auth()->user()->id);
+
     }
 
     public function promoPage () {
