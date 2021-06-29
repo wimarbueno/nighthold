@@ -229,6 +229,8 @@ return [
     // Activate compass when environment is NOT local
     'compass_in_production' => false,
 
+    'assets_path' => env('APP_URL').'/public/vendor/tcg/voyager/assets',
+    
     'media' => [
         // The allowed mimetypes to be uploaded through the media-manager.
         'allowed_mimetypes' => '*', //All types can be uploaded
