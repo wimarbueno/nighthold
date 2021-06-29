@@ -241,15 +241,11 @@
         </section>
 
     @else
-        @can('add', $thread)
-            @if(!$thread->locked || Auth::user()->role->answer_closed_topic === 'Y')
-                @include('forum.create.reply')
-            @else
-                @include('forum.create.reply_topic_closed')
-            @endif
+        @if(!$thread->locked || Auth::user()->role->answer_closed_topic === 'Y')
+            @include('forum.create.reply')
         @else
-            @include('forum.create.reply_topic_not_reply')
-        @endcan
+            @include('forum.create.reply_topic_closed')
+        @endif
     @endguest
     <div class="Topic-container--bottomNav">
         <a class="Topic-button--parentForum" href="{{ route('forum.show', [$thread->channel->id])}}" type="button">
