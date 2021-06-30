@@ -50,7 +50,7 @@
 
         {{ $topics->links('forum.paginate.posthead') }}
         <div class="Topic-content">
-            <div class="TopicPost @if($thread->creator->role->id === 1 || $thread->creator->role->id === 3) TopicPost--blizzard @endif @if($thread->creator->role->id === 5) TopicPost--mvp @endif" id="post-{{ $thread->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $thread->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $thread->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $thread->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
+            <div class="TopicPost @if($thread->creator->role->id === 1 || $thread->creator->role->id === 3 || $thread->creator->role->id === 6) TopicPost--blizzard @endif @if($thread->creator->role->id === 5) TopicPost--mvp @endif" id="post-{{ $thread->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $thread->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $thread->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $thread->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
                 <span id="{{ $thread->id }}"></span>
                 <div class="TopicPost-content">
                     <div class="TopicPost-authorIcon TopicPost-authorIcon--blizzard">
@@ -60,7 +60,7 @@
                     </div>
                     <aside class="TopicPost-author">
                         <div class="Author-block">
-                            <div class="Author @if($thread->creator->role->id === 1 || $thread->creator->role->id === 3) Author--blizzard @endif @if($thread->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true">
+                            <div class="Author @if($thread->creator->role->id === 1 || $thread->creator->role->id === 3 || $thread->creator->role->id === 6) Author--blizzard @endif @if($thread->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true">
                                 <a href="#" class="Author-avatar hasNoProfile">
                                     <img src="{{ asset('/storage/'.$thread->creator->avatar) }}" alt="" />
                                 </a>
@@ -98,7 +98,7 @@
                                         <div class="Dropdown-menu">
                                             <span class="Dropdown-arrow Dropdown-arrow--up" data-attachment="top right" data-target-attachment="bottom center"></span>
                                             <div class="Dropdown-items">
-                                                @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3)
+                                                @if(auth()->user()->role->id === 1 || auth()->user()->role->id === 3 || auth()->user()->role->id === 6)
                                                     @if($thread->creator->role->id === 4)
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="unblock.topicpost">Разблокировать</span>
                                                     @else
@@ -120,14 +120,14 @@
                                                         <div class="Dropdown-divider"></div>
                                                 @endif
                                                 @endif
-                                                    @if(Auth::user()->name != $thread->creator->name)
-                                                        @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3 || Auth::user()->role->id === 5)
+                                                    @if(auth()->user()->role->name != $thread->creator->name)
+                                                        @if(auth()->user()->role->id === 1 || auth()->user()->role->id === 3 || auth()->user()->role->id === 5 || auth()->user()->role->id === 6)
                                                             <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                             <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
                                                             <div class="Dropdown-divider"></div>
                                                         @endif
                                                     @endif
-                                                @if(Auth::user()->name == $thread->creator->name)
+                                                @if(auth()->user()->role->name == $thread->creator->name)
                                                     <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                     <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
                                                 @else
@@ -154,7 +154,7 @@
             </div>
             @foreach ($topics as $reply)
 
-                <div class="TopicPost @if($reply->creator->role->id === 1 || $reply->creator->role->id === 3) TopicPost--blizzard @endif @if($reply->creator->role->id === 5) TopicPost--mvp @endif" id="post-{{ $reply->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $reply->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $reply->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $reply->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
+                <div class="TopicPost @if($reply->creator->role->id === 1 || $reply->creator->role->id === 3 || $topic->creator->role->id === 6) TopicPost--blizzard @endif @if($reply->creator->role->id === 5) TopicPost--mvp @endif" id="post-{{ $reply->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $reply->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $reply->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $reply->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
                     <span id="{{ $reply->id }}"></span>
                     <div class="TopicPost-content">
                         <div class="TopicPost-authorIcon TopicPost-authorIcon--blizzard">
@@ -164,7 +164,7 @@
                         </div>
                         <aside class="TopicPost-author">
                             <div class="Author-block">
-                                <div class="Author @if($reply->creator->role->id === 1 || $reply->creator->role->id === 3) Author--blizzard @endif @if($reply->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true"><a href="#" class="Author-avatar hasNoProfile"><img src="{{ asset('/storage/'.$reply->creator->avatar) }}" alt="" /></a>
+                                <div class="Author @if($reply->creator->role->id === 1 || $reply->creator->role->id === 3 || $topic->creator->role->id === 6) Author--blizzard @endif @if($reply->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true"><a href="#" class="Author-avatar hasNoProfile"><img src="{{ asset('/storage/'.$reply->creator->avatar) }}" alt="" /></a>
                                     <div class="Author-details">
                                         <a class="Author-name--profileLink" href="#">
                                             {{ Str::Title($reply->creator->name) }}
@@ -195,7 +195,7 @@
                                             <div class="Dropdown-menu">
                                                 <span class="Dropdown-arrow Dropdown-arrow--up" data-attachment="top right" data-target-attachment="bottom center"></span>
                                                 <div class="Dropdown-items">
-                                                    @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3)
+                                                    @if(auth()->user()->role->id === 1 || auth()->user()->role->id === 3 || auth()->user()->role->id === 6)
                                                         @if($reply->creator->role->id === 4)
                                                             <span class="Dropdown-item" data-topic-post-button="true" data-trigger="unblock.topicpost">Разблокировать</span>
                                                         @else
@@ -203,14 +203,14 @@
                                                             <div class="Dropdown-divider"></div>
                                                         @endif
                                                     @endif
-                                                        @if(Auth::user()->name != $reply->creator->name)
-                                                            @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3 || Auth::user()->role->id === 5)
+                                                        @if(auth()->user()->name != $reply->creator->name)
+                                                            @if(auth()->user()->role->id === 1 || auth()->user()->role->id === 3 || auth()->user()->role->id === 5 || $topic->creator->role->id === 6)
                                                                 <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                                 <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
                                                                 <div class="Dropdown-divider"></div>
                                                             @endif
                                                         @endif
-                                                    @if(Auth::user()->name == $reply->creator->name)
+                                                    @if(auth()->user()->name == $reply->creator->name)
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
                                                         @else
