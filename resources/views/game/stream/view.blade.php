@@ -37,7 +37,7 @@
 
                                     <iframe
                                         id="chat_embed"
-                                        src="https://www.twitch.tv/embed/{{ $user->user_login }}/chat?parent=nighthold.ru"
+                                        src="https://www.twitch.tv/embed/{{ $user->user_login }}/chat?parent=nighthold.pro"
                                         height="500"
                                         width="380">
                                     </iframe>
