@@ -1,14 +1,9 @@
 <IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
 
     RewriteEngine On
-
-    RewriteCond %{REQUEST_URI} !\?
-    RewriteCond %{REQUEST_URI} !\&
-    RewriteCond %{REQUEST_URI} !\=
-    RewriteCond %{REQUEST_URI} !\.
-    RewriteCond %{REQUEST_URI} ![^\/]$
-    RewriteCond %{HTTP_HOST} ^www\.(.*)$
-    RewriteRule ^(.*)$ http://%1/$1 [L,R=301]
 
     RewriteRule ^(.+)\.pdx$ $1.woff
     RewriteRule ^(.+)\.pdk$ $1.woff2

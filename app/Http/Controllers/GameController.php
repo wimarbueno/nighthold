@@ -6,6 +6,7 @@ use App\Models\Classes;
 use App\Models\Races;
 use App\Models\Shadowlands\Arena\ArenaSl;
 use App\Models\Stream;
+use App\Models\Streams;
 use App\Models\Wotlk\Arena\ArenaWotlk;
 use App\Services\Server;
 use Butschster\Head\Facades\Meta;
@@ -127,6 +128,8 @@ class GameController extends Controller
     }
 
     public function stream() {
+        $this->addStreamUser();
+
         Meta::prependTitle('Стримы')
             ->setDescription(__('classes.classes_8'));
         $twitch = new Twitch;
@@ -172,5 +175,13 @@ class GameController extends Controller
         Meta::prependTitle($user->user_name )
             ->setDescription(__('classes.classes_8'));
         return view('game.stream.view', ['user' => $user]);
+    }
+
+    private function addStreamUser()
+    {
+        //$userStream = Streams::where('status', 1)->get();
+        //foreach ($userStream as $item) {
+
+        //}
     }
 }
