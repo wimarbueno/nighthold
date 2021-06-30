@@ -106,6 +106,10 @@ class JsonController extends Controller
         return str_replace($order, $replace, $source);
     }
 
+    protected function getInLinesEdit($source){
+        return nl2br($source);
+    }
+
     public function frag($id) {
         $thread = Thread::where('id', $id)->firstOrFail();
         $bbCode = new BBCode();
@@ -115,7 +119,9 @@ class JsonController extends Controller
             '<a href="$1">$2</a>',
             '$1'
         );
-        $text = $bbCode->convertToHtml($thread->body);
+
+        $texts = $bbCode->convertFromHtml($thread->body);
+        $text = $this->getInLinesEdit($texts);
         return response()->json([
             'name' => $thread->id,
             'detail' => $text
