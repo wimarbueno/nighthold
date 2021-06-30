@@ -128,7 +128,7 @@ class GameController extends Controller
     }
 
     public function stream() {
-        $this->addStreamUser();
+        ///$this->addStreamUser();
 
         Meta::prependTitle('Стримы')
             ->setDescription(__('classes.classes_8'));
@@ -177,11 +177,5 @@ class GameController extends Controller
         return view('game.stream.view', ['user' => $user]);
     }
 
-    private function addStreamUser()
-    {
-        //$userStream = Streams::where('status', 1)->get();
-        //foreach ($userStream as $item) {
-
-        //}
-    }
+    
 }
