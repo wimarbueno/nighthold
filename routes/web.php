@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use TCG\Voyager\Voyager;
 
 Route::get('/', function () {
     return redirect('/'. App::getLocale());
@@ -110,7 +111,7 @@ Route::get('/cookie', function () {
 });
 
 Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
+    (new TCG\Voyager\Voyager)->routes();
 
     Route::get('clear', function() {
         Artisan::call('cache:clear');
