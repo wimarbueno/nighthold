@@ -98,7 +98,7 @@ class JsonController extends Controller
         $text = $this->getInLines($bbCode->convertToHtml(request('detail')));
 
         $thead = Thread::where('id', $id)->update(['body' => $text]);
-        
+
         return response()->json([
             'detail' => $text
         ]);
