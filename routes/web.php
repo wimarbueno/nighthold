@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use TCG\Voyager\Voyager;
 
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
+
 Route::get('/', function () {
     return redirect('/'. App::getLocale());
 });

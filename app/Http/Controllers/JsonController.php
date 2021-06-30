@@ -87,14 +87,18 @@ class JsonController extends Controller
 
     public function edit($id) {
         $bbCode = new BBCode();
+
         $bbCode->addParser(
             'custom-link',
             '/\[link=(.*?)\](.*?)\[\/link\]/s',
             '<a href="$1">$2</a>',
             '$1'
         );
+
         $text = $this->getInLines($bbCode->convertToHtml(request('detail')));
+
         $thead = Thread::where('id', $id)->update(['body' => $text]);
+        
         return response()->json([
             'detail' => $text
         ]);
@@ -106,18 +110,17 @@ class JsonController extends Controller
         return str_replace($order, $replace, $source);
     }
 
+    protected function setInLines($source){
+        $tempCONTENT = str_ireplace(array("\r\n","/\r","\n/",'/\r','\n/'),'<br />', $source);
+        return str_ireplace(array('<br /><br />'),'<br />', $tempCONTENT);
+    }
+
+
     public function frag($id) {
         $thread = Thread::where('id', $id)->firstOrFail();
         $bbCode = new BBCode();
-        $bbCode->addParser(
-            'custom-link',
-            '/\[link=(.*?)\](.*?)\[\/link\]/s',
-            '<a href="$1">$2</a>',
-            '$1'
-        );
-
         $texts = $bbCode->convertFromHtml($thread->body);
-        $text = $this->getInLines($texts);
+        $text = $this->setInLines($texts);
         return response()->json([
             'name' => $thread->id,
             'detail' => $text

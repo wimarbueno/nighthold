@@ -12,6 +12,10 @@ use App\Http\Controllers\LauncherApi\ClientController;
 use App\Http\Controllers\LauncherApi\UpdateController;
 use Illuminate\Support\Facades\Route;
 
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
+
 Route::group([
     'prefix' => 'auth'
 ], function () {
