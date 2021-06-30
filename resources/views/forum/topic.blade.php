@@ -154,7 +154,7 @@
             </div>
             @foreach ($topics as $reply)
 
-                <div class="TopicPost @if($reply->creator->role->id === 1 || $reply->creator->role->id === 3 || $topic->creator->role->id === 6) TopicPost--blizzard @endif @if($reply->creator->role->id === 5) TopicPost--mvp @endif" id="post-{{ $reply->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $reply->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $reply->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $reply->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
+                <div class="TopicPost @if($reply->creator->role->id === 1 || $reply->creator->role->id === 3 || $reply->creator->role->id === 6) TopicPost--blizzard @endif @if($reply->creator->role->id === 5) TopicPost--mvp @endif" id="post-{{ $reply->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $reply->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $reply->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $reply->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
                     <span id="{{ $reply->id }}"></span>
                     <div class="TopicPost-content">
                         <div class="TopicPost-authorIcon TopicPost-authorIcon--blizzard">
@@ -256,7 +256,7 @@
         </section>
 
     @else
-        @if(!$thread->locked || Auth::user()->role->answer_closed_topic === 'Y')
+        @if(!$thread->locked || auth()->user()->role->answer_closed_topic === 'Y')
             @include('forum.create.reply')
         @else
             @include('forum.create.reply_topic_closed')
