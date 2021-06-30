@@ -124,6 +124,7 @@
                                                         @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3 || Auth::user()->role->id === 5)
                                                             <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                             <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
+                                                            <div class="Dropdown-divider"></div>
                                                         @endif
                                                     @endif
                                                 @if(Auth::user()->name == $thread->creator->name)
@@ -206,6 +207,7 @@
                                                             @if(Auth::user()->role->id === 1 || Auth::user()->role->id === 3 || Auth::user()->role->id === 5)
                                                                 <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                                 <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
+                                                                <div class="Dropdown-divider"></div>
                                                             @endif
                                                         @endif
                                                     @if(Auth::user()->name == $reply->creator->name)
