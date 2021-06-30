@@ -73,8 +73,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
      * @throws \Exception
      */
     public function read($thread) {
-        ///return cache()->forever($this->visitedThreadCacheKey($thread), Carbon::now());
-        return cache()->put($this->visitedThreadCacheKey($thread), Carbon::now());
+        return cache()->forever($this->visitedThreadCacheKey($thread), Carbon::now());
     }
 
     public function visitedThreadCacheKey($thread) {

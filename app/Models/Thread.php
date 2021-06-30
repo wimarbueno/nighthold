@@ -129,8 +129,8 @@
          */
         public function hasUpdatesFor($user)
         {
-            $key = $user->visitedThreadCacheKey($this);
-            return $this->updated_at > cache($key);
+            $key = $user->visitedThreadCacheKey($this->id);
+            return $this['updated_at'] > cache($key);
         }
 
         public function getRouteKeyName(): string
