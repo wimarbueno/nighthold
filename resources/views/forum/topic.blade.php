@@ -164,7 +164,7 @@
                         </div>
                         <aside class="TopicPost-author">
                             <div class="Author-block">
-                                <div class="Author @if($reply->creator->role->id === 1 || $reply->creator->role->id === 3 || $topic->creator->role->id === 6) Author--blizzard @endif @if($reply->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true"><a href="#" class="Author-avatar hasNoProfile"><img src="{{ asset('/storage/'.$reply->creator->avatar) }}" alt="" /></a>
+                                <div class="Author @if($reply->creator->role->id === 1 || $reply->creator->role->id === 3 || $reply->creator->role->id === 6) Author--blizzard @endif @if($reply->creator->role->id === 5) Author--mvp @endif" id="" data-topic-post-body-content="true"><a href="#" class="Author-avatar hasNoProfile"><img src="{{ asset('/storage/'.$reply->creator->avatar) }}" alt="" /></a>
                                     <div class="Author-details">
                                         <a class="Author-name--profileLink" href="#">
                                             {{ Str::Title($reply->creator->name) }}
