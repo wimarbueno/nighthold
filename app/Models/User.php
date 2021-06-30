@@ -69,12 +69,12 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         return $this->topics->count();
     }
 
+    /**
+     * @throws \Exception
+     */
     public function read($thread) {
-        try {
-            return cache()->forever($this->visitedThreadCacheKey($thread), Carbon::now());
-        } catch (\Exception $e) {
-            return response()->json($e);
-        }
+        ///return cache()->forever($this->visitedThreadCacheKey($thread), Carbon::now());
+        return cache()->put($this->visitedThreadCacheKey($thread), Carbon::now());
     }
 
     public function visitedThreadCacheKey($thread) {

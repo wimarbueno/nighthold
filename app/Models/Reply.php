@@ -18,6 +18,8 @@
 
         protected $appends = ['favoritesCount', 'isFavorited', 'isBest'];
 
+        protected $touches = ['thread'];
+
         protected static function boot()
         {
             parent::boot();
@@ -31,12 +33,12 @@
             });
         }
 
-        public function owner()
+        public function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
         {
             return $this->belongsTo(User::class, 'user_id');
         }
 
-        public function thread()
+        public function thread(): \Illuminate\Database\Eloquent\Relations\BelongsTo
         {
             return $this->belongsTo(Thread::class);
         }

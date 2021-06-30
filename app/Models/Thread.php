@@ -20,11 +20,18 @@
         protected $with = ['creator', 'channel', 'thread'];
 
         protected $appends = ['isSubscribedTo'];
+
         protected $dates = ['expired_at'];
 
         protected $casts = [
                 'locked' => 'boolean'
         ];
+
+        /**
+         * @var mixed
+         */
+
+        private $updated_at;
 
         public function path(): string
         {
@@ -117,7 +124,10 @@
                     ->exists();
         }
 
-        public function hasUpdatesFor($user): bool
+        /**
+         * @throws \Exception
+         */
+        public function hasUpdatesFor($user)
         {
             $key = $user->visitedThreadCacheKey($this);
             return $this->updated_at > cache($key);
