@@ -125,7 +125,7 @@
                                                             <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                             <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
                                                         @endif
-                                                    @else
+                                                    @endif
                                                 @if(Auth::user()->name == $thread->creator->name)
                                                     <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                     <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
@@ -207,7 +207,7 @@
                                                                 <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                                 <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
                                                             @endif
-                                                        @else
+                                                        @endif
                                                     @if(Auth::user()->name == $reply->creator->name)
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
