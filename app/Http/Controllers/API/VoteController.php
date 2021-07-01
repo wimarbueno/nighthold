@@ -55,35 +55,37 @@ class VoteController extends Controller
         if ($data) {
             foreach ($data as $item) {
                 $game = User::where('name', $item->name)->first();
-                $account = AccountDonate::where('id', $game->accountWotlk->id)->first();
-                if ($account) {
-                    AccountDonate::where('id', $game->accountWotlk->id)->update([
-                        'id' => $game->accountWotlk->id,
-                        'bonuses' => $account->bonuses,
-                        'votes' => $account->votes + $item->vote,
-                        'total_votes' => $account->total_votes + 1,
-                        'total_bonuses' => $account->total_bonuses,
-                    ]);
-                }   else {
-                    AccountDonate::create([
-                        'id' => $game->accountWotlk->id,
-                        'bonuses' => '0',
-                        'votes' => $item->vote,
-                        'total_votes' => '1',
-                        'total_bonuses' => '0',
+                if ($game->accountWotlk->id) {
+                    $account = AccountDonate::where('id', $game->accountWotlk->id)->first();
+                    if ($account) {
+                        AccountDonate::where('id', $game->accountWotlk->id)->update([
+                            'id' => $game->accountWotlk->id,
+                            'bonuses' => $account->bonuses,
+                            'votes' => $account->votes + $item->vote,
+                            'total_votes' => $account->total_votes + 1,
+                            'total_bonuses' => $account->total_bonuses,
+                        ]);
+                    }   else {
+                        AccountDonate::create([
+                            'id' => $game->accountWotlk->id,
+                            'bonuses' => '0',
+                            'votes' => $item->vote,
+                            'total_votes' => '1',
+                            'total_bonuses' => '0',
+                        ]);
+                    }
+                    User::setBalanceVote($game->vote_balance + $item->vote);
+
+                    Vote::where('id', $item->id)->update(['complete' => 1]);
+
+                    HistoryPayment::create([
+                        'user_id' => $game->id,
+                        'service' => 'balance',
+                        'title' => 'Голосование за сервер',
+                        'price' => $item->balance,
+                        'status' => '1',
                     ]);
                 }
-                User::setBalanceVote($game->vote_balance + $item->vote);
-
-                Vote::where('id', $item->id)->update(['complete' => 1]);
-
-                HistoryPayment::create([
-                    'user_id' => $game->id,
-                    'service' => 'balance',
-                    'title' => 'Голосование за сервер',
-                    'price' => $item->balance,
-                    'status' => '1',
-                ]);
             }
         }
     }
