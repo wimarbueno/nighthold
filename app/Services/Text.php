@@ -88,7 +88,7 @@
             }   else {
                 $months = array('Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря');
             }
-            $newDatetime = new Datetime('@'.$str);
+            $newDatetime = new Datetime($str);
             $month = $newDatetime->format('n');
             if($locale == 'ru-ru') {
                 return '<span class="LocalizedDateMount" data-props="{&quot;format&quot;:&quot;LL&quot;,&quot;iso8601&quot;:&quot;'.$str.'&quot;}" queryselectoralways="55">
