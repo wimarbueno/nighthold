@@ -60,7 +60,7 @@ class VoteController extends Controller
                     AccountDonate::where('id', $game->accountWotlk->id)->update([
                         'id' => $game->accountWotlk->id,
                         'bonuses' => $account->bonuses,
-                        'votes' => $account->votes + $item->balance,
+                        'votes' => $account->votes + $item->vote,
                         'total_votes' => $account->total_votes + 1,
                         'total_bonuses' => $account->total_bonuses,
                     ]);
@@ -68,12 +68,12 @@ class VoteController extends Controller
                     AccountDonate::create([
                         'id' => $game->accountWotlk->id,
                         'bonuses' => '0',
-                        'votes' => $item->balance,
+                        'votes' => $item->vote,
                         'total_votes' => '1',
                         'total_bonuses' => '0',
                     ]);
                 }
-                User::setBalanceVote($game->vote_balance + $item->balance);
+                User::setBalanceVote($game->vote_balance + $item->vote);
 
                 Vote::where('id', $item->id)->update(['complete' => 1]);
 
