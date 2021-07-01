@@ -20,8 +20,8 @@ return [
             'slug'  => 'stormrage-x7',
             'type'  => 'wotlk',                                 //// Не изменять
             'type_server' => 'Обычный',                         //// Не изменять
-            'ip'  => '91.201.41.102',                           //// Не изменять
-            'port'  => '8087',                                  //// Не изменять
+            'ip'  => '185.71.65.236',                           //// Не изменять
+            'port'  => '8085',                                  //// Не изменять
             'connectionAuth' => 'WotlkAuth',                    //// Не изменять
             'connectionChatacters' => 'WotlkChatacters',        //// Не изменять
             'connectionWorld' => 'WotlkWorld',                  //// Не изменять
