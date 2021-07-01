@@ -35,7 +35,7 @@ class LoginController extends Controller
             return response()->json([
                 'authentication_state' => "LOGIN",
                 'error_code' => "USERNAME_REQUIRED",
-                'error_message' => "Не удалось найти учетную запись Blizzard с такими данными.",
+                'error_message' => "Не удалось найти учетную запись Nighthold с такими данными.",
                 'error_message_helper' => "Введите имя учетной записи.",
                 'error_status'=> "WARNING",
                 'input_id' => "account_name"
