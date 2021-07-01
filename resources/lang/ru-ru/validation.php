@@ -112,7 +112,7 @@
             'starts_with' => 'Поле :attribute должно начинаться из одного из следующих значений: :values',
             'string'      => 'Поле :attribute должно быть строкой.',
             'timezone'    => 'Поле :attribute должно быть действительным часовым поясом.',
-            'unique'      => 'Такое значение поля :attribute уже существует.',
+            'unique'      => ':attribute уже существует.',
             'uploaded'    => 'Загрузка поля :attribute не удалась.',
             'url'         => 'Поле :attribute имеет ошибочный формат.',
             'uuid'        => 'Поле :attribute должно быть корректным UUID.',
@@ -157,7 +157,7 @@
         */
             'attributes' => [
                     'name'                  => 'Имя',
-                    'username'              => 'Никнейм',
+                    'username'              => 'Логин',
                     'email'                 => 'E-Mail',
                     'first_name'            => 'Имя',
                     'last_name'             => 'Фамилия',

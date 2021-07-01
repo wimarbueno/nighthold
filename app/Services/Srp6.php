@@ -6,29 +6,48 @@ namespace App\Services;
 
 class Srp6
 {
+    // Returns SRP6 parameters to register this username/password combination with
+
     /**
      * @throws \Exception
      */
-    public static function getRegistrationData($email, $password)
+    function getRegistrationData($username, $password): array
     {
+        // generate a random salt
         $salt = random_bytes(32);
-        $verifier = self::calculateSRP6Verifier($email, $password, $salt);
-        $salt = strtoupper(bin2hex($salt));
-        $verifier = strtoupper(bin2hex($verifier));
+
+        // calculate verifier using this salt
+        $verifier = self::calculateSRP6Verifier($username, $password, $salt);
+
+        // done - this is what you put in the account table!
         return array($salt, $verifier);
     }
 
-    public static function calculateSRP6Verifier($email, $password, $salt): string
+    // Its from Trinitycore/account-creator
+    function calculateSRP6Verifier($username, $password, $salt): string
     {
+        // algorithm constants
         $g = gmp_init(7);
         $N = gmp_init('894B645E89E1535BBDAD5B8B290650530801B18EBFBF5E8FAB3C82872A3E9BB7', 16);
-        $h1 = sha1(strtoupper($email . ':' . $password), TRUE);
-        $h2 = sha1(strrev($salt) . $h1, TRUE);  // From haukw
+
+        // calculate first hash
+        $h1 = sha1(strtoupper($username . ':' . $password), TRUE);
+
+        // calculate second hash
+        $h2 = sha1($salt.$h1, TRUE);
+
+        // convert to integer (little-endian)
         $h2 = gmp_import($h2, 1, GMP_LSW_FIRST);
+
+        // g^h2 mod N
         $verifier = gmp_powm($g, $h2, $N);
+
+        // convert back to a byte array (little-endian)
         $verifier = gmp_export($verifier, 1, GMP_LSW_FIRST);
-        $verifier = str_pad($verifier, 32, chr(0), STR_PAD_RIGHT);
-        return strrev($verifier);
+
+        // pad to 32 bytes, remember that zeros go on the end in little-endian!
+        // done!
+        return str_pad($verifier, 32, chr(0), STR_PAD_RIGHT);
     }
 
     public static  function verifySRP6($user, $pass, $salt, $verifier)
