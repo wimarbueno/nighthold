@@ -51,14 +51,14 @@ class VoteController extends Controller
     private function sendVote()
     {
         $data = Vote::where('complete', 0)->get();
-        $game = auth()->user()->accountWotlk->id;
 
         if ($data) {
             foreach ($data as $item) {
-                $account = AccountDonate::where('id', $game)->first();
+                $game = User::where('name', $item->name)->first();
+                $account = AccountDonate::where('id', $game->accountWotlk->id)->first();
                 if ($account) {
-                    AccountDonate::where('id', $game)->update([
-                        'id' => $game,
+                    AccountDonate::where('id', $game->accountWotlk->id)->update([
+                        'id' => $game->accountWotlk->id,
                         'bonuses' => $account->bonuses,
                         'votes' => $account->votes + $item->balance,
                         'total_votes' => $account->total_votes + 1,
@@ -66,17 +66,19 @@ class VoteController extends Controller
                     ]);
                 }   else {
                     AccountDonate::create([
-                        'id' => $game,
+                        'id' => $game->accountWotlk->id,
                         'bonuses' => '0',
                         'votes' => $item->balance,
                         'total_votes' => '1',
                         'total_bonuses' => '0',
                     ]);
                 }
-                User::setBalanceVote(auth()->user()->vote_balance + $item->balance);
+                User::setBalanceVote($game->vote_balance + $item->balance);
+
                 Vote::where('id', $item->id)->update(['complete' => 1]);
+
                 HistoryPayment::create([
-                    'user_id' => Auth::user()->id,
+                    'user_id' => $game->id,
                     'service' => 'balance',
                     'title' => 'Голосование за сервер',
                     'price' => $item->balance,
