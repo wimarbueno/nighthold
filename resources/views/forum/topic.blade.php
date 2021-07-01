@@ -204,7 +204,7 @@
                                                         @endif
                                                     @endif
                                                         @if(auth()->user()->name != $reply->creator->name)
-                                                            @if(auth()->user()->role->id === 1 || auth()->user()->role->id === 3 || auth()->user()->role->id === 5 || $topic->creator->role->id === 6)
+                                                            @if(auth()->user()->role->id === 1 || auth()->user()->role->id === 3 || auth()->user()->role->id === 5 || auth()->user()->role->id === 6)
                                                                 <span class="Dropdown-item" data-topic-post-button="true" data-trigger="edit.topicpost">@lang('forum.edit_topicpost')</span>
                                                                 <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
                                                                 <div class="Dropdown-divider"></div>
