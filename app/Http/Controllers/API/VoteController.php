@@ -55,7 +55,7 @@ class VoteController extends Controller
         if ($data) {
             foreach ($data as $item) {
                 $game = User::where('name', $item->name)->first();
-                if ($game->accountWotlk) {
+                if (isset($game->accountWotlk)) {
                     $account = AccountDonate::where('id', $game->accountWotlk->id)->first();
                     if ($account) {
                         AccountDonate::where('id', $game->accountWotlk->id)->update([
