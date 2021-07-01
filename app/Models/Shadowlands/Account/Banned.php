@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Shadowlands\Account;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Banned extends Model
 {
-    protected $connection = 'auth';
+    protected $connection = 'ShadowlandsAuth';
 
     protected $table = 'account_banned';
 

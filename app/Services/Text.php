@@ -24,6 +24,32 @@
             return $encodedData;
         }
 
+        public static function convertDateLastLogin($date) {
+            if (is_null($date)) {
+                return "Не известно";
+            }
+            return self::rusDateLastLogin(DateTime::createFromFormat('Y-m-d H:i:s', $date)->getTimestamp());
+        }
+
+        /**
+         * @throws \Exception
+         */
+        public static function rusDateLastLogin($str, $gtr = FALSE ) {
+            $locale = "ru-ru";
+            if($gtr) {
+                $months = array('Янв.', 'Фев.', 'Март.', 'Апр.', 'Мая', 'Июня', 'Июля', 'Авг.', 'Сен.', 'Окт.', 'Нояб.', 'Дек.');
+            }   else {
+                $months = array('Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря');
+            }
+            $newDatetime = new Datetime('@'.$str);
+            $month = $newDatetime->format('n');
+            if($locale == 'ru-ru') {
+                return  $newDatetime->format('d '.$months[$month-1].'') .' '. $newDatetime->format('Y') . 'г. в '. $newDatetime->format('h:i');
+            } else {
+                return $album_data = $newDatetime->format('M d') . ", " . $newDatetime->format('Y');
+            }
+        }
+
         public static function convertDate($date) {
             return DateTime::createFromFormat('Y-m-d H:i:s', $date->joindate)->getTimestamp();
         }
@@ -52,6 +78,9 @@
             return $days. ' ' . $hours. ' ' . $min;
         }
 
+        /**
+         * @throws \Exception
+         */
         public static function rusDate($str, $gtr = FALSE ) {
             $locale = "ru-ru";
             if($gtr) {
@@ -59,7 +88,7 @@
             }   else {
                 $months = array('Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря');
             }
-            $newDatetime = new Datetime($str);
+            $newDatetime = new Datetime('@'.$str);
             $month = $newDatetime->format('n');
             if($locale == 'ru-ru') {
                 return '<span class="LocalizedDateMount" data-props="{&quot;format&quot;:&quot;LL&quot;,&quot;iso8601&quot;:&quot;'.$str.'&quot;}" queryselectoralways="55">

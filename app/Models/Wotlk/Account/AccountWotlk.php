@@ -26,6 +26,11 @@ class AccountWotlk extends Model
         'sha_pass_hash'
     ];
 
+    public function banned(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(AccountBanned::class, 'id', 'id');
+    }
+
     public static function newPasswordChangeEmail($user, $password)
     {
         $accountHash = strtoupper(bin2hex(strrev(hex2bin(strtoupper(hash("sha256",strtoupper(hash("sha256", strtoupper($user)).":".strtoupper($password))))))));

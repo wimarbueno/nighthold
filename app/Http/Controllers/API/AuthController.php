@@ -152,18 +152,26 @@ class AuthController extends Controller
      */
     public function game()
     {
-        $user = Auth::user()->account;
-        return response()->json(['error' => false, 'data' => Text::encode($user)]);
+        $userSL = Auth::user()->account;
+        $userWotlk = Auth::user()->accountWotlk;
+        return response()->json([
+            'error' => false,
+            'dataSL' => Text::convertDateLastLogin($userSL->last_login),
+            'dataWotlk' => Text::convertDateLastLogin($userWotlk->last_login),
+            'loginSl' => $userWotlk->email,
+            'loginWotlk' => $userWotlk->username
+        ]);
     }
 
     public function banned()
     {
         $notBanned = 0;
         $banned = 1;
-        $user = Auth::user()->account->banned;
-        if($user === NULL) {
+        $userSL = Auth::user()->account->banned;
+        $userWotlk = Auth::user()->accountWotlk->banned;
+        if($userSL === NULL || $userWotlk === NULL) {
             return response()->json(['error' => false, 'data' => $notBanned]);
-        } elseif($user->active === 0) {
+        } elseif($userSL->active === 0 || $userWotlk->active === 0) {
             return response()->json(['error' => false, 'data' => $notBanned]);
         } else {
             return response()->json(['error' => false, 'data' => $banned]);

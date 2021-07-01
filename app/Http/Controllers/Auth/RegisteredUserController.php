@@ -95,7 +95,7 @@ class RegisteredUserController extends Controller
     public function setPassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'password' => 'required|string|min:8'
+            'password' => 'required|string|min:8|max:16'
         ]);
 
         if ($validator->fails()) {
