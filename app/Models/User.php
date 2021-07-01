@@ -88,6 +88,10 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         return static::where('id', Auth::user()->id)->update(['vote_balance' => $newBalanceVote]);
     }
 
+    public static function setBalanceVoteUsers($id, $newBalanceVote) {
+        return static::where('id', $id)->update(['vote_balance' => $newBalanceVote]);
+    }
+
     public function referrer()
     {
         return $this->belongsTo(self::class, 'referred_by');

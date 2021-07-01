@@ -74,7 +74,7 @@ class VoteController extends Controller
                             'total_bonuses' => '0',
                         ]);
                     }
-                    User::setBalanceVote($game->vote_balance + $item->vote);
+                    User::setBalanceVoteUsers($game->id, $game->vote_balance + $item->vote);
 
                     Vote::where('id', $item->id)->update(['complete' => 1]);
 
