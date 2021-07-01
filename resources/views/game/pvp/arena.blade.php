@@ -20,14 +20,14 @@
                 <div class="contain-medium gutter-small" media-medium="!gutter-small" media-nav="!contain-medium">
                     <div class="List List--vertical List--full" media-nav="!List--full !List--vertical List--gutters">
                         <div class="List-item">
-                            <div class="SelectMenu SelectMenu--search SelectMenu--fullscreen" media-medium="!SelectMenu--fullscreen">
+                            <div class="SelectMenu SelectMenu--fullscreen" media-medium="!SelectMenu--fullscreen">
                                 <div class="SelectMenu-toggle">{{ Server::GetRealmNameBySlug($servers) }}</div>
                                 <div class="SelectMenu-menu">
                                     <div class="SelectMenu-close">
                                         <span class="Icon Icon--closeGold SelectMenu-close-icon"></span>
                                     </div>
                                     <div class="SelectMenu-inputContainer">
-                                        <input class="SelectMenu-input" type="search" placeholder="Поиск игрового мира"/></div>
+                                        <input class="SelectMenu-input" type="search"/></div>
                                     <div class="SelectMenu-items">
                                         @foreach(Server::getServer() as $server)
                                         <div class="SelectMenu-item" data-value="{{ $server['name'] }}">
