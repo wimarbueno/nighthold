@@ -85,7 +85,7 @@
 @foreach ($topics as $topic)
 
 @if($topic->sticky == 1)
-<a class="ForumTopic ForumTopic--sticky  ForumTopic--featured @if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6)has-blizzard-post @endif @if($topic->creator->role->id === 5) has-mvp-post @endif @if($topic->locked) is-locked @endif @if(auth()->check() && $topic->hasUpdatesFor(auth()->user())) is-read @else @endif" href="{{ route('topic.show', [$topic])}}" data-forum-topic="{'id':{{ $topic->id }},'lastPosition':0,'isSticky':true,'isFeatured':true,'isLocked':@if($topic->locked) true @else false @endif,'isHidden':false,'isSpam':false}">
+<a class="ForumTopic ForumTopic--sticky  ForumTopic--featured @if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6)has-blizzard-post @endif @if($topic->creator->role->id === 5) has-mvp-post @endif @if($topic->locked) is-locked @endif @if(auth()->check() && $topic->hasUpdatesFor(auth()->user())) @else is-read @endif" href="{{ route('topic.show', [$topic])}}" data-forum-topic="{'id':{{ $topic->id }},'lastPosition':0,'isSticky':true,'isFeatured':true,'isLocked':@if($topic->locked) true @else false @endif,'isHidden':false,'isSpam':false}">
 <span class="ForumTopic-type">
 <i class="Icon"></i>
 @if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6)
@@ -133,7 +133,7 @@
 
 @foreach ($topics as $topic)
 @if($topic->sticky == 0)
-<a class="ForumTopic @if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6)has-blizzard-post @endif @if($topic->creator->role->id === 5) has-mvp-post @endif @if($topic->locked) is-locked @endif @if(auth()->check() && $topic->hasUpdatesFor(auth()->user())) is-read @else @endif" href="{{ route('topic.show', [$topic])}}" data-forum-topic="{'id':{{ $topic }},'lastPosition':0,'isSticky':false,'isFeatured':false,'isLocked':@if($topic->locked) true @else false @endif,'isHidden':false,'isSpam':false}">
+<a class="ForumTopic @if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6)has-blizzard-post @endif @if($topic->creator->role->id === 5) has-mvp-post @endif @if($topic->locked) is-locked @endif @if(auth()->check() && $topic->hasUpdatesFor(auth()->user()))  @else is-read @endif" href="{{ route('topic.show', [$topic])}}" data-forum-topic="{'id':{{ $topic }},'lastPosition':0,'isSticky':false,'isFeatured':false,'isLocked':@if($topic->locked) true @else false @endif,'isHidden':false,'isSpam':false}">
 <span class="ForumTopic-type">
 <i class="Icon"></i>
 @if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6)
