@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 if (App::environment('production')) {
     URL::forceScheme('https');
 }
-Route::get('{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
+Route::get('locale/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
 require __DIR__.'/auth.php';
 
