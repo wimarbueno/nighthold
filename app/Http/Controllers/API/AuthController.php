@@ -141,7 +141,8 @@ class AuthController extends Controller
     }
 
     public function payment() {
-        $data = HistoryPayment::where('user_id', Auth::user()->id)
+        $data = HistoryPayment::where('user_id', auth()->user()->id)
+            ->where('service', 'balance')
             ->orderBy('created_at', 'desc')
             ->paginate(5);
         return response()->json(['error' => false, 'data' => $data]);
@@ -152,8 +153,8 @@ class AuthController extends Controller
      */
     public function game()
     {
-        $userSL = Auth::user()->account;
-        $userWotlk = Auth::user()->accountWotlk;
+        $userSL = auth()->user()->account;
+        $userWotlk = auth()->user()->accountWotlk;
         return response()->json([
             'error' => false,
             'dataSL' => Text::convertDateLastLogin($userSL->last_login),
@@ -167,8 +168,8 @@ class AuthController extends Controller
     {
         $notBanned = 0;
         $banned = 1;
-        $userSL = Auth::user()->account->banned;
-        $userWotlk = Auth::user()->accountWotlk->banned;
+        $userSL = auth()->user()->account->banned;
+        $userWotlk = auth()->user()->accountWotlk->banned;
         if($userSL === NULL || $userWotlk === NULL) {
             return response()->json(['error' => false, 'data' => $notBanned]);
         } elseif($userSL->active === 0 || $userWotlk->active === 0) {
