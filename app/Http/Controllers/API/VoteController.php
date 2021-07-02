@@ -80,7 +80,7 @@ class VoteController extends Controller
 
                     HistoryPayment::create([
                         'user_id' => $game->id,
-                        'service' => 'balance',
+                        'service' => 'vote',
                         'title' => 'Голосование за сервер',
                         'price' => $item->balance,
                         'status' => '1',
