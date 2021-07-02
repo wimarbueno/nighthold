@@ -14,7 +14,7 @@ class PaymentController extends Controller
 {
     public function paymentInfo()
     {
-        $data = HistoryPayment::where('user_id', Auth::user()->id)
+        $data = HistoryPayment::where('user_id', auth()->user()->id)
             ->where('service', 'balance')
             ->orderBy('created_at', 'desc')
             ->paginate(5);
@@ -23,8 +23,9 @@ class PaymentController extends Controller
 
     public function homePage()
     {
-        $data = HistoryPayment::where('user_id', Auth::user()->id)
+        $data = HistoryPayment::where('user_id', auth()->user()->id)
             ->orderBy('created_at', 'desc')
+            ->where('service', 'balance')
             ->limit(5)
             ->get();
         return response()->json(['error' => false, 'data' => $data]);
