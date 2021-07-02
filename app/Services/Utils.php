@@ -1100,7 +1100,7 @@
                     'images' => '/static/components/Icon/svg/alliance.f42675c36dac66ceab3ac9a774c188bd.svg#alliance'
                 ];
             } else {
-                return false;
+                return 'Не известно';
             }
         }
 
