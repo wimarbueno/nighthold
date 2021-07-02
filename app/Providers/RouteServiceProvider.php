@@ -43,9 +43,16 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            $locale = array_key_exists(request()->segment(1), config('app.locales')) ? request()->segment(1) : null;
+
+            Route::middleware(['web', 'localized'])
+                ->prefix($locale)
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/other.php'));
         });
     }
 

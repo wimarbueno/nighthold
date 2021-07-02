@@ -18,7 +18,7 @@ class MainController extends Controller
 
     function __construct() {
         if (Auth()->check()){
-            ///Account::init();
+            Account::init();
         }
     }
 

@@ -9,13 +9,12 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\API\LoginController;
-use App\Http\Middleware\LocaleMiddleware;
 use Illuminate\Support\Facades\Route;
-Route::group(['prefix' => LocaleMiddleware::getLocales()], function(){
+
 Route::get('account/creation/flow/create-full', [RegisteredUserController::class, 'create'])
     ->middleware('guest')
     ->name('register');
-});
+
 Route::post('account/creation/flow/create-full/step/get-started', [RegisteredUserController::class, 'started'])
     ->middleware('guest');
 

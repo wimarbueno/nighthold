@@ -26,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(array_key_exists(request()->segment(1), config('app.locales'))) {
+            app()->setLocale(request()->segment(1));
+        }
+
         Log::Initialize(true, 2);
 
         view()->composer('layouts.providers.pages', function($view) {

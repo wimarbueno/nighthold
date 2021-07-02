@@ -41,8 +41,6 @@ return [
 
     'debug' => (bool) env('APP_DEBUG', false),
 
-    'forum_version' => '0.0.3',
-
     /*
     |--------------------------------------------------------------------------
     | Application URL
