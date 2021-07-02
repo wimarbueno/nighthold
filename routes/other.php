@@ -21,18 +21,6 @@ Route::get('/cookie', function () {
     return Cookie::get('referral');
 });
 
-Route::group(['prefix' => 'admin'], function () {
-    (new TCG\Voyager\Voyager)->routes();
-
-    Route::get('clear', function() {
-        Artisan::call('cache:clear');
-        Artisan::call('config:clear');
-        Artisan::call('view:clear');
-        Artisan::call('route:clear');
-        return "Кэш очищен.";
-    });
-});
-
 Route::group(['prefix' => 'forums'], function () {
     Route::post('topic/post/{user}/block', [JsonController::class, 'block']);
     Route::post('topic/post/{thread}/report', [JsonController::class, 'report']);

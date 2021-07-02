@@ -77,3 +77,15 @@ Route::get('search/blog', [SearchController::class, 'blog'])->name('search.blog'
 Route::get('online', [OnlineController::class, 'index'])->name('online.index');
 
 Route::get('/referral-link', [MainController::class, 'referral']);
+
+Route::group(['prefix' => 'admin'], function () {
+    (new TCG\Voyager\Voyager)->routes();
+
+    Route::get('clear', function() {
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('view:clear');
+        Artisan::call('route:clear');
+        return "Кэш очищен.";
+    });
+});
