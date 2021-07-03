@@ -43,7 +43,7 @@
                         "slug" => $item['slug'],
                         "locale" => "ru-RU",
                         "timezone" => self::getOnline($item['connectionChatacters']),
-                        "online" => @fsockopen($item['ip'], $item['port'], $errNo, $errStr, 1) ? 'true' : 'false',
+                        "online" => (bool)(@fsockopen($item['ip'], $item['port'], $errNo, $errStr, 1)),
                         "category" => "Русский",
                         "type" => [
                             "id" => "1",
@@ -106,7 +106,7 @@
                         "slug" => $item['slug'],
                         "locale" => "ru-RU",
                         "timezone" => self::getOnline($item['connectionChatacters']),
-                        "online" => @fsockopen($item['ip'], $item['port'], $errNo, $errStr, 1) ? 'true' : 'false',
+                        "online" => (bool)(@fsockopen($item['ip'], $item['port'], $errNo, $errStr, 1)),
                         "category" => "Русский",
                         "type" => [
                             "id" => "1",
@@ -168,7 +168,7 @@
                    "slug" => $item['slug'],
                    "locale" => "ru-RU",
                    "timezone" => self::getOnline($item['connectionChatacters']),
-                   "online" => @fsockopen($item['ip'], $item['port'], $errNo, $errStr, 1) ? 'true' : 'false',
+                   "online" => (bool)(@fsockopen($item['ip'], $item['port'], $errNo, $errStr, 1)),
                    "category" => "Русский",
                    "type" => [
                        "id" => "1",
