@@ -219,12 +219,8 @@
 
         private static function getOnline($connection) {
             if ($connection === "WotlkChatacters") {
-                $Statement = DB::connection($connection)
-                    ->table('characters')
-                    ->select(DB::raw('count(guid) as now_online'))
-                    ->where('online', 1)
-                    ->first();
-                return ceil($Statement->now_online * setting('onlain.online_wotlk'));
+                $Statement = DB::connection('WotlkAuth')->table('realmlist')->where('online')->first();
+                return ceil($Statement * setting('onlain.online_wotlk'));
             } else {
                 $Statement = DB::connection($connection)
                     ->table('characters')
@@ -300,7 +296,7 @@
         private static function getOnlinePlayers()
         {
             $SLOnline = DB::connection('ShadowlandsChatacters')->table('characters')->where('online', 1)->count();
-            $WotlkOnline = DB::connection('WotlkChatacters')->table('characters')->where('online', 1)->count();
+            $WotlkOnline = DB::connection('WotlkAuth')->table('realmlist')->where('online')->first();
 
             return ceil($SLOnline + $WotlkOnline * setting('onlain.online') * setting('onlain.online_wotlk')) ;
         }
