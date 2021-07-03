@@ -8,6 +8,7 @@ use App\Models\Shadowlands\Account\Account;
 use App\Models\Streams;
 use App\Models\User;
 use App\Models\Web\Referral;
+use App\Models\Wotlk\Account\AccountDonate;
 use App\Services\Soap\Soap;
 use App\Services\Text;
 use App\Services\Utils;
@@ -107,10 +108,13 @@ class AuthController extends Controller
         $data = auth()->user();
         $data['questions'] = __('account.question_'.$data['question']);
         $data['countrys'] = __('country.'.$data['country']);
-        $balance = auth()->user()->balance;
+        if (auth()->user()->accountWotlk) {
+            $user = auth()->user()->accountWotlk->id;
+            $balance = AccountDonate::where('id', $user)->first();
+        }
         return json_encode([
             'data' => $data,
-            'balance' => $balance
+            'balance' => $balance->bonuses ?? 0
         ], JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
     }
 
@@ -144,8 +148,9 @@ class AuthController extends Controller
         $data = HistoryPayment::where('user_id', auth()->user()->id)
             ->where('service', 'balance')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
-        return response()->json(['error' => false, 'data' => $data]);
+            ->paginate(15);
+        $count = HistoryPayment::where('user_id', auth()->user()->id)->get()->count();
+        return response()->json(['error' => false, 'data' => $data, 'count' => $count]);
     }
 
     /**
@@ -201,6 +206,7 @@ class AuthController extends Controller
         return response()->json([
             'error' => false,
             'data' =>  $referrals,
+            'count' =>  $data->count(),
             'url' => config('app.url') . "?ref=" . \Hashids::encode(auth()->user()->id)
         ]);
     }

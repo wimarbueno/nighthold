@@ -18,7 +18,8 @@ class PaymentController extends Controller
             ->where('service', 'balance')
             ->orderBy('created_at', 'desc')
             ->paginate(5);
-        return response()->json(['error' => false, 'data' => $data]);
+        $count = HistoryPayment::where('user_id', auth()->user()->id)->get()->count();
+        return response()->json(['error' => false, 'data' => $data, 'count' => $count ]);
     }
 
     public function homePage()
