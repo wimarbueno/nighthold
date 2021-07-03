@@ -183,6 +183,7 @@ class GameController extends Controller
         foreach ($userStream as $item) {
             if (!Stream::where('display_name', $item->name_user)->first()) {
                 Stream::create([
+                    'name' => $item->name_user,
                     'display_name' => $item->name_user,
                     'description' => '',
                     'user_id' => '',
