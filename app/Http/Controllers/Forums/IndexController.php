@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Forums;
 use App\Http\Controllers\Controller;
 use App\Models\Channel;
 use App\Models\Thread;
-use Illuminate\Http\Request;
 use Genert\BBCode\BBCode;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class IndexController extends Controller
 {
@@ -25,10 +22,11 @@ class IndexController extends Controller
         $threads = Channel::where('parent_id', 0)->with('forums')->orderBy('sort')->get();
         $category = Channel::where('id', $slug)->whereNotNull('parent_id')->firstOrFail();
         $categories = Channel::where('id', $slug)->with('forums')->orderBy('sort')->get();
+        $sidebar = Channel::where('id', $slug)->orderBy('parent_id', 'DESC')->with(['childrenCategories'])->get();
         $topics = Thread::whereChannelId($category->id)->whereNull('parent_id')->orderBy('sticky', 'DESC')->orderBy('created_at', 'DESC')->with(['user' => function($query) {
             $query->select('id', 'name');
         }])->paginate(30);
-        return view('forum.show', compact('category', 'topics', 'threads', 'categories'));
+        return view('forum.show', compact('category', 'topics', 'threads', 'categories', 'sidebar'));
     }
 
     public function store()
@@ -84,10 +82,9 @@ class IndexController extends Controller
         if (auth()->check()) {
             auth()->user()->read($slug);
         }
-
         $topics = Thread::whereParentId($thread->id)->paginate(10);
-
-        return view('forum.topic', compact('thread', 'topics'));
+        $sidebar = Channel::where('id', $thread->channel_id)->with('childrenCategories')->orderBy('parent_id', 'desc')->get();
+        return view('forum.topic', compact('thread', 'topics', 'sidebar'));
     }
 
     public function patch_notes() {

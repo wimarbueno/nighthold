@@ -9,10 +9,34 @@
 @endsection
 
 @section('sidebar')
-    <div class="Breadcrumbs"> <span class="Breadcrumb"> <a href="{{ route('forums.index') }}" class="Breadcrumb-content">
-<span class="Breadcrumb-divider Home"> <i class="Icon"></i> </span>@lang('navbar.Navbar-forums')</a> </span>
-        <span class="Breadcrumb"> <span class="Breadcrumb-divider"> <i class="Icon"></i> </span>
-<a href="{{ route('forum.show', [$category->id])}}" class="Breadcrumb-content is-active"> {{ $category->name }} </a> </span>
+
+    <div class="Breadcrumbs">
+        <span class="Breadcrumb">
+            <a href="{{ route('forums.index') }}" class="Breadcrumb-content">
+                <span class="Breadcrumb-divider Home">
+                    <i class="Icon"></i>
+                </span>
+                @lang('navbar.Navbar-forums')
+            </a>
+        </span>
+        @foreach ($sidebar as $category)
+                <span class="Breadcrumb">
+                    <a href="{{ route('forum.show', [$category->id])}}" class="Breadcrumb-content">
+                        <span class="Breadcrumb-divider Home">
+                            <i class="Icon"></i>
+                        </span>
+                        {{ $category->name }}
+                    </a>
+                </span>
+
+                @if($category->categories)
+                    @foreach ($category->categories as $childCategory)
+
+                        @include('forum.child_category', ['category' => $childCategory])
+                    @endforeach
+                @endif
+            </ul>
+        @endforeach
     </div>
 @endsection
 
