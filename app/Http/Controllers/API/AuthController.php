@@ -149,7 +149,7 @@ class AuthController extends Controller
             ->where('service', 'balance')
             ->orderBy('created_at', 'desc')
             ->paginate(15);
-        $count = HistoryPayment::where('user_id', auth()->user()->id)->get()->count();
+        $count = HistoryPayment::where('user_id', auth()->user()->id)->where('service', 'balance')->get()->count();
         return response()->json(['error' => false, 'data' => $data, 'count' => $count]);
     }
 
