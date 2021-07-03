@@ -44,10 +44,11 @@ class IndexController extends Controller
             '$1'
         );
 
-        $texts = $bbCode->convertToHtml(request('messages'), BBCode::CASE_SENSITIVE);
+        $url = preg_replace("#\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))#iS", "<strong><a href='$0' target='_blank'>$0</a></strong>", request('detail'));
+        
+        $texts = $bbCode->convertToHtml($url, BBCode::CASE_SENSITIVE);
 
         $text = $this->getInLines($texts);
-
 
         $thread = Thread::create([
             'user_id' => auth()->id(),
