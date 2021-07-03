@@ -126,15 +126,18 @@ class Account extends Model
             ->update(['sha_pass_hash' => $accountGameHash]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function newPasswordBnetSrp6($email, $password)
     {
         $bnet_hashed_pass = strtoupper(bin2hex(strrev(hex2bin(strtoupper(hash('sha256', strtoupper(hash('sha256', strtoupper($email)) . ':' . strtoupper($password))))))));
-        $accountBnet = DB::connection('auth')
+        $accountBnet = DB::connection('ShadowlandsAuth')
             ->table('battlenet_accounts')
             ->where('email', $email)
             ->update(['sha_pass_hash' => $bnet_hashed_pass]);
-        list($salt, $verifier) = Srp6::getRegistrationData($email, $password);
-        DB::connection('auth')
+        list($salt, $verifier) = (new \App\Services\Srp6)->getRegistrationData($email, $password);
+        DB::connection('ShadowlandsAuth')
             ->table('account')
             ->where('email', $email)
             ->update([

@@ -9,6 +9,7 @@ use App\Models\Wotlk\Account\AccountDonate;
 use App\Models\Wotlk\Account\AccountPremium;
 use App\Services\Account;
 use App\Services\Posts\Posts;
+use App\Services\Soap\Soap;
 use Butschster\Head\Facades\Meta;
 use Carbon\Carbon;
 use TCG\Voyager\Models\Post;
@@ -37,8 +38,13 @@ class MainController extends Controller
         return view('update', ['update' => $data]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function referral()
     {
+        ////\App\Models\Shadowlands\Account\Account::newPasswordBnetSrp6('koltkot1703@gmail.com', '415827');
+
         $referred = Referral::where('ref_id', 17)->get();
 
         if(count($referred) === 0) {
