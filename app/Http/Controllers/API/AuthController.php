@@ -9,6 +9,7 @@ use App\Models\Streams;
 use App\Models\User;
 use App\Models\Web\Referral;
 use App\Models\Wotlk\Account\AccountDonate;
+use App\Models\Wotlk\Account\AccountWotlk;
 use App\Services\Soap\Soap;
 use App\Services\Text;
 use App\Services\Utils;
@@ -66,15 +67,9 @@ class AuthController extends Controller
 
         if(Hash::check($password['oldPassword'], auth()->user()->password)) {
             $user = User::where('email', auth()->user()->email)->first();
-            $soap = new Soap();
-            if($soap->cmd('bnetaccount password '.$password['oldPassword'].' '.$password['newPassword'].' '.$password['confirmPassword']) === NULL) {
-                $user->update([
-                    'password' => Hash::make($password['newPassword'])
-                ]);
-                return response()->json(['success'=> true, 'message' => 'Пароль успешно изменен.']);
-            } else {
-                return response()->json(['success'=> true, 'message' => 'Не известная ошибка, обратитесь к администратору сайта.']);
-            }
+            AccountWotlk::newPassword($user->accountWotlk->username, $password['newPassword']);
+            Account::newPasswordBnetSrp6($user->email, $password['newPassword']);
+            return response()->json(['success'=> true, 'message' => 'Данные успешно изменены. Для входа на сайт и в игры используйте новый пароль.']);
         } else {
             return response()->json(['success'=> false, 'message' => 'Старый пароль неверный!']);
         }
