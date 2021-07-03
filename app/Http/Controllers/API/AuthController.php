@@ -197,8 +197,8 @@ class AuthController extends Controller
         foreach ($data as $item ) {
             $referrals[] =
                 [
-                    "name" => $item->referrer->name,
-                    "bonus" => $item->bonus,
+                    "name" => $item->referrer->name ?? 'Не известно',
+                    "bonus" => $item->bonus ?? 'Не известно',
                     "totaltime" => Text::totalTime($item->characters->totaltime ?? '0')
                 ];
         }
