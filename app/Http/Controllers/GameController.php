@@ -181,7 +181,7 @@ class GameController extends Controller
     {
         $userStream = Streams::where('status', 1)->get();
         foreach ($userStream as $item) {
-            if (!Stream::where('display_name', $item->name_user)->first()) {
+            if (!Stream::where('name', $item->name_user)->first()) {
                 Stream::create([
                     'name' => $item->name_user,
                     'display_name' => $item->name_user,
