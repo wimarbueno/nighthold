@@ -162,7 +162,7 @@
             'icon_race_15' => 'nightelf',
             'icon_race_16' => 'voidelf',
             'icon_race_17' => 'nightborne',
-            'icon_race_18' => 'void-elf',
+            'icon_race_18' => 'voidelf',
             'icon_race_20' => 'vulpera',
             'icon_race_22' => 'worgen',
             'icon_race_24' => 'pandaren',
