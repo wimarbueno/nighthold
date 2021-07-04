@@ -110,7 +110,7 @@ class JsonController extends Controller
             '$1'
         );
 
-        $text = $bbCode->convertToHtml(request('messages'), BBCode::CASE_SENSITIVE);
+        $text = $bbCode->convertToHtml(request('detail'), BBCode::CASE_SENSITIVE);
 
 
         Thread::where('id', $id)->update(['body' => $text]);
