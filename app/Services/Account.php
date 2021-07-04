@@ -42,7 +42,7 @@ class Account
             for($i = 0; $i < $total_chars_count; ++$i) {
                 self::$characters_data[$i]->class_text = __('characters.class_' . self::$characters_data[$i]->class);
                 self::$characters_data[$i]->race_text = __('characters.race_' . self::$characters_data[$i]->race);
-                self::$characters_data[$i]->faction_text = Utils::faction(self::$characters_data[$i]->race)['slug'];
+                self::$characters_data[$i]->faction_text = Utils::faction(self::$characters_data[$i]->race)['slug'] ?? 'unknown';
                 self::$characters_data[$i]->url = '';
                 if(self::$characters_data[$i]->isActive) {
                     self::$active_character = self::$characters_data[$i];
