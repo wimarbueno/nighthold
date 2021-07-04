@@ -173,7 +173,12 @@
                         </button>
                         <div class="TopicPost-bodyContent" data-topic-post-body-content="true">{!! $thread->body !!}</div>
                         @guest
-                        @else<footer class="TopicPost-actions" data-topic-post-body-content="true"><button class="TopicPost-button TopicPost-button--like" data-topic-post-button="true" data-trigger="vote.up.topicpost" type="button"><span class="Button-content"><i class="Icon"></i>Нравится</span></button><a href="#detail" class="TopicPost-button TopicPost-button--quote" data-topic-post-button="true" data-trigger="quote.topicpost" type="button"><span class="Button-content"><svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-quote"/></svg>Цитирование</span></a></footer>@endguest
+                        @else
+                            <footer class="TopicPost-actions" data-topic-post-body-content="true">
+                                <button class="TopicPost-button TopicPost-button--like" data-topic-post-button="true" data-trigger="vote.up.topicpost" type="button"><span class="Button-content"><i class="Icon"></i>Нравится</span></button>
+                                <a href="#detail" class="TopicPost-button TopicPost-button--quote" data-topic-post-button="true" data-trigger="quote.topicpost" type="button"><span class="Button-content"><svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-quote"/></svg>Цитирование</span></a>
+                            </footer>
+                        @endguest
                     </div>
                 </div>
             </div>

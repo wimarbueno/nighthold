@@ -1,18 +1,18 @@
 <div class="Section Section--secondary is-hidden" id="create-topic-section">
     <div class="CreateTopic-container">
-        <div class="TopicForm TopicForm-group--isActive TopicForm-group--isActivated TopicForm--create is-hidden is-editing" data-topic-form="{'userId': {{ Auth::user()->id }}  }" id="create-topic"><header class="TopicForm-header"><h1 class="TopicForm-heading">@lang('forum.New_Topic')</h1><a class="TopicForm-button--close" data-trigger="create.topicpost.forum" data-forum-button="true"></a></header>
+        <div class="TopicForm TopicForm-group--isActive TopicForm-group--isActivated TopicForm--create is-hidden is-editing" data-topic-form="{'userId': {{ auth()->user()->id }}  }" id="create-topic"><header class="TopicForm-header"><h1 class="TopicForm-heading">@lang('forum.New_Topic')</h1><a class="TopicForm-button--close" data-trigger="create.topicpost.forum" data-forum-button="true"></a></header>
             <div class="TopicForm-content">
-                <aside class="TopicForm-author" data-topic-form="{'userId': {{ Auth::user()->id }}  }">
+                <aside class="TopicForm-author" data-topic-form="{'userId': {{ auth()->user()->id }}  }">
                     <div class="Author" id="" data-topic-post-body-content="true">
                         <a href="#" class="Author-avatar ">
                             <img src="{{ asset('/storage/'.Auth::user()->avatar ?: '/static/Avatar-anon.png') }}" alt="" /></a>
                         <div class="Author-details">
 <span class="Author-name">
-<a class="Author-name--profileLink" href="characters">{{ Auth::user()->name }}</a>
+<a class="Author-name--profileLink" href="#">{{ auth()->user()->name }}</a>
 </span>
                             <span class="Author-posts">
 <a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
-@lang('forum.count_messages', ['count' => Auth::user()->posts_count])
+@lang('forum.count_messages', ['count' => auth()->user()->posts_count])
 </a>
 </span>
                         </div>
@@ -27,7 +27,8 @@
                         <input type="text" id="subject" name="subject" autocomplete="off" class="TopicForm-control TopicForm-control--subject TopicForm-subject" data-topic-form-subject="true" placeholder="@lang('forum.TopicFormSubject')" required="required" tabindex="1" fieldType="text" />
                     </div>
                     <div class="TopicForm-group TopicForm-group-content">
-                        <textarea name="messages" class="TopicForm-control TopicForm-control--detail TopicForm-detail" data-topic-form-detail="true" required="required" spellcheck="true" tabindex="1"></textarea>
+                        <textarea id="postCommand.detail" name="messages" class="TopicForm-control TopicForm-control--detail TopicForm-detail" data-topic-form-detail="true" spellcheck="true" tabindex="1" autofocus></textarea>
+                        <div class="PostForm-errors"></div>
                         <script>
                             tinymce.init({
                                 selector: 'textarea',
