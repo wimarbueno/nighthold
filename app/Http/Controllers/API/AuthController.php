@@ -128,8 +128,8 @@ class AuthController extends Controller
                 [
                     "name" => $item->name,
                     "level" => $item->level,
-                    "race" => asset(Utils::imageRace($item->race)),
-                    "class" => asset(Utils::imageClass($item->race, $item->gender)),
+                    "race" => Utils::imageRace($item->race),
+                    "class" => Utils::imageClass($item->race, $item->gender),
                     "server" => $item->realmName,
                     "totaltime" => Text::totalTime($item->totaltime),
                     "logout_time" => Text::lastLoginCharacters($item->logout_time),

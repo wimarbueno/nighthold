@@ -1105,8 +1105,8 @@
         }
 
         public static function raceCharacters($race) {
-            $horde_races    = [10, 35, 6, 31, 2, 9, 27, 5, 8, 28, 36, 26];
-            $alliance_races = [1, 32, 4, 3, 22, 29, 7, 37, 11, 34, 30, 25];
+            $horde_races    = [10, 35, 6, 31, 2, 9, 27, 5, 8, 28, 36, 26, 20, 15, 16, 17, 18];
+            $alliance_races = [1, 32, 4, 3, 22, 29, 7, 37, 11, 34, 30, 25, 14, 12, 15, 16, 17, 18];
             $neutral_races = [24];
             if(in_array($race, $horde_races)) {
                 return 'Logo--horde';
@@ -1129,8 +1129,8 @@
         }
 
         public static function imageRace($race) {
-            $horde_races    = [10, 35, 6, 31, 2, 9, 27, 5, 8, 28, 36, 26];
-            $alliance_races = [1, 32, 4, 3, 22, 29, 7, 37, 11, 34, 30, 25];
+            $horde_races    = [10, 35, 6, 31, 2, 9, 27, 5, 8, 28, 36, 26, 20, 15, 16, 17, 18];
+            $alliance_races = [1, 32, 4, 3, 22, 29, 7, 37, 11, 34, 30, 25, 14, 12, 15, 16, 17, 18];
             $neutral_races = [24];
             if(in_array($race, $horde_races)) {
                 return asset('/static/components/Logo/Logo-hordeEmblem.e6d11863f6c65b2a875091c1ac01cb3f.png');
