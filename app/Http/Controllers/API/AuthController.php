@@ -24,7 +24,7 @@ class AuthController extends Controller
             'name_user' => $request->get('name_user'),
             'id_user' => auth()->id()
         ]);
-        return response()->json(['success'=> true, 'message' => 'Данные успешно отправлены.']);
+        return response()->json(['success'=> true, 'message' => 'Данные успешно отправлены.', 'class' => 'alert-message success']);
     }
 
     public function stream() {
@@ -53,7 +53,7 @@ class AuthController extends Controller
             'question' => $request->get('question'),
             'answer' => $request->get('answer')
         ]);
-        return response()->json(['success'=> true, 'message' => 'Данные успешно изменены.']);
+        return response()->json(['success'=> true, 'message' => 'Данные успешно изменены.', 'class' => 'alert-message success']);
     }
 
     public function changePassword(Request $request) {
@@ -62,16 +62,16 @@ class AuthController extends Controller
         ]);
 
         if ($password['newPassword'] != $password['confirmPassword']) {
-            return response()->json(['success'=> false, 'message' => 'Поле «подтвердить пароль» не совпадает.']);
+            return response()->json(['success'=> false, 'message' => 'Поле «подтвердить пароль» не совпадает.', 'class' => 'alert-message error']);
         }
 
         if(Hash::check($password['oldPassword'], auth()->user()->password)) {
             $user = User::where('email', auth()->user()->email)->first();
             AccountWotlk::newPassword($user->accountWotlk->username, $password['newPassword']);
             Account::newPasswordBnetSrp6($user->email, $password['newPassword']);
-            return response()->json(['success'=> true, 'message' => 'Данные успешно изменены. Для входа на сайт и в игры используйте новый пароль.']);
+            return response()->json(['success'=> true, 'message' => 'Данные успешно изменены. Для входа на сайт и в игры используйте новый пароль.', 'class' => 'alert-message success']);
         } else {
-            return response()->json(['success'=> false, 'message' => 'Старый пароль неверный!']);
+            return response()->json(['success'=> false, 'message' => 'Старый пароль неверный!', 'class' => 'alert-message error']);
         }
     }
 
@@ -82,7 +82,29 @@ class AuthController extends Controller
             'firstName' => $request->get('first-name'),
             'country' => $request->get('country')
         ]);
-        return response()->json(['success'=> true, 'message' => 'Данные успешно изменены.']);
+        return response()->json(['success'=> true, 'message' => 'Данные успешно изменены.', 'class' => 'alert-message success']);
+    }
+
+    public function changeTag(Request $request) {
+        $balance = AccountDonate::where('id', auth()->user()->accountWotlk->id)->first();
+
+        if ($balance->bonuses >= setting('platnye-uslugi.NightHoldTag')) {
+            $user = User::where('email', auth()->user()->email)->first();
+
+            $user->update([
+                'name' => $request->get('name')
+            ]);
+
+            $newBalance = $balance->bonuses - setting('platnye-uslugi.NightHoldTag');
+
+            AccountDonate::where('id', auth()->user()->accountWotlk->id)->update([
+                'bonuses' => $newBalance
+            ]);
+
+            return response()->json(['successtag'=> true, 'message' => 'Данные успешно изменены.', 'class' => 'alert-message success']);
+        }  else {
+            return response()->json(['successtag'=> false, 'message' => 'У вас недостаточное бонусов', 'class' => 'alert-message error']);
+        }
     }
 
     public function changeEmail(Request $request) {
@@ -93,9 +115,9 @@ class AuthController extends Controller
             $user->update([
                 'email' => $request->email
             ]);
-            return response()->json(['success'=> true, 'message' => 'Электронная почта успешно изменена.']);
+            return response()->json(['success'=> true, 'message' => 'Электронная почта успешно изменена.', 'class' => 'alert-message success']);
         } else {
-            return response()->json(['success'=> false, 'message' => 'Login Fail, pls check password']);
+            return response()->json(['success'=> false, 'message' => 'Login Fail, pls check password', 'class' => 'alert-message error']);
         }
     }
 
@@ -111,6 +133,7 @@ class AuthController extends Controller
             'data' => $data,
             'balance' => $balance->bonuses ?? 0,
             'votes' => $balance->votes ?? 0,
+            'NightHoldTag' => setting('platnye-uslugi.NightHoldTag'),
         ], JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
     }
 

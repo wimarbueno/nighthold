@@ -47,6 +47,7 @@ Route::post('edit/password', [AuthController::class, 'changePassword']);
 Route::post('edit/question', [AuthController::class, 'changeQuestion']);
 Route::post('edit/email', [AuthController::class, 'changeEmail']);
 Route::post('edit/name', [AuthController::class, 'changeName']);
+Route::post('edit/change-tag', [AuthController::class, 'changeTag']);
 
 Route::get('referrals', [AuthController::class, 'referrals']);
 
