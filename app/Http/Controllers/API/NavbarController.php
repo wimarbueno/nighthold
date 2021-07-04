@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class NavbarController extends Controller
 {
+    public function errorReport(Request $request) {
+
+    }
+
     public function nav(Request $request) {
         if ($request->get('titleId') && $request->get('countryCode') && $request->get('locale')) {
             return json_encode(

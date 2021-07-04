@@ -30,6 +30,7 @@ Route::group([
     });
 });
 Route::get('v5/nav/rating', [NavbarController::class, 'nav'])->name('navRating');
+Route::post('error-report', [NavbarController::class, 'errorReport'])->name('error.report');
 
 Route::get('online', [NavbarController::class, 'online'])->name('onlineApi');
 

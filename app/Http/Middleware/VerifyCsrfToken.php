@@ -17,7 +17,6 @@ class VerifyCsrfToken extends Middleware
         '/account/creation/*',
         '/graphql',
         '/message-bus/*',
-        '/api/edit/email',
-        '/api/auth/login'
+        '/api/*',
     ];
 }
