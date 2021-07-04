@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Forums;
 use App\Http\Controllers\Controller;
 use App\Models\Channel;
 use App\Models\Thread;
+use Genert\BBCode\BBCode;
 
 class IndexController extends Controller
 {
@@ -35,11 +36,37 @@ class IndexController extends Controller
             'messages' => 'required'
         ]);
 
+        $bbCode = new BBCode();
+
+        $bbCode->addParser(
+            'custom-link',
+            '/\[link=(.*?)\](.*?)\[\/link\]/s',
+            '<a href="$1">$2</a>',
+            '$1'
+        );
+        $bbCode->addParser(
+            'quote',
+            '/\[quote=(.*?)\](.*?)\[\/quote\]/s',
+            '<blockquote><a href="$1">$2</a></blockquote>',
+            '$1'
+        );
+
+        $index = rand(1, 90);
+
+        $bbCode->addParser(
+            'custom-link',
+            '#\[video(.+?)\]#i',
+            '<div id="player_'.$index.'"></div><script>var player = new Playerjs({id:"player_'.$index.'", $1});</script>',
+            '$1'
+        );
+
+        $text = $bbCode->convertToHtml(request('messages'), BBCode::CASE_SENSITIVE);
+
         $thread = Thread::create([
             'user_id' => auth()->id(),
             'channel_id' => request('channel_id'),
             'title' => request('subject'),
-            'body' => request('messages')
+            'body' => $text
         ]);
 
         if (request()->wantsJson()) {

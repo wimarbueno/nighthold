@@ -94,10 +94,26 @@ class JsonController extends Controller
             '<a href="$1">$2</a>',
             '$1'
         );
+        $bbCode->addParser(
+            'quote',
+            '/\[quote=(.*?)\](.*?)\[\/quote\]/s',
+            '<blockquote><a href="$1">$2</a></blockquote>',
+            '$1'
+        );
 
-        $text = $this->getInLines($bbCode->convertToHtml(request('detail')));
+        $index = rand(1, 90);
 
-        $thead = Thread::where('id', $id)->update(['body' => $text]);
+        $bbCode->addParser(
+            'custom-link',
+            '#\[video(.+?)\]#i',
+            '<div id="player_'.$index.'"></div><script>var player = new Playerjs({id:"player_'.$index.'", $1});</script>',
+            '$1'
+        );
+
+        $text = $bbCode->convertToHtml(request('messages'), BBCode::CASE_SENSITIVE);
+
+
+        Thread::where('id', $id)->update(['body' => $text]);
 
         return response()->json([
             'detail' => $text

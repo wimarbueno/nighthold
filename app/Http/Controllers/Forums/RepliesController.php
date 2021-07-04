@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Forums;
 use App\Http\Controllers\Controller;
 use App\Models\Reply;
 use App\Models\Thread;
+use Genert\BBCode\BBCode;
 
 class RepliesController extends Controller
 {
@@ -34,9 +35,34 @@ class RepliesController extends Controller
             'detail' => 'required'
         ]);
 
+        $bbCode = new BBCode();
+
+        $bbCode->addParser(
+            'custom-link',
+            '/\[link=(.*?)\](.*?)\[\/link\]/s',
+            '<a href="$1">$2</a>',
+            '$1'
+        );
+        $bbCode->addParser(
+            'quote',
+            '/\[quote=(.*?)\](.*?)\[\/quote\]/s',
+            '<blockquote><a href="$1">$2</a></blockquote>',
+            '$1'
+        );
+        $index = rand(1, 15);
+
+        $bbCode->addParser(
+            'custom-link',
+            '#\[video(.+?)\]#i',
+            '<div id="player_'.$index.'"></div><script>var player = new Playerjs({id:"player_'.$index.'", $1});</script>',
+            '$1'
+        );
+
+        $text = $bbCode->convertToHtml(request('detail'), BBCode::CASE_SENSITIVE);
+
         $thread->addReply([
             'parent_id' => $thread->id,
-            'body' =>  request('detail'),
+            'body' => $text,
             'user_id' => auth()->id(),
             'channel_id' => $thread->channel_id
         ])->load('creator');
