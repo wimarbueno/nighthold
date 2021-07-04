@@ -8,11 +8,15 @@ class Account
 {
     private static $characters_data = [];
 
-    private static $active_character = [];
-
-    private static $characters_loaded = false;
-
     private static $myGamesList = [];
+    /**
+     * @var false
+     */
+    private static $characters_loaded;
+    /**
+     * @var mixed
+     */
+    private static $active_character;
 
     public static function init() {
         self::LoadCharacters();
@@ -23,12 +27,7 @@ class Account
     {
         self::$characters_loaded = false;
         self::$myGamesList = auth()->user()->accountWotlk->id;
-        $account_ids = array();
-        $accounts_count = self::$myGamesList;
-        for($i = 0; $i < $accounts_count; ++$i) {
-            $account_ids[] = self::$myGamesList;
-        }
-        if(is_array($account_ids) && $accounts_count > 0) {
+        if(self::$myGamesList > 0) {
             $total_chars_count = DB::connection('WotlkAuth')->table('realmcharacters')->where('acctid', [auth()->user()->accountWotlk->id])->sum('numchars');
             self::$characters_data = DB::table("user_characters")->where('account', [auth()->user()->accountWotlk->id])->orderBy('index')->get();
         }
@@ -45,11 +44,6 @@ class Account
                 self::$characters_data[$i]->race_text = __('characters.race_' . self::$characters_data[$i]->race);
                 self::$characters_data[$i]->faction_text = Utils::faction(self::$characters_data[$i]->race)['slug'];
                 self::$characters_data[$i]->url = '';
-
-                // Realm status
-                $status = Server::getServerStatus(self::$characters_data[$i]->realmId);
-                self::$characters_data[$i]->realmStatus = isset($status[0], $status[0]->status) ? $status[0]->status : 'down';
-
                 if(self::$characters_data[$i]->isActive) {
                     self::$active_character = self::$characters_data[$i];
                 }
@@ -61,7 +55,12 @@ class Account
         }
         $active_set = false;
         $index = 0;
-        DB::table('user_characters')->where('account', '=', $account_ids)->delete();
+
+        $total_chars = DB::table("user_characters")->where('account', [self::$myGamesList])->sum('account');
+
+        if ($total_chars != $total_chars_count)  {
+            DB::table('user_characters')->where('account', '=', self::$myGamesList)->delete();
+        }
         foreach(self::$characters_data as $char) {
             DB::table('user_characters')->insert([
                 'bn_id' => auth()->user()->id,
@@ -103,14 +102,9 @@ class Account
     {
         self::$characters_loaded = false;
         self::$myGamesList = auth()->user()->account->id;
-        $account_ids = array();
-        $accounts_count = self::$myGamesList;
-        for($i = 0; $i < $accounts_count; ++$i) {
-            $account_ids[] = self::$myGamesList;
-        }
-        if(is_array($account_ids) && $accounts_count > 0) {
-            $total_chars_count = DB::connection('ShadowlandsAuth')->table('realmcharacters')->where('acctid', [auth()->user()->account->id])->sum('numchars');
-            self::$characters_data = DB::table("user_characters")->where('account', [auth()->user()->account->id])->orderBy('index')->get();
+        if(self::$myGamesList > 0) {
+            $total_chars_count = DB::connection('ShadowlandsAuth')->table('realmcharacters')->where('acctid', [self::$myGamesList])->sum('numchars');
+            self::$characters_data = DB::table("user_characters")->where('account', [self::$myGamesList])->orderBy('index')->get();
         }
         else {
             $total_chars_count = 0;
@@ -134,10 +128,15 @@ class Account
         if(!self::$characters_data) {
             return;
         }
+
         $active_set = false;
         $index = 0;
 
-        DB::table('user_characters')->where('account', '=', $account_ids)->delete();
+        $total_chars = DB::table("user_characters")->where('account', [self::$myGamesList])->sum('account');
+
+        if ($total_chars != $total_chars_count)  {
+            DB::table('user_characters')->where('account', '=', self::$myGamesList)->delete();
+        }
 
         foreach(self::$characters_data as $char) {
             DB::table('user_characters')->insert([
