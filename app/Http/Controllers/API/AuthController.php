@@ -109,7 +109,8 @@ class AuthController extends Controller
         }
         return json_encode([
             'data' => $data,
-            'balance' => $balance->bonuses ?? 0
+            'balance' => $balance->bonuses ?? 0,
+            'votes' => $balance->votes ?? 0,
         ], JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
     }
 
