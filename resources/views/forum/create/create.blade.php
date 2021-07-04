@@ -4,14 +4,14 @@
             <div class="TopicForm-content">
                 <aside class="TopicForm-author" data-topic-form="{'userId': {{ Auth::user()->id }}  }">
                     <div class="Author" id="" data-topic-post-body-content="true">
-                        <a href="characters" class="Author-avatar ">
+                        <a href="#" class="Author-avatar ">
                             <img src="{{ asset('/storage/'.Auth::user()->avatar ?: '/static/Avatar-anon.png') }}" alt="" /></a>
                         <div class="Author-details">
 <span class="Author-name">
 <a class="Author-name--profileLink" href="characters">{{ Auth::user()->name }}</a>
 </span>
                             <span class="Author-posts">
-<a class="Author-posts" href="/search?a={{ Auth::user()->name }}" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
+<a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
 @lang('forum.count_messages', ['count' => Auth::user()->posts_count])
 </a>
 </span>
@@ -27,36 +27,41 @@
                         <input type="text" id="subject" name="subject" autocomplete="off" class="TopicForm-control TopicForm-control--subject TopicForm-subject" data-topic-form-subject="true" placeholder="@lang('forum.TopicFormSubject')" required="required" tabindex="1" fieldType="text" />
                     </div>
                     <div class="TopicForm-group TopicForm-group-content">
-                        <textarea id="postCommand.detail" name="messages" class="TopicForm-control TopicForm-control--detail TopicForm-detail" data-topic-form-detail="true" required="required" spellcheck="true" tabindex="1"></textarea>
-                        <div class="BmlToolbar" id="BmlToolbar">
-                            <div class="BmlToolbar--content">
-<span data-toggle="tooltip" data-tooltip-content="@lang('forum.bold')" data-topic-post-button="true" data-trigger="bml.bold.bmltoolbar" class="BmlToolbar-button" data-original-title="" title="">
-<i class="Icon Icon--16 Icon--bold"></i>
-</span>
-                                <span data-toggle="tooltip" data-tooltip-content="@lang('forum.italics')" data-topic-post-button="true" data-trigger="bml.italics.bmltoolbar" class="BmlToolbar-button" data-original-title="" title=""><i class="Icon Icon--16 Icon--italics"></i>
-</span>
-                                <span data-toggle="tooltip" data-tooltip-content="@lang('forum.underline')" data-topic-post-button="true" data-trigger="bml.underline.bmltoolbar" class="BmlToolbar-button" data-original-title="" title="">
-<i class="Icon Icon--16 Icon--underline"></i>
-</span>
-                                <span class="BmlToolbar-divider"></span>
-                                <span data-toggle="tooltip" data-tooltip-content="@lang('forum.list')" data-topic-post-button="true" data-trigger="bml.list.bmltoolbar" class="BmlToolbar-button" data-original-title="" title="">
-<i class="Icon Icon--16 Icon--list"></i>
-</span>
-                                <span data-toggle="tooltip" data-tooltip-content="@lang('forum.listItem')" data-topic-post-button="true" data-trigger="bml.listItem.bmltoolbar" class="BmlToolbar-button" data-original-title="" title="">
-<i class="Icon Icon--16 Icon--list-item"></i>
-</span>
-                                <span class="BmlToolbar-divider"></span>
-                                <span data-toggle="tooltip" data-tooltip-content="@lang('forum.quote')" data-topic-post-button="true" data-trigger="bml.quote.bmltoolbar" class="BmlToolbar-button" data-original-title="" title="">
-<i class="Icon Icon--16 Icon--quote"></i>
-</span>
-                                <span data-toggle="tooltip" data-tooltip-content="@lang('forum.code')" data-topic-post-button="true" data-trigger="bml.code.bmltoolbar" class="BmlToolbar-button" data-original-title="" title="">
-<i class="Icon Icon--16 Icon--code"></i>
-</span>
-                                <span data-toggle="tooltip" data-tooltip-content="@lang('forum.item')" data-topic-post-button="true" data-trigger="bml.item.bmltoolbar" class="BmlToolbar-button" data-original-title="" title="">
-<i class="Icon Icon--16 Icon--code"></i>
-</span>
-                            </div>
-                        </div>
+                        <textarea name="messages" class="TopicForm-control TopicForm-control--detail TopicForm-detail" data-topic-form-detail="true" required="required" spellcheck="true" tabindex="1"></textarea>
+                        <script>
+                            tinymce.init({
+                                selector: 'textarea',
+                                plugins: 'autolink lists link image charmap print preview hr anchor pagebreak media',
+                                toolbar_mode: 'floating',
+                                toolbar: [
+                                    {
+                                        name: 'history', items: [ 'undo', 'redo' ]
+                                    },
+                                    {
+                                        name: 'styles', items: [ 'styleselect' ]
+                                    },
+                                    {
+                                        name: 'formatting', items: [ 'bold', 'italic']
+                                    },
+                                    {
+                                        name: 'alignment', items: [ 'alignleft', 'aligncenter', 'alignright', 'alignjustify' ]
+                                    },
+                                    {
+                                        name: 'indentation', items: [ 'link', 'image' , 'media']
+                                    }
+                                ],
+                                menubar: false,
+                                mobile: {
+                                    menubar: false,
+                                    plugins: [ 'autosave', 'lists', 'autolink' ],
+                                    toolbar: [ 'undo', 'bold', 'italic', 'styleselect' ]
+                                },
+                                resize: false,
+                                theme: 'silver',
+                                height : 300,
+                                language: 'ru'
+                            });
+                        </script>
                     </div>
                     <div class="CoolDownTimer-message" data-time-left="0" id="post-countdown">@lang('forum.CoolDownTimerMessage')</div>
                     <div class="TopicForm-action--buttons">

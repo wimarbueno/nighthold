@@ -11,6 +11,7 @@
       <link rel="stylesheet" href="{{ asset('forum/static/css/main-9296f9fec4.css') }}">
       <link rel="stylesheet" href="{{ asset('forum/static/css/desktop_2_d90f4dbd5a861bdeed61b3da02053b01ae34655f.css') }}">
       <link rel="stylesheet" href="{{ asset('forum/static/css/desktop_theme_3_5adbba4c27c4c795e67b29e3622e828be72f9232.css') }}">
+      <script src="https://cdn.tiny.cloud/1/wwqqv9id7ffnpz5q9ych4h63q8thnarin4suzc90i3jyrp4x/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
       <script>var whTooltips = {colorLinks: true, iconizeLinks: true, renameLinks: true};</script>
       <script src="//wow.zamimg.com/widgets/power.js"></script>
       <script type="text/javascript" src="{{ asset('forum/static/js/vendor/jquery/dist/jquery.min.js') }}"></script>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Forums;
 use App\Http\Controllers\Controller;
 use App\Models\Channel;
 use App\Models\Thread;
-use Genert\BBCode\BBCode;
 
 class IndexController extends Controller
 {
@@ -35,26 +34,12 @@ class IndexController extends Controller
             'subject' => 'required',
             'messages' => 'required'
         ]);
-        $bbCode = new BBCode();
-
-        $bbCode->addParser(
-            'custom-link',
-            '/\[link=(.*?)\](.*?)\[\/link\]/s',
-            '<a href="$1">$2</a>',
-            '$1'
-        );
-
-        $url = preg_replace("#\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))#iS", "<strong><a href='$0' target='_blank'>$0</a></strong>", request('detail'));
-        
-        $texts = $bbCode->convertToHtml($url, BBCode::CASE_SENSITIVE);
-
-        $text = $this->getInLines($texts);
 
         $thread = Thread::create([
             'user_id' => auth()->id(),
             'channel_id' => request('channel_id'),
             'title' => request('subject'),
-            'body' => $text
+            'body' => request('messages')
         ]);
 
         if (request()->wantsJson()) {
@@ -63,18 +48,6 @@ class IndexController extends Controller
 
         return redirect($thread->path())
             ->with('flash', 'Your thread has been published!');
-    }
-
-
-    protected function getInLines($source){
-        $order   = array("\r\n", "\n", "\r");
-        $replace = '<br />';
-        return str_replace($order, $replace, $source);
-    }
-
-    protected function setInLine($source) {
-        if(isset($_SERVER['SHELL'])) return preg_replace('/\<br(\s*)?\/?\>/i', PHP_EOL, $source);
-        return nl2br($source);
     }
 
     public function topic($slug)
@@ -86,10 +59,6 @@ class IndexController extends Controller
         $topics = Thread::whereParentId($thread->id)->paginate(10);
         $sidebar = Channel::where('id', $thread->channel_id)->with('childrenCategories')->orderBy('parent_id', 'desc')->get();
         return view('forum.topic', compact('thread', 'topics', 'sidebar'));
-    }
-
-    public function patch_notes() {
-        return view('forum.patch_notes');
     }
 
     public function new() {
