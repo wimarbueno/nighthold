@@ -53,9 +53,9 @@
             return $this->belongsTo(Channel::class, 'channel_id', 'id');
         }
 
-        public function replies(): \Illuminate\Database\Eloquent\Relations\HasMany
+        public function replies(): \Illuminate\Database\Eloquent\Relations\hasMany
         {
-            return $this->hasMany(Reply::class);
+            return $this->hasMany(self::class, 'parent_id')->limit(1);
         }
 
         public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

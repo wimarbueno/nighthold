@@ -1,11 +1,11 @@
-<span class="Breadcrumb">
-    <a href="{{ route('forum.show', [$category->id])}}" class="Breadcrumb-content">
-        <span class="Breadcrumb-divider Home">
-            <i class="Icon"></i>
-        </span>
-        {{ $category->name }}
+<li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+    <a href="{{ route('forum.show', [$category->id])}}" itemprop="item">
+
+        <span itemprop="name">{{ $category->name }}</span>
+
     </a>
-</span>
+    <meta itemprop="position" content="3">
+</li>
 @if ($category->categories)
     @foreach ($category->categories as $childCategory)
         @include('forum.child_category', ['category' => $childCategory])

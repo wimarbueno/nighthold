@@ -48,7 +48,7 @@ class PaymentController extends Controller
                 'service' => 'balance',
                 'title' => 'Пополнение баланса (RoboKassa)',
                 'price' => $request->get('sum'),
-                'status' => '0',
+                'status' => '2',
             ]);
 
             $payment->setInvoiceId($order->id)
@@ -65,7 +65,7 @@ class PaymentController extends Controller
                 'service' => 'balance',
                 'title' => 'Пополнение баланса (FreeKassa)',
                 'price' => $request->get('sum'),
-                'status' => '0',
+                'status' => '2',
                 'order_id' => $order_id,
             ]);
 
