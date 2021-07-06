@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Report;
 use App\Models\Thread;
 use App\Models\ThreadVote;
 use App\Models\User;
