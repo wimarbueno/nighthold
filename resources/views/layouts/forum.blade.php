@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns="//www.w3.org/1999/xhtml">
+<html lang="{{ preg_replace_callback('/\-\s*\w\s*\w/', function($m) { return strtoupper($m[0]); }, app()->getLocale()) }}">
    <head>
       <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
@@ -37,19 +37,19 @@
          Core.sharedStaticUrl   = '/forums/static/local-common';
          Core.baseUrl           = '/forums';
          Core.projectUrl        = '/forums';
-         Core.cdnUrl            = 'http://media.blizzard.com';
-         Core.supportUrl            = 'http://eu.battle.net/support/';
-         Core.secureSupportUrl  = 'https://eu.battle.net/support/';
+         Core.cdnUrl            = '/';
+         Core.supportUrl        = '/';
+         Core.secureSupportUrl  = '/';
          Core.project           = 'forums';
-         Core.locale                = '{{ app()->getLocale() }}';
+         Core.locale            = '{{ app()->getLocale() }}';
          Core.language          = 'ru';
-         Core.region                = 'eu';
+         Core.region            = 'eu';
          Core.shortDateFormat   = 'dd/MM/yyyy';
-         Core.dateTimeFormat        = 'dd/MM/yyyy HH:mm';
+         Core.dateTimeFormat    = 'dd/MM/yyyy HH:mm';
          Core.loggedIn          = @guest false; @else true; @endguest
-             Core.userAgent         = 'web';
+         Core.userAgent         = 'web';
          Login.embeddedUrl      = '/{{ app()->getLocale() }}/login';
-         Core.community = 'wow';
+         Core.community         = 'wow';
          //]]>
       </script>
       <script type="text/javascript">
@@ -59,7 +59,7 @@
          //]]>
       </script>
    </head>
-   <body class="{{ app()->getLocale() }} @if(Route::currentRouteName() != 'patch-notes') Theme--wow @else patch-notes Theme--patch-notes preload @endif">
+   <body class="{{ app()->getLocale() }} Theme--wow">
       <script type="text/javascript">
          //<![CDATA[
          var LOCALIZATION = LOCALIZATION || {};

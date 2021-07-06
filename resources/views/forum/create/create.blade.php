@@ -28,18 +28,22 @@
                     </div>
                     <div class="TopicForm-group TopicForm-group-content">
                         <textarea id="postCommand.detail" name="messages" class="TopicForm-control TopicForm-control--detail TopicForm-detail" data-topic-form-detail="true" spellcheck="true" tabindex="1" autofocus></textarea>
-                        <div class="PostForm-errors"></div>
+                        <div class="PostForm-errors">                       @if ($errors)
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            @endif</div>
                         <script>
                             tinymce.init({
                                 selector: 'textarea',
-                                plugins: 'autolink lists link image charmap print preview hr anchor pagebreak media',
+                                plugins: 'autolink lists link image charmap print preview hr anchor pagebreak media table',
                                 toolbar_mode: 'floating',
                                 toolbar: [
                                     {
                                         name: 'history', items: [ 'undo', 'redo' ]
                                     },
                                     {
-                                        name: 'styles', items: [ 'styleselect' ]
+                                        name: 'styles', items: [ 'styleselect', 'table']
                                     },
                                     {
                                         name: 'formatting', items: [ 'bold', 'italic']
@@ -48,7 +52,7 @@
                                         name: 'alignment', items: [ 'alignleft', 'aligncenter', 'alignright', 'alignjustify' ]
                                     },
                                     {
-                                        name: 'indentation', items: [ 'link', 'image' , 'media']
+                                        name: 'indentation', items: [ 'link', 'image' , 'media', 'blockquote']
                                     }
                                 ],
                                 menubar: false,
@@ -60,7 +64,13 @@
                                 resize: false,
                                 theme: 'silver',
                                 height : 300,
-                                language: 'ru'
+                                automatic_uploads: true,
+                                relative_urls : false,
+                                remove_script_host : false,
+                                convert_urls : true,
+                                images_upload_url: '{{ route('forums.upload') }}',
+                                images_reuse_filename: true,
+                                language: 'ru',
                             });
                         </script>
                     </div>

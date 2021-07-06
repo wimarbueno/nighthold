@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Channel;
 use App\Models\Thread;
 use Genert\BBCode\BBCode;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class IndexController extends Controller
 {
@@ -29,52 +31,29 @@ class IndexController extends Controller
         return view('forum.show', compact('category', 'topics', 'threads', 'categories', 'sidebar'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        request()->validate([
-            'subject' => 'required',
-            'messages' => 'required'
+        $validator = Validator::make($request->all(), [
+            'subject' => 'required|string|min:5',
+            'messages' => 'required|string|min:10'
         ]);
 
-        $bbCode = new BBCode();
-
-        $bbCode->addParser(
-            'custom-link',
-            '/\[link=(.*?)\](.*?)\[\/link\]/s',
-            '<a href="$1">$2</a>',
-            '$1'
-        );
-        $bbCode->addParser(
-            'quote',
-            '/\[quote=(.*?)\](.*?)\[\/quote\]/s',
-            '<blockquote><a href="$1">$2</a></blockquote>',
-            '$1'
-        );
-
-        $index = rand(1, 90);
-
-        $bbCode->addParser(
-            'custom-link',
-            '#\[video(.+?)\]#i',
-            '<div id="player_'.$index.'"></div><script>var player = new Playerjs({id:"player_'.$index.'", $1});</script>',
-            '$1'
-        );
-
-        $text = $bbCode->convertToHtml(request('messages'), BBCode::CASE_SENSITIVE);
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
         $thread = Thread::create([
             'user_id' => auth()->id(),
-            'channel_id' => request('channel_id'),
-            'title' => request('subject'),
-            'body' => $text
+            'channel_id' => $request->get('channel_id'),
+            'title' => $request->get('subject'),
+            'body' => $request->get('messages')
         ]);
 
         if (request()->wantsJson()) {
             return response($thread, 201);
         }
 
-        return redirect($thread->path())
-            ->with('flash', 'Your thread has been published!');
+        return redirect($thread->path())->with('flash', 'Your thread has been published!');
     }
 
     public function topic($slug)

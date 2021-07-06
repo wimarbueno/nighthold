@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\Forums\ForumsController;
 use App\Http\Controllers\FreeKassaController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\JsonController;
@@ -46,6 +47,7 @@ Route::group(['prefix' => 'forums'], function () {
     Route::post('topic/post/{topic}/unclosed', [JsonController::class, 'unclosed']);
     Route::post('topic/post/{topic}/sticky', [JsonController::class, 'sticky']);
     Route::post('topic/post/{topic}/unsticky', [JsonController::class, 'unsticky']);
+    Route::post('upload/images', [ForumsController::class, 'store'])->name('forums.upload');
 });
 
 Route::prefix('dashboard')->group(function () {

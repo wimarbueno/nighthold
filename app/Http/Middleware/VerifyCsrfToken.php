@@ -18,5 +18,6 @@ class VerifyCsrfToken extends Middleware
         '/graphql',
         '/message-bus/*',
         '/api/*',
+        '/forums/upload/images',
     ];
 }

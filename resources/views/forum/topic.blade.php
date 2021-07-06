@@ -102,6 +102,15 @@
                     </aside>
                     <div class="TopicPost-body" data-topic-post-body="true">
                         <div class="TopicPost-details">
+                            @if($thread->up >= 50)
+                                <div class="TopicPost-bodyStatus">
+                                    <div class="TopicPost-statusTag highly-rated">
+                                        <span class="TopicPost-statusTagContent"> <i class="thumbsup"></i>
+                                            <span class="TopicPost-statusTagText">Высокий рейтинг</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="Timestamp-details">
                                 <a class="TopicPost-timestamp" href="#post-{{ $thread->id }}" data-toggle="tooltip" data-tooltip-content="{{ $thread->created_at->format('m/d/Y H:i') }}" data-original-title="" title="">{{ $thread->created_at->diffForHumans() }}</a>
                                 @if($thread->created_at != $thread->updated_at)
@@ -201,23 +210,39 @@
                                         </a>
                                         <span class="Author-job">{{ $reply->creator->role->display_name }}</span>
                                         <span class="Author-posts">
-<a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
-@lang('forum.count_messages', ['count' => $reply->creator->posts_count])</a>
-</span></div></div>
+                                            <a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
+                                            @lang('forum.count_messages', ['count' => $reply->creator->posts_count])</a>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </aside>
 
                         <div class="TopicPost-body" data-topic-post-body="true">
                             <div class="TopicPost-details">
+                                @if($reply->up >= 50)
+                                <div class="TopicPost-bodyStatus">
+                                    <div class="TopicPost-statusTag highly-rated">
+                                        <span class="TopicPost-statusTagContent"> <i class="thumbsup"></i>
+                                            <span class="TopicPost-statusTagText">Высокий рейтинг</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                @endif
                                 <div class="Timestamp-details">
                                     <a class="TopicPost-timestamp" data-toggle="tooltip" data-tooltip-content="{{ $reply->created_at->diffForHumans() }}" data-original-title="" title="" href="#post-{{ $reply->id }}">{{ $reply->created_at->diffForHumans() }}</a>
-                                    @if($reply->created_at != $reply->updated_at)<a class="TopicPost-timestamp" href="#post-{{ $reply->id }}" data-toggle="tooltip" data-tooltip-content="{{ $reply->creator->name }} {{ $reply->created_at->diffForHumans() }}">
+                                    @if($reply->created_at != $reply->updated_at)
+                                        <a class="TopicPost-timestamp" href="#post-{{ $reply->id }}" data-toggle="tooltip" data-tooltip-content="{{ $reply->creator->name }} {{ $reply->created_at->diffForHumans() }}">
                                         &#160;(Отредактировано)
                                     </a>
                                     @endif
-                                    @if($reply->up)<span class="TopicPost-rank TopicPost-rank--up" data-topic-post-rank="true"
-                                                         data-toggle="tooltip" data-tooltip-content="Нравится: {{ $reply->up }}.">{{ $reply->up }}</span>@endif
+                                    @if($reply->up)
+                                        <span class="TopicPost-rank TopicPost-rank--up" data-topic-post-rank="true"
+                                                         data-toggle="tooltip" data-tooltip-content="Нравится: {{ $reply->up }}.">{{ $reply->up }}
+                                        </span>
+                                    @else
                                     <span class="TopicPost-rank TopicPost-rank--none" data-topic-post-rank="true"></span>
+                                    @endif
                                 </div>
                                 @auth
                                     <aside class="TopicPost-control">
@@ -248,6 +273,7 @@
                                                         <span class="Dropdown-item" data-topic-post-button="true" data-topic-post-ignore-button="true" data-trigger="ignore.user.topicpost">@lang('forum.ignore_user_topicpost')</span>
                                                         <span class="Dropdown-item is-hidden" data-topic-post-button="true" data-topic-post-unignore-button="true" data-trigger="unignore.user.topicpost">@lang('forum.unignore_user_topicpost')</span>
                                                     @endif
+                                                        <span xmlns="http://www.w3.org/1999/xhtml" class="Dropdown-item" data-clipboard-text="http://us.battle.net/forums/en/wow/topic/20749678358#post-5">Copy URL</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -265,8 +291,11 @@
                                     <span class="Button-content"><i class="Icon"></i>Нравится</span>
                                 </button>
                                 <a href="#detail" class="TopicPost-button TopicPost-button--quote" data-topic-post-button="true" data-trigger="quote.topicpost" type="button">
-                                    <span class="Button-content"><svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-quote"/></svg>Цитирование</span>
+                                    <span class="Button-content">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-quote"/></svg>
+                                        Цитирование
+                                    </span>
                                 </a>
                             </footer>@endauth
                         </div>
@@ -297,4 +326,11 @@
             <span class="Button-content"><i class="Icon"></i>@lang('forum.parentForum')</span>
         </a>
     </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+        <symbol id="icon-quote" viewbox="0 0 128 128">
+            <title>quote</title>
+            <path class="path1" d="M74,89h15l10-20V39H69v30h15 M34,89h15l10-20V39H29v30h15L34,89z"/>
+        </symbol>
+    </svg>
 </x-forum-layout>

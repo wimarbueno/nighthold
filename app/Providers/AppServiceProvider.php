@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Channel;
 use App\Models\Language;
 use App\Services\Logs\Log;
 use Illuminate\Support\ServiceProvider;
@@ -34,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('layouts.providers.pages', function($view) {
             $view->with('pages', Page::where('status', 'ACTIVE')->get());
+        });
+
+        view()->composer('layouts.providers.mobileMenu', function($view) {
+            $view->with('menu', Channel::where('parent_id', 0)->with('forums')->orderBy('sort')->get());
         });
     }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Reply;
 use App\Models\Thread;
 use Genert\BBCode\BBCode;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RepliesController extends Controller
 {
@@ -29,40 +31,19 @@ class RepliesController extends Controller
         ]);
     }
 
-    public function store(Thread $thread)
+    public function store(Request $request, Thread $thread)
     {
-        request()->validate([
-            'detail' => 'required'
+        $validator = Validator::make($request->all(), [
+            'detail' => 'required|string|min:10'
         ]);
 
-        $bbCode = new BBCode();
-
-        $bbCode->addParser(
-            'custom-link',
-            '/\[link=(.*?)\](.*?)\[\/link\]/s',
-            '<a href="$1">$2</a>',
-            '$1'
-        );
-        $bbCode->addParser(
-            'quote',
-            '/\[quote=(.*?)\](.*?)\[\/quote\]/s',
-            '<blockquote><a href="$1">$2</a></blockquote>',
-            '$1'
-        );
-        $index = rand(1, 15);
-
-        $bbCode->addParser(
-            'custom-link',
-            '#\[video(.+?)\]#i',
-            '<div id="player_'.$index.'"></div><script>var player = new Playerjs({id:"player_'.$index.'", $1});</script>',
-            '$1'
-        );
-
-        $text = $bbCode->convertToHtml(request('detail'), BBCode::CASE_SENSITIVE);
+        if ($validator->fails()) {
+            return redirect($thread->path())->withErrors($validator);
+        }
 
         $thread->addReply([
             'parent_id' => $thread->id,
-            'body' => $text,
+            'body' => $request->get('detail'),
             'user_id' => auth()->id(),
             'channel_id' => $thread->channel_id
         ])->load('creator');

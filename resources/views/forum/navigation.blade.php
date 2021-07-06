@@ -278,7 +278,7 @@ document.getElementById('logout').submit();" class="Navbar-accountDropdownLink" 
                             <img class="Community-logo" src="{{ asset('/images/game-logos/game-logo-wow.png') }}"/>
                         </div>
                     </a>
-
+                    @include('layouts.providers.mobileMenu')
                 </div>
 
                 <div class="Navbar-siteMenuLogo">
