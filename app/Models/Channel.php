@@ -24,7 +24,12 @@
 
         public function threads(): \Illuminate\Database\Eloquent\Relations\HasMany
         {
-            return $this->hasMany(Thread::class);
+            return $this->hasMany(Thread::class, 'channel_id', 'id')->whereNull('parent_id');
+        }
+
+        public function replies(): \Illuminate\Database\Eloquent\Relations\HasMany
+        {
+            return $this->hasMany(Thread::class, 'channel_id', 'id')->whereNotNull('parent_id');
         }
 
         public function forums(): \Illuminate\Database\Eloquent\Relations\HasMany

@@ -64,7 +64,9 @@
                                 <i class="ForumCard-icon" style="background-image: url('{{ asset('/storage/' . Utils::Images($forum->icons)) }}')"></i>
                                 <div class="ForumCard-details">
                                     <h1 class="ForumCard-heading">{!! $forum->name !!}</h1>
-                                    <span class="ForumCard-description">{!! $forum->category_description !!}</span>
+                                    <span class="ForumCard-description">{!! $forum->category_description !!}<h5>&nbsp;</h5></span>
+                                    <span class="ForumCard-description">Тем в категории: {{ $forum->threads->count() }}</span>
+                                    <span class="ForumCard-description">Сообщений в категории: {{ $forum->replies->count() }}</span>
                                 </div>
                             </a>
                         @endforeach
