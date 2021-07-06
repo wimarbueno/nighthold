@@ -33,46 +33,7 @@
                                     <li>{{ $error }}</li>
                                 @endforeach
                             @endif</div>
-                        <script>
-                            tinymce.init({
-                                selector: 'textarea',
-                                plugins: 'autolink lists link image charmap print preview hr anchor pagebreak media table',
-                                toolbar_mode: 'floating',
-                                toolbar: [
-                                    {
-                                        name: 'history', items: [ 'undo', 'redo' ]
-                                    },
-                                    {
-                                        name: 'styles', items: [ 'styleselect', 'table']
-                                    },
-                                    {
-                                        name: 'formatting', items: [ 'bold', 'italic']
-                                    },
-                                    {
-                                        name: 'alignment', items: [ 'alignleft', 'aligncenter', 'alignright', 'alignjustify' ]
-                                    },
-                                    {
-                                        name: 'indentation', items: [ 'link', 'image' , 'media', 'blockquote']
-                                    }
-                                ],
-                                menubar: false,
-                                mobile: {
-                                    menubar: false,
-                                    plugins: [ 'autosave', 'lists', 'autolink' ],
-                                    toolbar: [ 'undo', 'bold', 'italic', 'styleselect' ]
-                                },
-                                resize: false,
-                                theme: 'silver',
-                                height : 300,
-                                automatic_uploads: true,
-                                relative_urls : false,
-                                remove_script_host : false,
-                                convert_urls : true,
-                                images_upload_url: '{{ route('forums.upload') }}',
-                                images_reuse_filename: true,
-                                language: 'ru',
-                            });
-                        </script>
+                        @include('forum.create.tinymce')
                     </div>
                     <div class="CoolDownTimer-message" data-time-left="0" id="post-countdown">@lang('forum.CoolDownTimerMessage')</div>
                     <div class="TopicForm-action--buttons">
