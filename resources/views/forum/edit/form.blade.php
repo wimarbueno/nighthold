@@ -69,7 +69,7 @@
                     </div>
                     <div class="TopicForm-action--buttons">
                         <button type="submit" class="TopicForm-button TopicForm-button--reply" id="submit-button">
-                            <span class="Button-content">@lang('forum.TopicFormReply')</span>
+                            <span class="Button-content">Редактировать</span>
                         </button>
                     </div>
                 </form>
