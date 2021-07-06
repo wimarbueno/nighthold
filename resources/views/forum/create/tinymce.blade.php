@@ -3,6 +3,9 @@
         selector: 'textarea',
         id: 'detail',
         plugins: 'autolink link image preview hr pagebreak media lists',
+        external_plugins: {
+            spoiler: '{{ asset('forum/static/js/spoiler/plugin.js') }}'
+        },
         toolbar_mode: 'floating',
         toolbar: [
             {
@@ -18,7 +21,7 @@
                 name: 'alignment', items: [ 'alignleft', 'aligncenter', 'alignright', 'alignjustify', 'lists' ]
             },
             {
-                name: 'indentation', items: [ 'link', 'image' , 'media', 'blockquote', 'bullist', 'numlist']
+                name: 'indentation', items: [ 'link', 'image' , 'media', 'blockquote', 'bullist', 'numlist', 'spoiler-add', 'spoiler-remove']
             }
         ],
         default_link_target: '_blank',
@@ -39,4 +42,12 @@
         images_reuse_filename: true,
         language: 'ru',
     });
+</script>
+<script>
+    $(function(){
+        $('.spoiler-text').hide();
+        $('.spoiler-toggle').click(function(){
+            $(this).next().toggle();
+        }); // end spoiler-toggle
+    }); // end document ready
 </script>

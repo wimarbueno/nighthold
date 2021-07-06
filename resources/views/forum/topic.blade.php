@@ -308,12 +308,29 @@
     @guest
         <section class="Section Section--secondary">
             <div data-topic-post="true" tabindex="0" class="TopicForm is-editing" id="topic-reply">
-
-                <div class="LoginPlaceholder-content"> <aside class="LoginPlaceholder-author"> <div class="Author" id="" data-topic-post-body-content="true"><div class="Author-avatar Author-avatar--default"></div><div class="Author-details"><span class="Author-name is-blank"></span> <span class="Author-posts is-blank"></span></div></div> <div class="Author-ignored is-hidden" data-topic-post-ignored-author="true"> <span class="Author-name"> </span><div class="Author-posts Author-posts--ignored">@lang('forum.ignored')</div></div> </aside> <div class="LoginPlaceholder-details"> <div class="LogIn-message">@lang('forum.logIn_message')</div> <a class="LogIn-button" href="{{ route('login') }}"> <span class="LogIn-button-content" >@lang('forum.logIn_content')</span> </a> </div> </div>
-
+                <div class="LoginPlaceholder-content">
+                    <aside class="LoginPlaceholder-author">
+                        <div class="Author" id="" data-topic-post-body-content="true">
+                            <div class="Author-avatar Author-avatar--default"></div>
+                            <div class="Author-details">
+                                <span class="Author-name is-blank"></span>
+                                <span class="Author-posts is-blank"></span>
+                            </div>
+                        </div>
+                        <div class="Author-ignored is-hidden" data-topic-post-ignored-author="true">
+                            <span class="Author-name"> </span>
+                            <div class="Author-posts Author-posts--ignored">@lang('forum.ignored')</div>
+                        </div>
+                    </aside>
+                    <div class="LoginPlaceholder-details">
+                        <div class="LogIn-message">@lang('forum.logIn_message')</div>
+                        <a class="LogIn-button" href="{{ route('login') }}">
+                            <span class="LogIn-button-content" >@lang('forum.logIn_content')</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
-
     @else
         @if(!$thread->locked || auth()->user()->role->answer_closed_topic === 'Y')
             @include('forum.create.reply')
