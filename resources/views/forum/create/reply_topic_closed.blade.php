@@ -5,7 +5,7 @@
         </header>
         <div class="TopicForm-content">
             <aside class="TopicForm-author" data-topic-form="{'userId': {{ Auth::user()->id }}}">
-                <div class="Author" id="" data-topic-post-body-content="true"><a href="characters" class="Author-avatar "><img src="{{ asset('/storage/'.Auth::user()->avatar) }}" alt="" /></a><div class="Author-details"> <span class="Author-name">
+                <div class="Author" id="" data-topic-post-body-content="true"><a href="#" class="Author-avatar "><img src="{{ asset('/storage/'.Auth::user()->avatar) }}" alt="" /></a><div class="Author-details"> <span class="Author-name">
 <a class="Author-name--profileLink" href="characters">{{ Str::Title(Auth::user()->name) }}</a>
 </span>
                         <span class="Author-posts">
@@ -15,7 +15,7 @@
 </span></div></div>
                 <div class="Author-ignored is-hidden" data-topic-post-ignored-author="true">
 <span class="Author-name">
-<a class="Author-name--profileLink" href="characters">{{ Auth::user()->name }}</a>
+<a class="Author-name--profileLink" href="#">{{ Auth::user()->name }}</a>
 </span>
                     <div class="Author-posts Author-posts--ignored">@lang('forum.ignored')</div></div>
             </aside>

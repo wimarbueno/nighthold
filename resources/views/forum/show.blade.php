@@ -64,7 +64,11 @@
                             <span class="Button-content"><i class="Icon"></i>@lang('forum.create_topic')</span></button>
                     @else
                         @auth
+                            @if($category->closed != "CLOSED" || auth()->user()->hasPermission('create_closed_topic'))
                             <button class="Forum-button Forum-button--new" id="toggle-create-topic" data-forum-button="true" data-trigger="create.topicpost.forum" type="button"><span class="Overlay-element"></span><span class="Button-content"><i class="Icon"></i>@lang('forum.create_topic')</span></button>
+                            @else
+                                <button class="Forum-button Forum-button--new" id="toggle-create-topic" disabled="disabled" data-toggle="tooltip" data-tooltip-content="Категория закрыта!" data-forum-button="true" data-trigger="create.topicpost.forum" type="button"><span class="Overlay-element" disabled="disabled" data-toggle="tooltip" data-tooltip-content="Категория закрыта!"></span><span class="Button-content"><i class="Icon"></i>@lang('forum.create_topic')</span></button>
+                            @endif
                         @else
                             <button class="Forum-button Forum-button--new" id="toggle-create-topic" disabled="disabled" data-toggle="tooltip" data-tooltip-content="Категория закрыта!" data-forum-button="true" data-trigger="create.topicpost.forum" type="button"><span class="Overlay-element" disabled="disabled" data-toggle="tooltip" data-tooltip-content="Категория закрыта!"></span><span class="Button-content"><i class="Icon"></i>@lang('forum.create_topic')</span></button>
                         @endauth
@@ -104,18 +108,16 @@
 @if ($topics->isEmpty())
 <div data-topics-container="featured">@lang('forum.no_topic_in_category')</div>
 @endif
-
-<div data-topics-container="sticky">
+<div data-topics-container="featured">
 @foreach ($topics as $topic)
-
-@if($topic->sticky == 1)
-<a class="ForumTopic ForumTopic--sticky  ForumTopic--featured @if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6)has-blizzard-post @endif @if($topic->creator->role->id === 5) has-mvp-post @endif @if($topic->locked) is-locked @endif @if(auth()->check() && $topic->hasUpdatesFor(auth()->user())) @else is-read @endif" href="{{ route('topic.show', [$topic])}}" data-forum-topic="{'id':{{ $topic->id }},'lastPosition':0,'isSticky':true,'isFeatured':true,'isLocked':@if($topic->locked) true @else false @endif,'isHidden':false,'isSpam':false}">
+    @if($topic->sticky == 2)
+<a class="ForumTopic ForumTopic--featured @if($topic->creator->hasPermission('forum_nighthold'))has-blizzard-post @endif @if($topic->creator->hasPermission('forum_mvp')) has-mvp-post @endif @if($topic->locked) is-locked @endif @if(auth()->check() && $topic->hasUpdatesFor(auth()->user()))  @else is-read @endif" href="{{ route('topic.show', [$topic])}}" data-forum-topic="{'id':{{ $topic }},'lastPosition':0,'isSticky':false,'isFeatured':true,'isLocked':@if($topic->locked) true @else false @endif,'isHidden':false,'isSpam':false}">
 <span class="ForumTopic-type">
 <i class="Icon"></i>
-@if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6)
+@if($topic->creator->hasPermission('forum_nighthold'))
 <i class="BlizzIcon" data-toggle="tooltip" data-tooltip-content="@lang('forum.messages_gm')" data-original-title="" title=""></i>
 @endif
-@if($topic->creator->role->id === 5)
+@if($topic->creator->hasPermission('forum_mvp'))
 <i class="MvpIcon" data-toggle="tooltip" data-tooltip-content="@lang('forum.messages_cuf')"></i>
 @endif
 </span>
@@ -128,42 +130,85 @@
 </span>
 </span>
 
-<span class="ForumTopic-title" data-toggle="tooltip" data-tooltip-content="" data-original-title="" title="">
-{{ $topic->title }}
-</span>@if($topic->locked) <i class="statusIcon statusIcon-mobile" data-toggle="tooltip" data-tooltip-content="Закрыто" data-original-title="" title=""></i>@endif
-</span>
+<span class="ForumTopic-title" data-toggle="tooltip" data-tooltip-content="" data-original-title="" title="">{{ $topic->title }}</span>
+@if($topic->locked) <i class="statusIcon statusIcon-mobile" data-toggle="tooltip" data-tooltip-content="Закрыто" data-original-title="" title=""></i>@endif</span>
 @if($topic->locked)
 <i class="statusIcon statusIcon-desktop" data-toggle="tooltip" data-tooltip-content="Закрыто" data-original-title="" title=""></i>
 @endif
 </span>
-<span class="ForumTopic--preview">{{ $topic->content }}</span>
-<span class="ForumTopic-author @if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6) ForumTopic-author--blizzard @endif @if($topic->creator->role->id === 5) ForumTopic-author--mvp @endif">
+                <span class="ForumTopic--preview">{{ $topic->content }}</span>
+                <span class="ForumTopic-author @if($topic->creator->hasPermission('forum_nighthold'))ForumTopic-author--blizzard @endif @if($topic->creator->hasPermission('forum_mvp')) ForumTopic-author--mvp @endif">
 {{ Str::title($topic->creator->name) }}
 </span>
 
-<span class="ForumTopic-replies">
+                <span class="ForumTopic-replies">
 <i class="Icon"></i>
 <span>{{ $topic->replies_count }}</span>
 </span>
 
-<span class="ForumTopic-timestamp">
+                <span class="ForumTopic-timestamp">
 <span class="ForumTopic-timestamp--lastPost" href="{{ route('topic.show', [$topic])}}">{{ $topic->created_at->diffForHumans() }}</span>
 </span>
-</div>
-</a>
-@endif
+            </div>
+        </a>
+    @endif
 @endforeach
 </div>
-
+<div data-topics-container="sticky">
 @foreach ($topics as $topic)
-@if($topic->sticky == 0)
-<a class="ForumTopic @if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6)has-blizzard-post @endif @if($topic->creator->role->id === 5) has-mvp-post @endif @if($topic->locked) is-locked @endif @if(auth()->check() && $topic->hasUpdatesFor(auth()->user()))  @else is-read @endif" href="{{ route('topic.show', [$topic])}}" data-forum-topic="{'id':{{ $topic }},'lastPosition':0,'isSticky':false,'isFeatured':false,'isLocked':@if($topic->locked) true @else false @endif,'isHidden':false,'isSpam':false}">
+@if($topic->sticky == 1)
+            <a class="ForumTopic ForumTopic--sticky @if($topic->creator->hasPermission('forum_nighthold'))has-blizzard-post @endif @if($topic->creator->hasPermission('forum_mvp')) has-mvp-post @endif @if($topic->locked) is-locked @endif @if(auth()->check() && $topic->hasUpdatesFor(auth()->user()))  @else is-read @endif" href="{{ route('topic.show', [$topic])}}" data-forum-topic="{'id':{{ $topic }},'lastPosition':0,'isSticky':true,'isFeatured':false,'isLocked':@if($topic->locked) true @else false @endif,'isHidden':false,'isSpam':false}">
 <span class="ForumTopic-type">
 <i class="Icon"></i>
-@if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6)
+@if($topic->creator->hasPermission('forum_nighthold'))
+        <i class="BlizzIcon" data-toggle="tooltip" data-tooltip-content="@lang('forum.messages_gm')" data-original-title="" title=""></i>
+    @endif
+    @if($topic->creator->hasPermission('forum_mvp'))
+        <i class="MvpIcon" data-toggle="tooltip" data-tooltip-content="@lang('forum.messages_cuf')"></i>
+    @endif
+</span>
+                <div class="ForumTopic-details">
+<span class="ForumTopic-heading">
+<span class="ForumTopic-title--wrapper">
+
+<span class="ForumTopic-timestamp on-mobile">
+<span class="ForumTopic-timestamp--lastPost" href="{{ route('topic.show', [$topic])}}" >
+</span>
+</span>
+
+<span class="ForumTopic-title" data-toggle="tooltip" data-tooltip-content="" data-original-title="" title="">{{ $topic->title }}</span>
+@if($topic->locked) <i class="statusIcon statusIcon-mobile" data-toggle="tooltip" data-tooltip-content="Закрыто" data-original-title="" title=""></i>@endif</span>
+@if($topic->locked)
+        <i class="statusIcon statusIcon-desktop" data-toggle="tooltip" data-tooltip-content="Закрыто" data-original-title="" title=""></i>
+    @endif
+</span>
+                    <span class="ForumTopic--preview">{{ $topic->content }}</span>
+                    <span class="ForumTopic-author @if($topic->creator->hasPermission('forum_nighthold'))ForumTopic-author--blizzard @endif @if($topic->creator->hasPermission('forum_mvp')) ForumTopic-author--mvp @endif">
+    {{ Str::title($topic->creator->name) }}
+</span>
+
+                    <span class="ForumTopic-replies">
+<i class="Icon"></i>
+<span>{{ $topic->replies_count }}</span>
+</span>
+
+                    <span class="ForumTopic-timestamp">
+<span class="ForumTopic-timestamp--lastPost" href="{{ route('topic.show', [$topic])}}">{{ $topic->created_at->diffForHumans() }}</span>
+</span>
+                </div>
+            </a>
+        @endif
+@endforeach
+</div>
+@foreach ($topics as $topic)
+@if($topic->sticky == 0)
+<a class="ForumTopic @if($topic->creator->hasPermission('forum_nighthold'))has-blizzard-post @endif @if($topic->creator->hasPermission('forum_mvp')) has-mvp-post @endif @if($topic->locked) is-locked @endif @if(auth()->check() && $topic->hasUpdatesFor(auth()->user()))  @else is-read @endif" href="{{ route('topic.show', [$topic])}}" data-forum-topic="{'id':{{ $topic }},'lastPosition':0,'isSticky':false,'isFeatured':false,'isLocked':@if($topic->locked) true @else false @endif,'isHidden':false,'isSpam':false}">
+<span class="ForumTopic-type">
+<i class="Icon"></i>
+@if($topic->creator->hasPermission('forum_nighthold'))
 <i class="BlizzIcon" data-toggle="tooltip" data-tooltip-content="@lang('forum.messages_gm')" data-original-title="" title=""></i>
 @endif
-@if($topic->creator->role->id === 5)
+@if($topic->creator->hasPermission('forum_mvp'))
 <i class="MvpIcon" data-toggle="tooltip" data-tooltip-content="@lang('forum.messages_cuf')"></i>
 @endif
 </span>
@@ -183,7 +228,7 @@
 @endif
 </span>
 <span class="ForumTopic--preview">{{ $topic->content }}</span>
-<span class="ForumTopic-author @if($topic->creator->role->id === 1 || $topic->creator->role->id === 3 || $topic->creator->role->id === 6) ForumTopic-author--blizzard @endif @if($topic->creator->role->id === 5) ForumTopic-author--mvp @endif">
+<span class="ForumTopic-author @if($topic->creator->hasPermission('forum_nighthold'))ForumTopic-author--blizzard @endif @if($topic->creator->hasPermission('forum_mvp')) ForumTopic-author--mvp @endif">
     {{ Str::title($topic->creator->name) }}
 </span>
 
