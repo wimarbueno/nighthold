@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CharactersController;
+use App\Http\Controllers\Forums\ForumsController;
 use App\Http\Controllers\Forums\IndexController;
 use App\Http\Controllers\Forums\RepliesController;
 use App\Http\Controllers\GameController;
@@ -34,6 +35,7 @@ Route::prefix('forums')->group(function () {
     Route::get('/topic/{thread}', [IndexController::class, 'topic'])->name('topic.show');
     Route::post('/replies/{thread}', [RepliesController::class, 'store'])->name('forum.topic.reply.create');
     Route::get('/search', [SearchController::class, 'forum'])->name('forum.search');
+    Route::get('topic/post/{topic}/edit', [ForumsController::class, 'edit'])->name('forum.edit');
 });
 
 Route::get('game/stream', [GameController::class, 'stream'])->name('stream');

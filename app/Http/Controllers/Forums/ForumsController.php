@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Forums;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Thread;
 use Illuminate\Http\Request;
 
 class ForumsController extends Controller
@@ -24,6 +25,11 @@ class ForumsController extends Controller
         $pathRerurn = 'forum/user-' . auth()->user()->id . '/';
 
         return response()->json([ "location" => asset('storage/'.$pathRerurn . $imageName) ]);
+    }
+
+    public function edit($id) {
+        $data = Thread::where('id', $id)->firstOrFail();
+        return view('forum.edit.form', ['data' => $data, 'guid' => $id]);
     }
 
 }

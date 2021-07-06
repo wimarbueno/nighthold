@@ -5,7 +5,7 @@
         </header>
         <div class="TopicForm-content">
             <aside class="TopicForm-author" data-topic-form="{'userId': {{ auth()->user()->id }}}">
-                <div class="Author" id="" data-topic-post-body-content="true"><a href="characters" class="Author-avatar "><img src="{{ asset('/storage/'. auth()->user()->avatar) }}" alt="" /></a>
+                <div class="Author" id="" data-topic-post-body-content="true"><a href="#" class="Author-avatar "><img src="{{ asset('/storage/'. auth()->user()->avatar) }}" alt="" /></a>
                     <div class="Author-details">
                         <span class="Author-name">
                             <a class="Author-name--profileLink" href="#">{{ Str::Title(auth()->user()->name) }}</a>
@@ -29,7 +29,7 @@
                     @csrf
                 </fieldset>
                 <div class="TopicForm-group TopicForm-group-content TopicForm-group--isActivated" data-topic-form="true">
-                    <textarea id="detail" name="detail" class="TopicForm-control needsclick TopicForm-control--detail" data-topic-post-body-edit="true" tabindex="1" spellcheck="true"></textarea>
+                    <textarea id="detail" name="detail"></textarea>
                     <div class="PostForm-errors">
                         @if ($errors)
                             @foreach ($errors->all() as $error)

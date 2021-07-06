@@ -10,6 +10,7 @@ use Genert\BBCode\BBCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class JsonController extends Controller
 {
@@ -85,39 +86,17 @@ class JsonController extends Controller
         ]);
     }
 
-    public function edit($id) {
-        $bbCode = new BBCode();
+    public function edit(Request $request, $id) {
 
-        $bbCode->addParser(
-            'custom-link',
-            '/\[link=(.*?)\](.*?)\[\/link\]/s',
-            '<a href="$1">$2</a>',
-            '$1'
-        );
-        $bbCode->addParser(
-            'quote',
-            '/\[quote=(.*?)\](.*?)\[\/quote\]/s',
-            '<blockquote><a href="$1">$2</a></blockquote>',
-            '$1'
-        );
-
-        $index = rand(1, 90);
-
-        $bbCode->addParser(
-            'custom-link',
-            '#\[video(.+?)\]#i',
-            '<div id="player_'.$index.'"></div><script>var player = new Playerjs({id:"player_'.$index.'", $1});</script>',
-            '$1'
-        );
-
-        $text = $bbCode->convertToHtml(request('detail'), BBCode::CASE_SENSITIVE);
-
-
-        Thread::where('id', $id)->update(['body' => $text]);
-
-        return response()->json([
-            'detail' => $text
+        $validator = Validator::make($request->all(), [
+            'detail' => 'required|string|min:10'
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+        Thread::where('id', $id)->update(['body' => $request->get('detail')]);
+        return redirect($request->get('return'));
     }
 
     protected function getInLines($source){
@@ -134,13 +113,8 @@ class JsonController extends Controller
 
     public function frag($id) {
         $thread = Thread::where('id', $id)->firstOrFail();
-        $bbCode = new BBCode();
-        $texts = $bbCode->convertFromHtml($thread->body);
-        $text = $this->setInLines($texts);
-        return response()->json([
-            'name' => $thread->id,
-            'detail' => $text
-        ]);
+        $redactor = view('forum.edit.form', ['thread' => $thread->id, 'detail' => $thread->body, 'id' => $id])->render();
+        return response()->json(['success' => true, 'content' => $redactor, 'id' => $id]);
     }
 
     public function delete($topic)
