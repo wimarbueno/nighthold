@@ -33,9 +33,26 @@ class IndexController extends Controller
 
     public function store(Request $request)
     {
+        Validator::extend('strip_min', function ($attribute, $value, $parameters, $validator) {
+
+            $validator->addReplacer('strip_min', function($message, $attribute, $rule, $parameters){
+                return str_replace([':min'], $parameters, $message);
+            });
+
+            return strlen(
+                    strip_tags(
+                        preg_replace(
+                            '/\s+/',
+                            '',
+                            str_replace('&nbsp;',"", $value)
+                        )
+                    )
+                ) >= $parameters[0];
+        });
+
         $validator = Validator::make($request->all(), [
             'subject' => 'required|string|min:5',
-            'messages' => 'required|string|min:10'
+            'messages' => 'required|string|min:10|strip_min:10'
         ]);
 
         if ($validator->fails()) {
