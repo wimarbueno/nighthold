@@ -71,10 +71,7 @@ class JsonController extends Controller
 
     public function down($id) {
         if (ThreadVote::where('threads_id', $id)->where('user_id', Auth::user()->id)->where('type', 'down')->first()){
-            $down = Thread::where('id', $id)->first();
-            return response()->json([
-                'toggleRankMode' => $down->down - $down->up
-            ]);
+            return null;
         }
         Thread::where('id', $id)->increment('down', 1);
         ThreadVote::create([
@@ -90,10 +87,7 @@ class JsonController extends Controller
 
     public function up($id) {
         if (ThreadVote::where('threads_id', $id)->where('user_id', Auth::user()->id)->where('type', 'up')->first()){
-            $up = Thread::where('id', $id)->first();
-            return response()->json([
-                'toggleRankMode' => $up->up - $up->down
-            ]);
+            return null;
         }
         Thread::where('id', $id)->increment('up', 1);
         ThreadVote::create([
