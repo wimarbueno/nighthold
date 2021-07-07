@@ -101,57 +101,60 @@
 
                         <div id="ember51" class="contents ember-view"><!---->  <span id="ember52" class="ember-view"><!----></span>
 
-                            <table id="ember53" class="topic-list ember-view">  <thead>
-                                <tr><th data-sort-order="default" class="default">Тема</th>
-
-                                    <th data-sort-order="" class="">Автор</th>
-
-                                    <th data-sort-order="posts" class="posts sortable num">Ответы</th>
-
-                                    <th data-sort-order="views" class="views sortable num">Просмотры</th>
-
-                                    <th data-sort-order="activity" class="activity sortable num">Сообщения</th>
-
+                            <table id="ember53" class="topic-list ember-view">
+                                <thead>
+                                <tr>
+                                    <th data-sort-order="default" class="default"></th>
+                                    <th data-sort-order="" class=""></th>
+                                    <th data-sort-order="posts" class="posts sortable num"></th>
+                                    <th data-sort-order="activity" class="activity sortable num"></th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @foreach ($topics as $item)
-                                    <tr data-topic-id="194369" id="ember59" class="topic-list-item category-%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0-c%D0%BB%D1%83%D0%B6%D0%B1%D0%B0-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B8 unseen-topic ember-view">
-                                        <td class="main-link clearfix" colspan="1">
-  <span class="link-top-line"><span class="topic-icon-container">
+                                @foreach ($topics as $topic)
+<a class="ForumTopic @if($topic->creator->hasPermission('forum_nighthold'))has-blizzard-post @endif @if($topic->creator->hasPermission('forum_mvp')) has-mvp-post @endif @if($topic->locked) is-locked @endif @if(auth()->check() && $topic->hasUpdatesFor(auth()->user()))  @else is-read @endif" href="{{ route('topic.show', [$topic->thread->id]) }}#post-{{ $topic->id }}" data-forum-topic="{'id':{{ $topic }},'lastPosition':0,'isSticky':false,'isFeatured':false,'isLocked':@if($topic->locked) true @else false @endif,'isHidden':false,'isSpam':false}">
+<span class="ForumTopic-type">
+<i class="Icon"></i>
+@if($topic->creator->hasPermission('forum_nighthold'))
+        <i class="BlizzIcon" data-toggle="tooltip" data-tooltip-content="@lang('forum.messages_gm')" data-original-title="" title=""></i>
+    @endif
+    @if($topic->creator->hasPermission('forum_mvp'))
+        <i class="MvpIcon" data-toggle="tooltip" data-tooltip-content="@lang('forum.messages_cuf')"></i>
+    @endif
 </span>
-<a href="{{ route('topic.show', [$item->thread->id]) }}#post-{{ $item->id }}" class="title raw-link raw-topic-link" data-topic-id="{{ $item->id }}">{{ $item->thread->title }}</a>  </span>
-                                            <div class="link-bottom-line">
-                                                <a class="badge-wrapper none" href="{{ route('forum.show', [$item->channel->id]) }}"><span data-drop-close="true" class="badge-category clear-badge" title="{{ $item->channel->category_description }}"><span class="category-name">{{ $item->channel->name }}</span></span></a>
+<div class="ForumTopic-details">
+<span class="ForumTopic-heading">
+<span class="ForumTopic-title--wrapper">
 
+<span class="ForumTopic-timestamp on-mobile">
+    <span class="ForumTopic-timestamp--lastPost" href="{{ route('forum.show', [$topic->channel->id]) }}"></span>
+</span>
 
-                                            </div>
-                                        </td>
+<span class="title raw-link raw-topic-link" data-toggle="tooltip" data-tooltip-content="" data-original-title="" title="">
+    {{ $topic->thread->title }}
+</span>
+<br>
+<span class="category-name" href="{{ route('forum.show', [$topic->channel->id]) }}">{{ $topic->channel->name }}</span>
+@if($topic->locked) <i class="statusIcon statusIcon-mobile" data-toggle="tooltip" data-tooltip-content="Закрыто" data-original-title="" title=""></i>@endif</span>
+@if($topic->locked)
+        <i class="statusIcon statusIcon-desktop" data-toggle="tooltip" data-tooltip-content="Закрыто" data-original-title="" title=""></i>
+    @endif
+</span>
+<span class="ForumTopic--preview">{{ $topic->content }}</span>
+<span class="ForumTopic-author @if($topic->creator->hasPermission('forum_nighthold'))ForumTopic-author--blizzard @endif @if($topic->creator->hasPermission('forum_mvp')) ForumTopic-author--mvp @endif">
+    {{ Str::title($topic->creator->name) }}
+</span>
 
-                                        <td class="creator">
-                                            <a href="#" data-user-card="{{ $item->creator->name }}">
-                                                {{ $item->creator->name }}
-                                            </a>
-                                        </td>
-
-
-                                        <td class="num posts-map posts heatmap-" title="Ответов  в этой теме: 1">
-                                            <a href="" class="posts-map badge-posts heatmap-">
-                                                <svg class="fa d-icon d-icon-blizzard-chat svg-icon blizzard-reply-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#blizzard-chat"></use></svg>
-
-                                                <span class="number" aria-label="Ответов  в этой теме: {{ $item->thread->replies_count }}">{{ $item->thread->replies_count }}</span>
-                                            </a>
-                                        </td>
-
-                                        <td class="num views "><span class="number" title="просмотров темы: 0">0</span></td>
-
-                                        <td class="num age activity" title="Первое сообщение: {{ $item->created_at->diffForHumans() }}">
-                                            <a class="post-activity" href="{{ route('forum.show', [$item->channel->id]) }}"><span class="relative-date" data-time="1622815911072" data-format="tiny">{{ $item->created_at->diffForHumans() }}</span></a>
-                                        </td>
-
-
-                                    </tr>
+<span class="ForumTopic-replies">
+<i class="Icon"></i>
+<span>{{ $topic->thread->replies_count }}</span>
+</span>
+<span class="ForumTopic-timestamp">
+<span class="ForumTopic-timestamp--lastPost" href="{{ route('topic.show', [$topic])}}">{{ $topic->created_at->diffForHumans() }}</span>
+</span>
+</div>
+</a>
                                 @endforeach
                                 </tbody>
                             </table>
