@@ -132,6 +132,7 @@
 &#160;(Отредактировано)
 @endif
 @if($thread->up != 0 || $thread->down != 0)
+@if($thread->up != $thread->down)
 <span class="TopicPost-rank
 @if($thread->up > $thread->down)
     TopicPost-rank--up
@@ -141,9 +142,10 @@
     @if($thread->up > $thread->down)
         {{ $thread->up - $thread->down }}
     @else
-        -{{ $thread->up - $thread->down }}
+        {{ $thread->up - $thread->down }}
     @endif
 </span>
+@endif
 @else
 <span class="TopicPost-rank TopicPost-rank--none" data-topic-post-rank="true"></span>
 @endif
@@ -283,6 +285,7 @@
 &#160;(Отредактировано)
 @endif
 @if($reply->up != 0 || $reply->down != 0)
+@if($reply->up != $reply->down)
 <span class="TopicPost-rank
 @if($reply->up > $reply->down)
 TopicPost-rank--up
@@ -292,7 +295,8 @@ TopicPost-rank--down
 @if($reply->up > $reply->down)
 {{ $reply->up - $reply->down }}
 @else
--{{ $reply->up - $reply->down }}
+{{ $reply->up - $reply->down }}
+@endif
 @endif
 </span>
 @else
