@@ -130,6 +130,7 @@
          LOCALIZATION.TOPIC_POST_LIMIT = "Post Limit";
          //]]>
       </script>
+
       @include('forum.navigation')
       <div class="Subnav">
          <div class="Container Container--content Container--breadcrumbs">
@@ -147,7 +148,7 @@
       <script src="{{ asset('forum/static/js/vendor/instanttouch.min.js') }}"></script>
       <script src="{{ asset('forum/static/js/vendor/clipboard.min.js') }}"></script>
       <script src="{{ asset('forum/static/js/vendor/d3/tooltips.js') }}"></script>
-      <script src="{{ asset('static/scripts/navbar.js?v8.2.1') }}"></script>
+      <script src="{{ asset('static/scripts/navbar.min.js') }}?v8.2.1"></script>
       <script type="text/javascript" src="{{ asset('forum/static/js/main.js') }}"></script>
    </body>
 </html>

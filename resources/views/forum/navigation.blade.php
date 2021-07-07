@@ -8,7 +8,7 @@
      data-service-version="3.3.3"
      data-middleware-version="3.2.0"
      data-ui-version="3.2.0"
-     data-notification-url="/navbar/notifications?locale=ru-ru&amp;community=forums"
+     data-notification-url="{{route('json.notifications')}}"
      data-support-url="/support/update/json?callback="
      data-current-site="games"
 >
@@ -296,7 +296,19 @@ document.getElementById('logout').submit();" class="Navbar-accountDropdownLink" 
         </div>
     </div>
 
-    <div class="Navbar-toast Navbar-promotion"><div class="Navbar-toastContainer Navbar-promotionContainer"><img src="" alt="" class="Navbar-toastImage Navbar-promotionImage"/><div class="Navbar-toastContent Navbar-promotionContent"><div class="Navbar-toastLabel Navbar-promotionLabel">%PROMO_LABEL%</div><div class="Navbar-toastText Navbar-promotionText">%PROMO_TEXT%</div><a href="%PROMO_LINK_URL" class="Navbar-toastLink Navbar-promotionLink">%PROMO_LINK_TEXT%</a></div><div class="Navbar-icon Navbar-toastClose"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-close"></use></svg></div></div></div>
+    <div class="Navbar-toast Navbar-promotion">
+        <div class="Navbar-toastContainer Navbar-promotionContainer">
+            <img src="" alt="" class="Navbar-toastImage Navbar-promotionImage"/>
+            <div class="Navbar-toastContent Navbar-promotionContent">
+                <div class="Navbar-toastLabel Navbar-promotionLabel">%PROMO_LABEL%</div>
+                <div class="Navbar-toastText Navbar-promotionText">%PROMO_TEXT%</div>
+                <a href="%PROMO_LINK_URL" class="Navbar-toastLink Navbar-promotionLink">%PROMO_LINK_TEXT%</a>
+            </div>
+            <div class="Navbar-icon Navbar-toastClose">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-close"></use></svg>
+            </div>
+        </div>
+    </div>
 
     <div class="Navbar-toast Navbar-cookieCompliance"><div class="Navbar-toastContainer"><div class="Navbar-toastContent"><div class="Navbar-toastLabel Navbar-desktopOnly">Cookie-файлы</div><div class="Navbar-toastText"><div class="Navbar-desktopOnly">На сайтах {{ config('app.name') }} используются cookie-файлы и другие аналогичные технологии. Если, прочитав это сообщение, вы остаетесь на нашем сайте, это означает, что вы не возражаете против использования этих технологий.</div><div class="Navbar-mobileOnly">На этом сайте используются cookie-файлы. Если вы сейчас остаетесь на сайте, это означает, что вы не возражаете против использования этих технологий.</div></div><button id="cookie-compliance-agree" class="Navbar-button">Хорошо</button><a href="/" target="_blank"><button class="Navbar-button is-tertiary"><span>Подробнее</span><div class="Navbar-icon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-new_window"></use></svg></div></button></a></div><div class="Navbar-icon Navbar-toastClose"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" focusable="false"><use xlink:href="#Navbar-icon-close"></use></svg></div></div></div>
 </div>

@@ -43,10 +43,6 @@ class AuthController extends Controller
         }
     }
 
-    public function notifications() {
-        return response()->json([]);
-    }
-
     public function changeQuestion(Request $request) {
         $user = User::where('email', auth()->user()->email)->first();
         $user->update([

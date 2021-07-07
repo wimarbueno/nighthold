@@ -19,19 +19,19 @@ class JsonController extends Controller
     {
         return response()->json([
             "totalNotifications" => 1,
-            "notificationsList" => [
+            "notifications" => [
                 [
-                    'id' => '1',
-                    'img' => [
-                        'url' => 'https://nighthold.pro/storage/users/user-487/1625655643.jpg'
+                    "id" => 1894440545,
+                    "title" => "Добро пожаловать",
+                    "content" => "Форум на стадии разработки",
+                    "img" => [
+                        "mediaId" => 20817995,
+                        "url" => "https://nighthold.pro/v3/assets/img_1.png"
                     ],
-                    'url ' => '/iu',
-                    'title ' => 'test',
-                    'content  ' => 'tests  vvc',
-                    'httpLink ' => [
-                        'link' => '/wdwdwd',
-                        'content' => 'wdwdwd',
-                    ]
+                    'httpLink' => [
+                        'content' => 'Предложения',
+                        'link' => 'https://nighthold.pro/ru-ru/forums/168',
+                    ],
                 ]
             ],
             "notificationsCount" => 1
@@ -41,8 +41,28 @@ class JsonController extends Controller
     public function notifications()
     {
         return response()->json([
-            "totalNotifications" => 0
-        ]);
+            "totalNotifications" => 1,
+            "notifications" => [
+                [
+                    "id" => 1894440545,
+                    "title" => "Добро пожаловать",
+                    "content" => "Добро пожаловать на игровой сервер",
+                    "httpLink"  => [null],
+                    "img" => [
+                        "mediaId" => 20817995,
+                        "url" => "https://nighthold.pro/storage/users/April2021/nI0AM5QruaanN1QTGABG.gif",
+                        "mimeType" => "image/gif",
+                        "type" => "fullsize",
+                        "size" => 4348,
+                        "width" => 100,
+                        "height" => 50,
+                        "originalFileName" => "nI0AM5QruaanN1QTGABG.gif",
+                        "mediaType" => 13
+                    ]
+                ]
+            ],
+            "notificationsCount" => 1
+    ]);
     }
 
     public function update()

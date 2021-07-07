@@ -61,7 +61,7 @@ Route::get('shop/category/{category}', [ShopController::class, 'category']);
 
 Route::post('shop/bay', [ShopController::class, 'bay']);
 
-Route::get('navbar/notifications', [AuthController::class, 'notifications']);
+Route::get('navbar/notifications', [\App\Http\Controllers\JsonController::class, 'notificationsList']);
 
 Route::post('send_email', [AuthController::class, 'send_email']);
 
