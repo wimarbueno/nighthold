@@ -52,6 +52,12 @@
          Core.community         = 'wow';
          //]]>
       </script>
+       <script type="text/javascript" src="{{ asset('forum/static/js/nav-client/navbar-tk.min.js') }}?v=84"></script>
+       <script type="text/javascript">
+           //<![CDATA[
+           window.nav.notifications.endpoint = "/notification/list";
+           //]]>
+       </script>
       <script type="text/javascript">
          //<![CDATA[
          var LOCALIZATION = LOCALIZATION || {};

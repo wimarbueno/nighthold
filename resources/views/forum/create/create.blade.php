@@ -7,14 +7,14 @@
                         <a href="#" class="Author-avatar ">
                             <img src="{{ asset('/storage/'.Auth::user()->avatar ?: '/static/Avatar-anon.png') }}" alt="" /></a>
                         <div class="Author-details">
-<span class="Author-name">
-<a class="Author-name--profileLink" href="#">{{ auth()->user()->name }}</a>
-</span>
-                            <span class="Author-posts">
-<a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
-@lang('forum.count_messages', ['count' => auth()->user()->posts_count])
-</a>
-</span>
+                            <span class="Author-name">
+                            <a class="Author-name--profileLink" href="#">{{ auth()->user()->name }}</a>
+                            </span>
+                             <span class="Author-posts">
+                            <a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
+                            @lang('forum.count_messages', ['count' => auth()->user()->posts_count])
+                            </a>
+                            </span>
                         </div>
                     </div>
                 </aside>
@@ -24,10 +24,10 @@
                         <input type="hidden" name="channel_id" value="{{ $category->id }}" />
                     </fieldset>
                     <div class="TopicForm-group">	<i class="Icon Icon-compose"></i>
-                        <input type="text" id="subject" name="subject" autocomplete="off" class="TopicForm-control TopicForm-control--subject TopicForm-subject" data-topic-form-subject="true" placeholder="@lang('forum.TopicFormSubject')" required="required" tabindex="1" fieldType="text" />
+                        <input type="text" name="subject" autocomplete="off" class="TopicForm-control TopicForm-control--subject TopicForm-subject" data-topic-form-subject="true" placeholder="@lang('forum.TopicFormSubject')" required tabindex="1" fieldType="text"/>
                     </div>
                     <div class="TopicForm-group TopicForm-group-content">
-                        <textarea id="postCommand.detail" name="messages" class="TopicForm-control TopicForm-control--detail TopicForm-detail" data-topic-form-detail="true" spellcheck="true" tabindex="1" autofocus></textarea>
+                        <textarea name="messages" class="TopicForm-control TopicForm-control--detail TopicForm-detail" tabindex="1" required></textarea>
                         <div class="PostForm-errors">                       @if ($errors)
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
