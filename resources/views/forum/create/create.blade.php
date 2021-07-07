@@ -27,7 +27,7 @@
                         <input type="text" name="subject" autocomplete="off" class="TopicForm-control TopicForm-control--subject TopicForm-subject" data-topic-form-subject="true" placeholder="@lang('forum.TopicFormSubject')" required tabindex="1" fieldType="text"/>
                     </div>
                     <div class="TopicForm-group TopicForm-group-content">
-                        <textarea name="messages" class="TopicForm-control TopicForm-control--detail TopicForm-detail" tabindex="1" required></textarea>
+                        <textarea name="messages" class="TopicForm-control TopicForm-control--detail TopicForm-detail" tabindex="1"></textarea>
                         <div class="PostForm-errors">                       @if ($errors)
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>

@@ -29,7 +29,7 @@
                     @csrf
                 </fieldset>
                 <div class="TopicForm-group TopicForm-group-content TopicForm-group--isActivated" data-topic-form="true">
-                    <textarea id="detail" name="detail" required></textarea>
+                    <textarea id="detail" name="detail"></textarea>
                     <div class="PostForm-errors">
                         @if ($errors)
                             @foreach ($errors->all() as $error)
