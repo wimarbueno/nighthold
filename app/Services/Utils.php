@@ -1147,7 +1147,7 @@
 
         private static function pvpTalent($guid, $spec): array
         {
-            $pvp = DB::connection('characters')->table('character_pvp_talent')->where('guid', $guid)->where('talentGroup', $spec)->orderBy('talentId0', 'asc')->get();
+            $pvp = DB::connection('ShadowlandsChatacters')->table('character_pvp_talent')->where('guid', $guid)->where('talentGroup', $spec)->orderBy('talentId0', 'asc')->get();
             $flattened = [];
             foreach ($pvp as $value) {
                 $info = Talent::where('talent', $value->talentId0)->first();
@@ -1175,7 +1175,7 @@
 
         private static function pvpTalentGrouped($guid, $spec): array
         {
-            $talentInfo = DB::connection('characters')->table('character_pvp_talent')->where('guid', $guid)->where('talentGroup', $spec)->get();
+            $talentInfo = DB::connection('ShadowlandsChatacters')->table('character_pvp_talent')->where('guid', $guid)->where('talentGroup', $spec)->get();
             $flattened = [];
             foreach ($talentInfo as $item) {
                 $info = Talent::where('talent', $item->talentId0)

@@ -10,7 +10,7 @@ class CharactersTalent extends Model
 {
     use HasFactory;
 
-    protected $connection = 'characters';
+    protected $connection = 'ShadowlandsChatacters';
 
     protected $table = 'character_talent';
 

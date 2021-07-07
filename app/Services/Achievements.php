@@ -35,11 +35,11 @@
             if(self::IsLoaded()) {
                 return true;
             }
-            self::$achievements_storage = DB::connection('characters')->table('character_achievement')->where('guid', self::$guid)->orderBy('date', 'desc')->get();
+            self::$achievements_storage = DB::connection('ShadowlandsChatacters')->table('character_achievement')->where('guid', self::$guid)->orderBy('date', 'desc')->get();
             if(!self::$achievements_storage) {
                 return false;
             }
-            self::$criterias_storage = DB::connection('characters')->table('character_achievement_progress')->where('guid', self::$guid)->get();
+            self::$criterias_storage = DB::connection('ShadowlandsChatacters')->table('character_achievement_progress')->where('guid', self::$guid)->get();
             self::$isAchievementsLoaded = true;
             return true;
         }

@@ -88,13 +88,14 @@
 
             self::$name = mb_convert_case($name, MB_CASE_TITLE, "UTF-8");
 
-            if(!self::LoadCharacterFieldsFromDB()) {
-                return 1;
-            }
             self::$realmID = $realm_id;
             self::$realmName = config('servers.realm')[$realm_id]['name'];
             self::$realmSlug = config('servers.realm')[$realm_id]['slug'];
             self::$m_server = config('servers.realm')[$realm_id]['type'];
+
+            if(!self::LoadCharacterFieldsFromDB()) {
+                return 1;
+            }
 
             self::HandleEquipmentCacheInfo();
             if($full) {
@@ -372,7 +373,7 @@
         public static function boss($boss, $guid) {
             $bosses = [];
             foreach ($boss as $item) {
-                $info = DB::connection('characters')
+                $info = DB::connection('ShadowlandsChatacters')
                     ->table('character_skills')
                     ->where('guid', $guid)
                     ->where('skill', $item->id_boss)
@@ -386,7 +387,7 @@
             $count = 0;
             $i = 0;
             foreach ($boss as $item) {
-                $count = DB::connection('characters')
+                $count = DB::connection('ShadowlandsChatacters')
                     ->table('character_skills')
                     ->where('guid', $guid)
                     ->where('skill', $item->id_boss)
@@ -457,8 +458,9 @@
                 Log::WriteError('%s : name was not provided.', __METHOD__);
                 return false;
             }
-            $fields = DB::connection('characters')->selectOne(/** @lang text */
-                'SELECT
+            if (self::$m_server === 'sl') {
+                $fields = DB::connection('ShadowlandsChatacters')->selectOne(/** @lang text */
+                    'SELECT
             characters.guid,
             characters.account,
             characters.name,
@@ -482,6 +484,34 @@
             LEFT JOIN guild_member AS guild_member ON guild_member.guid=characters.guid
             LEFT JOIN guild AS guild ON guild.guildid=guild_member.guildid
             WHERE BINARY characters.name = ? LIMIT 1', [self::$name]);
+            } else {
+                $fields = DB::connection('WotlkChatacters')->selectOne(/** @lang text */
+                    'SELECT
+            characters.guid,
+            characters.account,
+            characters.name,
+            characters.race,
+            characters.class,
+            characters.gender,
+            characters.level,
+            characters.playerFlags,
+            characters.totalKills,
+            characters.chosenTitle,
+            characters.health,
+            characters.honorLevel,
+            characters.honor,
+            characters.activeTalentGroup,
+            characters.equipmentCache,
+            characters.totaltime,
+            characters.logout_time,
+            guild_member.guildid AS guildId,
+            guild.name AS guildName
+            FROM characters AS characters
+            LEFT JOIN guild_member AS guild_member ON guild_member.guid=characters.guid
+            LEFT JOIN guild AS guild ON guild.guildid=guild_member.guildid
+            WHERE BINARY characters.name = ? LIMIT 1', [self::$name]);
+            }
+
             if(!$fields) {
                 Log::WriteError('%s : character %s was not found in `characters` table!', __METHOD__, self::$name);
                 return false;

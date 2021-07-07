@@ -26,7 +26,7 @@
         public $item;
 
         public function LoadFromDB($data, $guid) {
-            $inv = DB::connection('characters')->select(/** @lang text */
+            $inv = DB::connection('ShadowlandsChatacters')->select(/** @lang text */
                 '
                 SELECT
                 ii.guid,
@@ -104,7 +104,7 @@
         }
 
         private function iconName($entry) {
-            $iconName = DB::connection('mysql')->table('icons')->where('id', $entry)->get(['iconname']);
+            $iconName = DB::table('icons')->where('id', $entry)->get(['iconname']);
             if(!Images::Exists(public_path('uploads/item/'.$iconName[0]->iconname.'.jpg') ) ) {
                 Images::Download(
                         'https://render.worldofwarcraft.com/eu/icons/56/'.$iconName[0]->iconname.'.jpg',

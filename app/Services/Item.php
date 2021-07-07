@@ -65,7 +65,7 @@
         }
 
         public static function LoadInventory($guid) {
-            $inv = DB::connection('characters')->select(/** @lang text */
+            $inv = DB::connection('ShadowlandsChatacters')->select(/** @lang text */
                     '
                     SELECT
                     ii.guid,
