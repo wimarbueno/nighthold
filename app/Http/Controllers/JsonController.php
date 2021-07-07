@@ -140,12 +140,17 @@ class JsonController extends Controller
 
     public function delete($topic)
     {
-        Thread::where('id', $topic)->delete();
+        $data = Thread::where('id', $topic)->first();
+        if ($data->parent_id === null) {
+            $data->delete();
+        } else {
+            Thread::where('id', $topic)->delete();
+        }
 
         if (request()->wantsJson()) {
-            return redirect()->back();
+            return redirect()->route('forum.show', $data->channel_id);
         }
-        return redirect()->back();
+        return redirect()->route('forum.show', $data->channel_id);
     }
 
 }

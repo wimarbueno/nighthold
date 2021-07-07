@@ -33,6 +33,15 @@
 
         private $updated_at;
 
+        protected static function boot()
+        {
+            parent::boot();
+
+            static::deleting(function ($thread) {
+                $thread->replies()->delete();
+            });
+        }
+
         public function path(): string
         {
             return route('topic.show', [$this->id]);
@@ -55,7 +64,7 @@
 
         public function replies(): \Illuminate\Database\Eloquent\Relations\HasMany
         {
-            return $this->hasMany(Reply::class);
+            return $this->hasMany(self::class, 'parent_id', 'id');
         }
 
         public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
