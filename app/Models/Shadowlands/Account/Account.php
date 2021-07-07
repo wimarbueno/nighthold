@@ -77,7 +77,6 @@ class Account extends Model
             'salt' => $salt,
             'verifier' => $verifier,
             'email' => $email,
-            'last_login' => date("Y-m-d H:i:s"),
             'expansion' => '7',
             'battlenet_account' => $bnetInfo->id,
             'battlenet_index' => '1']
