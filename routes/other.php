@@ -59,6 +59,7 @@ Route::prefix('dashboard')->group(function () {
 
 Route::post('graphql', [GameController::class, 'graphql'])->name('graphql');
 Route::get('navbar/notifications.json', [JsonController::class, 'notifications'])->name('json.notifications');
+Route::get('notification/list', [JsonController::class, 'notificationsList'])->name('notificationsList');
 Route::get('support/update/json', [JsonController::class, 'update'])->name('json.update');
 
 Route::get('freekassa/result', [FreeKassaController::class, 'searchOrder']);

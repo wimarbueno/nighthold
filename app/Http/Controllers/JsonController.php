@@ -15,6 +15,28 @@ use Illuminate\Support\Facades\Validator;
 
 class JsonController extends Controller
 {
+    public function notificationsList()
+    {
+        return response()->json([
+            "totalNotifications" => 1,
+            "notificationsList" => [
+                [
+                    'id' => '1',
+                    'img' => [
+                        'url' => 'https://nighthold.pro/storage/users/user-487/1625655643.jpg'
+                    ],
+                    'url ' => '/iu',
+                    'title ' => 'test',
+                    'content  ' => 'tests  vvc',
+                    'httpLink ' => [
+                        'link' => '/wdwdwd',
+                        'content' => 'wdwdwd',
+                    ]
+                ]
+            ],
+            "notificationsCount" => 1
+        ]);
+    }
 
     public function notifications()
     {
