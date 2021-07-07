@@ -187,7 +187,7 @@
             <div class="Dropdown-divider"></div>
     @endif
 @endif
-@if(auth()->user()->role->name != $thread->creator->name)
+@if(auth()->user()->name != $thread->creator->name)
     @if(auth()->user()->hasPermission('forum_topic_edit'))
         <a class="Dropdown-item" href="{{ route('forum.edit', ['topic' => $thread->id]) }}">@lang('forum.edit_topicpost')</a>
     @endif
@@ -196,7 +196,7 @@
         <div class="Dropdown-divider"></div>
     @endif
 @endif
-@if(auth()->user()->role->name == $thread->creator->name)
+@if(auth()->user()->name === $thread->creator->name)
     <a class="Dropdown-item" href="{{ route('forum.edit', ['topic' => $thread->id]) }}">@lang('forum.edit_topicpost')</a>
 @else
     <span class="Dropdown-item" data-topic-post-button="true" data-trigger="report.preview.topicpost">@lang('forum.report_topicpost')</span>
@@ -317,7 +317,7 @@ TopicPost-rank--down
             <div class="Dropdown-divider"></div>
         @endif
     @endif
-        @if(auth()->user()->role->name != $reply->creator->name)
+        @if(auth()->user()->name != $reply->creator->name)
             @if(auth()->user()->hasPermission('forum_topic_edit'))
                 <a class="Dropdown-item" href="{{ route('forum.edit', ['topic' => $reply->id]) }}">@lang('forum.edit_topicpost')</a>
             @endif
@@ -326,7 +326,7 @@ TopicPost-rank--down
                 <div class="Dropdown-divider"></div>
             @endif
         @endif
-    @if(auth()->user()->name == $reply->creator->name)
+    @if(auth()->user()->name === $reply->creator->name)
         <a href="{{ route('forum.edit', ['topic' => $reply->id]) }}" class="Dropdown-item" >@lang('forum.edit_topicpost')</a>
         <span class="Dropdown-item" data-topic-post-button="true" data-trigger="delete.topicpost">@lang('forum.delete_topicpost')</span>
         @else
