@@ -24,7 +24,7 @@
                         <input type="hidden" name="channel_id" value="{{ $category->id }}" />
                     </fieldset>
                     <div class="TopicForm-group">	<i class="Icon Icon-compose"></i>
-                        <input type="text" name="subject" autocomplete="off" class="TopicForm-control TopicForm-control--subject TopicForm-subject" data-topic-form-subject="true" placeholder="@lang('forum.TopicFormSubject')" required tabindex="1" fieldType="text"/>
+                        <input type="text" name="subject" autocomplete="off" class="TopicForm-control TopicForm-control--subject TopicForm-subject" placeholder="@lang('forum.TopicFormSubject')" required tabindex="1" fieldType="text"/>
                     </div>
                     <div class="TopicForm-group TopicForm-group-content">
                         <textarea name="messages" class="TopicForm-control TopicForm-control--detail TopicForm-detail" tabindex="1"></textarea>
