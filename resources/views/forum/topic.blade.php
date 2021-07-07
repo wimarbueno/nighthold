@@ -76,7 +76,11 @@
 
 {{ $topics->links('forum.paginate.posthead') }}
 <div class="Topic-content">
-<div class="TopicPost @if($thread->creator->hasPermission('forum_nighthold')) TopicPost--blizzard @endif @if($thread->creator->hasPermission('forum_mvp')) TopicPost--mvp @endif" id="post-{{ $thread->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $thread->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $thread->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $thread->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
+<div class="TopicPost
+@if($thread->down >= 30)is-low-rated @endif
+@if($thread->creator->hasPermission('forum_nighthold')) TopicPost--blizzard
+@endif @if($thread->creator->hasPermission('forum_mvp')) TopicPost--mvp
+@endif" id="post-{{ $thread->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $thread->id }}&quot;,&quot;valueVoted&quot;:{{ $thread->up - $thread->down }},&quot;rank&quot;:{&quot;voteUp&quot;:{{ $thread->up }},&quot;voteDown&quot;:{{ $thread->down }}},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $thread->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $thread->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
 <span id="{{ $thread->id }}"></span>
 <div class="TopicPost-content">
 <div class="TopicPost-authorIcon TopicPost-authorIcon--blizzard">
@@ -127,8 +131,22 @@
 @if($thread->created_at != $thread->updated_at)
 &#160;(Отредактировано)
 @endif
-@if($thread->up)<span class="TopicPost-rank TopicPost-rank--up" data-topic-post-rank="true" data-toggle="tooltip" data-tooltip-content="Нравится: {{ $thread->up }}.">{{ $thread->up }}</span>@endif
+@if($thread->up != 0 || $thread->down != 0)
+<span class="TopicPost-rank
+@if($thread->up > $thread->down)
+    TopicPost-rank--up
+@else
+    TopicPost-rank--down
+@endif" data-topic-post-rank="true" data-toggle="tooltip" data-tooltip-content="{{ $thread->down }} Dislikes, {{ $thread->up }} Likes">
+    @if($thread->up > $thread->down)
+        {{ $thread->up - $thread->down }}
+    @else
+        -{{ $thread->up - $thread->down }}
+    @endif
+</span>
+@else
 <span class="TopicPost-rank TopicPost-rank--none" data-topic-post-rank="true"></span>
+@endif
 </div>
 @auth
 <aside class="TopicPost-control">
@@ -198,6 +216,7 @@
 @if($thread->creator->name != auth()->user()->name)
 <footer class="TopicPost-actions" data-topic-post-body-content="true">
 <button class="TopicPost-button TopicPost-button--like" data-topic-post-button="true" data-trigger="vote.up.topicpost" type="button"><span class="Button-content"><i class="Icon"></i>Нравится</span></button>
+<button class="TopicPost-button TopicPost-button--dislike" data-topic-post-button="true" data-trigger="vote.down.topicpost" type="button"><span class="Button-content"><i class="Icon"></i>Не нравится</span></button>
 <a href="#detail" class="TopicPost-button TopicPost-button--quote" data-topic-post-button="true" data-trigger="quote.topicpost" type="button"><span class="Button-content"><svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-quote"/></svg>Цитирование</span></a>
 </footer>
 @endif
@@ -207,7 +226,11 @@
 </div>
 @foreach ($topics as $reply)
 
-<div class="TopicPost @if($reply->creator->hasPermission('forum_nighthold')) TopicPost--blizzard @endif @if($reply->creator->hasPermission('forum_mvp')) TopicPost--mvp @endif" id="post-{{ $reply->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $reply->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $reply->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $reply->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
+<div class="TopicPost
+@if($reply->down >= 30)is-low-rated @endif
+@if($reply->creator->hasPermission('forum_nighthold')) TopicPost--blizzard
+@endif @if($reply->creator->hasPermission('forum_mvp')) TopicPost--mvp
+@endif" id="post-{{ $reply->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $reply->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $reply->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $reply->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
 <span id="{{ $reply->id }}"></span>
 <div class="TopicPost-content">
 <div class="TopicPost-authorIcon TopicPost-authorIcon--blizzard">
@@ -259,9 +282,18 @@
 @if($reply->created_at != $reply->updated_at)
 &#160;(Отредактировано)
 @endif
-@if($reply->up)
-<span class="TopicPost-rank TopicPost-rank--up" data-topic-post-rank="true"
-         data-toggle="tooltip" data-tooltip-content="Нравится: {{ $reply->up }}.">{{ $reply->up }}
+@if($reply->up != 0 || $reply->down != 0)
+<span class="TopicPost-rank
+@if($reply->up > $reply->down)
+TopicPost-rank--up
+@else
+TopicPost-rank--down
+@endif" data-topic-post-rank="true" data-toggle="tooltip" data-tooltip-content="{{ $reply->down }} Dislikes, {{ $reply->up }} Likes">
+@if($reply->up > $reply->down)
+{{ $reply->up - $reply->down }}
+@else
+-{{ $reply->up - $reply->down }}
+@endif
 </span>
 @else
 <span class="TopicPost-rank TopicPost-rank--none" data-topic-post-rank="true"></span>
@@ -314,6 +346,7 @@
     <button class="TopicPost-button TopicPost-button--like" data-topic-post-button="true" data-trigger="vote.up.topicpost" type="button">
     <span class="Button-content"><i class="Icon"></i>Нравится</span>
     </button>
+    <button class="TopicPost-button TopicPost-button--dislike" data-topic-post-button="true" data-trigger="vote.down.topicpost" type="button"><span class="Button-content"><i class="Icon"></i>Не нравится</span></button>
     <a href="#detail" class="TopicPost-button TopicPost-button--quote" data-topic-post-button="true" data-trigger="quote.topicpost" type="button">
     <span class="Button-content">
     <svg xmlns="http://www.w3.org/2000/svg">
