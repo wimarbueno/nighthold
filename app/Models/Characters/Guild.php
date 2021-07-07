@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guild extends Model {
 
-    protected $connection = 'characters';
+    protected $connection = 'ShadowlandsChatacters';
 
     protected $table = 'guild';
 
