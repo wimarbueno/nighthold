@@ -8,6 +8,7 @@
       <script>var dataLayer = dataLayer || [];
          dataLayer.push({"locale":"{{ preg_replace_callback('/\-\s*\w\s*\w/', function($m) { return strtoupper($m[0]); }, app()->getLocale()) }}", "serverRegion":"eu", "region":"eu", "localeRegion":"eu", "project":"wow", @guest "authenticated":"0", "hasGameTime":"0" @else "authenticated":"1", "userId":{{ Auth::id() }}, "hasGameTime":"0" @endguest });
       </script>
+       <meta name="enot" content="4181625767739knlMBFuk0OzKhOf6J6xIaCsI_TUarR5C" />
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ setting('site.googletagmanager') }}"></script>
       <script>
