@@ -62,4 +62,7 @@ Route::get('notification/list', [JsonController::class, 'notificationsList'])->n
 Route::get('support/update/json', [JsonController::class, 'update'])->name('json.update');
 
 Route::get('freekassa/result', [FreeKassaController::class, 'searchOrder']);
-Route::post('enot/result', [FreeKassaController::class, 'resultEnot']);
+
+Route::post('enot/result/webhook', [FreeKassaController::class, 'webhook']);
+Route::get('enot/result/success', [FreeKassaController::class, 'success']);
+Route::get('enot/result/fail', [FreeKassaController::class, 'fail']);
