@@ -46,7 +46,7 @@ class FreeKassaController extends Controller
             $merchant = $request->get('merchant'); // id вашего магазина
             $secret_word2 = '7ly9G3-oae51ouObirR_vUF1n1XM4RYo'; // секретный ключ 2
 
-            $sign = md5($merchant.':'.$_REQUEST['amount'].':'.$secret_word2.':'.$request->get('merchant_id'));
+            $sign = md5($merchant.':'.$request->get('amount').':'.$secret_word2.':'.$request->get('merchant_id'));
 
             if ($sign != $request->get('sign_2')) {
                 return redirect('/dashboard/payment/index');

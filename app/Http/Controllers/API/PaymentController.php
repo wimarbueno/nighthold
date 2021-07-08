@@ -111,7 +111,7 @@ class PaymentController extends Controller
                 'user_id' => Auth::user()->id,
                 'service' => 'balance',
                 'title' => 'Пополнение баланса (Enot)',
-                'price' => $ORDER_AMOUNT,
+                'price' => $request->get('sum'),
                 'status' => '0',
                 'order_id' => $PAYMENT_ID
             ]);
