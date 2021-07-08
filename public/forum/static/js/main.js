@@ -307,11 +307,13 @@ return $.ajax({
                     $(".TopicPost-button--like").blur(),
                     $(n).removeClass("is-user-disliked"),
                     $(".TopicPost-button--dislike").blur())
-})}},{
+                    })}},{
     key:"toggleRankMode",value:function(t,e,r,n){
         $(t).toggleClass("TopicPost-rank--up",e),
         $(t).toggleClass("TopicPost-rank--down",r),
-        $(t).toggleClass("TopicPost-rank--none",n)}},{
+        $(t).toggleClass("TopicPost-rank--none",n)
+        }
+    },{
     key:"toggleLikeMode",value:function(t,e){
         $(t).toggleClass("is-user-liked",e),
         $(t).toggleClass("is-user-disliked",!e)}},{

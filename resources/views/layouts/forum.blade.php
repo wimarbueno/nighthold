@@ -8,7 +8,7 @@
       <meta name="csrf-token" content="{{ csrf_token() }}">
       <link rel="shortcut icon" type="image/x-icon" href="{{ asset('forum/static/images/icons/wow-favicon.ico') }}" />
       <link rel="stylesheet" href="{{ asset('forum/static/css/navbar.css') }}">
-      <link rel="stylesheet" href="{{ asset('forum/static/css/main-1445231e35.css') }}">
+      <link rel="stylesheet" href="{{ asset('forum/static/css/main-9296f9fec4.css') }}">
       <link rel="stylesheet" href="{{ asset('forum/static/css/desktop_2_d90f4dbd5a861bdeed61b3da02053b01ae34655f.css') }}">
       <link rel="stylesheet" href="{{ asset('forum/static/css/desktop_theme_3_5adbba4c27c4c795e67b29e3622e828be72f9232.css') }}">
       <script src="https://cdn.tiny.cloud/1/wwqqv9id7ffnpz5q9ych4h63q8thnarin4suzc90i3jyrp4x/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>

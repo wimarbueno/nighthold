@@ -80,7 +80,7 @@
 @if($thread->down >= 30)is-low-rated @endif
 @if($thread->creator->hasPermission('forum_nighthold')) TopicPost--blizzard
 @endif @if($thread->creator->hasPermission('forum_mvp')) TopicPost--mvp
-@endif" id="post-{{ $thread->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $thread->id }}&quot;,&quot;valueVoted&quot;:{{ $thread->up - $thread->down }},&quot;rank&quot;:{&quot;voteUp&quot;:{{ $thread->up }},&quot;voteDown&quot;:{{ $thread->down }}},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $thread->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $thread->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
+@endif" id="post-{{ $thread->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $thread->id }}&quot;,&quot;valueVoted&quot;:{{ $thread->up + $thread->down }},&quot;rank&quot;:{&quot;voteUp&quot;:{{ $thread->up }},&quot;voteDown&quot;:{{ $thread->down }}},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $thread->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $thread->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
 <span id="{{ $thread->id }}"></span>
 <div class="TopicPost-content">
 <div class="TopicPost-authorIcon TopicPost-authorIcon--blizzard">
@@ -232,7 +232,7 @@
 @if($reply->down >= 30)is-low-rated @endif
 @if($reply->creator->hasPermission('forum_nighthold')) TopicPost--blizzard
 @endif @if($reply->creator->hasPermission('forum_mvp')) TopicPost--mvp
-@endif" id="post-{{ $reply->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $reply->id }}&quot;,&quot;valueVoted&quot;:0,&quot;rank&quot;:{&quot;voteUp&quot;:0,&quot;voteDown&quot;:0},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $reply->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $reply->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
+@endif" id="post-{{ $reply->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $reply->id }}&quot;,&quot;valueVoted&quot;:{{ $reply->up + $reply->down }},&quot;rank&quot;:{&quot;voteUp&quot;:{{ $reply->up }},&quot;voteDown&quot;:{{ $reply->down }}},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $reply->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $reply->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
 <span id="{{ $reply->id }}"></span>
 <div class="TopicPost-content">
 <div class="TopicPost-authorIcon TopicPost-authorIcon--blizzard">

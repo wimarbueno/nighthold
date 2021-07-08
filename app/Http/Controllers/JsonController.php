@@ -24,14 +24,14 @@ class JsonController extends Controller
                     "id" => 1894440545,
                     "title" => "Добро пожаловать",
                     "content" => "Форум на стадии разработки",
-                    "img" => [
-                        "mediaId" => 20817995,
-                        "url" => "https://nighthold.pro/v3/assets/img_1.png"
-                    ],
                     'httpLink' => [
                         'content' => 'Предложения',
                         'link' => 'https://nighthold.pro/ru-ru/forums/168',
                     ],
+                    "img" => [
+                        "mediaId" => 20817995,
+                        "url" => "https://nighthold.pro/v3/assets/img_1.png"
+                    ]
                 ]
             ],
             "notificationsCount" => 1
@@ -46,18 +46,14 @@ class JsonController extends Controller
                 [
                     "id" => 1894440545,
                     "title" => "Добро пожаловать",
-                    "content" => "Добро пожаловать на игровой сервер",
-                    "httpLink"  => [null],
+                    "content" => "Форум на стадии разработки",
+                    'httpLink' => [
+                        'content' => 'Предложения',
+                        'link' => 'https://nighthold.pro/ru-ru/forums/168',
+                    ],
                     "img" => [
                         "mediaId" => 20817995,
-                        "url" => "https://nighthold.pro/storage/users/April2021/nI0AM5QruaanN1QTGABG.gif",
-                        "mimeType" => "image/gif",
-                        "type" => "fullsize",
-                        "size" => 4348,
-                        "width" => 100,
-                        "height" => 50,
-                        "originalFileName" => "nI0AM5QruaanN1QTGABG.gif",
-                        "mediaType" => 13
+                        "url" => "https://nighthold.pro/v3/assets/img_1.png"
                     ]
                 ]
             ],
@@ -111,42 +107,45 @@ class JsonController extends Controller
         Thread::where('id', $id)->update(['locked' => '0']);
     }
 
-    public function down($id) {
-        if (ThreadVote::where('threads_id', $id)->where('user_id', Auth::user()->id)->where('type', 'down')->first()){
-            $down = Thread::where('id', $id)->first();
-            return response()->json([
-                'toggleRankMode' => $down->down - $down->up
+    public function vote($id, $type) {
+        if ($type === 'up') {
+            if (ThreadVote::where('threads_id', $id)->where('user_id', Auth::user()->id)->where('type', 'up')->first()){
+                $up = Thread::where('id', $id)->first();
+                return response()->json([
+                    'toggleRankMode' => $up->up + $up->down,
+                    'vote' => $up->down - $up->up
+                ]);
+            }
+            Thread::where('id', $id)->increment('up', 1);
+            ThreadVote::create([
+                'threads_id' => $id,
+                'user_id' => Auth::user()->id,
+                'type' => 'up'
             ]);
-        }
-        Thread::where('id', $id)->increment('down', 1);
-        ThreadVote::create([
-            'threads_id' => $id,
-            'user_id' => Auth::user()->id,
-            'type' => 'down'
-        ]);
-        $down = Thread::where('id', $id)->first();
-        return response()->json([
-            'toggleRankMode' => $down->down - $down->up
-        ]);
-    }
-
-    public function up($id) {
-        if (ThreadVote::where('threads_id', $id)->where('user_id', Auth::user()->id)->where('type', 'up')->first()){
             $up = Thread::where('id', $id)->first();
             return response()->json([
-                'toggleRankMode' => $up->up - $up->down
+                'toggleRankMode' => $up->up + $up->down,
+                'vote' => $up->down - $up->up
+            ]);
+        } else {
+            if (ThreadVote::where('threads_id', $id)->where('user_id', Auth::user()->id)->where('type', 'down')->first()){
+                $vote = Thread::whereId($id)->select('up', 'down')->first();
+                return response()->json([
+                    'toggleRankMode' => $vote->down + $vote->up,
+                    'vote' => $vote->down - $vote->up
+                ]);
+            }
+            Thread::where('id', $id)->increment('down', 1);
+            ThreadVote::create([
+                'threads_id' => $id,
+                'user_id' => Auth::user()->id,
+                'type' => 'down'
+            ]);
+            $down = Thread::where('id', $id)->first();
+            return response()->json([
+                'toggleRankMode' => $down->down + $down->up - 2,
             ]);
         }
-        Thread::where('id', $id)->increment('up', 1);
-        ThreadVote::create([
-            'threads_id' => $id,
-            'user_id' => Auth::user()->id,
-            'type' => 'up'
-        ]);
-        $up = Thread::where('id', $id)->first();
-        return response()->json([
-            'toggleRankMode' => $up->up - $up->down
-        ]);
     }
 
     public function edit(Request $request, $id) {
