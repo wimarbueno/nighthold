@@ -2,6 +2,7 @@
     @push('css')
         <link href="{{ asset('static/5.60a3b147f091048d9af5.css') }}" rel="stylesheet" type="text/css"/>
     @endpush
+
     <article>
         <header>
             <div class="Pane Pane--underSiteNav Pane--fadeBottom bordered" data-url="{{ asset('/storage/' . Utils::ImagesLogo($page->image)) }}" queryselectoralways="31">

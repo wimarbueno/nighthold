@@ -135,9 +135,9 @@
                </div>
                @include('layouts.footer')
             </footer>
-             <aside>
+             <!--aside>
                  <div class="PersistentCtaMount PersistentCtaMount--bcc" data-props='{"title":"Stormrage x7 3.3.5a+","subtitle":"Открытие игрового мира","completedSubtitle":"Доступно сейчас\n","prepurchaseButton":{"text":"Подробности","url":"https://nighthold.pro/ru-ru/forums/topic/219","analytics":{"event":"ctaOther","event_action":"","event_category":"","event_label":"learn more"}},"purchaseButton":{"text":"","url":"","analytics":{"event":"","event_action":"","event_category":"","event_label":""}},"countdownTimer":{"endTimestamp":3622584860,"daysLabel":"дн.","hoursLabel":"ч.","minutesLabel":"Мин.","secondsLabel":"сек"},"forceCompletion":false,"hideTimer":false}'></div>
-             </aside>
+             </aside-->
          </div>
       </div>
       <div class="Photoswipe pswp Photoswipe--modal Photoswipe--wow" name="modal" tabindex="-1" role="dialog" aria-hidden="true">
