@@ -108,7 +108,7 @@
 @endif
 <span class="Author-job">{{ $thread->creator->role->display_name }}</span>
 <span class="Author-posts">
-<a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
+<a class="Author-posts" href="{{ route('forum.search', ['a' => $thread->creator->name]) }}" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
 @lang('forum.count_messages', ['count' => $thread->creator->posts_count])</a>
 </span>
 </div>
@@ -260,8 +260,9 @@
             @endif
             <span class="Author-job">{{ $reply->creator->role->display_name }}</span>
             <span class="Author-posts">
-            <a class="Author-posts" href="#" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
-            @lang('forum.count_messages', ['count' => $reply->creator->posts_count])</a>
+            <a class="Author-posts" href="{{ route('forum.search', ['a' => $reply->creator->name]) }}" data-toggle="tooltip" data-tooltip-content="@lang('forum.view_message_history')" data-original-title="" title="">
+            @lang('forum.count_messages', ['count' => $reply->creator->posts_count])
+            </a>
             </span>
         </div>
     </div>

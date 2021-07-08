@@ -16,14 +16,42 @@ use App\Services\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     public function streamSend(Request $request) {
+
+        Validator::extend('strip_min', function ($attribute, $value, $parameters, $validator) {
+
+            $validator->addReplacer('strip_min', function($message, $attribute, $rule, $parameters){
+                return str_replace([':min'], $parameters, $message);
+            });
+
+            return strlen(
+                    strip_tags(
+                        preg_replace(
+                            '/\s+/',
+                            '',
+                            str_replace('&nbsp;',"", $value)
+                        )
+                    )
+                ) >= $parameters[0];
+        });
+
+        $validator = Validator::make($request->all(), [
+            'name_user' => 'required|string|min:2|strip_min:2'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success'=> false, 'message' => 'Ошибка отправки данных, проверьте заполняемые данные.', 'class' => 'alert-message error']);
+        }
+
         Streams::create([
             'name_user' => $request->get('name_user'),
             'id_user' => auth()->id()
         ]);
+
         return response()->json(['success'=> true, 'message' => 'Данные успешно отправлены.', 'class' => 'alert-message success']);
     }
 

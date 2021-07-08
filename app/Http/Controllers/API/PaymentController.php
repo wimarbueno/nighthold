@@ -8,6 +8,7 @@ use App\Models\Shadowlands\Account\Account;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Maksa988\FreeKassa\Facades\FreeKassa;
 
 class PaymentController extends Controller
@@ -35,6 +36,31 @@ class PaymentController extends Controller
 
     public function paymentAdd(Request $request)
     {
+        Validator::extend('strip_min', function ($attribute, $value, $parameters, $validator) {
+
+            $validator->addReplacer('strip_min', function($message, $attribute, $rule, $parameters){
+                return str_replace([':min'], $parameters, $message);
+            });
+
+            return strlen(
+                    strip_tags(
+                        preg_replace(
+                            '/\s+/',
+                            '',
+                            str_replace('&nbsp;',"", $value)
+                        )
+                    )
+                ) >= $parameters[0];
+        });
+
+        $validator = Validator::make($request->all(), [
+            'sum' => 'required|numeric|min:10|strip_min:2'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success'=> false, 'message' => 'Минимальная сумма пополнения 10 бонусов', 'class' => 'alert-message error']);
+        }
+
         if ($request->get('option') === 'RoboKassa') {
             $payment = new \Idma\Robokassa\Payment(
                 setting('robokassa.payment_user'),
@@ -55,7 +81,7 @@ class PaymentController extends Controller
                 ->setSum($request->get('sum')*10)
                 ->setDescription('Пополнение баланса');
 
-            return response()->json(['error' => false, 'url' => $payment->getPaymentUrl()]);
+            return response()->json(['success'=> true, 'message' => 'Успешно, Перенаправляем на оплату.', 'class' => 'alert-message success', 'url' => $payment->getPaymentUrl()]);
         }
         elseif ($request->get('option') === 'FreeKassa') {
             $order_id = time();
@@ -66,13 +92,36 @@ class PaymentController extends Controller
                 'title' => 'Пополнение баланса (FreeKassa)',
                 'price' => $request->get('sum'),
                 'status' => '0',
-                'order_id' => $order_id,
+                'order_id' => $order_id
             ]);
 
             $url = FreeKassa::getPayUrl($request->get('sum')*10, $order_id);
-            return response()->json(['error' => false, 'url' => $url]);
+            return response()->json(['success'=> true, 'message' => 'Успешно, перенаправляем на оплату.', 'class' => 'alert-message success', 'url' => $url]);
+
         }
-        return response()->json(['error' => 'Errors']);
+        elseif ($request->get('option') === 'enot') {
+
+            $MERCHANT_ID   = 21256;                                  // ID магазина
+            $SECRET_WORD   = 'IjtjVFni3amKqw_Q8LQyAfUD2j5MxuvY';     // Секретный ключ
+            $PAYMENT_ID    = time();                                 // ID заказа (мы используем time(), чтобы был всегда уникальный ID)
+            $ORDER_AMOUNT  = $request->get('sum')*10;                                     // Сумма заказа
+
+            $sign = md5($MERCHANT_ID.':'.$ORDER_AMOUNT.':'.$SECRET_WORD.':'.$PAYMENT_ID);  //Генерация ключа
+            HistoryPayment::create([
+                'user_id' => Auth::user()->id,
+                'service' => 'balance',
+                'title' => 'Пополнение баланса (Enot)',
+                'price' => $ORDER_AMOUNT,
+                'status' => '0',
+                'order_id' => $PAYMENT_ID
+            ]);
+
+            $url = 'https://enot.io/pay?m='.$MERCHANT_ID.'&oa='.$ORDER_AMOUNT.'&o='. $PAYMENT_ID
+            .'&s='.$sign.'&cr=RUB';
+            return response()->json(['success'=> true, 'message' => 'Успешно, перенаправляем на оплату.', 'class' => 'alert-message success', 'url' => $url]);
+
+        }
+        return response()->json(['success'=> false, 'message' => 'Неизвестная ошибка, обратитесь к администрации сайта.', 'class' => 'alert-message error']);
     }
 
     public function store(Request $request)

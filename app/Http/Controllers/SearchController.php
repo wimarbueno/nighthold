@@ -51,16 +51,33 @@ class SearchController extends Controller
 
     public function forum(Request $request): string
     {
-        $q = request('q');
-        $max_page = 10;
-        $results = $this->searchForum($q, $max_page);
+        if(request('q') || request('a')) {
+            if(request('q')) {
+                $q = request('q');
+                $max_page = 10;
+                $results = $this->searchForum($q, $max_page);
+            } else {
+                $q = request('a');
+                $max_page = 10;
+                $results = $this->searchForumUser($q, $max_page);
+            }
+            return view('forum.search', [
+                'result' => $results,
+            ])->render();
+        }
         return view('forum.search', [
-            'result' => $results,
+            'result' => null,
         ])->render();
     }
 
     public function searchForum($q, $count){
         $query = mb_strtolower($q, 'UTF-8');
         return Thread::where('title','LIKE','%'.$query.'%')->orWhere('body','LIKE','%'.$query.'%')->paginate($count);
+    }
+
+    private function searchForumUser($q, int $max_page)
+    {
+        $user = User::where('name', $q)->select('name', 'id')->first();
+        return Thread::where('user_id', $user->id)->whereNotNull('parent_id')->paginate($max_page);
     }
 }

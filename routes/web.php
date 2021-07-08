@@ -34,7 +34,7 @@ Route::prefix('forums')->group(function () {
     Route::post('/{category}/create', [IndexController::class, 'store'])->name('forum.topic.store');
     Route::get('/topic/{thread}', [IndexController::class, 'topic'])->name('topic.show');
     Route::post('/replies/{thread}', [RepliesController::class, 'store'])->name('forum.topic.reply.create');
-    Route::get('/search', [SearchController::class, 'forum'])->name('forum.search');
+    Route::get('search', [SearchController::class, 'forum'])->name('forum.search');
     Route::get('topic/post/{topic}/edit', [ForumsController::class, 'edit'])->name('forum.edit');
 });
 
