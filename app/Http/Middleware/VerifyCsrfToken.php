@@ -19,5 +19,6 @@ class VerifyCsrfToken extends Middleware
         '/message-bus/*',
         '/api/*',
         '/forums/upload/images',
+        '/enot/result/webhook',
     ];
 }
