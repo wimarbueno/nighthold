@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\HistoryPayment;
 use App\Models\Shadowlands\Account\Account;
 use App\Models\User;
+use App\Models\Wotlk\Account\AccountDonate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -54,11 +55,11 @@ class PaymentController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'sum' => 'required|numeric|min:10|strip_min:2'
+            'sum' => 'required|numeric|min:'.setting('platnye-uslugi.payment_bonus_min').'|strip_min:2'
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['success'=> false, 'message' => 'Минимальная сумма пополнения 10 бонусов', 'class' => 'alert-message error']);
+            return response()->json(['success'=> false, 'message' => 'Минимальная сумма пополнения '.setting('platnye-uslugi.payment_bonus_min').' бонусов', 'class' => 'alert-message error']);
         }
 
         if ($request->get('option') === 'RoboKassa') {
@@ -78,7 +79,7 @@ class PaymentController extends Controller
             ]);
 
             $payment->setInvoiceId($order->id)
-                ->setSum($request->get('sum')*10)
+                ->setSum($request->get('sum')*setting('platnye-uslugi.payment_bonus'))
                 ->setDescription('Пополнение баланса');
 
             return response()->json(['success'=> true, 'message' => 'Успешно, Перенаправляем на оплату.', 'class' => 'alert-message success', 'url' => $payment->getPaymentUrl()]);
@@ -95,16 +96,16 @@ class PaymentController extends Controller
                 'order_id' => $order_id
             ]);
 
-            $url = FreeKassa::getPayUrl($request->get('sum')*10, $order_id);
+            $url = FreeKassa::getPayUrl($request->get('sum')*setting('platnye-uslugi.payment_bonus'), $order_id);
             return response()->json(['success'=> true, 'message' => 'Успешно, перенаправляем на оплату.', 'class' => 'alert-message success', 'url' => $url]);
 
         }
         elseif ($request->get('option') === 'enot') {
 
-            $MERCHANT_ID   = 21256;                                  // ID магазина
-            $SECRET_WORD   = 'IjtjVFni3amKqw_Q8LQyAfUD2j5MxuvY';     // Секретный ключ
+            $MERCHANT_ID   = 22342;                                  // ID магазина
+            $SECRET_WORD   = 'PcEqXegCP7Ar-JMkcjDkfCdBjUduAc6n';     // Секретный ключ
             $PAYMENT_ID    = time();                                 // ID заказа (мы используем time(), чтобы был всегда уникальный ID)
-            $ORDER_AMOUNT  = $request->get('sum')*10;                                     // Сумма заказа
+            $ORDER_AMOUNT  = $request->get('sum')*setting('platnye-uslugi.payment_bonus');                                     // Сумма заказа
 
             $sign = md5($MERCHANT_ID.':'.$ORDER_AMOUNT.':'.$SECRET_WORD.':'.$PAYMENT_ID);  //Генерация ключа
             HistoryPayment::create([
@@ -136,8 +137,22 @@ class PaymentController extends Controller
             $order = HistoryPayment::find($payment->getInvoiceId());
 
             if ($payment->getSum() == $order->price) {
-                $newBalance = Account::balance()->balans + $payment->getSum();
-                Account::setBalance($newBalance);
+                $newAccountBalance = AccountDonate::where('id', auth()->user()->accountWotlk->id)->first();
+                if ($newAccountBalance) {
+                    AccountDonate::updateOrCreate([
+                        'id' => auth()->user()->accountWotlk->id,
+                    ],[
+                        'bonuses' => $newAccountBalance->bonuses  + $order->price,
+                        'total_bonuses' => $newAccountBalance->bonuses  + $order->price
+                    ]);
+                } else {
+                    AccountDonate::updateOrCreate([
+                        'id' => auth()->user()->accountWotlk->id,
+                    ],[
+                        'bonuses' => $order->price,
+                        'total_bonuses' => $order->price
+                    ]);
+                }
                 HistoryPayment::where('id', $payment->getInvoiceId())->update(['status' => 1]);
                 return redirect('/dashboard/payment/index');
             }
