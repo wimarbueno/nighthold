@@ -9,7 +9,7 @@ class Posts
 {
 
     public function getHome() {
-        $raw = Post::select(['id','title', 'slug', 'image', 'created_at'])->orderBy('created_at', 'DESC')->orderBy('updated_at', 'DESC')->limit(4)->get();
+        $raw = Post::select(['id','title', 'slug', 'image', 'created_at'])->where('status', 'PUBLISHED')->orderBy('created_at', 'DESC')->orderBy('updated_at', 'DESC')->limit(4)->get();
         $collection = [];
         foreach($raw as $key) {
             $collection[] = $this->buildArticle($key);

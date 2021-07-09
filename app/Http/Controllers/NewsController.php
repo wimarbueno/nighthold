@@ -20,7 +20,7 @@ class NewsController extends Controller
     }
 
     public function frag() {
-        $dataToEliminate = Post::orderBy('created_at','desc')->take(6)->select('id')->pluck('id');
+        $dataToEliminate = Post::orderBy('created_at','desc')->where('status','PUBLISHED')->take(6)->select('id')->pluck('id');
         $news = Post::whereNotIn('id', $dataToEliminate)->orderBy('created_at','desc')->skip(6)->simplePaginate(10);
         return view('news.frag', [
             'news' => $news

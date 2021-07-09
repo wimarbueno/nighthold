@@ -12,7 +12,8 @@ class Referral extends Model
         'user_id',
         'ref_id',
         'bonus',
-        'reward'
+        'reward',
+        'status'
     ];
 
     public function referrer(): \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -136,9 +136,11 @@
                </div>
                @include('layouts.footer')
             </footer>
-             <!--aside>
-                 <div class="PersistentCtaMount PersistentCtaMount--bcc" data-props='{"title":"Stormrage x7 3.3.5a+","subtitle":"Открытие игрового мира","completedSubtitle":"Доступно сейчас\n","prepurchaseButton":{"text":"Подробности","url":"https://nighthold.pro/ru-ru/forums/topic/219","analytics":{"event":"ctaOther","event_action":"","event_category":"","event_label":"learn more"}},"purchaseButton":{"text":"","url":"","analytics":{"event":"","event_action":"","event_category":"","event_label":""}},"countdownTimer":{"endTimestamp":3622584860,"daysLabel":"дн.","hoursLabel":"ч.","minutesLabel":"Мин.","secondsLabel":"сек"},"forceCompletion":false,"hideTimer":false}'></div>
-             </aside-->
+             @if(setting('taimer.timer_enable') === 'PUBLISHED')
+             <aside>
+                 <div class="PersistentCtaMount PersistentCtaMount--bcc" data-props='{"title":"{{ setting('taimer.name') }}","subtitle":"{{ setting('taimer.sub_title') }}","completedSubtitle":"Доступно сейчас\n","prepurchaseButton":{"text":"{{ setting('taimer.link') }}","url":"{{ setting('taimer.url_link') }}","analytics":{"event":"ctaOther","event_action":"","event_category":"","event_label":"learn more"}},"purchaseButton":{"text":"","url":"","analytics":{"event":"","event_action":"","event_category":"","event_label":""}},"countdownTimer":{"endTimestamp":{{ setting('taimer.date_enable') }},"daysLabel":"дн.","hoursLabel":"ч.","minutesLabel":"Мин.","secondsLabel":"сек"},"forceCompletion":false,"hideTimer":false}'></div>
+             </aside>
+             @endif
          </div>
       </div>
       <div class="Photoswipe pswp Photoswipe--modal Photoswipe--wow" name="modal" tabindex="-1" role="dialog" aria-hidden="true">

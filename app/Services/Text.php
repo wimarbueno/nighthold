@@ -53,6 +53,23 @@
         public static function convertDate($date) {
             return DateTime::createFromFormat('Y-m-d H:i:s', $date->joindate)->getTimestamp();
         }
+        public static function totalTimeReferral($time) {
+            $time = intval ($time/60);
+            $min = $time%60;
+            $time = intval ($time/60);
+            $hours = $time%24;
+
+            if ($hours != 0)
+                $hours = $hours.".";
+            else
+                $hours = "";
+            if ($min != 0)
+                $min = $min."";
+            else
+                $min = "0";
+
+            return $hours.$min;
+        }
 
         public static function totalTime($time) {
             $time = intval ($time/60);

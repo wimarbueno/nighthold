@@ -230,8 +230,6 @@ class AuthController extends Controller
 
     public function referrals()
     {
-        $this->referralData();
-
         $data = Referral::where('ref_id', Auth::user()->id)->with('referrer')->with('characters')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
@@ -252,12 +250,5 @@ class AuthController extends Controller
             'count' =>  $data->count(),
             'url' => config('app.url') . "?ref=" . \Hashids::encode(auth()->user()->id)
         ]);
-    }
-
-    private function referralData()
-    {
-        $data = Referral::where('ref_id', Auth::user()->id)->with('referrer')->with('characters')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
     }
 }

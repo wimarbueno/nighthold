@@ -9,6 +9,7 @@ use App\Models\Wotlk\Account\AccountDonate;
 use App\Models\Wotlk\Account\AccountPremium;
 use App\Services\Account;
 use App\Services\Posts\Posts;
+use App\Services\Referrals;
 use Butschster\Head\Facades\Meta;
 use Carbon\Carbon;
 use TCG\Voyager\Models\Post;
@@ -19,6 +20,7 @@ class MainController extends Controller
     function __construct() {
         if (Auth()->check()){
             Account::init();
+            Referrals::init();
         }
     }
 

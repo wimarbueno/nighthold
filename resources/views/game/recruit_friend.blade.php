@@ -54,7 +54,7 @@
     <div class="contain-medium align-center color-monochrome-white">Вы можете приглашать друзей и вместе отправиться на поиски приключений в Азероте, чтобы получать уникальные награды, когда они отыграют 12 часов на персонаже!</div>
     <div class="Raf-AttentionText Raf-AttentionText--large-margin">
         <div class="Raf-AttentionText-column"></div>
-        <div class="Raf-AttentionText-text">Для получения наград приглашающему игроку требуется активная учетная запись.</div>
+        <div class="Raf-AttentionText-text">Для получения наград приглашающему игроку требуется активная учетная запись. У приглашенного должен быть подтвержден EMail</div>
         <div class="Raf-AttentionText-column"></div>
     </div>
 </div>
