@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HistoryPayment;
+use App\Models\User;
 use App\Models\Wotlk\Account\AccountDonate;
 use Illuminate\Http\Request;
 
@@ -51,18 +52,19 @@ class FreeKassaController extends Controller
             if ($sign != $request->get('sign_2')) {
                 return response()->json(['success'=> false, 'message' => 'Sign Не совпадает']);
             }
+            $user = User::whereId($order->user_id)->first();
 
-            $newAccountBalance = AccountDonate::where('id', auth()->user()->accountWotlk->id)->first();
+            $newAccountBalance = AccountDonate::where('id', $user->accountWotlk->id)->first();
             if ($newAccountBalance) {
                 AccountDonate::updateOrCreate([
-                    'id' => auth()->user()->accountWotlk->id,
+                    'id' => $user->accountWotlk->id,
                 ],[
                     'bonuses' => $newAccountBalance->bonuses  + $order->price,
                     'total_bonuses' => $newAccountBalance->bonuses  + $order->price
                 ]);
             } else {
                 AccountDonate::updateOrCreate([
-                    'id' => auth()->user()->accountWotlk->id,
+                    'id' => $user->accountWotlk->id,
                 ],[
                     'bonuses' => $order->price,
                     'total_bonuses' => $order->price
