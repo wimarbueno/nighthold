@@ -1,4 +1,4 @@
-<x-login-layout>
+<x-guest-layout>
     <x-auth-card>
         <div class="inner-wrapper">
             <div class="box-wrapper ">
@@ -149,4 +149,4 @@
             <img src="{{ asset('static/images/toolkit/themes/bnet/spinners/spinner-battlenet.1IdwV.png') }}" class="hide" />
         </div>
     </x-auth-card>
-</x-login-layout>
+</x-guest-layout>
