@@ -30,6 +30,7 @@ class PaymentController extends Controller
             $top_donaters = Cache::rememberForever('top_donaters', function () {
                 $donaters = HistoryPayment::select('user_id', DB::raw('SUM(price) as price'))
                     ->whereDate('updated_at', Carbon::today())
+                    ->where('service', 'balance')
                     ->where(['status' => 1, ['price', '>', '0']])
                     ->groupBy('user_id')
                     ->limit(3)

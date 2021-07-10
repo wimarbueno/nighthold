@@ -113,12 +113,16 @@ class GameController extends Controller
 
     public function graphql(Request $request) {
         if ($request->get('operationName')) {
-            if($request->get('variables')['input']['compoundRegionGameVersionSlug'] === 'eu') {
+            if ($request->get('operationName') === 'GetNow') {
                 return Server::status();
-            } elseif ($request->get('variables')['input']['compoundRegionGameVersionSlug'] === 'sl-eu') {
-                return Server::statusSL();
-            }  elseif($request->get('variables')['input']['compoundRegionGameVersionSlug'] === 'wotlk-eu') {
-                return Server::statusWotlk();
+            } else {
+                if($request->get('variables')['input']['compoundRegionGameVersionSlug'] === 'eu') {
+                    return Server::status();
+                } elseif ($request->get('variables')['input']['compoundRegionGameVersionSlug'] === 'sl-eu') {
+                    return Server::statusSL();
+                }  elseif($request->get('variables')['input']['compoundRegionGameVersionSlug'] === 'wotlk-eu') {
+                    return Server::statusWotlk();
+                }
             }
         } else {
             return json_encode(
