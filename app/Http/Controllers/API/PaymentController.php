@@ -49,7 +49,7 @@ class PaymentController extends Controller
 
                 return $data;
             });
-            ///Cache::forget('top_donaters');
+            Cache::forget('top_donaters');
             $last_donater = Cache::get('last_donater');
             return response()->json(['success'=> true, 'data' => $top_donaters, 'last_donater' => $last_donater]);
         }
