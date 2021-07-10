@@ -67,8 +67,6 @@ Route::post('send_email', [AuthController::class, 'send_email']);
 
 Route::get('web/payment', [AuthController::class, 'payment']);
 
-Route::get('web/payment/home', [PaymentController::class, 'homePage']);
-
 Route::get('payment', [PaymentController::class, 'paymentInfo']);
 
 Route::get('user/game', [AuthController::class, 'game']);
@@ -84,3 +82,6 @@ Route::get('user/banned', [AuthController::class, 'banned']);
 
 Route::post('payment/add', [PaymentController::class, 'paymentAdd']);
 Route::get('account/payment/success', [PaymentController::class, 'store']);
+
+Route::get('top/donate', [PaymentController::class, 'topDonate']);
+Route::post('top/timer', [PaymentController::class, 'topDonateTimer']);

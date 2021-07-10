@@ -164,7 +164,7 @@ class GameController extends Controller
     }
 
     public function streamView($name) {
-        $stream = Stream::where('name', $name)->first();
+        $stream = Stream::where('name', $name)->firstOrFail();
         $twitch = new Twitch;
         $twitch->setClientId('dg7ctrw8kegwua5bbmp80nwn8u4807');
         $result = $twitch->getStreams(['user_id' => $stream->user_id]);

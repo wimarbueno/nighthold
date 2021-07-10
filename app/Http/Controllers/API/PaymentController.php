@@ -7,30 +7,60 @@ use App\Models\HistoryPayment;
 use App\Models\Shadowlands\Account\Account;
 use App\Models\User;
 use App\Models\Wotlk\Account\AccountDonate;
+use App\Models\Wotlk\Account\AccountWotlk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Maksa988\FreeKassa\Facades\FreeKassa;
 
 class PaymentController extends Controller
 {
+    public function topDonateTimer(): \Illuminate\Http\JsonResponse
+    {
+        $top_timer = Carbon::now()->diffInSeconds(Carbon::now()->endOfDay(), true);
+        $top_timer = Carbon::createFromTimestampUTC($top_timer);
+        return response()->json(['success'=> false, 'timer' => $top_timer->format('H:i:s')]);
+    }
+    public function topDonate(): \Illuminate\Http\JsonResponse
+    {
+        if (setting('top-donaty.donate_status') === 'PUBLISHED') {
+            $top_donaters = Cache::rememberForever('top_donaters', function () {
+                $donaters = HistoryPayment::select('user_id', DB::raw('SUM(price) as price'))
+                    ->whereDate('updated_at', Carbon::today())
+                    ->where(['status' => 1, ['price', '>', '0']])
+                    ->groupBy('user_id')
+                    ->limit(3)
+                    ->get();
+                $data = [];
+                foreach ($donaters as $donater) {
+                    $user = User::whereId($donater->user_id)->first();
+                    if ($user->accountWotlk)
+                        $account = AccountDonate::whereId($user->accountWotlk->id)->first();
+                    $data[] = (object) [
+                        'account_id' => $user->id,
+                        'username' => $user->name,
+                        'bonuses' => $account->bonuses
+                    ];
+                }
+
+                return $data;
+            });
+            ///Cache::forget('top_donaters');
+            $last_donater = Cache::get('last_donater');
+            return response()->json(['success'=> true, 'data' => $top_donaters, 'last_donater' => $last_donater]);
+        }
+        return response()->json(['success'=> false, 'data' => null, 'last_donater' => null]);
+    }
+
     public function paymentInfo()
     {
         $data = HistoryPayment::where('user_id', auth()->user()->id)
             ->where('service', 'balance')
             ->orderBy('created_at', 'desc')
             ->paginate(5);
-        $count = HistoryPayment::where('user_id', auth()->user()->id)->where('service', 'balance')->get()->count();
-        return response()->json(['error' => false, 'data' => $data, 'count' => $count]);
-    }
-
-    public function homePage()
-    {
-        $data = HistoryPayment::where('user_id', auth()->user()->id)
-            ->orderBy('created_at', 'desc')
-            ->where('service', 'balance')
-            ->limit(5)
-            ->get();
         $count = HistoryPayment::where('user_id', auth()->user()->id)->where('service', 'balance')->get()->count();
         return response()->json(['error' => false, 'data' => $data, 'count' => $count]);
     }
@@ -71,7 +101,7 @@ class PaymentController extends Controller
             );
 
             $order = HistoryPayment::create([
-                'user_id' => Auth::user()->id,
+                'user_id' => auth()->user()->id,
                 'service' => 'balance',
                 'title' => 'Пополнение баланса (RoboKassa)',
                 'price' => $request->get('sum'),
@@ -88,7 +118,7 @@ class PaymentController extends Controller
             $order_id = time();
 
             HistoryPayment::create([
-                'user_id' => Auth::user()->id,
+                'user_id' => auth()->user()->id,
                 'service' => 'balance',
                 'title' => 'Пополнение баланса (FreeKassa)',
                 'price' => $request->get('sum'),
@@ -153,6 +183,12 @@ class PaymentController extends Controller
                         'total_bonuses' => $order->price
                     ]);
                 }
+                Cache::forget('top_donaters');
+                Cache::forget('last_donater');
+
+                Cache::rememberForever('last_donater', function ()  {
+                    return auth()->user()->name;
+                });
                 HistoryPayment::where('id', $payment->getInvoiceId())->update(['status' => 1]);
                 return redirect('/dashboard/payment/index');
             }

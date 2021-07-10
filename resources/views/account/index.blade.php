@@ -4,7 +4,8 @@
         'appUrl' => config('app.url'),
         'locale' => str_replace('_', '-', app()->getLocale()),
         'locales' => config('app.locales'),
-        'githubAuth' => config('services.github.client_id'),
+        'topdonat' => setting('top-donaty.donate_status'),
+        'userId' => auth()->user()->role_id,
         'mmotop' => setting('site.mmotop'),
         'logo' => asset(Utils::ImagesLogo('storage/'.setting('site.logo')))
     ];

@@ -83,10 +83,21 @@
 @endif" id="post-{{ $thread->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $thread->id }}&quot;,&quot;valueVoted&quot;:{{ $thread->up + $thread->down }},&quot;rank&quot;:{&quot;voteUp&quot;:{{ $thread->up }},&quot;voteDown&quot;:{{ $thread->down }}},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $thread->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $thread->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
 <span id="{{ $thread->id }}"></span>
 <div class="TopicPost-content">
-<div class="TopicPost-authorIcon TopicPost-authorIcon--blizzard">
+
+<div class="TopicPost-authorIcon
+@if($thread->creator->hasPermission('forum_nighthold'))TopicPost-authorIcon--blizzard
+@endif @if($thread->creator->hasPermission('forum_mvp')) TopicPost-authorIcon--mvp
+@endif">
+@if($thread->creator->hasPermission('forum_nighthold'))
 <svg xmlns="http://www.w3.org/2000/svg">
-<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo_svg"/>
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo_svg"/>
 </svg>
+@endif
+@if($thread->creator->hasPermission('forum_mvp'))
+<svg xmlns="http://www.w3.org/2000/svg">
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo_svg"/>
+</svg>
+@endif
 </div>
 <aside class="TopicPost-author">
 <div class="Author-block">
@@ -235,10 +246,20 @@
 @endif" id="post-{{ $reply->id }}" data-topic-post="{&quot;id&quot;:&quot;{{ $reply->id }}&quot;,&quot;valueVoted&quot;:{{ $reply->up + $reply->down }},&quot;rank&quot;:{&quot;voteUp&quot;:{{ $reply->up }},&quot;voteDown&quot;:{{ $reply->down }}},&quot;author&quot;:{&quot;id&quot;:&quot;{{ $reply->creator->id }}&quot;,&quot;name&quot;:&quot;{{ $reply->creator->name }}&quot;}}" data-topic="{ &quot;sticky&quot;:&quot;false&quot;,&quot;featured&quot;:&quot;false&quot;,&quot;locked&quot;:&quot;false&quot;,&quot;frozen&quot;:&quot;false&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;pollId&quot;:&quot;0&quot;}">
 <span id="{{ $reply->id }}"></span>
 <div class="TopicPost-content">
-<div class="TopicPost-authorIcon TopicPost-authorIcon--blizzard">
-<svg xmlns="http://www.w3.org/2000/svg">
-<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo_svg"/>
-</svg>
+    <div class="TopicPost-authorIcon
+@if($reply->creator->hasPermission('forum_nighthold'))TopicPost-authorIcon--blizzard
+@endif @if($reply->creator->hasPermission('forum_mvp')) TopicPost-authorIcon--mvp
+@endif">
+    @if($reply->creator->hasPermission('forum_nighthold'))
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo_svg"/>
+        </svg>
+    @endif
+    @if($reply->creator->hasPermission('forum_mvp'))
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo_svg"/>
+        </svg>
+    @endif
 </div>
 <aside class="TopicPost-author">
 <div class="Author-block">

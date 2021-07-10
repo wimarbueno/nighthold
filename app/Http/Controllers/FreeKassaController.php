@@ -6,6 +6,7 @@ use App\Models\HistoryPayment;
 use App\Models\User;
 use App\Models\Wotlk\Account\AccountDonate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class FreeKassaController extends Controller
 {
@@ -31,7 +32,12 @@ class FreeKassaController extends Controller
                     'total_bonuses' => $order->price
                 ]);
             }
+            Cache::forget('top_donaters');
+            Cache::forget('last_donater');
 
+            Cache::rememberForever('last_donater', function ()  {
+                return auth()->user()->name;
+            });
             HistoryPayment::where('order_id', $request->get('MERCHANT_ORDER_ID'))->update(['status' => 1]);
             return redirect('/dashboard/payment/index');
         }
@@ -70,7 +76,12 @@ class FreeKassaController extends Controller
                     'total_bonuses' => $order->price
                 ]);
             }
+            Cache::forget('top_donaters');
+            Cache::forget('last_donater');
 
+            Cache::rememberForever('last_donater', function ()  {
+                return auth()->user()->name;
+            });
             HistoryPayment::where('order_id', $request->get('merchant_id'))->update(['status' => 1]);
 
         }
