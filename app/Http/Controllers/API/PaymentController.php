@@ -38,12 +38,10 @@ class PaymentController extends Controller
                 $data = [];
                 foreach ($donaters as $donater) {
                     $user = User::whereId($donater->user_id)->first();
-                    if ($user->accountWotlk)
-                        $account = AccountDonate::whereId($user->accountWotlk->id)->first();
                     $data[] = (object) [
                         'account_id' => $user->id,
                         'username' => $user->name,
-                        'bonuses' => $account->bonuses
+                        'bonuses' => $user->price
                     ];
                 }
 
