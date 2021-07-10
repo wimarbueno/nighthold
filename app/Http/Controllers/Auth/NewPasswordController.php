@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shadowlands\Account\Account;
+use App\Models\Wotlk\Account\AccountWotlk;
 use App\Services\Soap\Soap;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -35,14 +36,8 @@ class NewPasswordController extends Controller
                     'remember_token' => Str::random(60),
                 ])->save();
 
-                if(setting('soap.soap_enable') === "PUBLISHED") {
-                    $soap = new Soap();
-                    $soap->cmd("battlenetaccount set password {$request->email} {$request->password} {$request->password}");
-                }elseif(setting('registraciya.srp6_support') === "PUBLISHED") {
-                    Account::newPasswordBnetSrp6($request->email, $request->password);
-                } else {
-                    Account::newPasswordBnet($request->email, $request->password);
-                }
+                Account::newPasswordBnetSrp6($request->email, $request->password);
+                AccountWotlk::newPassword($request->email, $request->password);
                 event(new PasswordReset($user));
             }
         );

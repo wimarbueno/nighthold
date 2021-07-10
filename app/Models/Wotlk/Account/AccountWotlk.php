@@ -46,8 +46,9 @@ class AccountWotlk extends Model
     }
 
     public static function newPassword($user, $password) {
-        $hashed_pass = strtoupper(sha1(strtoupper($user . ':' . $password)));
-        self::where('username', $user)->update([
+        $users = self::where('reg_mail', $user)->first();
+        $hashed_pass = strtoupper(sha1(strtoupper($users->username . ':' . $password)));
+        self::where('reg_mail', $users->username)->update([
             'sha_pass_hash' => $hashed_pass,
         ]);
     }
