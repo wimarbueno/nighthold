@@ -41,7 +41,7 @@ class PaymentController extends Controller
                     $data[] = (object) [
                         'account_id' => $user->id,
                         'username' => $user->name,
-                        'bonuses' => $user->price
+                        'bonuses' => $donater->price
                     ];
                 }
 
