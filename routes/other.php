@@ -4,6 +4,7 @@ use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Forums\ForumsController;
 use App\Http\Controllers\FreeKassaController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\Gm\IndexGmController;
 use App\Http\Controllers\JsonController;
 use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\App;
@@ -34,7 +35,10 @@ Route::group(['prefix' => 'admin'], function () {
         return "Кэш очищен.";
     });
 });
-
+Route::group(['prefix' => 'gm'], function () {
+    Route::get('/', [IndexGmController::class, 'index'])->name('gm.index');
+    Route::get('/ticket', [IndexGmController::class, 'ticket'])->name('gm.ticket');
+});
 Route::group(['prefix' => 'forums'], function () {
     Route::post('topic/post/{user}/block', [JsonController::class, 'block']);
     Route::post('topic/post/{thread}/report', [JsonController::class, 'report']);
