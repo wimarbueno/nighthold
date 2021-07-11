@@ -13,4 +13,6 @@ class Ticket extends Model
     protected $guarded = [];
 
     public $timestamps = false;
+
+    protected $dates = ['createTime'];
 }

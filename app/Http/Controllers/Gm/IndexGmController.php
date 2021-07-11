@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 class IndexGmController extends Controller
 {
     public function index() {
-        return view('gm.index');
+        $ticket = Ticket::where('type', 0)->orderBy('createTime')->get();
+        return view('gm.index', ['ticket'=>$ticket]);
     }
 
     public function ticket() {

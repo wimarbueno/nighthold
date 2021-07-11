@@ -47,8 +47,9 @@
                                             <span class="badge bg-danger">Удалено</span>
                                         @endif
                                     </td>
-                                    <td>11.07.2021 18:30</td>
-                                    <td><div class="btn-group btn-group-sm">
+                                    <td>{{ $item->createTime->format('d.m.Y H:i') }}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
                                             <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Открыть
                                             </button>
@@ -58,7 +59,8 @@
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="#">Удалить</a>
                                             </div>
-                                        </div></td>
+                                        </div>
+                                    </td>
                                 </tr>
                                 @endforeach
                                 </tbody>
