@@ -25,8 +25,8 @@
                                 <thead>
                                 <tr>
                                     <th>№</th>
-                                    <th>Логин</th>
-                                    <th>Email</th>
+                                    <th>Персонаж</th>
+                                    <th>Сообщение</th>
                                     <th>Статус</th>
                                     <th>Дата</th>
                                     <th>Действие</th>
@@ -35,10 +35,18 @@
                                 <tbody>
                                 @foreach($ticket as $item)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Garrett Winters</td>
-                                    <td>garrett@winters.com</td>
-                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{  Str::limit($item->description, 20)}}</td>
+                                    <td>
+                                        @if($item->type === 0)
+                                            <span class="badge bg-success">Открыто</span>
+                                        @elseif($item->type === 1)
+                                            <span class="badge bg-info">Закрыто</span>
+                                        @elseif($item->type === 2)
+                                            <span class="badge bg-danger">Удалено</span>
+                                        @endif
+                                    </td>
                                     <td>11.07.2021 18:30</td>
                                     <td><div class="btn-group btn-group-sm">
                                             <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

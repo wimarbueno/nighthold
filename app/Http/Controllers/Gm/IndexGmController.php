@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Gm;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Wotlk\Gm\Ticket;
 use Illuminate\Support\Facades\DB;
 
 class IndexGmController extends Controller
@@ -14,7 +15,7 @@ class IndexGmController extends Controller
     }
 
     public function ticket() {
-        $ticket = DB::connection('WotlkChatacters')->table('gm_ticket')->orderBy('createTime')->get();
+        $ticket = Ticket::orderBy('createTime')->get();
         return view('gm.ticket', ['ticket' => $ticket]);
     }
 }
