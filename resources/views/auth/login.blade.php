@@ -10,7 +10,7 @@
                 </div>
                 <div class="input" id="login-wrapper">
                     <div class="login">
-                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                        <x-auth-session-status class="alert alert-icon alert-info" :status="session('status')" />
                         <form action="{{ route('login') }}" method="post" id="password-form" novalidate="novalidate"
                             class="username-required input-focus form-with-captcha">
                             @csrf

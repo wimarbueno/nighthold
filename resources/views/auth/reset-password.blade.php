@@ -46,7 +46,6 @@
                                             value="{{ old('email', $request->email) }}"
                                         />
                                         <span class="input-after"></span>
-                                        @error('email')<span class="error-helper error-helper-accountName status-warning" style="display: block;">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                                 <div class="control-group ">
@@ -69,7 +68,6 @@
                                             data-password-show-aria="Показать пароль" data-password-hide-aria="Скрыть пароль"
                                         />
                                         <span class="input-after"></span>
-                                        @error('password')<span class="error-helper error-helper-password status-warning" style="display: block;">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                                 <div class="control-group ">
@@ -77,7 +75,7 @@
                                            for="password">Подтвердите пароль</label>
                                     <div class="controls">
                                         <input
-                                            id="password"
+                                            id="password_confirmation"
                                             aria-label="Поле пароля. Введите пароль."
                                             name="password_confirmation"
                                             title="Подтвердите пароль"
@@ -92,7 +90,6 @@
                                             data-password-show-aria="Показать пароль" data-password-hide-aria="Скрыть пароль"
                                         />
                                         <span class="input-after"></span>
-                                        @error('password')<span class="error-helper error-helper-password status-warning" style="display: block;">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                             </div>

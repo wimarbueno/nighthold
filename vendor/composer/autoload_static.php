@@ -34,6 +34,7 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
+        'a1af1fc0cffb5f61cbaf64dbe030fdb9' => __DIR__ . '/..' . '/laravel/legacy-factories/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
@@ -112,10 +113,15 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         ),
         'R' => 
         array (
+            'ReeceM\\Mocker\\' => 14,
             'React\\Promise\\' => 14,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
             'RachidLaasri\\LaravelInstaller\\' => 30,
+        ),
+        'Q' => 
+        array (
+            'Qoraiche\\MailEclipse\\' => 21,
         ),
         'P' => 
         array (
@@ -176,6 +182,7 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
             'Intervention\\Image\\' => 19,
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Foundation\\Auth\\' => 27,
+            'Illuminate\\Database\\Eloquent\\' => 29,
             'Illuminate\\' => 11,
             'Idma\\Robokassa\\' => 15,
         ),
@@ -433,6 +440,10 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         array (
             0 => __DIR__ . '/..' . '/seld/jsonlint/src/Seld/JsonLint',
         ),
+        'ReeceM\\Mocker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/reecem/mocker/src',
+        ),
         'React\\Promise\\' => 
         array (
             0 => __DIR__ . '/..' . '/react/promise/src',
@@ -448,6 +459,10 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'RachidLaasri\\LaravelInstaller\\' => 
         array (
             0 => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src',
+        ),
+        'Qoraiche\\MailEclipse\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/qoraiche/laravel-mail-editor/src',
         ),
         'Psy\\' => 
         array (
@@ -606,6 +621,10 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'Illuminate\\Foundation\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/ui/auth-backend',
+        ),
+        'Illuminate\\Database\\Eloquent\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/legacy-factories/src',
         ),
         'Illuminate\\' => 
         array (
@@ -815,12 +834,14 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
         'App\\Http\\Controllers\\CharactersController' => __DIR__ . '/../..' . '/app/Http/Controllers/CharactersController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\Forums\\ForumsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Forums/ForumsController.php',
         'App\\Http\\Controllers\\Forums\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Forums/IndexController.php',
         'App\\Http\\Controllers\\Forums\\RepliesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Forums/RepliesController.php',
         'App\\Http\\Controllers\\FreeKassaController' => __DIR__ . '/../..' . '/app/Http/Controllers/FreeKassaController.php',
         'App\\Http\\Controllers\\GameController' => __DIR__ . '/../..' . '/app/Http/Controllers/GameController.php',
         'App\\Http\\Controllers\\GuildController' => __DIR__ . '/../..' . '/app/Http/Controllers/GuildController.php',
         'App\\Http\\Controllers\\JsonController' => __DIR__ . '/../..' . '/app/Http/Controllers/JsonController.php',
+        'App\\Http\\Controllers\\LanguageController' => __DIR__ . '/../..' . '/app/Http/Controllers/LanguageController.php',
         'App\\Http\\Controllers\\LauncherApi\\ArticleController' => __DIR__ . '/../..' . '/app/Http/Controllers/LauncherApi/ArticleController.php',
         'App\\Http\\Controllers\\LauncherApi\\AuthLauncherController' => __DIR__ . '/../..' . '/app/Http/Controllers/LauncherApi/AuthLauncherController.php',
         'App\\Http\\Controllers\\LauncherApi\\ClientController' => __DIR__ . '/../..' . '/app/Http/Controllers/LauncherApi/ClientController.php',
@@ -835,10 +856,9 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckReferral' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckReferral.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
-        'App\\Http\\Middleware\\LocaleMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/LocaleMiddleware.php',
+        'App\\Http\\Middleware\\Language' => __DIR__ . '/../..' . '/app/Http/Middleware/Language.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
-        'App\\Http\\Middleware\\SetLocale' => __DIR__ . '/../..' . '/app/Http/Middleware/SetLocale.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
@@ -850,13 +870,12 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'App\\Launcher\\Data\\BaseRepository' => __DIR__ . '/../..' . '/app/Launcher/Data/Repositories/BaseRepository.php',
         'App\\Launcher\\Data\\LauncherVersion' => __DIR__ . '/../..' . '/app/Launcher/Data/LauncherVersion.php',
         'App\\Launcher\\Data\\ShopItem' => __DIR__ . '/../..' . '/app/Launcher/Data/Repositories/ShopItem.php',
-        'App\\Models\\Account' => __DIR__ . '/../..' . '/app/Models/Account.php',
+        'App\\Listeners\\SendPasswordResetEmail' => __DIR__ . '/../..' . '/app/Listeners/SendPasswordResetEmail.php',
+        'App\\Mail\\PasswordResetEmail' => __DIR__ . '/../..' . '/app/Mail/PasswordResetEmail.php',
         'App\\Models\\Activity' => __DIR__ . '/../..' . '/app/Models/Activity.php',
-        'App\\Models\\Banned' => __DIR__ . '/../..' . '/app/Models/Banned.php',
         'App\\Models\\Boss' => __DIR__ . '/../..' . '/app/Models/Boss.php',
         'App\\Models\\Channel' => __DIR__ . '/../..' . '/app/Models/Channel.php',
         'App\\Models\\CharactersTalent' => __DIR__ . '/../..' . '/app/Models/CharactersTalent.php',
-        'App\\Models\\Characters\\Arena' => __DIR__ . '/../..' . '/app/Models/Characters/Arena.php',
         'App\\Models\\Characters\\Characters' => __DIR__ . '/../..' . '/app/Models/Characters/Characters.php',
         'App\\Models\\Characters\\Guild' => __DIR__ . '/../..' . '/app/Models/Characters/Guild.php',
         'App\\Models\\Characters\\Reputation' => __DIR__ . '/../..' . '/app/Models/Characters/Reputation.php',
@@ -884,9 +903,16 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'App\\Models\\Realms' => __DIR__ . '/../..' . '/app/Models/Realms.php',
         'App\\Models\\RecordsActivity' => __DIR__ . '/../..' . '/app/Models/RecordsActivity.php',
         'App\\Models\\Reply' => __DIR__ . '/../..' . '/app/Models/Reply.php',
+        'App\\Models\\Report' => __DIR__ . '/../..' . '/app/Models/Report.php',
         'App\\Models\\Services' => __DIR__ . '/../..' . '/app/Models/Services.php',
+        'App\\Models\\Shadowlands\\Account\\Account' => __DIR__ . '/../..' . '/app/Models/Shadowlands/Account/Account.php',
+        'App\\Models\\Shadowlands\\Account\\Banned' => __DIR__ . '/../..' . '/app/Models/Shadowlands/Account/Banned.php',
+        'App\\Models\\Shadowlands\\Arena\\ArenaMemberSL' => __DIR__ . '/../..' . '/app/Models/Shadowlands/Arena/ArenaMemberSL.php',
+        'App\\Models\\Shadowlands\\Arena\\ArenaSl' => __DIR__ . '/../..' . '/app/Models/Shadowlands/Arena/ArenaSl.php',
         'App\\Models\\Shop\\CategotyShop' => __DIR__ . '/../..' . '/app/Models/Shop/CategotyShop.php',
         'App\\Models\\Shop\\Shop' => __DIR__ . '/../..' . '/app/Models/Shop/Shop.php',
+        'App\\Models\\Stream' => __DIR__ . '/../..' . '/app/Models/Stream.php',
+        'App\\Models\\Streams' => __DIR__ . '/../..' . '/app/Models/Streams.php',
         'App\\Models\\Talent' => __DIR__ . '/../..' . '/app/Models/Talent.php',
         'App\\Models\\Talents' => __DIR__ . '/../..' . '/app/Models/Talents.php',
         'App\\Models\\Thread' => __DIR__ . '/../..' . '/app/Models/Thread.php',
@@ -894,6 +920,15 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'App\\Models\\ThreadVote' => __DIR__ . '/../..' . '/app/Models/ThreadVote.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Vote' => __DIR__ . '/../..' . '/app/Models/Vote.php',
+        'App\\Models\\Web\\Notification' => __DIR__ . '/../..' . '/app/Models/Web/Notification.php',
+        'App\\Models\\Web\\Referral' => __DIR__ . '/../..' . '/app/Models/Web/Referral.php',
+        'App\\Models\\Wotlk\\Account\\AccountBanned' => __DIR__ . '/../..' . '/app/Models/Wotlk/Account/AccountBanned.php',
+        'App\\Models\\Wotlk\\Account\\AccountDonate' => __DIR__ . '/../..' . '/app/Models/Wotlk/Account/AccountDonate.php',
+        'App\\Models\\Wotlk\\Account\\AccountPremium' => __DIR__ . '/../..' . '/app/Models/Wotlk/Account/AccountPremium.php',
+        'App\\Models\\Wotlk\\Account\\AccountWotlk' => __DIR__ . '/../..' . '/app/Models/Wotlk/Account/AccountWotlk.php',
+        'App\\Models\\Wotlk\\Arena\\ArenaMember' => __DIR__ . '/../..' . '/app/Models/Wotlk/Arena/ArenaMember.php',
+        'App\\Models\\Wotlk\\Arena\\ArenaWotlk' => __DIR__ . '/../..' . '/app/Models/Wotlk/Arena/ArenaWotlk.php',
+        'App\\Models\\Wotlk\\Characters\\CharactersWotlk' => __DIR__ . '/../..' . '/app/Models/Wotlk/Characters/CharactersWotlk.php',
         'App\\Notifications\\NewMessage' => __DIR__ . '/../..' . '/app/Notifications/NewMessage.php',
         'App\\Notifications\\ReferalNotification' => __DIR__ . '/../..' . '/app/Notifications/ReferalNotification.php',
         'App\\Notifications\\ResetPassword' => __DIR__ . '/../..' . '/app/Notifications/ResetPassword.php',
@@ -925,6 +960,7 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'App\\Services\\Parser\\Images' => __DIR__ . '/../..' . '/app/Services/Parser/Images.php',
         'App\\Services\\Parser\\Wowhead' => __DIR__ . '/../..' . '/app/Services/Parser/Wowhead.php',
         'App\\Services\\Posts\\Posts' => __DIR__ . '/../..' . '/app/Services/Posts/Posts.php',
+        'App\\Services\\Referrals' => __DIR__ . '/../..' . '/app/Services/Referrals.php',
         'App\\Services\\Server' => __DIR__ . '/../..' . '/app/Services/Server.php',
         'App\\Services\\Soap\\Soap' => __DIR__ . '/../..' . '/app/Services/Soap/Soap.php',
         'App\\Services\\Srp6' => __DIR__ . '/../..' . '/app/Services/Srp6.php',
@@ -3131,9 +3167,12 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'Illuminate\\Database\\Eloquent\\Factories\\HasFactory' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Factories/HasFactory.php',
         'Illuminate\\Database\\Eloquent\\Factories\\Relationship' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Relationship.php',
         'Illuminate\\Database\\Eloquent\\Factories\\Sequence' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Sequence.php',
+        'Illuminate\\Database\\Eloquent\\Factory' => __DIR__ . '/..' . '/laravel/legacy-factories/src/Factory.php',
+        'Illuminate\\Database\\Eloquent\\FactoryBuilder' => __DIR__ . '/..' . '/laravel/legacy-factories/src/FactoryBuilder.php',
         'Illuminate\\Database\\Eloquent\\HigherOrderBuilderProxy' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/HigherOrderBuilderProxy.php',
         'Illuminate\\Database\\Eloquent\\InvalidCastException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/InvalidCastException.php',
         'Illuminate\\Database\\Eloquent\\JsonEncodingException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/JsonEncodingException.php',
+        'Illuminate\\Database\\Eloquent\\LegacyFactoryServiceProvider' => __DIR__ . '/..' . '/laravel/legacy-factories/src/LegacyFactoryServiceProvider.php',
         'Illuminate\\Database\\Eloquent\\MassAssignmentException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/MassAssignmentException.php',
         'Illuminate\\Database\\Eloquent\\Model' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Model.php',
         'Illuminate\\Database\\Eloquent\\ModelNotFoundException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/ModelNotFoundException.php',
@@ -5723,6 +5762,12 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'Psy\\VersionUpdater\\GitHubChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/GitHubChecker.php',
         'Psy\\VersionUpdater\\IntervalChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/IntervalChecker.php',
         'Psy\\VersionUpdater\\NoopChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/NoopChecker.php',
+        'Qoraiche\\MailEclipse\\Command\\VendorPublishCommand' => __DIR__ . '/..' . '/qoraiche/laravel-mail-editor/src/Command/VendorPublishCommand.php',
+        'Qoraiche\\MailEclipse\\Facades\\MailEclipse' => __DIR__ . '/..' . '/qoraiche/laravel-mail-editor/src/Facades/MailEclipse.php',
+        'Qoraiche\\MailEclipse\\Http\\Controllers\\MailablesController' => __DIR__ . '/..' . '/qoraiche/laravel-mail-editor/src/Http/Controllers/MailablesController.php',
+        'Qoraiche\\MailEclipse\\Http\\Controllers\\TemplatesController' => __DIR__ . '/..' . '/qoraiche/laravel-mail-editor/src/Http/Controllers/TemplatesController.php',
+        'Qoraiche\\MailEclipse\\MailEclipse' => __DIR__ . '/..' . '/qoraiche/laravel-mail-editor/src/MailEclipse.php',
+        'Qoraiche\\MailEclipse\\MailEclipseServiceProvider' => __DIR__ . '/..' . '/qoraiche/laravel-mail-editor/src/MailEclipseServiceProvider.php',
         'RachidLaasri\\LaravelInstaller\\Controllers\\DatabaseController' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Controllers/DatabaseController.php',
         'RachidLaasri\\LaravelInstaller\\Controllers\\EnvironmentController' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Controllers/EnvironmentController.php',
         'RachidLaasri\\LaravelInstaller\\Controllers\\FinalController' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Controllers/FinalController.php',
@@ -5886,6 +5931,12 @@ class ComposerStaticInit4ce0165be0bbb0442e071f2dbd4dd1ec
         'React\\Promise\\PromisorInterface' => __DIR__ . '/..' . '/react/promise/src/PromisorInterface.php',
         'React\\Promise\\RejectedPromise' => __DIR__ . '/..' . '/react/promise/src/RejectedPromise.php',
         'React\\Promise\\UnhandledRejectionException' => __DIR__ . '/..' . '/react/promise/src/UnhandledRejectionException.php',
+        'ReeceM\\Mocker\\Exceptions\\VarStoreMissingException' => __DIR__ . '/..' . '/reecem/mocker/src/Exceptions/VarStoreMissingException.php',
+        'ReeceM\\Mocker\\Mocked' => __DIR__ . '/..' . '/reecem/mocker/src/Mocked.php',
+        'ReeceM\\Mocker\\ReflectionMockery' => __DIR__ . '/..' . '/reecem/mocker/src/ReflectionMockery.php',
+        'ReeceM\\Mocker\\Traits\\ArrayMagic' => __DIR__ . '/..' . '/reecem/mocker/src/Traits/ArrayMagic.php',
+        'ReeceM\\Mocker\\Traits\\ObjectMagic' => __DIR__ . '/..' . '/reecem/mocker/src/Traits/ObjectMagic.php',
+        'ReeceM\\Mocker\\Utils\\VarStore' => __DIR__ . '/..' . '/reecem/mocker/src/Utils/VarStore.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
         'SebastianBergmann\\CliParser\\OptionDoesNotAllowArgumentException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/OptionDoesNotAllowArgumentException.php',
