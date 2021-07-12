@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
 
-                                    @if($ticket->assignedTo)
+                                    @if($ticket->assignedTo !== 0)
                                         <div class="mb-2 row">
                                             <label class="col-md-2 col-form-label" for="example-input-small">Ответил</label>
                                             <div class="col-md-10">
