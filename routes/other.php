@@ -39,6 +39,7 @@ Route::group(['prefix' => 'gm'], function () {
     Route::get('/', [IndexGmController::class, 'index'])->name('gm.index');
     Route::get('/ticket', [IndexGmController::class, 'ticket'])->name('gm.ticket');
     Route::get('/ticket/{ticket}/edit', [IndexGmController::class, 'edit'])->name('gm.ticket.edit');
+    Route::post('/ticket/{ticket}/store', [IndexGmController::class, 'store'])->name('gm.ticket.store');
 });
 Route::group(['prefix' => 'forums'], function () {
     Route::post('topic/post/{user}/block', [JsonController::class, 'block']);

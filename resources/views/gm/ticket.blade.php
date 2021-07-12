@@ -71,6 +71,8 @@
                                     <th class="fw-medium">Сообщение</th>
                                     <th class="fw-medium">Статус</th>
                                     <th class="fw-medium">Дата</th>
+                                    <th class="fw-medium">Ответил</th>
+                                    <th class="fw-medium">Просмотрен</th>
                                     <th class="fw-medium">Обновлено</th>
                                     <th class="fw-medium">Действие</th>
                                 </tr>
@@ -105,6 +107,22 @@
                                         </td>
 
                                         <td>
+                                            @if($item->assignedTo)
+                                                <span class="badge bg-secondary text-light">{{ $item->characters->user->name }}</span>
+                                            @else
+                                                 Ответа нет
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if($item->viewed === 0)
+                                            <span class="badge bg-info text-light">Новый</span>
+                                            @else
+                                            <span class="badge bg-success text-light">Просмотрен</span>
+                                            @endif
+                                        </td>
+
+                                        <td>
                                             {{ $item->lastModifiedTime->format('d.m.Y H:i') }}
                                         </td>
 
@@ -112,9 +130,8 @@
                                             <div class="btn-group dropdown">
                                                 <a href="#" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="{{ route('gm.ticket.edit', $item) }}"><i class="mdi mdi-pencil me-2 text-muted font-18 vertical-middle"></i>Редактировать</a>
+                                                    <a class="dropdown-item" href="{{ route('gm.ticket.edit', $item) }}"><i class="mdi mdi-pencil me-2 text-muted font-18 vertical-middle"></i>Ответить</a>
                                                     <a class="dropdown-item" href="#"><i class="mdi mdi-check-all me-2 text-muted font-18 vertical-middle"></i>Закрыть</a>
-                                                    <a class="dropdown-item" href="#"><i class="mdi mdi-delete me-2 text-muted font-18 vertical-middle"></i>Удалить</a>
                                                 </div>
                                             </div>
                                         </td>
