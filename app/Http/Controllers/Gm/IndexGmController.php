@@ -57,11 +57,7 @@ class IndexGmController extends Controller
         }
 
         $ticket->where('id', $ticket->id)->update([
-            'type' => $request->get('status'),
-            'comment' => $request->get('answer'),
-            'assignedTo' => $request->get('characters'),
-            'escalated' => 1,
-            'lastModifiedTime' => Carbon::parse(Carbon::now())->timestamp
+            'comment' => $request->get('answer')
         ]);
 
         $ticket->increment('viewed');

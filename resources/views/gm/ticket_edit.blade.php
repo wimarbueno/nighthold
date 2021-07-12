@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title">Ответить на тикет</h4>
-                             {{ dd($ticket) }}
+
                             <div class="p-2">
                                 <form action="{{ route('gm.ticket.store', [$ticket]) }}" method="post" role="form" class="form-horizontal">
                                     @csrf
