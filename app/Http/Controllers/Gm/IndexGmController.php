@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Gm;
 use App\Http\Controllers\Controller;
 use App\Models\Wotlk\Gm\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -59,7 +60,8 @@ class IndexGmController extends Controller
             'type' => $request->get('status'),
             'comment' => $request->get('answer'),
             'assignedTo' => $request->get('characters'),
-            'escalated' => 1
+            'escalated' => 1,
+            'lastModifiedTime' => Carbon::parse(Carbon::now())->timestamp
         ]);
 
         $ticket->increment('viewed');
