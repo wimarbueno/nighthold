@@ -58,7 +58,8 @@ class IndexGmController extends Controller
         $ticket->where('id', $ticket->id)->update([
             'type' => $request->get('status'),
             'comment' => $request->get('answer'),
-            'assignedTo' => $request->get('characters')
+            'assignedTo' => $request->get('characters'),
+            'escalated' => 1
         ]);
 
         $ticket->increment('viewed');
