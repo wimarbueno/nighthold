@@ -20,7 +20,7 @@ class IndexGmController extends Controller
     }
 
     public function ticket() {
-        $ticket = Ticket::orderBy('createTime')->get();
+        $ticket = Ticket::orderBy('createTime', 'asc')->get();
         return view('gm.ticket', ['ticket' => $ticket]);
     }
 
