@@ -81,7 +81,7 @@
                                 <tbody class="font-14">
                                 @forelse ($ticket as $item)
                                     <tr>
-                                        <td><b>#{{ $loop->iteration }}</b></td>
+                                        <td><b>#{{ $item->id }}</b></td>
                                         <td>
                                             <a href="javascript: void(0);" class="text-dark">
                                                 <span class="ms-2">{{ $item->name }}</span>
