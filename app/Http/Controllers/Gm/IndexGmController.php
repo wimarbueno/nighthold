@@ -11,7 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class IndexGmController extends Controller
 {
+    function __construct() {
+        $this->middleware('auth');
+        $this->middleware('IsGm');
+    }
+
     public function index() {
+
         $ticket = Ticket::where('type', 0)->get();
         $tickets = Ticket::all();
         return view('gm.index', ['ticket' => $ticket, 'tickets' => $tickets]);
