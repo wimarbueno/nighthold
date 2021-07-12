@@ -7,20 +7,18 @@ namespace App\Http\Controllers\Gm;
 use App\Http\Controllers\Controller;
 use App\Models\Wotlk\Gm\Ticket;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class IndexGmController extends Controller
 {
     public function index() {
-        $ticket = Ticket::where('type', 0)->orderBy('id')->get();
+        $ticket = Ticket::where('type', 0)->get();
         $tickets = Ticket::all();
         return view('gm.index', ['ticket' => $ticket, 'tickets' => $tickets]);
     }
 
     public function ticket() {
-        $ticket = Ticket::orderBy('id')->get();
+        $ticket = Ticket::all();
         return view('gm.ticket', ['ticket' => $ticket]);
     }
 
