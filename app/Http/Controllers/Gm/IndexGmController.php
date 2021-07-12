@@ -24,6 +24,7 @@ class IndexGmController extends Controller
     }
 
     public function edit(Ticket $ticket) {
+        $ticket->increment('viewed');
         return view('gm.ticket_edit', ['ticket' => $ticket]);
     }
 
@@ -59,6 +60,8 @@ class IndexGmController extends Controller
             'comment' => $request->get('answer'),
             'assignedTo' => $request->get('characters')
         ]);
+
+        $ticket->increment('viewed');
 
         return redirect()->route('gm.ticket')->with('success', 'Успешно');
     }
