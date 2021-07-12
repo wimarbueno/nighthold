@@ -14,5 +14,5 @@ class Ticket extends Model
 
     public $timestamps = false;
 
-    protected $dates = ['createTime'];
+    protected $dates = ['createTime', 'lastModifiedTime'];
 }
