@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Validator;
 class IndexGmController extends Controller
 {
     public function index() {
-        $ticket = Ticket::where('type', 0)->orderBy('createTime')->get();
-        $tickets = Ticket::orderBy('createTime')->get();
+        $ticket = Ticket::where('type', 0)->orderBy('id')->get();
+        $tickets = Ticket::orderBy('id')->get();
         return view('gm.index', ['ticket' => $ticket, 'tickets' => $tickets]);
     }
 
     public function ticket() {
-        $ticket = Ticket::orderBy('createTime', 'asc')->get();
+        $ticket = Ticket::orderBy('id')->get();
         return view('gm.ticket', ['ticket' => $ticket]);
     }
 
