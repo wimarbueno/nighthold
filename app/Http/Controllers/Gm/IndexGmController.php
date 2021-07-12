@@ -15,7 +15,7 @@ class IndexGmController extends Controller
 {
     public function index() {
         $ticket = Ticket::where('type', 0)->orderBy('id')->get();
-        $tickets = Ticket::orderBy('id')->get();
+        $tickets = Ticket::all();
         return view('gm.index', ['ticket' => $ticket, 'tickets' => $tickets]);
     }
 
