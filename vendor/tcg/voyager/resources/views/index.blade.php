@@ -13,29 +13,8 @@
                                 <div class="col-md-6 col-xl-3">
                                     <div class="py-1">
                                         <i class="fe-tag font-24"></i>
-                                        <h3>14</h3>
-                                        <p class="text-uppercase mb-1 font-13 fw-medium">Всего тикетов</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-xl-3">
-                                    <div class="py-1">
-                                        <i class="fe-archive font-24"></i>
-                                        <h3 class="text-warning">1</h3>
-                                        <p class="text-uppercase mb-1 font-13 fw-medium">Открытых тикетов</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-xl-3">
-                                    <div class="py-1">
-                                        <i class="fe-shield font-24"></i>
-                                        <h3 class="text-success">13</h3>
-                                        <p class="text-uppercase mb-1 font-13 fw-medium">Закрытых тикетов</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-xl-3">
-                                    <div class="py-1">
-                                        <i class="fe-delete font-24"></i>
-                                        <h3 class="text-danger">0</h3>
-                                        <p class="text-uppercase mb-1 font-13 fw-medium">Удалено тикетов</p>
+                                        <h3>{{ $user->count() }}</h3>
+                                        <p class="text-uppercase mb-1 font-13 fw-medium">Пользователей</p>
                                     </div>
                                 </div>
                             </div>

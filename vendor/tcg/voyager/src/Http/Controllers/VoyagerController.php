@@ -2,6 +2,7 @@
 
 namespace TCG\Voyager\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -16,7 +17,8 @@ class VoyagerController extends Controller
 {
     public function index()
     {
-        return Voyager::view('voyager::index');
+
+        return Voyager::view('voyager::index', ['user' => User::all()]);
     }
 
     public function logout()
