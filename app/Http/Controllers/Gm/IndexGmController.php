@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Gm;
 
 use App\Http\Controllers\Controller;
 use App\Models\Wotlk\Gm\Ticket;
+use App\Services\Soap\SoapWotlk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,37 +36,25 @@ class IndexGmController extends Controller
 
     public function store(Request $request, Ticket $ticket) {
 
-        Validator::extend('strip_min', function ($attribute, $value, $parameters, $validator) {
-
-            $validator->addReplacer('strip_min', function($message, $attribute, $rule, $parameters){
-                return str_replace([':min'], $parameters, $message);
-            });
-
-            return strlen(
-                    strip_tags(
-                        preg_replace(
-                            '/\s+/',
-                            '',
-                            str_replace('&nbsp;',"", $value)
-                        )
-                    )
-                ) >= $parameters[0];
-        });
-
         $validator = Validator::make($request->all(), [
-            'answer' => 'required|string|min:2|strip_min:2'
+            'answer' => 'required|string|min:2'
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator);
         }
 
-        $ticket->where('id', $ticket->id)->update([
-            'comment' => $request->get('answer')
-        ]);
+        $soap = new SoapWotlk();
+        if($soap->cmd('.ticket comment ' . $ticket->id . ' ' . $request->get('answer')) === NULL) {
 
-        $ticket->increment('viewed');
+            $data = ['success' => true, 'messages' => 'Успешно'];
 
-        return redirect()->route('gm.ticket')->with('success', 'Успешно');
+        } else {
+
+            $data = ['success' => false, 'messages' => 'Не известная ошибка, обратитесь к администратору сайта.'];
+
+        }
+
+        return redirect()->route('gm.ticket')->with($data);
     }
 }

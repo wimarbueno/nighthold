@@ -104,6 +104,6 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function referralsNotComplete(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Referral::class, 'ref_id', 'id')->where('status', 0);
+        return $this->hasMany(Referral::class, 'ref_id', 'id');
     }
 }

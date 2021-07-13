@@ -19,7 +19,7 @@ class Referrals
 
     private static function loadReferral()
     {
-        $user = auth()->user()->referralsNotComplete;
+        $user = auth()->user()->referralsNotComplete->where('status', 0);
          if ($user) {
              foreach ($user as $item)  {
                  if ($item) {
@@ -36,7 +36,7 @@ class Referrals
     {
         $userRefChar = Characters::where('bn_id', $item->user_id)->orderBy('totaltime')->first();
         if($userRefChar->realmId === 2) {
-            if (Text::totalTimeReferral($userRefChar->totaltime) >= '9.00') {
+            if (Text::totalTimeReferral($userRefChar->totaltime) >= '12.00') {
                 $game = User::whereId($item->ref_id)->first();
                 if (isset($game->accountWotlk)) {
                     $account = AccountDonate::where('id', $game->accountWotlk->id)->first();

@@ -10,6 +10,7 @@ use App\Models\Wotlk\Account\AccountPremium;
 use App\Services\Account;
 use App\Services\Posts\Posts;
 use App\Services\Referrals;
+use App\Services\Soap\SoapWotlk;
 use Butschster\Head\Facades\Meta;
 use Carbon\Carbon;
 use TCG\Voyager\Models\Post;
@@ -45,6 +46,13 @@ class MainController extends Controller
     public function referral()
     {
         ////\App\Models\Shadowlands\Account\Account::newPasswordBnetSrp6('koltkot1703@gmail.com', '415827');
+
+        //$soap = new SoapWotlk();
+        //if($soap->cmd('.send items Thanos "Поводья Непобедимого" "Thank you for purchasing" 50818[:1]') === NULL) {
+         //   $data = ['success' => 'Ошибка', 'data' => 'Успешно, товар оправлен вам на внутреигровую почту!'];
+       // } else {
+        //    $data = ['error' => 'Ошибка', 'data' => 'Не известная ошибка, обратитесь к администратору сайта.'];
+        //}
 
         $referred = Referral::where('ref_id', 17)->get();
 

@@ -70,7 +70,7 @@
                                 <div class="Raf-RewardCard-foregroundWrapper">
                                     <div class="Raf-RewardCard-foreground" style="background-image: url({{ asset('v3/assets/img_1.png') }});"></div></div><div class="Raf-RewardCard-border"></div><div class="Raf-RewardCard-breakout" style="background-image: url({{ asset('v3/assets/img_1.png') }});"></div></div>
                             <div class="Raf-RewardCard-rewardName">10 бонусов</div>
-                            <div class="Raf-RewardCard-subtitle">за 1-го друга.</div>
+                            <div class="Raf-RewardCard-subtitle">за первого друга.</div>
                         </div>
                     </a>
                 </div>
