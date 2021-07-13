@@ -45,16 +45,11 @@ class IndexGmController extends Controller
         }
 
         $soap = new SoapWotlk();
-        if($soap->cmd('.ticket comment ' . $ticket->id . ' ' . $request->get('answer')) === NULL) {
+        
+        $soap->cmd('.ticket comment ' . $ticket->id . ' ' . $request->get('answer');
+        $soap->cmd('.ticket assign ' . $ticket->id . ' ' . auth()->user()->characters->where('realmId', 2)->first()->name);
 
-            $data = ['success' => true, 'messages' => 'Успешно'];
 
-        } else {
-
-            $data = ['success' => false, 'messages' => 'Не известная ошибка, обратитесь к администратору сайта.'];
-
-        }
-
-        return redirect()->route('gm.ticket')->with($data);
+        return redirect()->route('gm.ticket');
     }
 }
