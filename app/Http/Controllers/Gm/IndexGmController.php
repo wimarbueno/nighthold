@@ -51,7 +51,7 @@ class IndexGmController extends Controller
         $soap->cmd('.ticket assign ' . $ticket->id . ' ' . auth()->user()->characters->where('realmId', 2)->first()->name);
 
 
-        return redirect()->route('gm.ticket');
+        return redirect()->route('gm.ticket')->withErrors(['success' => true, 'message' => 'Ответ отправлен!']);
     }
 
     public function closed(Ticket $ticket) {
