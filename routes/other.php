@@ -46,7 +46,8 @@ Route::group(['prefix' => 'forums'], function () {
     Route::post('topic/post/{thread}/report', [JsonController::class, 'report']);
     Route::get('topic/post/{topic}/frag', [JsonController::class, 'frag']);
     Route::post('topic/post/{topic}/edit', [JsonController::class, 'edit'])->name('forum.edit.topic');
-    Route::post('topic/post/{topic}/{type}', [JsonController::class, 'vote']);
+    Route::post('topic/post/{topic}/up', [JsonController::class, 'vote']);
+    Route::post('topic/post/{topic}/down', [JsonController::class, 'down']);
     Route::post('topic/post/{topic}/delete', [JsonController::class, 'delete']);
     Route::post('topic/post/{topic}/closed', [JsonController::class, 'closed']);
     Route::post('topic/post/{topic}/unclosed', [JsonController::class, 'unclosed']);

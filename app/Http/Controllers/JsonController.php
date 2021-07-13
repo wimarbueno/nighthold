@@ -107,45 +107,45 @@ class JsonController extends Controller
         Thread::where('id', $id)->update(['locked' => '0']);
     }
 
-    public function vote($id, $type) {
-        if ($type === 'up') {
-            if (ThreadVote::where('threads_id', $id)->where('user_id', Auth::user()->id)->where('type', 'up')->first()){
-                $up = Thread::where('id', $id)->first();
-                return response()->json([
-                    'toggleRankMode' => $up->up + $up->down,
-                    'vote' => $up->down - $up->up
-                ]);
-            }
-            Thread::where('id', $id)->increment('up', 1);
-            ThreadVote::create([
-                'threads_id' => $id,
-                'user_id' => Auth::user()->id,
-                'type' => 'up'
-            ]);
+    public function vote($id) {
+        if (ThreadVote::where('threads_id', $id)->where('user_id', Auth::user()->id)->where('type', 'up')->first()){
             $up = Thread::where('id', $id)->first();
             return response()->json([
                 'toggleRankMode' => $up->up + $up->down,
                 'vote' => $up->down - $up->up
             ]);
-        } else {
-            if (ThreadVote::where('threads_id', $id)->where('user_id', Auth::user()->id)->where('type', 'down')->first()){
-                $vote = Thread::whereId($id)->select('up', 'down')->first();
-                return response()->json([
-                    'toggleRankMode' => $vote->down + $vote->up,
-                    'vote' => $vote->down - $vote->up
-                ]);
-            }
-            Thread::where('id', $id)->increment('down', 1);
-            ThreadVote::create([
-                'threads_id' => $id,
-                'user_id' => Auth::user()->id,
-                'type' => 'down'
-            ]);
-            $down = Thread::where('id', $id)->first();
+        }
+        Thread::where('id', $id)->increment('up', 1);
+        ThreadVote::create([
+            'threads_id' => $id,
+            'user_id' => Auth::user()->id,
+            'type' => 'up'
+        ]);
+        $up = Thread::where('id', $id)->first();
+        return response()->json([
+            'toggleRankMode' => $up->up + $up->down,
+            'vote' => $up->down - $up->up
+        ]);
+    }
+
+    public function down($id) {
+        if (ThreadVote::where('threads_id', $id)->where('user_id', Auth::user()->id)->where('type', 'down')->first()){
+            $vote = Thread::whereId($id)->select('up', 'down')->first();
             return response()->json([
-                'toggleRankMode' => $down->down + $down->up - 2,
+                'toggleRankMode' => $vote->down + $vote->up,
+                'vote' => $vote->down - $vote->up
             ]);
         }
+        Thread::where('id', $id)->increment('down', 1);
+        ThreadVote::create([
+            'threads_id' => $id,
+            'user_id' => Auth::user()->id,
+            'type' => 'down'
+        ]);
+        $down = Thread::where('id', $id)->first();
+        return response()->json([
+            'toggleRankMode' => $down->down + $down->up - 2,
+        ]);
     }
 
     public function edit(Request $request, $id) {
