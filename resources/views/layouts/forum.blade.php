@@ -41,6 +41,12 @@
              }
          })
       </script>
+       <script>
+           window.dataLayer = window.dataLayer || [];
+           function gtag(){dataLayer.push(arguments);}
+           gtag('js', new Date());
+           gtag('config', '{{ setting('site.googletagmanager') }}');
+       </script>
       <!--[if lte IE 8]>
       <script type="text/javascript" src="{{ asset('forum/static/js/vendor/jquery-compat/dist/jquery.min.js') }}"></script>
       <![endif]-->
