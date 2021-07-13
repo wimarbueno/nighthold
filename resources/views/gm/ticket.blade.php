@@ -131,7 +131,11 @@
                                                 <a href="#" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item" href="{{ route('gm.ticket.edit', $item) }}"><i class="mdi mdi-pencil me-2 text-muted font-18 vertical-middle"></i>Ответить</a>
-                                                    <a class="dropdown-item" href="{{ route('gm.ticket.closed', $item) }}"><i class="mdi mdi-check-all me-2 text-muted font-18 vertical-middle"></i>Закрыть</a>
+                                                    <form method="POST" action="{{ route('gm.ticket.closed', $item) }}">
+                                                        @csrf
+                                                    <a class="dropdown-item" href="{{ route('gm.ticket.closed', $item) }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                        <i class="mdi mdi-check-all me-2 text-muted font-18 vertical-middle"></i>Закрыть</a>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </td>
