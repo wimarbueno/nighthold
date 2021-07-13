@@ -48,6 +48,7 @@ class MainController extends Controller
         ////\App\Models\Shadowlands\Account\Account::newPasswordBnetSrp6('koltkot1703@gmail.com', '415827');
 
         //$soap = new SoapWotlk();
+        //$soap->cmd('.ticket delete 15');
         //if($soap->cmd('.send items Thanos "Поводья Непобедимого" "Thank you for purchasing" 50818[:1]') === NULL) {
          //   $data = ['success' => 'Ошибка', 'data' => 'Успешно, товар оправлен вам на внутреигровую почту!'];
        // } else {

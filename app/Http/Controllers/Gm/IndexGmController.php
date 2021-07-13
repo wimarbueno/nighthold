@@ -46,7 +46,7 @@ class IndexGmController extends Controller
 
         $soap = new SoapWotlk();
 
-        $soap->cmd('.ticket comment ' . $ticket->id . ' ' . $request->get('answer'));
+        $soap->cmd('.ticket complete ' . $ticket->id . ' ' . $request->get('answer'));
         $soap->cmd('.ticket assign ' . $ticket->id . ' ' . auth()->user()->characters->where('realmId', 2)->first()->name);
 
 
