@@ -45,11 +45,17 @@ class IndexGmController extends Controller
         }
 
         $soap = new SoapWotlk();
-        
+
         $soap->cmd('.ticket comment ' . $ticket->id . ' ' . $request->get('answer'));
         $soap->cmd('.ticket assign ' . $ticket->id . ' ' . auth()->user()->characters->where('realmId', 2)->first()->name);
 
 
+        return redirect()->route('gm.ticket');
+    }
+
+    public function closed(Ticket $ticket) {
+        $soap = new SoapWotlk();
+        $soap->cmd('.ticket close ' . $ticket->id);
         return redirect()->route('gm.ticket');
     }
 }

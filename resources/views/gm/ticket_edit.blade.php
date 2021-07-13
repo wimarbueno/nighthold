@@ -76,17 +76,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-2 row">
-                                        <label class="col-md-2 col-form-label" for="example-textarea">Статус </label>
-                                        <div class="col-md-10">
-                                            <select class="form-select" name="status">
-                                                <option value="0" @if($ticket->type === 0) checked @endif>Открыт</option>
-                                                <option value="1" @if($ticket->type === 1) checked @endif>Закрыт</option>
-                                                <option value="2" disabled>Закрыт пользователем</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
                                     <div class="row">
                                         <div class="col-md-10">
                                             <div class="input-group">
