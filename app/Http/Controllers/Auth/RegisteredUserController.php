@@ -118,7 +118,7 @@ class RegisteredUserController extends Controller
                 'string',
                 'unique:users'
             ],
-            'username' => 'required|string|unique:WotlkAuth.account,username|regex:/^[A-Za-z \t]*$/i'
+            'username' => 'required|string|unique:WotlkAuth.account,username'
         ]);
 
         if ($request->input('name') === $request->input('username')) {
