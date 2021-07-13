@@ -38,6 +38,8 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'gm'], function () {
     Route::get('/', [IndexGmController::class, 'index'])->name('gm.index');
     Route::get('/ticket', [IndexGmController::class, 'ticket'])->name('gm.ticket');
+    Route::get('/mute', [IndexGmController::class, 'mute'])->name('gm.mute');
+    Route::post('/mute/store', [IndexGmController::class, 'addMute'])->name('gm.mute.store');
     Route::get('/ticket/{ticket}/edit', [IndexGmController::class, 'edit'])->name('gm.ticket.edit');
     Route::post('/ticket/{ticket}/store', [IndexGmController::class, 'store'])->name('gm.ticket.store');
     Route::post('/ticket/{ticket}/closed', [IndexGmController::class, 'closed'])->name('gm.ticket.closed');

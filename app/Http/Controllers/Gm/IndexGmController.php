@@ -29,6 +29,11 @@ class IndexGmController extends Controller
         return view('gm.ticket', ['ticket' => $ticket]);
     }
 
+    public function mute() {
+        $ticket = Ticket::all();
+        return view('gm.mute', ['ticket' => $ticket]);
+    }
+
     public function edit(Ticket $ticket) {
         $ticket->increment('viewed');
         return view('gm.ticket_edit', ['ticket' => $ticket]);
@@ -58,5 +63,22 @@ class IndexGmController extends Controller
         $soap = new SoapWotlk();
         $soap->cmd('.ticket close ' . $ticket->id);
         return redirect()->route('gm.ticket');
+    }
+
+    public function addMute(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'reason' => 'required|string|min:2',
+            'characters' => 'required|string|min:2'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $soap = new SoapWotlk();
+        $soap->cmd('.mute ' . $request->get('characters') . ' ' . $request->get('time') . ' ' . $request->get('reason'));
+
+        return back();
     }
 }

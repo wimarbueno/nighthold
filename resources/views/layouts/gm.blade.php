@@ -221,6 +221,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('gm.mute') }}">
+                            <i class="ri-shield-user-line"></i>
+                            <span> Муты </span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="#">
                             <i class="ri-message-2-line"></i>
                             <span> Чат </span>
