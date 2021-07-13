@@ -11,6 +11,7 @@
        <script>var whTooltips = {colorLinks: true, iconizeLinks: true, renameLinks: true};</script>
        <script src="//wow.zamimg.com/widgets/power.js"></script>
        <meta name="enot" content="4181625767739knlMBFuk0OzKhOf6J6xIaCsI_TUarR5C" />
+       <meta name="google-site-verification" content="UpoJ2cATnTr3YQDMzEmzfcyyq06hyewqOg-E07FkTV0" />
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ setting('site.googletagmanager') }}"></script>
        <!— Yandex.Metrika counter —>
