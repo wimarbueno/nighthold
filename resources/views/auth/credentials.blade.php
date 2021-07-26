@@ -19,7 +19,7 @@
         <div class="step__legal-summary__links step__block" id="legal-summary-links"> @lang('account.create_step_4_6') <a href="{{ route('pages.view', [4, 'licenzionnogo-soglasheniya']) }}" rel="external noopener" target="_blank">@lang('account.create_step_4_7', ['name' => setting('site.title')]) <i class="far fa-external-link"></i></a>
         </div>
     </div>
-    <button type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
+    <button onclick="dataLayer.push({'event': 'conditions'});" type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
 </form>
 <ul class="step__controls step__block">
     <li class="step__controls__item">

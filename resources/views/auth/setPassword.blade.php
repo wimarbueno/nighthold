@@ -13,7 +13,7 @@
     </div>
     <button type="button" class="step__button--secondary step__form__block" id="suggest-battletag-btn" data-blz-battletag-suggestion-endpoint="/account/creation/api/battletag-suggestion" >
         <i class="fas fa-random"></i> Сгенерировать</button>
-    <button type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
+    <button onclick="dataLayer.push({'event': 'nightholdtag'});" type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
 </form>
 <ul class="step__controls step__block">
     <li class="step__controls__item">

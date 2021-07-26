@@ -17,7 +17,7 @@
         <input class="step__input" valid="true" id="capture-phone-number" data-capture-id="phone-number" name="phoneNumber" placeholder="@lang('account.create_step_3_6')" type="tel" autocomplete="tel" maxlength="20" pattern="[0-9\-()\.\+\s]{5,}" />
         <span class="step__field__indicator"></span>
     </div>
-    <button type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
+    <button onclick="dataLayer.push({'event': 'email'});" type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
 </form>
 <ul class="step__controls step__block">
     <li class="step__controls__item">
