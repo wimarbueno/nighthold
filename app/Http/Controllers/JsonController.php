@@ -175,7 +175,7 @@ class JsonController extends Controller
 
     public function frag($id) {
         $thread = Thread::where('id', $id)->firstOrFail();
-        $redactor = view('forum.edit.form', ['thread' => $thread->id, 'detail' => $thread->body, 'id' => $id])->render();
+        $redactor = view('forum.edit.quote', ['thread' => $thread->id, 'detail' => $thread->body, 'id' => $id])->render();
         return response()->json(['success' => true, 'content' => $redactor, 'id' => $id]);
     }
 
