@@ -28,7 +28,7 @@
         <li class="step__field-errors-item">Укажите {{ config('app.name') }}Tag</li>
     </ul>
     @enderror
-    <button type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
+    <button onclick="dataLayer.push({'event': 'nightholdtag'});" type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
 </form>
 <ul class="step__controls step__block"> <li class="step__controls__item">
         <a href="/account/creation/flow/create-full/back" class="step__controls__link" id="flow-button-back">@lang('account.create_step_2_7')</a>

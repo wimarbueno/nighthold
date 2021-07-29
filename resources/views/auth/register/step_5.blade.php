@@ -20,7 +20,7 @@
     <progress class="step__password-strength-meter step__form__block" id="password-strength-bar" value="0"></progress>
     <div class="step__password-strength-status step__form__block" id="password-strength-status" data-blz-password-strength-poor="@lang('account.create_step_5_6')" data-blz-password-strength-uncommon="@lang('account.create_step_5_7')" data-blz-password-strength-epic="@lang('account.create_step_5_8')">@lang('account.create_step_5_9')
     </div>
-    <button type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
+    <button onclick="dataLayer.push({'event': 'pass'});" type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
 </form>
 <ul class="step__pagination">
     <li class="step__pagination__item"></li>

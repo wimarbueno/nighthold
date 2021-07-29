@@ -270,29 +270,10 @@
             <li class="step__field-errors-item">Введите дату рождения</li>
         </ul>
         @enderror
-        <button type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_1_9')</button>
+        <button onclick="dataLayer.push({'event': 'birthday'});" type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_1_9')</button>
     </form>
     <div class="step__hr step__block">
         <span class="step__hr__title">@lang('account.create_step_1_10')</span>
-    </div>
-    <div class="step__block">
-        <div class="step__third-party-links" id="third-party-links" data-csrf-endpoint="/login/csrf-token">
-            <form class="step__third-party-links__item step__third-party-links__item--apple" action="/" method="post">
-                <input type="hidden" name="csrftoken" class="csrftoken" />
-                <input type="hidden" name="scope" value="email name" />
-                <button class="step__third-party-links__button" type="submit"></button>
-            </form>
-            <form class="step__third-party-links__item step__third-party-links__item--facebook" action="/" method="post">
-                <input type="hidden" name="csrftoken" class="csrftoken" />
-                <input type="hidden" name="scope" value="public_profile email user_friends" />
-                <button class="step__third-party-links__button" type="submit"></button>
-            </form>
-            <form class="step__third-party-links__item step__third-party-links__item--google" action="/" method="post">
-                <input type="hidden" name="csrftoken" class="csrftoken" />
-                <input type="hidden" name="scope" value="openid profile email" />
-                <button class="step__third-party-links__button" type="submit"></button>
-            </form>
-        </div>
     </div>
     <div class="step__block">@lang('account.create_step_1_11') <a href="{{ route('login') }}">@lang('account.create_step_1_12')</a>
     </div>

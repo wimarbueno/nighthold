@@ -27,7 +27,7 @@
         <li class="step__field-errors-item">Номер телефона уже используется</li>
     </ul>
     @enderror
-    <button type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
+    <button onclick="dataLayer.push({'event': 'email'});" type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_2_6')</button>
 </form>
 <ul class="step__controls step__block">
     <li class="step__controls__item">

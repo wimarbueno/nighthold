@@ -287,7 +287,7 @@
                      <div class="SiteNav-menuList List">
                          <div class="SiteNav-menuListItem SiteNav-menuListItem--user List-item hide" data-test-id="122786c542d0ed1e3f8346696c79bfb3" media-wide="!hide">
                              <div class="SiteNav-menuListItemWrap">
-                                 
+
                                  <a class="Link Link--block SiteNav-menuListLink text-upper" data-analytics="main-nav" data-analytics-placement="Community - Log In" rel="nofollow">
                                      <span class="SiteNav-menuListLinkText">@lang('navbar.navbar_44') {{ App\Services\Server::playersAccount() ?: '0' }}</span>
                                  </a>
