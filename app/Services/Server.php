@@ -10,6 +10,10 @@
 
         private static $realmsStatusCache = array();
 
+        public static function playersAccount()
+        {
+            return static::getAccountsPlayers();
+        }
 
         public static function playersOnline()
         {
@@ -306,5 +310,10 @@
             $horde = array(2, 5, 6, 8, 10);
 
             return in_array($race, $horde) ? 'horde' : 'alliance';
+        }
+
+        private static function getAccountsPlayers()
+        {
+            return DB::connection('WotlkAuth')->table('account')->get()->count();
         }
     }

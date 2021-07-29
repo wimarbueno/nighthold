@@ -39,6 +39,7 @@
         'navbar_41' => 'View All Your WoW Characters',
         'navbar_42' => 'Online:',
         'navbar_43' => 'Dashboard',
+        'navbar_44' => 'Accounts:',
 
         'Navbar-forums' => 'Forums',
     ];
