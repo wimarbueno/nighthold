@@ -91,8 +91,12 @@ class AuthController extends Controller
 
         if(Hash::check($password['oldPassword'], auth()->user()->password)) {
             $user = User::where('email', auth()->user()->email)->first();
+            $user->update([
+                'password' => Hash::make($password['newPassword'])
+            ]);
             AccountWotlk::newPassword($user->accountWotlk->username, $password['newPassword']);
             Account::newPasswordBnetSrp6($user->email, $password['newPassword']);
+            Auth::logout();
             return response()->json(['success'=> true, 'message' => 'Данные успешно изменены. Для входа на сайт и в игры используйте новый пароль.', 'class' => 'alert-message success']);
         } else {
             return response()->json(['success'=> false, 'message' => 'Старый пароль неверный!', 'class' => 'alert-message error']);
