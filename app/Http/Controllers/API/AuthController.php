@@ -94,7 +94,11 @@ class AuthController extends Controller
             $user->update([
                 'password' => Hash::make($password['newPassword'])
             ]);
-            AccountWotlk::newPassword($user->accountWotlk->username, $password['newPassword']);
+            $wotlk = AccountWotlk::where('username', $user->accountWotlk->username)->first();
+            $wotlk->update([
+                'sha_pass_hash' => strtoupper(sha1(strtoupper($user->accountWotlk->username. ':' . $password['newPassword'])))
+            ]);
+            
             Account::newPasswordBnetSrp6($user->email, $password['newPassword']);
             return response()->json([
                 'success'=> true,
