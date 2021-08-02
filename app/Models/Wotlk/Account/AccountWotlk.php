@@ -46,7 +46,7 @@ class AccountWotlk extends Model
     }
 
     public static function newPassword($user, $password) {
-        self::where('username', $user)->update([
+        return self::where('username', $user)->update([
             'sha_pass_hash' => strtoupper(sha1(strtoupper($user. ':' . $password)))
         ]);
     }
