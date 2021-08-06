@@ -199,6 +199,8 @@ return [
         App\Providers\MetaTagsServiceProvider::class,
 
         App\Launcher\Api\LauncherApiServiceProvider::class,
+
+        Spatie\Backup\BackupServiceProvider::class,
     ],
 
     /*

@@ -91,14 +91,14 @@ class AuthController extends Controller
 
         if(Hash::check($password['oldPassword'], auth()->user()->password)) {
             $user = User::where('email', auth()->user()->email)->first();
+            $wotlk = AccountWotlk::where('username', $user->accountWotlk->username)->first();
             $user->update([
                 'password' => Hash::make($password['newPassword'])
             ]);
-            $wotlk = AccountWotlk::where('username', $user->accountWotlk->username)->first();
             $wotlk->update([
                 'sha_pass_hash' => strtoupper(sha1(strtoupper($user->accountWotlk->username. ':' . $password['newPassword'])))
             ]);
-            
+
             Account::newPasswordBnetSrp6($user->email, $password['newPassword']);
             return response()->json([
                 'success'=> true,
