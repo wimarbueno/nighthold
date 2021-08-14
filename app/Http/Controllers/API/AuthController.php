@@ -244,7 +244,7 @@ class AuthController extends Controller
         $data = Referral::where('ref_id', Auth::user()->id)->with('referrer')->with('characters')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-
+        $count = Referral::where('ref_id', Auth::user()->id)->get()->count();
         $referrals = [];
         foreach ($data as $item ) {
             $referrals[] =
@@ -258,7 +258,7 @@ class AuthController extends Controller
         return response()->json([
             'error' => false,
             'data' =>  $referrals,
-            'count' =>  $data->count(),
+            'count' =>  $count,
             'url' => config('app.url') . "?ref=" . \Hashids::encode(auth()->user()->id)
         ]);
     }

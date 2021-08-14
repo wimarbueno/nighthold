@@ -20,7 +20,7 @@
                 <div class="space-small"></div>
                 <div class="Divider Divider--lightBrown Divider--thin"></div>
                 <div class="space-small"></div>
-                <div class="color-monochrome-white">Кажеться что то сломалось, попробуйте позже</div>
+                <div class="color-monochrome-white">Кажется что то сломалось, попробуйте позже</div>
                 <div class="space-small"></div>
                 <div class="Divider Divider--lightBrown Divider--thin"></div>
                 <div class="space-small"></div>
@@ -61,7 +61,7 @@
                     <div class="space-small"></div>
                     <div class="Divider Divider--lightBrown Divider--thin"></div>
                     <div class="space-small"></div>
-                    <div class="color-monochrome-white">Кажеться что то сломалось, попробуйте позже</div>
+                    <div class="color-monochrome-white">Кажется что то сломалось, попробуйте позже</div>
                     <div class="space-small"></div>
                     <div class="Divider Divider--lightBrown Divider--thin"></div>
                     <div class="space-small"></div>

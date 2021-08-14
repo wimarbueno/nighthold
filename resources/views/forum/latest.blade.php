@@ -132,7 +132,7 @@
 </span>
 
 <span class="title raw-link raw-topic-link" data-toggle="tooltip" data-tooltip-content="" data-original-title="" title="">
-    {{ $topic->thread->title }}
+    {{ Str::limit($topic->body, 100) }}
 </span>
 <br>
 <span class="category-name" href="{{ route('forum.show', [$topic->channel->id]) }}">{{ $topic->channel->name }}</span>

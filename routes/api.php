@@ -73,7 +73,9 @@ Route::get('user/game', [AuthController::class, 'game']);
 
 Route::get('services', [ServicesController::class, 'index']);
 Route::post('services', [ServicesController::class, 'store']);
+
 Route::post('upload', [ServicesController::class, 'upload']);
+Route::post('forum', [ServicesController::class, 'forum']);
 
 Route::get('vote', [VoteController::class, 'vote']);
 Route::post('vote/info', [VoteController::class, 'store']);

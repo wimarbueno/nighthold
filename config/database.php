@@ -63,6 +63,26 @@ return [
             ]) : [],
         ],
 
+        'forums' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_FORUM_HOST', '127.0.0.1'),
+            'port' => env('DB_FORUM_PORT', '3306'),
+            'database' => env('DB_FORUM_DATABASE', 'forge'),
+            'username' => env('DB_FORUM_USERNAME', 'forge'),
+            'password' => env('DB_FORUM_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
         'ShadowlandsAuth' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
@@ -91,26 +111,6 @@ return [
             'database' => env('DB_SL_CHARACTERS_DATABASE', 'characters'),
             'username' => env('DB_SL_CHARACTERS_USERNAME', 'root'),
             'password' => env('DB_SL_CHARACTERS_PASSWORD', 'root'),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
-        'ShadowlandsWorld' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_SL_WORLD_HOST', '127.0.0.1'),
-            'port' => env('DB_SL_WORLD_PORT', '3306'),
-            'database' => env('DB_SL_WORLD_DATABASE', 'characters'),
-            'username' => env('DB_SL_WORLD_USERNAME', 'root'),
-            'password' => env('DB_SL_WORLD_PASSWORD', 'root'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

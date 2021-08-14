@@ -26,7 +26,7 @@ Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}/{slug}', [NewsController::class, 'show'])->name('news.show');
 Route::get('news.frag', [NewsController::class, 'frag'])->name('news.frag');
 
-Route::prefix('forums')->group(function () {
+/* Route::prefix('forums')->group(function () {
     Route::get('/', [IndexController::class, 'index'])->name('forums.index');
     Route::get('/new', [IndexController::class, 'new'])->name('forums.new');
     Route::get('/latest', [IndexController::class, 'latest'])->name('forums.latest');
@@ -36,7 +36,7 @@ Route::prefix('forums')->group(function () {
     Route::post('/replies/{thread}', [RepliesController::class, 'store'])->name('forum.topic.reply.create');
     Route::get('search', [SearchController::class, 'forum'])->name('forum.search');
     Route::get('topic/post/{topic}/edit', [ForumsController::class, 'edit'])->name('forum.edit');
-});
+});  */
 
 Route::get('game/stream', [GameController::class, 'stream'])->name('stream');
 Route::get('game/stream/{name}', [GameController::class, 'streamView'])->name('stream.view');
