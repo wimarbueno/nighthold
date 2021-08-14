@@ -148,7 +148,7 @@ class RegisteredUserController extends Controller
 
         Account::createSrp6BattleNet($email, Session::get('user_password.password'));
 
-        $dir = '/var/www/www-root/data/www/community.nighthold.pro';
+        $dir = '/var/www/www-root/data/www/nighthold/community.nighthold.pro';
 
         require($dir.'/src/XF.php');
 

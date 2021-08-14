@@ -25,7 +25,7 @@ class ServicesController extends Controller
 
         if(Hash::check($data['password'], auth()->user()->password)) {
 
-            $dir = '/var/www/www-root/data/www/community.nighthold.pro/';
+            $dir = '/var/www/www-root/data/www/nighthold/community.nighthold.pro';
 
             require($dir.'/src/XF.php');
 
