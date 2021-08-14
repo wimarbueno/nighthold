@@ -148,19 +148,19 @@ class RegisteredUserController extends Controller
 
         Account::createSrp6BattleNet($email, Session::get('user_password.password'));
 
-        $dir = '/var/www/www-root/data/www/community.nighthold.pro/';
+        $dir = '/var/www/www-root/data/www/community.nighthold.pro';
 
         require($dir.'/src/XF.php');
 
         \XF::start($dir);
-        $app = \XF::app();
+        $appXF = \XF::app();
 
-        $user = $app->repository('XF:User')->setupBaseUser();
+        $userXF = $appXF->repository('XF:User')->setupBaseUser();
 
-        $user->username = $request->input('name');
-        $user->email = $email;
-        $user->Auth->setPassword(Session::get('user_password.password'));
-        $user->save();
+        $userXF->username = $request->input('name');
+        $userXF->email = $email;
+        $userXF->Auth->setPassword(Session::get('user_password.password'));
+        $userXF->save();
 
         Auth::login($user = User::create([
             'name' => $request->input('name'),
