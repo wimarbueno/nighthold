@@ -11,6 +11,7 @@ use App\Models\Web\Referral;
 use App\Models\Wotlk\Account\AccountDonate;
 use App\Models\Wotlk\Account\AccountWotlk;
 use App\Services\Soap\Soap;
+use App\Services\Soap\SoapWotlk;
 use App\Services\Text;
 use App\Services\Utils;
 use Illuminate\Http\Request;
@@ -91,15 +92,17 @@ class AuthController extends Controller
 
         if(Hash::check($password['oldPassword'], auth()->user()->password)) {
             $user = User::where('email', auth()->user()->email)->first();
-            $wotlk = AccountWotlk::where('username', $user->accountWotlk->username)->first();
+
+            $soap = new SoapWotlk();
+
+            $soap->cmd('.account set password ' . $user->accountWotlk->username . ' ' . $password['newPassword'] . ' ' . $password['newPassword']);
+
             $user->update([
                 'password' => Hash::make($password['newPassword'])
             ]);
-            $wotlk->update([
-                'sha_pass_hash' => strtoupper(sha1(strtoupper($user->accountWotlk->username. ':' . $password['newPassword'])))
-            ]);
 
             Account::newPasswordBnetSrp6($user->email, $password['newPassword']);
+            
             return response()->json([
                 'success'=> true,
                 'message' => 'Данные успешно изменены. Для входа на сайт и в игры используйте новый пароль.',
