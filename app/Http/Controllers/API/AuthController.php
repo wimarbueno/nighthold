@@ -7,6 +7,7 @@ use App\Models\HistoryPayment;
 use App\Models\Shadowlands\Account\Account;
 use App\Models\Streams;
 use App\Models\User;
+use App\Models\Web\ForumsXF;
 use App\Models\Web\Referral;
 use App\Models\Wotlk\Account\AccountDonate;
 use App\Models\Wotlk\Account\AccountWotlk;
@@ -102,7 +103,7 @@ class AuthController extends Controller
             ]);
 
             Account::newPasswordBnetSrp6($user->email, $password['newPassword']);
-            
+
             return response()->json([
                 'success'=> true,
                 'message' => 'Данные успешно изменены. Для входа на сайт и в игры используйте новый пароль.',
@@ -172,6 +173,7 @@ class AuthController extends Controller
             'balance' => $balance->bonuses ?? 0,
             'votes' => $balance->votes ?? 0,
             'NightHoldTag' => setting('platnye-uslugi.NightHoldTag'),
+            'forums' => ForumsXF::where('username', auth()->user()->name)->first()->username ?? ''
         ], JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
     }
 
