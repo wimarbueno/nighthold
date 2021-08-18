@@ -270,7 +270,7 @@
         <input name="dob-year" class="step__input--date--yyyy" type="number" placeholder="@lang('account.create_step_1_8')" min="1900" max="2021" data-maxlength="4" value="" autocomplete="bday-year" />
         <span class="step__field__indicator"></span>
     </div>
-    <button onclick="dataLayer.push({'event': 'birthday'});" type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_1_9')</button>
+    <button disabled onclick="dataLayer.push({'event': 'birthday'});" type="submit" class="step__button--primary step__block" id="flow-form-submit-btn">@lang('account.create_step_1_9')</button>
 </form>
 <div class="step__hr step__block">
     <span class="step__hr__title">@lang('account.create_step_1_10')</span>
