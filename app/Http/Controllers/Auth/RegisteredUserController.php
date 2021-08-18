@@ -138,8 +138,8 @@ class RegisteredUserController extends Controller
 
         $email = Session::get('user_credentials.email');
 
-        Account::createSrp6BattleNet($email, Session::get('user_password.password'));
-        
+        ///Account::createSrp6BattleNet($email, Session::get('user_password.password'));
+
         AccountWotlk::create([
             'username' => $request->input('username'),
             'sha_pass_hash' => $hashed_pass,

@@ -69,11 +69,12 @@ class Account extends Model
 
         $bnet_hashed_pass = strtoupper(bin2hex(strrev(hex2bin(strtoupper(hash('sha256', strtoupper(hash('sha256', strtoupper($email)) . ':' . strtoupper($password))))))));
 
-        DB::connection('ShadowlandsAuth')->table('battlenet_accounts')->insert(['email' => $email, 'sha_pass_hash' => $bnet_hashed_pass, 'last_login' => date("Y-m-d H:i:s")]);
-        $bnetInfo = DB::connection('ShadowlandsAuth')->table('battlenet_accounts')->where('email', $email)->first();
-        $username = $bnetInfo->id . '#1';
-        $accountGame = DB::connection('ShadowlandsAuth')->table('account')->insert([
-            'username' => $username,
+        $bnetInfo = DB::connection('ShadowlandsAuth')
+            ->table('battlenet_accounts')
+            ->insert(['email' => $email, 'sha_pass_hash' => $bnet_hashed_pass, 'last_login' => date("Y-m-d H:i:s")]);
+
+        DB::connection('ShadowlandsAuth')->table('account')->insert([
+            'username' => $bnetInfo->id . '#1',
             'salt' => $salt,
             'verifier' => $verifier,
             'email' => $email,
@@ -116,7 +117,7 @@ class Account extends Model
             ->update(['sha_pass_hash' => $bnet_hashed_pass]);
 
         list($salt, $verifier) = (new \App\Services\Srp6)->getRegistrationData($email, $password);
-        
+
         DB::connection('ShadowlandsAuth')
             ->table('account')
             ->where('email', $email)

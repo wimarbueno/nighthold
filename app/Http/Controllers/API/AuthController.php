@@ -102,7 +102,7 @@ class AuthController extends Controller
                 'password' => Hash::make($password['newPassword'])
             ]);
 
-            Account::newPasswordBnetSrp6($user->email, $password['newPassword']);
+            ///Account::newPasswordBnetSrp6($user->email, $password['newPassword']);
 
             return response()->json([
                 'success'=> true,

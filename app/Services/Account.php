@@ -19,9 +19,9 @@ class Account
     private static $active_character;
 
     public static function init() {
-        if (auth()->user()->account) {
-            self::LoadCharacters();
-        }
+        ///if (auth()->user()->account) {
+        ///    self::LoadCharacters();
+        ///}
         if (auth()->user()->accountWotlk) {
             self::LoadCharactersWotlk();
         }

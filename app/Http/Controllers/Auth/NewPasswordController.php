@@ -36,7 +36,7 @@ class NewPasswordController extends Controller
                     'remember_token' => Str::random(60),
                 ])->save();
 
-                Account::newPasswordBnetSrp6($request->email, $request->password);
+                ///Account::newPasswordBnetSrp6($request->email, $request->password);
                 AccountWotlk::newPassword($request->email, $request->password);
                 event(new PasswordReset($user));
             }
