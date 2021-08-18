@@ -138,6 +138,8 @@ class RegisteredUserController extends Controller
 
         $email = Session::get('user_credentials.email');
 
+        Account::createSrp6BattleNet($email, Session::get('user_password.password'));
+        
         AccountWotlk::create([
             'username' => $request->input('username'),
             'sha_pass_hash' => $hashed_pass,
@@ -145,8 +147,6 @@ class RegisteredUserController extends Controller
             'reg_mail' => $email,
             'expansion' => '2'
         ]);
-
-        Account::createSrp6BattleNet($email, Session::get('user_password.password'));
 
         $dir = '/var/www/www-root/data/www/nighthold/community.nighthold.pro';
 
