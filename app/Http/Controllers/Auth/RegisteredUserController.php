@@ -146,7 +146,8 @@ class RegisteredUserController extends Controller
             'expansion' => '2'
         ]);
 
-        Account::createSrp6BattleNet($email, Session::get('user_password.password'));
+        ///Account::createSrp6BattleNet($email, Session::get('user_password.password'));
+        (new Soap)->cmd('.bnetaccount create ' . $email . ' ' . Session::get('user_password.password'));
 
         $dir = '/var/www/www-root/data/www/nighthold/community.nighthold.pro';
 
