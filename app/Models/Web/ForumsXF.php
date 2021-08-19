@@ -12,6 +12,8 @@ class ForumsXF extends Model
 
     protected $table = 'xf_user';
 
+    protected $primaryKey = 'user_id';
+
     protected $guarded = [];
 
     public $timestamps = false;
