@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Services;
 use App\Models\User;
 use App\Models\Web\ForumsXF;
+use App\Models\Wotlk\Account\AccountWotlk;
 use App\Services\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,35 @@ class ServicesController extends Controller
 
     var $portable_hashes;
     var $random_state;
+
+    public function createWotlk(Request $request) {
+
+        $data = $request->only([
+            'name', 'password'
+        ]);
+
+        if(Hash::check($data['password'], auth()->user()->password)) {
+
+            $hashed_pass = strtoupper(sha1(strtoupper($data['name'] . ':' . $data['password'])));
+
+            AccountWotlk::create([
+                'username' => $data['name'],
+                'sha_pass_hash' => $hashed_pass,
+                'email' => auth()->user()->email,
+                'reg_mail' => auth()->user()->email,
+                'expansion' => '2'
+            ]);
+
+            return response()->json([
+                    'success'=> true,
+                    'message' => 'Игровой аккаунт успешно прикреплен.',
+                    'class' => 'alert-message success']
+            );
+        } else {
+            return response()->json(['success'=> false, 'message' => 'Старый пароль неверный!', 'class' => 'alert-message error']);
+        }
+    }
+
 
     public function forum(Request $request) {
 
@@ -47,39 +77,6 @@ class ServicesController extends Controller
         } else {
             return response()->json(['success'=> false, 'message' => 'Старый пароль неверный!', 'class' => 'alert-message error']);
         }
-    }
-
-    private function HashPassword($password)
-    {
-        $random = '';
-
-        if (CRYPT_BLOWFISH == 1 && !$this->portable_hashes) {
-            $random = $this->get_random_bytes(16);
-            $hash = crypt($password, $this->gensalt_blowfish($random));
-            if (strlen($hash) == 60)
-                return $hash;
-        }
-
-        if (CRYPT_EXT_DES == 1 && !$this->portable_hashes) {
-            if (strlen($random) < 3)
-                $random = $this->get_random_bytes(3);
-            $hash = crypt($password, $this->gensalt_extended($random));
-            if (strlen($hash) == 20)
-                return $hash;
-        }
-
-        if (strlen($random) < 6)
-            $random = $this->get_random_bytes(6);
-        $hash =
-            $this->crypt_private($password,
-                $this->gensalt_private($random));
-        if (strlen($hash) == 34)
-            return $hash;
-
-        # Returning '*' on error is safe here, but would _not_ be safe
-        # in a crypt(3)-like function used _both_ for generating new
-        # hashes and for validating passwords against existing hashes.
-        return '*';
     }
 
     public function upload(Request $request) {

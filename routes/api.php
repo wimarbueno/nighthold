@@ -76,6 +76,7 @@ Route::post('services', [ServicesController::class, 'store']);
 
 Route::post('upload', [ServicesController::class, 'upload']);
 Route::post('forum', [ServicesController::class, 'forum']);
+Route::post('create/wotlk', [ServicesController::class, 'createWotlk']);
 
 Route::get('vote', [VoteController::class, 'vote']);
 Route::post('vote/info', [VoteController::class, 'store']);

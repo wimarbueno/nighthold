@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function streamSend(Request $request) {
+    public function streamSend(Request $request): \Illuminate\Http\JsonResponse
+    {
 
         Validator::extend('strip_min', function ($attribute, $value, $parameters, $validator) {
 
@@ -73,7 +74,8 @@ class AuthController extends Controller
         }
     }
 
-    public function changeQuestion(Request $request) {
+    public function changeQuestion(Request $request): \Illuminate\Http\JsonResponse
+    {
         $user = User::where('email', auth()->user()->email)->first();
         $user->update([
             'question' => $request->get('question'),
@@ -82,7 +84,8 @@ class AuthController extends Controller
         return response()->json(['success'=> true, 'message' => 'Данные успешно изменены.', 'class' => 'alert-message success']);
     }
 
-    public function changePassword(Request $request) {
+    public function changePassword(Request $request): \Illuminate\Http\JsonResponse
+    {
         $password = $request->only([
             'oldPassword', 'newPassword', 'confirmPassword'
         ]);
@@ -94,9 +97,10 @@ class AuthController extends Controller
         if(Hash::check($password['oldPassword'], auth()->user()->password)) {
             $user = User::where('email', auth()->user()->email)->first();
 
-            $soap = new SoapWotlk();
-
-            $soap->cmd('.account set password ' . $user->accountWotlk->username . ' ' . $password['newPassword'] . ' ' . $password['newPassword']);
+            if ($user->accountWotlk) {
+                $soap = new SoapWotlk();
+                $soap->cmd('.account set password ' . $user->accountWotlk->username . ' ' . $password['newPassword'] . ' ' . $password['newPassword']);
+            }
 
             $user->update([
                 'password' => Hash::make($password['newPassword'])
@@ -114,7 +118,8 @@ class AuthController extends Controller
         }
     }
 
-    public function changeName(Request $request) {
+    public function changeName(Request $request): \Illuminate\Http\JsonResponse
+    {
         $user = User::where('email', auth()->user()->email)->first();
         $user->update([
             'lastName' => $request->get('last-name'),
@@ -124,7 +129,8 @@ class AuthController extends Controller
         return response()->json(['success'=> true, 'message' => 'Данные успешно изменены.', 'class' => 'alert-message success']);
     }
 
-    public function changeTag(Request $request) {
+    public function changeTag(Request $request): \Illuminate\Http\JsonResponse
+    {
         $balance = AccountDonate::where('id', auth()->user()->accountWotlk->id)->first();
 
         if ($balance->bonuses >= setting('platnye-uslugi.NightHoldTag')) {
@@ -146,7 +152,8 @@ class AuthController extends Controller
         }
     }
 
-    public function changeEmail(Request $request) {
+    public function changeEmail(Request $request): \Illuminate\Http\JsonResponse
+    {
         if(Hash::check($request->get('password'), auth()->user()->password)) {
             $user = User::where('email', auth()->user()->email)->first();
             Account::newEmailBnet($request->get('email'));
@@ -177,7 +184,8 @@ class AuthController extends Controller
         ], JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
     }
 
-    public function select(Request $request) {
+    public function select(Request $request): \Illuminate\Http\JsonResponse
+    {
         $request->session()->put('characters', $request->get('name'));
         $request->session()->save();
         $data = ['successful' => 'Персонаж успешно выбран.'];
@@ -203,7 +211,8 @@ class AuthController extends Controller
         return json_encode($characters, JSON_UNESCAPED_UNICODE|JSON_INVALID_UTF8_IGNORE);
     }
 
-    public function payment() {
+    public function payment(): \Illuminate\Http\JsonResponse
+    {
         $data = HistoryPayment::where('user_id', auth()->user()->id)
             ->where('service', 'balance')
             ->orderBy('created_at', 'desc')
@@ -212,23 +221,29 @@ class AuthController extends Controller
         return response()->json(['error' => false, 'data' => $data, 'count' => $count]);
     }
 
-    /**
-     * @throws \JsonException
-     */
-    public function game()
+    public function game(): \Illuminate\Http\JsonResponse
     {
-        $userSL = auth()->user()->account;
+        //$userSL = auth()->user()->account;
         $userWotlk = auth()->user()->accountWotlk;
+        if ($userWotlk) {
+            return response()->json([
+                'error' => false,
+                'dataSL' =>  'unknown',
+                'dataWotlk' => Text::convertDateLastLogin($userWotlk->last_login) ?? 'unknown',
+                'loginSl' => '',
+                'loginWotlk' => $userWotlk->username
+            ]);
+        }
         return response()->json([
             'error' => false,
-            'dataSL' => Text::convertDateLastLogin($userSL->last_login),
-            'dataWotlk' => Text::convertDateLastLogin($userWotlk->last_login),
-            'loginSl' => $userWotlk->email,
-            'loginWotlk' => $userWotlk->username
+            'dataSL' => 'unknown',
+            'dataWotlk' => 'unknown',
+            'loginSl' => '',
+            'loginWotlk' => ''
         ]);
     }
 
-    public function banned()
+    public function banned(): \Illuminate\Http\JsonResponse
     {
         $notBanned = 0;
         $banned = 1;
@@ -244,7 +259,7 @@ class AuthController extends Controller
 
     }
 
-    public function referrals()
+    public function referrals(): \Illuminate\Http\JsonResponse
     {
         $data = Referral::where('ref_id', Auth::user()->id)->with('referrer')->with('characters')
             ->orderBy('created_at', 'desc')
