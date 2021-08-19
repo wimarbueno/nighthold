@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Shadowlands\Account\Account;
 use App\Models\Wotlk\Account\AccountWotlk;
 use App\Services\Soap\Soap;
+use App\Services\Soap\SoapWotlk;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -36,8 +37,11 @@ class NewPasswordController extends Controller
                     'remember_token' => Str::random(60),
                 ])->save();
 
-                ///Account::newPasswordBnetSrp6($request->email, $request->password);
-                AccountWotlk::newPassword($request->email, $request->password);
+                if ($user->accountWotlk) {
+                    $soap = new SoapWotlk();
+                    $soap->cmd('.account set password ' . $user->accountWotlk->username . ' ' . $request->password . ' ' . $request->password);
+                }
+          
                 event(new PasswordReset($user));
             }
         );
