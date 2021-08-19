@@ -9,14 +9,6 @@ class Account
     private static $characters_data = [];
 
     private static $myGamesList = [];
-    /**
-     * @var false
-     */
-    private static $characters_loaded;
-    /**
-     * @var mixed
-     */
-    private static $active_character;
 
     public static function init() {
         ///if (auth()->user()->account) {
