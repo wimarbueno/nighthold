@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shadowlands\Account\Account;
+use App\Models\Web\ForumsXF;
 use App\Models\Wotlk\Account\AccountWotlk;
 use App\Services\Soap\Soap;
 use App\Services\Soap\SoapWotlk;
+use GuzzleHttp\Client;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -41,7 +43,21 @@ class NewPasswordController extends Controller
                     $soap = new SoapWotlk();
                     $soap->cmd('.account set password ' . $user->accountWotlk->username . ' ' . $request->password . ' ' . $request->password);
                 }
-          
+
+                $userXF = ForumsXF::where('email', $user->email)->first();
+
+                $client = new Client(['base_uri' => config('app.url'), 'timeout'  => 2.0]);
+
+                $client->request('POST', '/index.php?api/users/' . $userXF->user_id, [
+                    'headers' => [
+                        'XF-Api-Key' => 'Z6-Lw2VYGYXM8jf2Y1l_JtWvsrcVyYgn',
+                        'XF-Api-User' => '1',
+                    ],
+                    'form_params' => [
+                        'password' => $request->password
+                    ]
+                ]);
+
                 event(new PasswordReset($user));
             }
         );

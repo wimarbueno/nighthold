@@ -7,6 +7,7 @@ use App\Models\HistoryPayment;
 use App\Models\Shadowlands\Account\Account;
 use App\Models\Streams;
 use App\Models\User;
+use App\Models\Web\ForumsPassword;
 use App\Models\Web\ForumsXF;
 use App\Models\Web\Referral;
 use App\Models\Wotlk\Account\AccountDonate;
@@ -15,8 +16,10 @@ use App\Services\Soap\Soap;
 use App\Services\Soap\SoapWotlk;
 use App\Services\Text;
 use App\Services\Utils;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -106,7 +109,19 @@ class AuthController extends Controller
                 'password' => Hash::make($password['newPassword'])
             ]);
 
-            ///Account::newPasswordBnetSrp6($user->email, $password['newPassword']);
+            $userXF = ForumsXF::where('email', $user->email)->first();
+
+            $client = new Client(['base_uri' => config('app.url'), 'timeout'  => 2.0]);
+
+            $client->request('POST', '/index.php?api/users/' . $userXF->user_id, [
+                'headers' => [
+                    'XF-Api-Key' => 'Z6-Lw2VYGYXM8jf2Y1l_JtWvsrcVyYgn',
+                    'XF-Api-User' => '1',
+                ],
+                'form_params' => [
+                    'password' => $password['newPassword']
+                ]
+            ]);
 
             return response()->json([
                 'success'=> true,
