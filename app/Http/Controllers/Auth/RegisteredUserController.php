@@ -148,7 +148,7 @@ class RegisteredUserController extends Controller
             'expansion' => '2'
         ]);
 
-        $dir = '/var/www/www-root/data/www/nighthold/community.nighthold.pro';
+        $dir = '/var/www/www-root/data/www/community.nighthold.pro';
 
         require($dir.'/src/XF.php');
 
