@@ -142,6 +142,12 @@ class AuthController extends Controller
 
             $newBalance = $balance->bonuses - setting('platnye-uslugi.NightHoldTag');
 
+            $forumUser = ForumsXF::where('email', auth()->user()->email)->first();
+
+            $forumUser->update([
+                'username' => $request->get('name')
+            ]);
+
             AccountDonate::where('id', auth()->user()->accountWotlk->id)->update([
                 'bonuses' => $newBalance
             ]);
