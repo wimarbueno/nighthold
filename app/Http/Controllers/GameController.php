@@ -134,7 +134,7 @@ class GameController extends Controller
     public function stream() {
         Meta::prependTitle('Стримы')
             ->setDescription(__('classes.classes_8'));
-        /*
+        
         $this->addStreamUser();
         $twitch = new Twitch;
         $twitch->setClientId('dg7ctrw8kegwua5bbmp80nwn8u4807');
@@ -163,7 +163,7 @@ class GameController extends Controller
                 'type' => $users->type ?? 'offline',
             ]);
         }
-        */
+
         $streams = Stream::all();
         return view('game.stream.index', ['stream' => $streams]);
     }
