@@ -19,10 +19,10 @@ class MainController extends Controller
 {
 
     function __construct() {
-        if (Auth()->check()){
+        //if (Auth()->check()){
             ///Account::init();
             ///Referrals::init();
-        }
+        //}
     }
 
     public function index () {
@@ -38,63 +38,6 @@ class MainController extends Controller
         Meta::prependTitle('Описание обновления')
             ->setDescription('Прочитайте о самых свежих новинках и исправлениях для World of Warcraft.');
         return view('update', ['update' => $data]);
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function referral()
-    {
-        ////\App\Models\Shadowlands\Account\Account::newPasswordBnetSrp6('koltkot1703@gmail.com', '415827');
-
-        //$soap = new SoapWotlk();
-        //$soap->cmd('.ticket delete 15');
-        //if($soap->cmd('.send items Thanos "Поводья Непобедимого" "Thank you for purchasing" 50818[:1]') === NULL) {
-         //   $data = ['success' => 'Ошибка', 'data' => 'Успешно, товар оправлен вам на внутреигровую почту!'];
-       // } else {
-        //    $data = ['error' => 'Ошибка', 'data' => 'Не известная ошибка, обратитесь к администратору сайта.'];
-        //}
-
-        $referred = Referral::where('ref_id', 17)->get();
-
-        if(count($referred) === 0) {
-            $bonus = 10;
-            $refer = User::where('id', 17)->first();
-            AccountDonate::updateOrCreate([
-                'id' => $refer->accountWotlk->id,
-            ],[
-                'bonuses' => $bonus,
-                'votes' => 0,
-                'total_votes' => 1,
-                'total_bonuses' => 1
-            ]);
-        } else {
-            $bonus = 5;
-            $refer = User::where('id', 17)->first();
-            AccountDonate::updateOrCreate([
-                'id' => $refer->accountWotlk->id,
-                ],[
-                'bonuses' => $bonus,
-                'votes' => 0,
-                'total_votes' => 1,
-                'total_bonuses' => 1
-            ]);
-        }
-
-        $referrals =  Referral::where('ref_id', 17)->get();
-
-        if (count($referrals) === 10) {
-            $refer = User::where('id', 17)->first();
-            AccountPremium::updateOrCreate([
-                'id' => $refer->accountWotlk->id,
-            ], [
-                'setdate' => Carbon::now()->addDays(0)->timestamp,
-                'unsetdate' => Carbon::now()->addDays(30)->timestamp,
-                'active' => 1
-            ]);
-        }
-        return config('app.url') . "?ref=" . \Hashids::encode(auth()->user()->id);
-
     }
 
     public function promoPage () {

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Account\AccountController;
-use App\Http\Controllers\Forums\ForumsController;
 use App\Http\Controllers\FreeKassaController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\Gm\IndexGmController;
@@ -43,20 +42,6 @@ Route::group(['prefix' => 'gm'], function () {
     Route::get('/ticket/{ticket}/edit', [IndexGmController::class, 'edit'])->name('gm.ticket.edit');
     Route::post('/ticket/{ticket}/store', [IndexGmController::class, 'store'])->name('gm.ticket.store');
     Route::post('/ticket/{ticket}/closed', [IndexGmController::class, 'closed'])->name('gm.ticket.closed');
-});
-Route::group(['prefix' => 'forums'], function () {
-    Route::post('topic/post/{user}/block', [JsonController::class, 'block']);
-    Route::post('topic/post/{thread}/report', [JsonController::class, 'report']);
-    Route::get('topic/post/{topic}/frag', [JsonController::class, 'frag']);
-    Route::post('topic/post/{topic}/edit', [JsonController::class, 'edit'])->name('forum.edit.topic');
-    Route::post('topic/post/{topic}/up', [JsonController::class, 'vote']);
-    Route::post('topic/post/{topic}/down', [JsonController::class, 'down']);
-    Route::post('topic/post/{topic}/delete', [JsonController::class, 'delete']);
-    Route::post('topic/post/{topic}/closed', [JsonController::class, 'closed']);
-    Route::post('topic/post/{topic}/unclosed', [JsonController::class, 'unclosed']);
-    Route::post('topic/post/{topic}/sticky', [JsonController::class, 'sticky']);
-    Route::post('topic/post/{topic}/unsticky', [JsonController::class, 'unsticky']);
-    Route::post('upload/images', [ForumsController::class, 'store'])->name('forums.upload');
 });
 
 Route::prefix('dashboard')->group(function () {

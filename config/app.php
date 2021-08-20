@@ -203,8 +203,6 @@ return [
 
         App\Providers\MetaTagsServiceProvider::class,
 
-        App\Launcher\Api\LauncherApiServiceProvider::class,
-
         Spatie\Backup\BackupServiceProvider::class,
     ],
 
@@ -263,7 +261,6 @@ return [
         'Utils' => App\Services\Utils::class,
         'FreeKassa' => Maksa988\FreeKassa\Facades\FreeKassa::class,
         'Hashids' => Torann\Hashids\Facade\Hashids::class,
-        'Launcher' => App\Launcher\Api\LauncherApiFacade::class,
     ],
 
 ];

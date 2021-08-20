@@ -1,9 +1,6 @@
 <?php
 
 use App\Http\Controllers\CharactersController;
-use App\Http\Controllers\Forums\ForumsController;
-use App\Http\Controllers\Forums\IndexController;
-use App\Http\Controllers\Forums\RepliesController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GuildController;
 use App\Http\Controllers\NewsController;
@@ -26,17 +23,11 @@ Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}/{slug}', [NewsController::class, 'show'])->name('news.show');
 Route::get('news.frag', [NewsController::class, 'frag'])->name('news.frag');
 
-/* Route::prefix('forums')->group(function () {
-    Route::get('/', [IndexController::class, 'index'])->name('forums.index');
-    Route::get('/new', [IndexController::class, 'new'])->name('forums.new');
-    Route::get('/latest', [IndexController::class, 'latest'])->name('forums.latest');
-    Route::get('/{category}', [IndexController::class, 'show'])->name('forum.show')->where('category', '[0-9]+');
-    Route::post('/{category}/create', [IndexController::class, 'store'])->name('forum.topic.store');
-    Route::get('/topic/{thread}', [IndexController::class, 'topic'])->name('topic.show');
-    Route::post('/replies/{thread}', [RepliesController::class, 'store'])->name('forum.topic.reply.create');
-    Route::get('search', [SearchController::class, 'forum'])->name('forum.search');
-    Route::get('topic/post/{topic}/edit', [ForumsController::class, 'edit'])->name('forum.edit');
-});  */
+Route::prefix('forums')->group(function () {
+    Route::get('/', function () {
+        return redirect(config('app.forum_url'));
+    })->name('forums.index');
+});
 
 Route::get('game/stream', [GameController::class, 'stream'])->name('stream');
 Route::get('game/stream/{name}', [GameController::class, 'streamView'])->name('stream.view');
@@ -77,5 +68,3 @@ Route::get('search/character', [SearchController::class, 'character'])->name('se
 Route::get('search/blog', [SearchController::class, 'blog'])->name('search.blog');
 
 Route::get('online', [OnlineController::class, 'index'])->name('online.index');
-
-Route::get('/referral-link', [MainController::class, 'referral']);

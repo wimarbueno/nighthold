@@ -3,10 +3,8 @@
 namespace App\Models;
 
 use App\Models\Characters\Characters;
-use App\Models\Shadowlands\Account\Account;
 use App\Models\Web\Referral;
 use App\Models\Wotlk\Account\AccountWotlk;
-use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
@@ -46,9 +44,6 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function account() {
-        return $this->hasOne(Account::class, 'email', 'email');
-    }
 
     public function accountWotlk() {
         return $this->hasOne(AccountWotlk::class, 'email', 'email');
@@ -60,25 +55,6 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function stream() {
         return $this->belongsTo(Streams::class, 'id', 'id_user');
-    }
-
-    public function topics() {
-        return $this->hasMany(Thread::class);
-    }
-
-    protected function getPostsCountAttribute() {
-        return $this->topics->count();
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function read($thread) {
-        return cache()->forever($this->visitedThreadCacheKey($thread), Carbon::now());
-    }
-
-    public function visitedThreadCacheKey($thread) {
-        return sprintf("users.%s.visits.%s", $this->id, $thread);
     }
 
     public static function setBalance($newBalance) {
