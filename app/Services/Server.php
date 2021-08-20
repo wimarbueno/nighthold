@@ -309,6 +309,6 @@
 
         private static function getAccountsPlayers()
         {
-            return '6800';
+            return DB::connection('WotlkAuth')->table('account')->get()->count();
         }
     }
