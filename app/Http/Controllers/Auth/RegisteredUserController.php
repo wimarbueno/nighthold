@@ -115,9 +115,17 @@ class RegisteredUserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => [
                 'required',
+                'string',
+                'max:16',
                 'unique:users'
             ],
-            'username' => 'required|unique:WotlkAuth.account,username'
+            'username' => [
+                'required',
+                'string',
+                'max:16',
+                'unique:WotlkAuth.account,username',
+                'regex:/(^([a-zA-Z0-9-]+)(\d+)?$)/u'
+            ]
         ]);
 
         if ($request->input('name') === $request->input('username')) {
