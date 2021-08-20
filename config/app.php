@@ -28,6 +28,9 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'forum_key' => env('FORUM_KEY', 'L2FWCceW741BRrUtrOwzpin-nRGh3auf'),
+    'forum_user' => env('FORUM_USER', '1'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

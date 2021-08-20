@@ -50,8 +50,8 @@ class NewPasswordController extends Controller
 
                 $client->request('POST', '/index.php?api/users/' . $userXF->user_id, [
                     'headers' => [
-                        'XF-Api-Key' => 'Z6-Lw2VYGYXM8jf2Y1l_JtWvsrcVyYgn',
-                        'XF-Api-User' => '1',
+                        'XF-Api-Key' => config('app.forum_key'),
+                        'XF-Api-User' => config('app.forum_user'),
                     ],
                     'form_params' => [
                         'password' => $request->password
