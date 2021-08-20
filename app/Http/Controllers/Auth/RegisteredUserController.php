@@ -121,7 +121,6 @@ class RegisteredUserController extends Controller
             ],
             'username' => [
                 'required',
-                'string',
                 'max:16',
                 'unique:WotlkAuth.account,username',
                 'regex:/(^([a-zA-Z0-9-]+)(\d+)?$)/u'
