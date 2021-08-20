@@ -46,7 +46,7 @@ class AuthController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'name_user' => 'required|string|min:2|strip_min:2|regex:/(^([a-zA-Z0-9-]+)(\d+)?$)/u'
+            'name_user' => 'required|string|min:2|strip_min:2|regex:/(^([_a-zA-Z0-9_]+)(\d+)?$)/u'
         ]);
 
         if ($validator->fails()) {
