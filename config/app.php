@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'https://wowlegions.ru'),
 
+    'forum_url' => env('FORUM_URL', 'https://community.nighthold.pro'),
+
     'asset_url' => env('ASSET_URL', 'https://wowlegions.ru'),
 
     'mix_url' => env('MIX_ASSET_URL', 'https://wowlegions.ru'),

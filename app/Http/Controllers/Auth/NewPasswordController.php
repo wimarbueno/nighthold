@@ -46,7 +46,7 @@ class NewPasswordController extends Controller
 
                 $userXF = ForumsXF::where('email', $user->email)->first();
 
-                $client = new Client(['base_uri' => config('app.url'), 'timeout'  => 2.0]);
+                $client = new Client(['base_uri' => config('app.forum_url'), 'timeout'  => 2.0]);
 
                 $client->request('POST', '/index.php?api/users/' . $userXF->user_id, [
                     'headers' => [
