@@ -46,7 +46,7 @@ class AuthController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'name_user' => 'required|string|min:2|strip_min:2'
+            'name_user' => 'required|string|min:2|strip_min:2|regex:/(^([a-zA-Z0-9-]+)(\d+)?$)/u'
         ]);
 
         if ($validator->fails()) {
@@ -182,8 +182,8 @@ class AuthController extends Controller
     {
         if(Hash::check($request->get('password'), auth()->user()->password)) {
             $user = User::where('email', auth()->user()->email)->first();
-            Account::newEmailBnet($request->get('email'));
-            Account::newPasswordChangeEmail($request->get('email'), $request->get('password'));
+            //Account::newEmailBnet($request->get('email'));
+            //Account::newPasswordChangeEmail($request->get('email'), $request->get('password'));
             $user->update([
                 'email' => $request->email
             ]);
