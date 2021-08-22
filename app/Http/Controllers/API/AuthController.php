@@ -146,9 +146,9 @@ class AuthController extends Controller
 
     public function changeTag(Request $request): \Illuminate\Http\JsonResponse
     {
-        $balance = AccountDonate::where('id', auth()->user()->accountWotlk->id)->first();
-        if ($balance) {
-            if (auth()->user()->free_name === 1) {
+        if (auth()->user()->free_name === 1) {
+            $balance = AccountDonate::where('id', auth()->user()->accountWotlk->id)->first();
+            if ($balance) {
                 if ($balance->bonuses >= setting('platnye-uslugi.NightHoldTag')) {
 
                     $newBalance = $balance->bonuses - setting('platnye-uslugi.NightHoldTag');
@@ -165,28 +165,31 @@ class AuthController extends Controller
                     ]);
 
                     $user->update([
-                        'name' => $request->get('name')
+                        'name' => $request->get('name'),
+                        'free_name' => 1
                     ]);
                     return response()->json(['successtag'=> true, 'message' => 'Данные успешно изменены.', 'class' => 'alert-message success']);
                 }
                 else {
                     return response()->json(['successtag'=> false, 'message' => 'У вас недостаточное бонусов', 'class' => 'alert-message error']);
                 }
-            }  else {
-                $user = User::where('email', auth()->user()->email)->first();
-
-                $forumUser = ForumsXF::where('email', auth()->user()->email)->first();
-
-                $forumUser->update([
-                    'username' => $request->get('name')
-                ]);
-
-                $user->update([
-                    'name' => $request->get('name'),
-                    'free_name' => 1
-                ]);
             }
+        } else {
+            $user = User::where('email', auth()->user()->email)->first();
+
+            $forumUser = ForumsXF::where('email', auth()->user()->email)->first();
+
+            $forumUser->update([
+                'username' => $request->get('name')
+            ]);
+
+            $user->update([
+                'name' => $request->get('name'),
+                'free_name' => 1
+            ]);
+            return response()->json(['successtag'=> true, 'message' => 'Данные успешно изменены.', 'class' => 'alert-message success']);
         }
+
         return response()->json(['successtag'=> false, 'message' => 'У вас недостаточное бонусов', 'class' => 'alert-message error']);
     }
 
