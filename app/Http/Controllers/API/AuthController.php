@@ -148,15 +148,31 @@ class AuthController extends Controller
     {
         $balance = AccountDonate::where('id', auth()->user()->accountWotlk->id)->first();
         if ($balance) {
-            if ($balance->bonuses >= setting('platnye-uslugi.NightHoldTag')) {
+            if (auth()->user()->free_name === 1) {
+                if ($balance->bonuses >= setting('platnye-uslugi.NightHoldTag')) {
 
-                if (auth()->user()->free_name === 1) {
                     $newBalance = $balance->bonuses - setting('platnye-uslugi.NightHoldTag');
                     AccountDonate::where('id', auth()->user()->accountWotlk->id)->update([
                         'bonuses' => $newBalance
                     ]);
-                }
 
+                    $user = User::where('email', auth()->user()->email)->first();
+
+                    $forumUser = ForumsXF::where('email', auth()->user()->email)->first();
+
+                    $forumUser->update([
+                        'username' => $request->get('name')
+                    ]);
+
+                    $user->update([
+                        'name' => $request->get('name')
+                    ]);
+                    return response()->json(['successtag'=> true, 'message' => 'Данные успешно изменены.', 'class' => 'alert-message success']);
+                }
+                else {
+                    return response()->json(['successtag'=> false, 'message' => 'У вас недостаточное бонусов', 'class' => 'alert-message error']);
+                }
+            }  else {
                 $user = User::where('email', auth()->user()->email)->first();
 
                 $forumUser = ForumsXF::where('email', auth()->user()->email)->first();
@@ -169,10 +185,6 @@ class AuthController extends Controller
                     'name' => $request->get('name'),
                     'free_name' => 1
                 ]);
-                return response()->json(['successtag'=> true, 'message' => 'Данные успешно изменены.', 'class' => 'alert-message success']);
-            }
-            else {
-                return response()->json(['successtag'=> false, 'message' => 'У вас недостаточное бонусов', 'class' => 'alert-message error']);
             }
         }
         return response()->json(['successtag'=> false, 'message' => 'У вас недостаточное бонусов', 'class' => 'alert-message error']);
