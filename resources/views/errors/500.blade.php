@@ -27,7 +27,6 @@
                 <div class="List List--left List--separator List--separatorBrownMedium gutter-small gutter-vertical">
                     <div class="List-item gutter-small"><a class="Link Link--text" href="{{ url('/') }}">Главная</a></div>
                     <div class="List-item gutter-small"><a class="Link Link--external Link--text" href="{{ route('user', ['overview']) }}">Учетная запись</a></div>
-                    <div class="List-item gutter-small"><a class="Link Link--external Link--text" href="{{ route('user', ['shop']) }}">Магазин</a></div>
                 </div>
             </div>
             <div class="contain-small">
@@ -68,7 +67,6 @@
                     <div class="List List--left List--separator List--separatorBrownMedium gutter-small gutter-vertical">
                         <div class="List-item gutter-small"><a class="Link Link--text" href="{{ url('/') }}">Главная</a></div>
                         <div class="List-item gutter-small"><a class="Link Link--external Link--text" href="{{ route('user', ['overview']) }}">Учетная запись</a></div>
-                        <div class="List-item gutter-small"><a class="Link Link--external Link--text" href="{{ route('user', ['shop']) }}">Магазин</a></div>
                     </div>
                 </div>
             </div>

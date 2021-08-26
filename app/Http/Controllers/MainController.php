@@ -19,10 +19,10 @@ class MainController extends Controller
 {
 
     function __construct() {
-        //if (Auth()->check()){
+        if (Auth()->check()){
             ///Account::init();
-            ///Referrals::init();
-        //}
+            Referrals::init();
+        }
     }
 
     public function index () {
