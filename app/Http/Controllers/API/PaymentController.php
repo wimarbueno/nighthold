@@ -24,6 +24,7 @@ class PaymentController extends Controller
         $top_timer = Carbon::createFromTimestampUTC($top_timer);
         return response()->json(['success'=> false, 'timer' => $top_timer->format('H:i:s')]);
     }
+
     public function topDonate(): \Illuminate\Http\JsonResponse
     {
         if (setting('top-donaty.donate_status') === 'PUBLISHED') {
@@ -33,7 +34,7 @@ class PaymentController extends Controller
                     ->where('service', 'balance')
                     ->where(['status' => 1, ['price', '>', '0']])
                     ->groupBy('user_id')
-                    ->limit(3)
+                    ->limit(5)
                     ->get();
                 $data = [];
                 foreach ($donaters as $donater) {
@@ -47,7 +48,7 @@ class PaymentController extends Controller
 
                 return $data;
             });
-            ///Cache::forget('top_donaters');
+
             $last_donater = Cache::get('last_donater');
             return response()->json(['success'=> true, 'data' => $top_donaters, 'last_donater' => $last_donater]);
         }
