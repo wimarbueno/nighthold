@@ -172,13 +172,17 @@ class PaymentController extends Controller
                         'id' => auth()->user()->accountWotlk->id,
                     ],[
                         'bonuses' => $newAccountBalance->bonuses  + $order->price,
-                        'total_bonuses' => $newAccountBalance->bonuses  + $order->price
+                        'votes' => $newAccountBalance->votes,
+                        'total_votes' => $newAccountBalance->total_votes,
+                        'total_bonuses' => $newAccountBalance->total_bonuses + $order->price
                     ]);
                 } else {
                     AccountDonate::updateOrCreate([
                         'id' => auth()->user()->accountWotlk->id,
                     ],[
                         'bonuses' => $order->price,
+                        'votes' => 0,
+                        'total_votes' => 0,
                         'total_bonuses' => $order->price
                     ]);
                 }
