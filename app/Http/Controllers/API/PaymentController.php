@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\HistoryPayment;
-use App\Models\Shadowlands\Account\Account;
 use App\Models\User;
 use App\Models\Wotlk\Account\AccountDonate;
 use App\Models\Wotlk\Account\AccountWotlk;
@@ -27,7 +26,6 @@ class PaymentController extends Controller
 
     public function topDonate(): \Illuminate\Http\JsonResponse
     {
-        if (setting('top-donaty.donate_status') === 'PUBLISHED') {
             $top_donaters = Cache::rememberForever('top_donaters', function () {
                 $donaters = HistoryPayment::select('user_id', DB::raw('SUM(price) as price'))
                     ->whereDate('updated_at', Carbon::today())
@@ -51,8 +49,7 @@ class PaymentController extends Controller
 
             $last_donater = Cache::get('last_donater');
             return response()->json(['success'=> true, 'data' => $top_donaters, 'last_donater' => $last_donater]);
-        }
-        return response()->json(['success'=> false, 'data' => null, 'last_donater' => null]);
+
     }
 
     public function paymentInfo()
