@@ -223,8 +223,8 @@
 
         private static function getOnline($connection) {
             if ($connection === "WotlkChatacters") {
-                $Statement = DB::connection('WotlkAuth')->table('realmlist')->where('online')->first();
-                return ceil($Statement * setting('onlain.online_wotlk'));
+                $Statement = DB::connection('WotlkAuth')->table('realmlist')->first();
+                return ceil($Statement->online * setting('onlain.online_wotlk'));
             } else {
                 return ceil(0 * setting('onlain.online'));
             }
