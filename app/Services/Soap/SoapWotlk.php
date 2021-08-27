@@ -24,6 +24,7 @@ class SoapWotlk
 
     public function connect() {
         try {
+            ini_set('default_socket_timeout', '300');
             $this->soap = new SoapClient(NULL, array(
                 'location' => 'http://185.71.65.236:7878/',
                 'uri' => 'urn:TC',
