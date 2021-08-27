@@ -294,10 +294,8 @@
 
         private static function getOnlinePlayers()
         {
-            $SLOnline = 0;
-            $WotlkOnline = DB::connection('WotlkAuth')->table('realmlist')->where('online')->first();
-
-            return ceil($SLOnline + $WotlkOnline * setting('onlain.online') * setting('onlain.online_wotlk')) ;
+            $WotlkOnline = DB::connection('WotlkAuth')->table('realmlist')->first();
+            return ceil($WotlkOnline->online * setting('onlain.online') * setting('onlain.online_wotlk')) ;
         }
 
         private static function extractFaction($race): string
