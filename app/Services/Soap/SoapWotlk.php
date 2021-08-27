@@ -24,19 +24,12 @@ class SoapWotlk
 
     public function connect() {
         try {
-            ini_set('default_socket_timeout', '300');
             $this->soap = new SoapClient(NULL, array(
                 'location' => 'http://185.71.65.236:7878/',
                 'uri' => 'urn:TC',
                 'style' => SOAP_RPC,
                 'login' => 'dont4u',
-                'password' => '8jw6X4CG0',
-                'trace' => true,
-                'keep_alive' => true,
-                'connection_timeout' => 5000,
-                'cache_wsdl' => WSDL_CACHE_NONE,
-                'compression'   => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
-
+                'password' => '8jw6X4CG0'
             ));
         }
         catch (SoapFault $e) {
