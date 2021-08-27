@@ -29,7 +29,13 @@ class SoapWotlk
                 'uri' => 'urn:TC',
                 'style' => SOAP_RPC,
                 'login' => 'dont4u',
-                'password' => '8jw6X4CG0'
+                'password' => '8jw6X4CG0',
+                'trace' => true,
+                'keep_alive' => true,
+                'connection_timeout' => 5000,
+                'cache_wsdl' => WSDL_CACHE_NONE,
+                'compression'   => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
+
             ));
         }
         catch (SoapFault $e) {
