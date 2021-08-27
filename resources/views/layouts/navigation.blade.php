@@ -289,7 +289,7 @@
                              <div class="SiteNav-menuListItemWrap">
 
                                  <a class="Link Link--block SiteNav-menuListLink text-upper" data-analytics="main-nav" data-analytics-placement="Community - Log In" rel="nofollow">
-                                     <span class="SiteNav-menuListLinkText">@lang('navbar.navbar_44') {{ App\Services\Server::playersAccount() ?: '0' }}</span>
+                                     <span class="SiteNav-menuListLinkText">@lang('navbar.navbar_44') {{ App\Services\Server::playersOnline() ?: '0' }}</span>
                                  </a>
                             </div>
                          </div>
