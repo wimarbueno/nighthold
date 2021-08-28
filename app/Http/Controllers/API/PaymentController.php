@@ -82,7 +82,7 @@ class PaymentController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'sum' => 'required|numeric|min:'.setting('platnye-uslugi.payment_bonus_min').'|strip_min:2'
+            'sum' => 'required|numeric|min:'.setting('platnye-uslugi.payment_bonus_min').'|strip_min:1'
         ]);
 
         if ($validator->fails()) {
