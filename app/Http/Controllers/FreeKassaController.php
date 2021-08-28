@@ -40,8 +40,8 @@ class FreeKassaController extends Controller
             Cache::forget('top_donaters');
             Cache::forget('last_donater');
 
-            Cache::rememberForever('last_donater', function ()  {
-                return auth()->user()->name;
+            Cache::rememberForever('last_donater', function ($user)  {
+                return $user->name;
             });
             $order->update([
                 'status' => 1
