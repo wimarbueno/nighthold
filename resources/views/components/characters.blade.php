@@ -50,11 +50,11 @@
                 <a class="SiteNav-pageLink" href="{{ route('voyager.dashboard') }}">@lang('navbar.navbar_43')</a>
             </div>
             @endcan
-            @if(auth()->user()->hasPermission('gm_ticket'))
+            @can('gm_ticket')
                 <div class="List-item">
                     <a class="SiteNav-pageLink" href="{{ route('gm.index') }}">GM Panel</a>
                 </div>
-            @endif
+            @endcan
             <div class="List-item">
                 <a class="SiteNav-pageLink" href="{{ route('user', ['overview']) }}">@lang('navbar.navbar_33')</a>
             </div>
