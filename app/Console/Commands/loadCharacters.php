@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Characters\Characters;
+use App\Models\Wotlk\Account\AccountWotlk;
 use App\Services\Utils;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -42,9 +43,9 @@ class loadCharacters extends Command
     {
         DB::table('users')->chunkById(100, function ($users) {
             foreach ($users as $user) {
-                $game = Wotlk::where('email', $user->email)->first();
+                $game = AccountWotlk::where('email', $user->email)->first();
                 if ($game) {
-                    DB::table('characters')->where('account', $game->id)->delete();
+                    DB::table('user_characters')->where('account', $game->id)->delete();
                     $characters = DB::connection(config('servers.realm')[2]['connectionChatacters'])->table('characters')
                        ->where('account', $game->id)->get();
                     if(!$characters) {
