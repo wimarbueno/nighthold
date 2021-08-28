@@ -15,11 +15,11 @@ class FreeKassaController extends Controller
     {
         $order = HistoryPayment::where('order_id', $request->get('MERCHANT_ORDER_ID'))->first();
         if($order) {
-
-            $newAccountBalance = AccountDonate::where('id', auth()->user()->accountWotlk->id)->first();
+            $user = User::whereId($order->user_id)->first();
+            $newAccountBalance = AccountDonate::where('id', $user->accountWotlk->id)->first();
             if ($newAccountBalance) {
                 AccountDonate::updateOrCreate([
-                    'id' => auth()->user()->accountWotlk->id,
+                    'id' => $user->accountWotlk->id,
                 ],[
                     'bonuses' => $newAccountBalance->bonuses  + $order->price,
                     'votes' => $newAccountBalance->votes,
@@ -28,7 +28,7 @@ class FreeKassaController extends Controller
                 ]);
             } else {
                 AccountDonate::updateOrCreate([
-                    'id' => auth()->user()->accountWotlk->id,
+                    'id' => $user->accountWotlk->id,
                 ],[
                     'bonuses' => $order->price,
                     'votes' => 0,
