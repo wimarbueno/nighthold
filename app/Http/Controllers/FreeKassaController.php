@@ -26,6 +26,7 @@ class FreeKassaController extends Controller
                     'total_votes' => $newAccountBalance->total_votes,
                     'total_bonuses' => $newAccountBalance->total_bonuses + $order->price
                 ]);
+
             } else {
                 AccountDonate::updateOrCreate([
                     'id' => $user->accountWotlk->id,
@@ -42,7 +43,9 @@ class FreeKassaController extends Controller
             Cache::rememberForever('last_donater', function ()  {
                 return auth()->user()->name;
             });
-            HistoryPayment::where('order_id', $request->get('MERCHANT_ORDER_ID'))->update(['status' => 1]);
+            $order->update([
+                'status' => 1
+            ]);
             return redirect('/dashboard/payment/index');
         }
 
