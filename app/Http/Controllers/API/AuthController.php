@@ -288,11 +288,8 @@ class AuthController extends Controller
     {
         $notBanned = 0;
         $banned = 1;
-        $userSL = auth()->user()->account->banned;
         $userWotlk = auth()->user()->accountWotlk->banned;
-        if($userSL === NULL || $userWotlk === NULL) {
-            return response()->json(['error' => false, 'data' => $notBanned]);
-        } elseif($userSL->active === 0 || $userWotlk->active === 0) {
+        if($userWotlk->active === 0) {
             return response()->json(['error' => false, 'data' => $notBanned]);
         } else {
             return response()->json(['error' => false, 'data' => $banned]);
