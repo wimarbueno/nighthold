@@ -175,38 +175,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="PagedTable-controls clearfix">
-                                <div class="Pagination Pagination--noMargin">
-                                    <div class="Pagination-page">
-                                        <button class="Button Pagination-button Pagination-button--direction Button--ghost Button--noMinWidth Button--small Button--prev" disabled="">
-                                            <div class="Button-outer Pagination-button-outer">
-                                                <div class="Button-inner Pagination-button-inner">
-                                                    <div class="Button-label Pagination-button-label">Назад</div>
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="Pagination-page">
-                                        <button class="Button Pagination-button Button--ghost Button--small Button--noMinWidth Pagination-button--selected">
-                                            <div class="Button-outer Pagination-button-outer">
-                                                <div class="Button-inner Pagination-button-inner">
-                                                    <div class="Button-label Pagination-button-label">1</div>
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="Pagination-page">
-                                        <button class="Button Pagination-button Pagination-button--direction Button--ghost Button--noMinWidth Button--small Button--next" disabled="">
-                                            <div class="Button-outer Pagination-button-outer">
-                                                <div class="Button-inner Pagination-button-inner">
-                                                    <div class="Button-label Pagination-button-label">Дальше</div>
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
+                          
                         </div>
 
                     </div>
