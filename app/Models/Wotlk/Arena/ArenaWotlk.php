@@ -2,7 +2,6 @@
 
 namespace App\Models\Wotlk\Arena;
 
-use App\Models\Shadowlands\Account\Account;
 use Illuminate\Database\Eloquent\Model;
 
 class ArenaWotlk extends Model
@@ -32,5 +31,10 @@ class ArenaWotlk extends Model
     public function team_member(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ArenaMember::class, 'arenaTeamId', 'arenaTeamId');
+    }
+
+        public function members(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ArenaMember::class, 'arenaTeamId', 'arenaTeamId');
     }
 }

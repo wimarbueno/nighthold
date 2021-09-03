@@ -41,6 +41,7 @@ Route::get('game/classes/{classes}', [GameController::class, 'classes_view'])->n
 Route::get('game/recruit-a-friend', [GameController::class, 'recruit'])->name('recruit');
 
 Route::get('game/pvp/leaderboards/{servers}/{type}', [GameController::class, 'arena'])->name('arena');
+Route::get('game/pvp/leaderboards/{servers}/{type}/team/{team}', [GameController::class, 'team'])->name('team');
 
 Route::get('game/pve/leaderboards/{server}/{instance}', [GameController::class, 'leaderboards'])->name('leaderboards');
 

@@ -35,11 +35,11 @@ class GameController extends Controller
         }
         if(Server::IsRealmByType($server) === 'sl') {
             if($type === '2v2') {
-                $data = ArenaSl::with('team_member')->where('type', 2)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
+                $data = ArenaWotlk::with('team_member')->where('type', 2)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
             } elseif ($type === '3v3') {
-                $data = ArenaSl::with('team_member')->where('type', 3)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
+                $data = ArenaWotlk::with('team_member')->where('type', 3)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
             } else {
-                $data = ArenaSl::with('team_member')->where('type', 5)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
+                $data = ArenaWotlk::with('team_member')->where('type', 5)->where('rating', '>', 0)->orderBy('rating', 'desc')->paginate(30);
             }
         } else {
             if($type === '2v2') {
@@ -56,6 +56,25 @@ class GameController extends Controller
             'data' => $data,
             'servers' => $server,
             'type' => $type,
+            'server_type' => Server::IsRealmByType($server)
+        ]);
+    }
+
+
+    public function team ($server, $type, $team) {
+        if(Server::IsRealmBySlug($server) === false) {
+            return abort(404);
+        }
+
+        $data = ArenaWotlk::with('members')
+            ->where('name', $team)
+            ->firstOrFail();
+
+        return view('game.pvp.team', [
+            'data' => $data,
+            'servers' => $server,
+            'type' => $type,
+            'team' => $team,
             'server_type' => Server::IsRealmByType($server)
         ]);
     }
